@@ -353,6 +353,7 @@ namespace NewOscylMeasSoft
 
         private void WavemeterInit_Click(object sender, EventArgs e)
         {
+
         }
 
 private void button1_Click_3(object sender, EventArgs e)

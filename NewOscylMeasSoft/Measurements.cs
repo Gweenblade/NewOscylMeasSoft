@@ -41,12 +41,12 @@ namespace NewOscylMeasSoft
                 if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błedu
                 {
                     Wavenumber = Wavecontrol.ReadCM();
-                    SB.Append(MeasureLoopIndicator + ":" + Wavenumber + ":");
+                    SB.Append(Wavenumber + ":");
                     WARNING = false;
                 }
                 else
                 {
-                    SB.Append(MeasureLoopIndicator + ":" + Wavenumber + ":");
+                    SB.Append(Wavenumber + ":");
                     WARNING = true;
                 }
                 temp = WaveformArray[NumberOfPointsPerWF];
@@ -71,8 +71,9 @@ namespace NewOscylMeasSoft
                     //SW.Write(SB);
                     SB.Clear();
                 }
-            
-            //FilePath.Close();
+
+                SW.Close();
+                
             }
         }
 
@@ -80,10 +81,6 @@ namespace NewOscylMeasSoft
         {
             
             List<double> temp = new List<double>();
-            foreach (double item in temp)
-            {
-                // Do something with item
-            }
             StreamReader SR = File.OpenText(FilePath1);
             var ReadLine = File.ReadLines(FilePath1).Skip(ReadLineNumber - 1).FirstOrDefault();
             string LineText = ReadLine.ToString();
@@ -91,7 +88,7 @@ namespace NewOscylMeasSoft
             LineText.ElementAt(1);
             string DataInBetween;
             int i, last=0, j = 1;
-            double converter,wavelenght = 0;
+            double converter;
             for( i = 0; i <= LineText.Length - 1; i++)
             {
                if(LineText.ElementAt(i) == ':' || i == LineText.Length - 1)
@@ -109,7 +106,28 @@ namespace NewOscylMeasSoft
                 }
 
             }
+            SR.Close();
             return temp;
+        }
+
+        public List<List<double>> IntegralCalculator(string FilePath1,int From, int To,int filelenght)
+        {
+            List<List<double>> Integral = new List<List<double>>();
+            List<double> Temp = new List<double>();
+            int i,j;
+            double LocalIntegral = 0;
+            double Wavenumber;
+            for (i = 0; i < filelenght - 1; i++)
+            {
+                Temp = LoadGatheredWaveforms(FilePath1, i);
+                for (j = 0; From + i <= To; j++)
+                {
+                    LocalIntegral = LocalIntegral + Temp[From + i];
+                }
+                Wavenumber = Temp[0];
+                Integral.Add(new List<double> {Wavenumber,LocalIntegral,Temp.Last()});
+            }
+            return Integral;
         }
     }
 }

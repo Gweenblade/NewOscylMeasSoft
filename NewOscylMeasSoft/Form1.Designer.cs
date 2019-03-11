@@ -38,6 +38,7 @@
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.PathToFileLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.IntegralBtn = new System.Windows.Forms.Button();
             this.TestBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.ReadDataBtn = new System.Windows.Forms.Button();
@@ -84,7 +85,6 @@
             this.ZedSpectrum = new ZedGraph.ZedGraphControl();
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.IntegralBtn = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -210,6 +210,15 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Experiment parameters";
+            // 
+            // IntegralBtn
+            // 
+            this.IntegralBtn.Location = new System.Drawing.Point(6, 84);
+            this.IntegralBtn.Name = "IntegralBtn";
+            this.IntegralBtn.Size = new System.Drawing.Size(75, 39);
+            this.IntegralBtn.TabIndex = 19;
+            this.IntegralBtn.Text = "Calculate Integral";
+            this.IntegralBtn.UseVisualStyleBackColor = true;
             // 
             // TestBtn
             // 
@@ -697,20 +706,11 @@
             // 
             this.OpenFileDialog.FileName = "openFileDialog1";
             // 
-            // IntegralBtn
-            // 
-            this.IntegralBtn.Location = new System.Drawing.Point(6, 84);
-            this.IntegralBtn.Name = "IntegralBtn";
-            this.IntegralBtn.Size = new System.Drawing.Size(75, 39);
-            this.IntegralBtn.TabIndex = 19;
-            this.IntegralBtn.Text = "Calculate Integral";
-            this.IntegralBtn.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1494, 865);
             this.Controls.Add(this.Groupmeasure);
             this.Controls.Add(this.TriggerGroup);
             this.Name = "Form1";
