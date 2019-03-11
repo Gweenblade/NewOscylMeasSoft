@@ -1,0 +1,37 @@
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe.config
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.pdb
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csprojResolveAssemblyReference.cache
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Form1.resources
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Properties.Resources.resources
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.GenerateResource.Cache
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CoreCompileInputs.cache
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\Oscyloskop.dll
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\ZedGraph.dll
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\ZedGraph.resources.dll
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\NationalInstruments.VisaNS.dll
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\CsvHelper.dll
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\System.ValueTuple.dll
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\CsvHelper.xml
+C:\Users\Artur\Desktop\Stypendium magistranckie\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\System.ValueTuple.xml
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe.config
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.pdb
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\CsvHelper.dll
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\NationalInstruments.VisaNS.dll
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\Oscyloskop.dll
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\System.ValueTuple.dll
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\ZedGraph.dll
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\ZedGraph.resources.dll
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\CsvHelper.xml
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\bin\Debug\System.ValueTuple.xml
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csprojAssemblyReference.cache
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Form1.resources
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Properties.Resources.resources
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.GenerateResource.cache
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CoreCompileInputs.cache
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CopyComplete
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
+H:\Nowy oscyloskop\NewOscylClassMeasure\NewOscylMeasSoft\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
