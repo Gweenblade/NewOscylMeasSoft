@@ -24,6 +24,17 @@ namespace NewOscylMeasSoft
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray;
         EventWaitHandle FileSaving, FileFree;
+        public struct MeasurementParameters
+        {
+            string FilePath1;
+            int NumberOfMeasures;
+            int NumberOfPointsPerWF;
+            bool pause;
+            bool STOP;
+            bool Trigger;
+            int ChannelTrig;
+            int ChannelSig;
+        }
         public void GatherWaveforms(string FilePath1, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
         {
             int MeasureLoopIndicator;

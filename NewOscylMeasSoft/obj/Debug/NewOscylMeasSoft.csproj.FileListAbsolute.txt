@@ -51,3 +51,20 @@ C:\Users\Artur\Desktop\Stypendium magistranckie\OscilDesktop\OscilloMeasureSoftw
 C:\Users\Artur\Desktop\Stypendium magistranckie\OscilDesktop\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CoreCompileInputs.cache
 C:\Users\Artur\Desktop\Stypendium magistranckie\OscilDesktop\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
 C:\Users\Artur\Desktop\Stypendium magistranckie\OscilDesktop\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csprojAssemblyReference.cache
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Form1.resources
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Properties.Resources.resources
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.GenerateResource.cache
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CoreCompileInputs.cache
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe.config
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.pdb
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\CsvHelper.dll
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\NationalInstruments.VisaNS.dll
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\Oscyloskop.dll
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\System.ValueTuple.dll
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\CsvHelper.xml
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\System.ValueTuple.xml
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CopyComplete

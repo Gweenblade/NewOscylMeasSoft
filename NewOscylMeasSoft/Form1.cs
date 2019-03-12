@@ -92,11 +92,12 @@ namespace NewOscylMeasSoft
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            measurements = new Measurements();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            measurements = new Measurements();
             oscillo.Show();
         }
 
