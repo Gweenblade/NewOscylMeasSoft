@@ -40,46 +40,42 @@ namespace NewOscylMeasSoft
             int MeasureLoopIndicator;
             int i;
             bool WARNING;
-            List<double> temp = WaveformArray[NumberOfPointsPerWF];
+            WaveformArray = new List<List<double>>();
+            List<double> temp = new List<double>(NumberOfPointsPerWF + 1);
             StreamWriter SW = new StreamWriter(FilePath1);
             StringBuilder SB = new StringBuilder();
-            var csv = new CsvWriter(SW);
             double Wavenumber =0;
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
             {
 
                 WaveformArray.Add(oscillo.odczyt()[0]);
-                if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błedu
+                if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błędu
                 {
                     Wavenumber = Wavecontrol.ReadCM();
-                    SB.Append(Wavenumber + ":");
                     WARNING = false;
                 }
                 else
-                {
-                    SB.Append(Wavenumber + ":");
                     WARNING = true;
-                }
-                temp = WaveformArray[NumberOfPointsPerWF];
+                SB.Append(Wavenumber + ":");
+                temp = WaveformArray[0];
+                WaveformArray.Clear();
                 for (i = 0; i < temp.Count; i++)
                 {
                     SB.Append(temp[i] + ":");
                 }
-                if (WARNING == true)
+                if (WARNING == true) // Jeśli ostatni element listy jest równy -1, to oznacza że był problem z odczytem długości fali i założono 
                     SB.Append("-1");
                 SB.Append("\r\n");
 
 
                 if (MeasureLoopIndicator % 50 == 0)
                 {
-                    //SW.Write(SB);
-                    csv.WriteRecords(WaveformArray);
-
+                    SW.Write(SB);
                     SB.Clear();
                 }
                 if (NumberOfMeasures - MeasureLoopIndicator < 50)
                 {
-                    //SW.Write(SB);
+                    SW.Write(SB);
                     SB.Clear();
                 }
 

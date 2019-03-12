@@ -97,7 +97,6 @@ namespace NewOscylMeasSoft
 
         private void button1_Click(object sender, EventArgs e)
         {
-            measurements = new Measurements();
             oscillo.Show();
         }
 
@@ -359,7 +358,6 @@ namespace NewOscylMeasSoft
 
 private void button1_Click_3(object sender, EventArgs e)
         {
-            measurements = new Measurements();
             measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
         }
 
