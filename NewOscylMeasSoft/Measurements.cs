@@ -41,15 +41,19 @@ namespace NewOscylMeasSoft
             int i;
             bool WARNING;
             WaveformArray = new List<List<double>>();
-            List<double> temp = new List<double>(NumberOfPointsPerWF + 1);
+            List<double> temp = new List<double>();
             StreamWriter SW = new StreamWriter(FilePath1);
             StringBuilder SB = new StringBuilder();
             double Wavenumber =0;
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
             {
 
-                WaveformArray.Add(oscillo.odczyt()[0]);
-                if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błędu
+                WaveformArray.Add(oscillo.odczyt()[0]); // Poprawić kanał w razie czego TO JEST WAZNE
+               /* WaveformArray = new List<List<double>> TYLKO DO TESTÓW, NIE MA ZNACZENIA JAK COS TO WYJEBAC
+            { new List<double> { 1,2 },
+            new List<double> { 3,4 },
+            new List<double> { 5,6 }};*/
+                if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błędu z odczytem długości fali
                 {
                     Wavenumber = Wavecontrol.ReadCM();
                     WARNING = false;
@@ -57,17 +61,15 @@ namespace NewOscylMeasSoft
                 else
                     WARNING = true;
                 SB.Append(Wavenumber + ":");
-                temp = WaveformArray[0];
-                WaveformArray.Clear();
-                for (i = 0; i < temp.Count; i++)
+                for (i = 0; i < WaveformArray[0].Count; i++)// TUTAJ moze byc bubel zwiazany z iloscia elementów (dać -1 jak cos)
                 {
-                    SB.Append(temp[i] + ":");
+                    SB.Append(WaveformArray[0][i] + ":");
                 }
                 if (WARNING == true) // Jeśli ostatni element listy jest równy -1, to oznacza że był problem z odczytem długości fali i założono 
                     SB.Append("-1");
                 SB.Append("\r\n");
-
-
+                WaveformArray.Clear();
+                
                 if (MeasureLoopIndicator % 50 == 0)
                 {
                     SW.Write(SB);
@@ -79,9 +81,9 @@ namespace NewOscylMeasSoft
                     SB.Clear();
                 }
 
-                SW.Close();
                 
             }
+            SW.Close();
         }
 
         public List<double> LoadGatheredWaveforms(string FilePath1, int ReadLineNumber)

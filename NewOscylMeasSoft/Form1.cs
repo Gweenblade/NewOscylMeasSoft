@@ -314,24 +314,6 @@ namespace NewOscylMeasSoft
             };*/
             savepath = DataSaverDialog.FileName;
             PathToFileLabel.Text = savepath;
-            StreamWriter SW = new StreamWriter(savepath);
-            CsvWriter csvr = new CsvWriter(SW);
-            List<double> lista = new List<double> { 1, 2, 3, 4, 5, 6 };
-            StringBuilder SB = new StringBuilder();
-            int i = 0;
-            for(i = 0; i<=200000; i++)
-            {
-                SB.Append(i + ":");
-                if(i % 50000 == 0 && i != 0)
-                {
-                    SB.Append(Environment.NewLine);
-                    SW.Write(SB);
-                    SB.Clear();
-                }
-            }
-            MessageBox.Show("Popetli");
-            SW.Flush();
-            SW.Close();
         }
 
         private void TestBtn_Click(object sender, EventArgs e)
@@ -358,7 +340,15 @@ namespace NewOscylMeasSoft
 
 private void button1_Click_3(object sender, EventArgs e)
         {
-            measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
+            List<List<double>> ListaLista = new List<List<double>>
+            { new List<double> { 1,2 },
+            new List<double> { 3,4 },
+            new List<double> { 5,6 }};
+            List<double> Lista = new List<double>(5);
+            Lista = ListaLista[0];
+            MessageBox.Show("" + ListaLista[0].Count);
+           
+            //measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
         }
 
         private void DataSlider_Scroll(object sender, EventArgs e)
