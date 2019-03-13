@@ -35,7 +35,7 @@ namespace NewOscylMeasSoft
             int ChannelTrig;
             int ChannelSig;
         }
-        public void GatherWaveforms(string FilePath1, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
+        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
         {
             int MeasureLoopIndicator;
             int i;
@@ -44,29 +44,27 @@ namespace NewOscylMeasSoft
             List<double> temp = new List<double>();
             StreamWriter SW = new StreamWriter(FilePath1);
             StringBuilder SB = new StringBuilder();
+            Stopwatch Stopwatch = new Stopwatch();
             double Wavenumber =0;
+            Stopwatch.Start();
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
             {
-
                 WaveformArray.Add(oscillo.odczyt()[0]); // Poprawić kanał w razie czego TO JEST WAZNE
-               /* WaveformArray = new List<List<double>> TYLKO DO TESTÓW, NIE MA ZNACZENIA JAK COS TO WYJEBAC
-            { new List<double> { 1,2 },
-            new List<double> { 3,4 },
-            new List<double> { 5,6 }};*/
-                if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błędu z odczytem długości fali
-                {
-                    Wavenumber = Wavecontrol.ReadCM();
-                    WARNING = false;
-                }
-                else
-                    WARNING = true;
-                SB.Append(Wavenumber + ":");
+                /*  if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błędu z odczytem długości fali
+                  {
+                      Wavenumber = Wavecontrol.ReadCM();
+                      WARNING = false;
+                  }
+                  else
+                      WARNING = true;
+                  SB.Append(Wavenumber + ":");*/
+                SB.Append(Stopwatch.ElapsedMilliseconds + ":");
                 for (i = 0; i < WaveformArray[0].Count; i++)// TUTAJ moze byc bubel zwiazany z iloscia elementów (dać -1 jak cos)
                 {
                     SB.Append(WaveformArray[0][i] + ":");
-                }
+                }/*
                 if (WARNING == true) // Jeśli ostatni element listy jest równy -1, to oznacza że był problem z odczytem długości fali i założono 
-                    SB.Append("-1");
+                    SB.Append("-1");*/
                 SB.Append("\r\n");
                 WaveformArray.Clear();
                 
@@ -83,6 +81,8 @@ namespace NewOscylMeasSoft
 
                 
             }
+            Stopwatch.Stop();
+            MessageBox.Show("Koniec");
             SW.Close();
         }
 
