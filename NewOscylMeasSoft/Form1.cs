@@ -15,6 +15,7 @@ using NewOscylMeasSoft;
 using CsvHelper;
 using System.Dynamic;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace NewOscylMeasSoft
 {
@@ -72,9 +73,9 @@ namespace NewOscylMeasSoft
             ZedSignal.Invalidate();
         }
 
-        public Thread StartTheThread(string FilePath, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
+        public Thread StartTheThread(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
         {
-            Measure = new Thread(() => measurements.GatherWaveforms(FilePath));
+            Measure = new Thread(() => measurements.GatherWaveforms(FilePath, oscillo));
             Measure.Start();
             return Measure;
         }
@@ -92,7 +93,7 @@ namespace NewOscylMeasSoft
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            measurements = new Measurements();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -217,7 +218,7 @@ namespace NewOscylMeasSoft
             PauseBtn.BackColor = Color.Yellow;
             StopBtn.BackColor = Color.Red;
             StartBtn.BackColor = Color.White;
-            StartTheThread(savepath);
+            StartTheThread(savepath,oscillo);
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
@@ -314,24 +315,6 @@ namespace NewOscylMeasSoft
             };*/
             savepath = DataSaverDialog.FileName;
             PathToFileLabel.Text = savepath;
-            StreamWriter SW = new StreamWriter(savepath);
-            CsvWriter csvr = new CsvWriter(SW);
-            List<double> lista = new List<double> { 1, 2, 3, 4, 5, 6 };
-            StringBuilder SB = new StringBuilder();
-            int i = 0;
-            for(i = 0; i<=200000; i++)
-            {
-                SB.Append(i + ":");
-                if(i % 50000 == 0 && i != 0)
-                {
-                    SB.Append(Environment.NewLine);
-                    SW.Write(SB);
-                    SB.Clear();
-                }
-            }
-            MessageBox.Show("Popetli");
-            SW.Flush();
-            SW.Close();
         }
 
         private void TestBtn_Click(object sender, EventArgs e)
@@ -358,8 +341,9 @@ namespace NewOscylMeasSoft
 
 private void button1_Click_3(object sender, EventArgs e)
         {
-            measurements = new Measurements();
-            measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
+            TEST(savepath);
+           
+            //measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
         }
 
         private void DataSlider_Scroll(object sender, EventArgs e)
@@ -382,6 +366,61 @@ private void button1_Click_3(object sender, EventArgs e)
             ZedSignal.GraphPane.AxisChange();
             ZedSignal.Update();
             ZedSignal.Invalidate();
+        }
+
+        public void TEST(string FilePath1, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
+        {
+            int MeasureLoopIndicator;
+            int i;
+            bool WARNING;
+            WaveformArray = new List<List<double>>();
+            List<double> temp = new List<double>();
+            StreamWriter SW = new StreamWriter(FilePath1);
+            StringBuilder SB = new StringBuilder();
+            double Wavenumber = 0;
+            Stopwatch Stopwatch = new Stopwatch();
+            Stopwatch.Start();
+            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
+            {
+                WaveformArray.Add(oscillo.odczyt()[0]); // Poprawić kanał w razie czego TO JEST WAZNE
+                /* WaveformArray = new List<List<double>> TYLKO DO TESTÓW, NIE MA ZNACZENIA JAK COS TO WYJEBAC
+             { new List<double> { 1,2 },
+             new List<double> { 3,4 },
+             new List<double> { 5,6 }};*/
+                /*  if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błędu z odczytem długości fali
+                  {
+                      Wavenumber = Wavecontrol.ReadCM();
+                      WARNING = false;
+                  }
+                  else
+                      WARNING = true;
+                  SB.Append(Wavenumber + ":");*/
+                SB.Append(Stopwatch.ElapsedMilliseconds + ":");
+                for (i = 0; i < WaveformArray[0].Count; i++)// TUTAJ moze byc bubel zwiazany z iloscia elementów (dać -1 jak cos)
+                {
+                    SB.Append(WaveformArray[0][i] + ":");
+                }/*
+                if (WARNING == true) // Jeśli ostatni element listy jest równy -1, to oznacza że był problem z odczytem długości fali i założono 
+                    SB.Append("-1");*/
+                SB.Append("KONIEC LINI \r\n");
+                WaveformArray.Clear();
+
+                if (MeasureLoopIndicator % 50 == 0)
+                {
+                    SW.Write(SB);
+                    SB.Clear();
+                }
+                if (NumberOfMeasures - MeasureLoopIndicator < 50)
+                {
+                    SW.Write(SB);
+                    SB.Clear();
+                }
+
+
+            }
+            Stopwatch.Stop();
+            SW.Close();
+            MessageBox.Show("KONIEc");
         }
     }
 }
