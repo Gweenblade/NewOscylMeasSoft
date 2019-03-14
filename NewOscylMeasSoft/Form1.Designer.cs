@@ -175,7 +175,8 @@
             this.DataSlider.Size = new System.Drawing.Size(543, 45);
             this.DataSlider.TabIndex = 4;
             this.DataSlider.Scroll += new System.EventHandler(this.DataSlider_Scroll);
-            this.DataSlider.DragDrop += new System.Windows.Forms.DragEventHandler(this.DataSlider_DragDrop);
+            this.DataSlider.ValueChanged += new System.EventHandler(this.DataSlider_ValueChanged);
+            this.DataSlider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DataSlider_MouseUp);
             // 
             // PathToFileLabel
             // 
@@ -705,12 +706,13 @@
             // OpenFileDialog
             // 
             this.OpenFileDialog.FileName = "openFileDialog1";
+            this.OpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileDialog_FileOk);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1370, 840);
             this.Controls.Add(this.Groupmeasure);
             this.Controls.Add(this.TriggerGroup);
             this.Name = "Form1";

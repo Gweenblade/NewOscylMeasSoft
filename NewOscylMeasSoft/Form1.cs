@@ -41,6 +41,7 @@ namespace NewOscylMeasSoft
         static double[] y = new double[2] { -50, 50 };
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
         ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
+        bool userdoneupdater = false;
         public List<double> WaveformRead()
         {
             return measurements.LoadGatheredWaveforms(loadpath, linecount);
@@ -263,16 +264,7 @@ namespace NewOscylMeasSoft
         private void LoadingData_Click(object sender, EventArgs e)
         {
             OpenFileDialog.ShowDialog();
-            if (OpenFileDialog.FileName != null)
-            {
-                FilePathReader = new StreamReader(OpenFileDialog.FileName);
-                loadpath = OpenFileDialog.FileName;
-                linecount = File.ReadLines(loadpath).Count();
-                DataSlider.Maximum = linecount;
-                DataSlider.Minimum = 1;
-            }
-            else
-                MessageBox.Show("Something went wrong..");
+
         }
 
         private void ReadDataBtn_Click(object sender, EventArgs e)
@@ -319,14 +311,6 @@ namespace NewOscylMeasSoft
 
         private void TestBtn_Click(object sender, EventArgs e)
         {
-            WaveformArray.Add(oscillo.odczyt()[0]);
-            List<double> temp = WaveformArray[0];
-            for (int i = 0; i < temp.Count; i++)
-            {
-                // PPL.Add(i, temp[i]);
-                MessageBox.Show(" " + i + " " + temp[i]);
-                TestLabel.Text = TestLabel.Text + " " + i + " " + temp[i];
-            }
         }
 
         private void button1_Click_2(object sender, EventArgs e)
@@ -348,24 +332,20 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void DataSlider_Scroll(object sender, EventArgs e)
         {
-            FrameLabel.Text = "Frame Number: " + DataSlider.Value.ToString();
-        }
-
-        private void DataSlider_DragDrop(object sender, DragEventArgs e)
-        {
+           /* FrameLabel.Text = "Frame Number: " + DataSlider.Value.ToString();
             CurrentWave.Clear();
-            CurrentWave = WaveformRead();
-            int i = 0;
-            foreach(int value in CurrentWave) // TO TRZEBA SPRAWDZIC
+            CurrentWave = measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
+            int i;
+            PPLsignal.Clear();
+            for(i = 0; i < CurrentWave.Count; i++)
             {
-                i++;
-                PPLsignal.Add(i, CurrentWave[value]);
+                PPLsignal.Add(i, CurrentWave[i]);
             }
             ZedSignal.GraphPane.CurveList.Clear();
             ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Green);
             ZedSignal.GraphPane.AxisChange();
             ZedSignal.Update();
-            ZedSignal.Invalidate();
+            ZedSignal.Invalidate();*/
         }
 
         public void TEST(string FilePath1, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
@@ -421,6 +401,48 @@ private void button1_Click_3(object sender, EventArgs e)
             Stopwatch.Stop();
             SW.Close();
             MessageBox.Show("KONIEc");
+        }
+
+        private void OpenFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            if (OpenFileDialog.FileName != null)
+            {
+                FilePathReader = new StreamReader(OpenFileDialog.FileName);
+                loadpath = OpenFileDialog.FileName;
+                linecount = File.ReadLines(loadpath).Count();
+                FilePathReader.Dispose();
+                DataSlider.Maximum = linecount;
+                DataSlider.Minimum = 1;
+            }
+            else
+                MessageBox.Show("Something went wrong..");
+        }
+
+        private void DataSlider_ValueChanged(object sender, EventArgs e)
+        {
+            userdoneupdater = true;
+        }
+
+        private void DataSlider_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (userdoneupdater)
+            {
+                userdoneupdater = false;
+                FrameLabel.Text = "Frame Number: " + DataSlider.Value.ToString();
+                CurrentWave.Clear();
+                CurrentWave = measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
+                int i;
+                PPLsignal.Clear();
+                for (i = 0; i < CurrentWave.Count; i++)
+                {
+                    PPLsignal.Add(i, CurrentWave[i]);
+                }
+                ZedSignal.GraphPane.CurveList.Clear();
+                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Green);
+                ZedSignal.GraphPane.AxisChange();
+                ZedSignal.Update();
+                ZedSignal.Invalidate();
+            }
         }
     }
 }

@@ -101,8 +101,9 @@ namespace NewOscylMeasSoft
                 LineText.ElementAt(1);
                 string DataInBetween;
                 int i, last = 0, j = 1;
-                double converter;
-                for (i = 0; i <= LineText.Length - 1; i++)
+                double converter = 0;
+                int indexfordelete;
+                for (i = 0; i < LineText.Length - 1; i++)
                 {
                     if (LineText.ElementAt(i) == ':' || i == LineText.Length - 1)
                     {
@@ -112,7 +113,7 @@ namespace NewOscylMeasSoft
                         }
 
                         DataInBetween = LineText.Substring(last, i - last);
-                        MessageBox.Show("" + DataInBetween);
+                        //MessageBox.Show("" + DataInBetween);
                         converter = double.Parse(DataInBetween);
                         temp.Add(converter);
                         last = i + 1;
