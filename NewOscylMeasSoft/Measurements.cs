@@ -42,7 +42,6 @@ namespace NewOscylMeasSoft
             bool WARNING;
             WaveformArray = new List<List<double>>();
             List<double> temp = new List<double>();
-            StreamWriter SW = new StreamWriter(FilePath1);
             StringBuilder SB = new StringBuilder();
             Stopwatch Stopwatch = new Stopwatch();
             double Wavenumber =0;
@@ -70,12 +69,18 @@ namespace NewOscylMeasSoft
                 
                 if (MeasureLoopIndicator % 50 == 0)
                 {
-                    SW.Write(SB);
+                    using (StreamWriter SW = new StreamWriter(FilePath1))
+                    {
+                        SW.Write(SB);
+                    }
                     SB.Clear();
                 }
                 if (NumberOfMeasures - MeasureLoopIndicator < 50)
                 {
-                    SW.Write(SB);
+                    using (StreamWriter SW = new StreamWriter(FilePath1))
+                    {
+                        SW.Write(SB);
+                    }
                     SB.Clear();
                 }
 
@@ -83,40 +88,40 @@ namespace NewOscylMeasSoft
             }
             Stopwatch.Stop();
             MessageBox.Show("Koniec");
-            SW.Close();
         }
 
         public List<double> LoadGatheredWaveforms(string FilePath1, int ReadLineNumber)
         {
-            
-            List<double> temp = new List<double>();
-            StreamReader SR = File.OpenText(FilePath1);
-            var ReadLine = File.ReadLines(FilePath1).Skip(ReadLineNumber - 1).FirstOrDefault();
-            string LineText = ReadLine.ToString();
-           // MessageBox.Show("" + LineText + "   " + LineText.ElementAt(4));
-            LineText.ElementAt(1);
-            string DataInBetween;
-            int i, last=0, j = 1;
-            double converter;
-            for( i = 0; i <= LineText.Length - 1; i++)
+            using (StreamReader SR = File.OpenText(FilePath1))
             {
-               if(LineText.ElementAt(i) == ':' || i == LineText.Length - 1)
+                List<double> temp = new List<double>();
+                var ReadLine = File.ReadLines(FilePath1).Skip(ReadLineNumber - 1).FirstOrDefault();
+                string LineText = ReadLine.ToString();
+                // MessageBox.Show("" + LineText + "   " + LineText.ElementAt(4));
+                LineText.ElementAt(1);
+                string DataInBetween;
+                int i, last = 0, j = 1;
+                double converter;
+                for (i = 0; i <= LineText.Length - 1; i++)
                 {
-                    if(i == LineText.Length - 1)
+                    if (LineText.ElementAt(i) == ':' || i == LineText.Length - 1)
                     {
-                        i = LineText.Length;
-                    }
-                    
-                    DataInBetween = LineText.Substring(last, i - last);
-                    MessageBox.Show("" + DataInBetween);
-                    converter = double.Parse(DataInBetween);
-                    temp.Add(converter);
-                    last = i + 1;
-                }
+                        if (i == LineText.Length - 1)
+                        {
+                            i = LineText.Length;
+                        }
 
+                        DataInBetween = LineText.Substring(last, i - last);
+                        MessageBox.Show("" + DataInBetween);
+                        converter = double.Parse(DataInBetween);
+                        temp.Add(converter);
+                        last = i + 1;
+                    }
+
+                }
+                SR.Close();
+                return temp;
             }
-            SR.Close();
-            return temp;
         }
 
         public List<List<double>> IntegralCalculator(string FilePath1,int From, int To,int filelenght)
