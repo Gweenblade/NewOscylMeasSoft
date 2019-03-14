@@ -16,12 +16,15 @@ using CsvHelper;
 using System.Dynamic;
 using System.Reflection;
 using System.Diagnostics;
+using ADwin;
+using ADwin.Driver;
+using Laser;
 
 namespace NewOscylMeasSoft
 {
     public partial class Form1 : Form
     {
-
+        obsługaAdWina AW;
         double numberofpoints;
         Oscyloskop.Form1 oscillo;
         List<List<double>> WaveformArray;
@@ -29,7 +32,7 @@ namespace NewOscylMeasSoft
         int TriggerCH;
         short TriggerVoltage;
         ushort TriggerHis;
-        Thread Measure;
+        Thread Measure, Aw;
         ThreadStart MEASURE;
         Measurements measurements;
         StreamWriter FilepathWriter;
@@ -42,6 +45,7 @@ namespace NewOscylMeasSoft
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
         ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
         bool userdoneupdater = false;
+        
         public List<double> WaveformRead()
         {
             return measurements.LoadGatheredWaveforms(loadpath, linecount);
@@ -50,6 +54,7 @@ namespace NewOscylMeasSoft
         List<double> CurrentWave;
         public Form1()
         {
+            AW = new obsługaAdWina(aDwinSystem1);
             PPLsignal = new PointPairList();
             InitializeComponent();
             oscillo = new Oscyloskop.Form1();
@@ -79,6 +84,12 @@ namespace NewOscylMeasSoft
             Measure = new Thread(() => measurements.GatherWaveforms(FilePath, oscillo));
             Measure.Start();
             return Measure;
+        }
+        public Thread AWgenerator(string FilePath, Oscyloskop.Form1 oscillo)
+        {
+            Aw = new Thread(() => AW.SingalGenerator(FilePath + "ZGeneratora", AW));
+            Aw.Start();
+            return Aw;
         }
 
         private void TriggerChannelChecker()
@@ -421,6 +432,11 @@ private void button1_Click_3(object sender, EventArgs e)
         private void DataSlider_ValueChanged(object sender, EventArgs e)
         {
             userdoneupdater = true;
+        }
+
+        private void AWinit_Click(object sender, EventArgs e)
+        {
+            AW.inicjalizuj();
         }
 
         private void DataSlider_MouseUp(object sender, MouseEventArgs e)

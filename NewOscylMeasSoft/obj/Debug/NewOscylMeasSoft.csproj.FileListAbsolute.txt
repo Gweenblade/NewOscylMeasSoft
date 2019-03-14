@@ -100,3 +100,4 @@ C:\Users\Tomek\Desktop\Puczka programy\Git Repositories\OscilloMeasureSoftware\N
 C:\Users\Tomek\Desktop\Puczka programy\Git Repositories\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CoreCompileInputs.cache
 C:\Users\Tomek\Desktop\Puczka programy\Git Repositories\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
 C:\Users\Tomek\Desktop\Puczka programy\Git Repositories\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
+C:\Users\Vafail\Desktop\New oscil software\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\ADwin.Driver.dll

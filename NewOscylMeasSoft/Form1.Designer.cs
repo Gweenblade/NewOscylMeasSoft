@@ -85,6 +85,8 @@
             this.ZedSpectrum = new ZedGraph.ZedGraphControl();
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.aDwinSystem1 = new ADwin.Driver.ADwinSystem();
+            this.AWinit = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -130,7 +132,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(428, 30);
+            this.button1.Location = new System.Drawing.Point(507, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 14;
@@ -190,6 +192,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.AWinit);
             this.groupBox2.Controls.Add(this.IntegralBtn);
             this.groupBox2.Controls.Add(this.TestBtn);
             this.groupBox2.Controls.Add(this.SaveBtn);
@@ -708,11 +711,21 @@
             this.OpenFileDialog.FileName = "openFileDialog1";
             this.OpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileDialog_FileOk);
             // 
+            // AWinit
+            // 
+            this.AWinit.Location = new System.Drawing.Point(306, 91);
+            this.AWinit.Name = "AWinit";
+            this.AWinit.Size = new System.Drawing.Size(75, 45);
+            this.AWinit.TabIndex = 19;
+            this.AWinit.Text = "Ad Win Init";
+            this.AWinit.UseVisualStyleBackColor = true;
+            this.AWinit.Click += new System.EventHandler(this.AWinit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 840);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.Groupmeasure);
             this.Controls.Add(this.TriggerGroup);
             this.Name = "Form1";
@@ -795,6 +808,8 @@
         private System.Windows.Forms.TextBox TestLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button IntegralBtn;
+        private ADwin.Driver.ADwinSystem aDwinSystem1;
+        private System.Windows.Forms.Button AWinit;
     }
 }
 
