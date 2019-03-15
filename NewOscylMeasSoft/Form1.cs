@@ -27,7 +27,7 @@ namespace NewOscylMeasSoft
         obsługaAdWina AW;
         double numberofpoints;
         Oscyloskop.Form1 oscillo;
-        List<List<double>> WaveformArray;
+        List<List<double>> WaveformArray, Integral;
         bool TriggerEdge = true;
         int TriggerCH;
         short TriggerVoltage;
@@ -37,7 +37,7 @@ namespace NewOscylMeasSoft
         Measurements measurements;
         StreamWriter FilepathWriter;
         StreamReader FilePathReader;
-        PointPairList PPLsignal;
+        PointPairList PPLsignal,PPLIntegralCorrect,PPLIntegralWrong;
         string loadpath;
         string savepath;
         static double[] x = new double[2] { 0, 0 };
@@ -45,7 +45,8 @@ namespace NewOscylMeasSoft
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
         ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
         bool userdoneupdater = false;
-        
+        LineItem LICorrect = new ZedGraph.LineItem("Correct measured wavelenghts", x,x, Color.Green, SymbolType.Circle);
+        LineItem LINotCorrect = new ZedGraph.LineItem("Incorrect measured Wavelenghts", x,x, Color.Red, SymbolType.Circle);
         public List<double> WaveformRead()
         {
             return measurements.LoadGatheredWaveforms(loadpath, linecount);
@@ -56,6 +57,12 @@ namespace NewOscylMeasSoft
         {
             AW = new obsługaAdWina(aDwinSystem1);
             PPLsignal = new PointPairList();
+            PPLIntegralCorrect = new PointPairList();
+            PPLIntegralWrong = new PointPairList();
+            LICorrect.Line.IsVisible = false;
+            LINotCorrect.Line.IsVisible = false;
+            LICorrect.Symbol.Size = 2;
+            LINotCorrect.Symbol.Size = 1;
             InitializeComponent();
             oscillo = new Oscyloskop.Form1();
             ZedSignal.GraphPane.XAxis.Scale.Min = 0;
@@ -85,7 +92,7 @@ namespace NewOscylMeasSoft
             Measure.Start();
             return Measure;
         }
-        public Thread AWgenerator(string FilePath, Oscyloskop.Form1 oscillo)
+        public Thread AWgenerator(string FilePath, obsługaAdWina AW)
         {
             Aw = new Thread(() => AW.SingalGenerator(FilePath + "ZGeneratora", AW));
             Aw.Start();
@@ -231,6 +238,7 @@ namespace NewOscylMeasSoft
             StopBtn.BackColor = Color.Red;
             StartBtn.BackColor = Color.White;
             StartTheThread(savepath,oscillo);
+            AWgenerator(savepath, AW);
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
@@ -439,6 +447,28 @@ private void button1_Click_3(object sender, EventArgs e)
             AW.inicjalizuj();
         }
 
+        private void IntegralBtn_Click(object sender, EventArgs e)
+        {
+            LINotCorrect.Clear();
+            LICorrect.Clear();
+            Integral = measurements.IntegralCalculator(loadpath, TrackMin.Value, TrackMax.Value, linecount);
+            for (int i = 0; i < Integral.Count(); i++)
+                {
+                    for (int j = 0; j < Integral[i].Count; j++)
+                    {
+                    using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(Integral[i][j] + " "); };
+                    }
+                using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write("\r\n"); };
+                if (Integral[i][2] == -1)
+                    LINotCorrect.AddPoint(Integral[i][0], Integral[i][1]);
+                else
+                    LICorrect.AddPoint(Integral[i][0], Integral[i][1]);
+                }
+            ZedIntegral.GraphPane.CurveList.Clear();
+            ZedIntegral.Update();
+            ZedIntegral.Invalidate();
+        }
+
         private void DataSlider_MouseUp(object sender, MouseEventArgs e)
         {
             if (userdoneupdater)
@@ -454,7 +484,7 @@ private void button1_Click_3(object sender, EventArgs e)
                     PPLsignal.Add(i, CurrentWave[i]);
                 }
                 ZedSignal.GraphPane.CurveList.Clear();
-                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Green);
+                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Blue,SymbolType.None);
                 ZedSignal.GraphPane.AxisChange();
                 ZedSignal.Update();
                 ZedSignal.Invalidate();
