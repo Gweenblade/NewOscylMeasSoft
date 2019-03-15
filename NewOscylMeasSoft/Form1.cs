@@ -331,27 +331,13 @@ namespace NewOscylMeasSoft
 
 private void button1_Click_3(object sender, EventArgs e)
         {
-            TEST(savepath);
-           
+            //TEST(savepath);
+            OpenFileDialog.ShowDialog();
             //measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
         }
 
         private void DataSlider_Scroll(object sender, EventArgs e)
         {
-           /* FrameLabel.Text = "Frame Number: " + DataSlider.Value.ToString();
-            CurrentWave.Clear();
-            CurrentWave = measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
-            int i;
-            PPLsignal.Clear();
-            for(i = 0; i < CurrentWave.Count; i++)
-            {
-                PPLsignal.Add(i, CurrentWave[i]);
-            }
-            ZedSignal.GraphPane.CurveList.Clear();
-            ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Green);
-            ZedSignal.GraphPane.AxisChange();
-            ZedSignal.Update();
-            ZedSignal.Invalidate();*/
         }
 
         public void TEST(string FilePath1, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
@@ -422,6 +408,29 @@ private void button1_Click_3(object sender, EventArgs e)
             }
             else
                 MessageBox.Show("Something went wrong..");
+        }
+
+        private void Checkone_Click(object sender, EventArgs e)
+        {
+            //Skopiowane z przycisku Integral
+            LINotCorrect.Clear();
+            LICorrect.Clear();
+            Integral = measurements.IntegralCalculator(loadpath, TrackMin.Value, TrackMax.Value, linecount);
+            for (int i = 0; i < Integral.Count(); i++)
+            {
+                for (int j = 0; j < Integral[i].Count; j++)
+                {
+                    using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(Integral[i][j] + " "); };
+                }
+                using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write("\r\n"); };
+                if (Integral[i][2] == -1)
+                    LINotCorrect.AddPoint(Integral[i][0], Integral[i][1]);
+                else
+                    LICorrect.AddPoint(Integral[i][0], Integral[i][1]);
+            }
+            ZedIntegral.GraphPane.CurveList.Clear();
+            ZedIntegral.Update();
+            ZedIntegral.Invalidate();
         }
 
         private void DataSlider_ValueChanged(object sender, EventArgs e)

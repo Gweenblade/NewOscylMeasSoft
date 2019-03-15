@@ -132,16 +132,21 @@ namespace NewOscylMeasSoft
             int i,j;
             double LocalIntegral = 0;
             double Wavenumber;
+            MessageBox.Show("Jestem Tutaj");
             for (i = 0; i < filelenght - 1; i++)
             {
                 Temp = LoadGatheredWaveforms(FilePath1, i);
-                for (j = 0; From + i <= To; j++)
+                LocalIntegral = 0;
+                for (j = 0; From + j <= To; j++)
                 {
-                    LocalIntegral = LocalIntegral + Temp[From + i];
+                    LocalIntegral = LocalIntegral + Temp[From + j];
                 }
                 Wavenumber = Temp[0];
                 Integral.Add(new List<double> {Wavenumber,LocalIntegral,Temp.Last()});
             }
+            MessageBox.Show("" + Integral[0][0]);
+            MessageBox.Show("" + Integral[0][1]);
+            MessageBox.Show("" + Integral[0][2]);
             return Integral;
         }
     }

@@ -147,6 +147,7 @@
             this.Checkone.TabIndex = 18;
             this.Checkone.Text = "Check signal";
             this.Checkone.UseVisualStyleBackColor = true;
+            this.Checkone.Click += new System.EventHandler(this.Checkone_Click);
             // 
             // DeleteFrame
             // 
@@ -725,7 +726,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1483, 869);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.Groupmeasure);
             this.Controls.Add(this.TriggerGroup);
             this.Name = "Form1";
