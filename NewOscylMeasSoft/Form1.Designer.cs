@@ -86,7 +86,6 @@
             this.ZedIntegral = new ZedGraph.ZedGraphControl();
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.aDwinSystem1 = new ADwin.Driver.ADwinSystem();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -809,7 +808,6 @@
         private System.Windows.Forms.TextBox TestLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button IntegralBtn;
-        private ADwin.Driver.ADwinSystem aDwinSystem1;
         private System.Windows.Forms.Button AWinit;
     }
 }

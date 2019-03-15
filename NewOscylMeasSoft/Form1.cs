@@ -16,15 +16,10 @@ using CsvHelper;
 using System.Dynamic;
 using System.Reflection;
 using System.Diagnostics;
-using ADwin;
-using ADwin.Driver;
-using Laser;
-
 namespace NewOscylMeasSoft
 {
     public partial class Form1 : Form
     {
-        obsługaAdWina AW;
         double numberofpoints;
         Oscyloskop.Form1 oscillo;
         List<List<double>> WaveformArray, Integral;
@@ -55,7 +50,6 @@ namespace NewOscylMeasSoft
         List<double> CurrentWave;
         public Form1()
         {
-            AW = new obsługaAdWina(aDwinSystem1);
             PPLsignal = new PointPairList();
             PPLIntegralCorrect = new PointPairList();
             PPLIntegralWrong = new PointPairList();
@@ -91,12 +85,6 @@ namespace NewOscylMeasSoft
             Measure = new Thread(() => measurements.GatherWaveforms(FilePath, oscillo));
             Measure.Start();
             return Measure;
-        }
-        public Thread AWgenerator(string FilePath, obsługaAdWina AW)
-        {
-            Aw = new Thread(() => AW.SingalGenerator(FilePath + "ZGeneratora", AW));
-            Aw.Start();
-            return Aw;
         }
 
         private void TriggerChannelChecker()
@@ -238,7 +226,6 @@ namespace NewOscylMeasSoft
             StopBtn.BackColor = Color.Red;
             StartBtn.BackColor = Color.White;
             StartTheThread(savepath,oscillo);
-            AWgenerator(savepath, AW);
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
@@ -444,7 +431,6 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void AWinit_Click(object sender, EventArgs e)
         {
-            AW.inicjalizuj();
         }
 
         private void IntegralBtn_Click(object sender, EventArgs e)
