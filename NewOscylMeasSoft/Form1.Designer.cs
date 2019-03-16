@@ -664,19 +664,23 @@
             // TrackMin
             // 
             this.TrackMin.Location = new System.Drawing.Point(13, 470);
-            this.TrackMin.Maximum = 2047;
+            this.TrackMin.Maximum = 2046;
+            this.TrackMin.Minimum = 1;
             this.TrackMin.Name = "TrackMin";
             this.TrackMin.Size = new System.Drawing.Size(649, 45);
             this.TrackMin.TabIndex = 9;
+            this.TrackMin.Value = 1;
             this.TrackMin.Scroll += new System.EventHandler(this.TrackMin_Scroll);
             // 
             // TrackMax
             // 
             this.TrackMax.Location = new System.Drawing.Point(13, 513);
-            this.TrackMax.Maximum = 2047;
+            this.TrackMax.Maximum = 2046;
+            this.TrackMax.Minimum = 1;
             this.TrackMax.Name = "TrackMax";
             this.TrackMax.Size = new System.Drawing.Size(649, 45);
             this.TrackMax.TabIndex = 10;
+            this.TrackMax.Value = 1;
             this.TrackMax.Scroll += new System.EventHandler(this.TrackMax_Scroll);
             // 
             // Groupmeasure
