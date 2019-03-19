@@ -337,19 +337,30 @@ private void button1_Click_3(object sender, EventArgs e)
         {
             if (OpenFileDialog.FileName != null)
             {
-                FilePathReader = new StreamReader(OpenFileDialog.FileName);
-                loadpath = OpenFileDialog.FileName;
-                linecount = File.ReadLines(loadpath).Count();
-                FilePathReader.Dispose();
-                DataSlider.Maximum = linecount;
-                DataSlider.Minimum = 1;
+                using (FilePathReader = new StreamReader(OpenFileDialog.FileName))
+                {
+                    loadpath = OpenFileDialog.FileName;
+                    linecount = File.ReadLines(loadpath).Count();
+                    DataSlider.Maximum = linecount;
+                    DataSlider.Minimum = 1;
+                }
             }
             else
                 MessageBox.Show("Something went wrong..");
         }
 
         private void Checkone_Click(object sender, EventArgs e)
-        { 
+        {
+            using (StreamWriter SW = new StreamWriter(savepath, true))
+            {
+                SW.Write("Jestem " + 1);
+                SW.Flush();
+            }
+            using (StreamWriter SW = new StreamWriter(savepath, true))
+            {
+                SW.Write("Jestem " + 5);
+                SW.Flush();
+            }
         }
 
         private void DataSlider_ValueChanged(object sender, EventArgs e)
@@ -381,9 +392,8 @@ private void button1_Click_3(object sender, EventArgs e)
                 PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
             }
             using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(SB); }
-
-            LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("bla", PPLCorrect, Color.Green, SymbolType.Circle);
-            LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("bla", PPLNotCorrect, Color.Red, SymbolType.Plus);
+            LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("Correct measured points", PPLCorrect, Color.Green, SymbolType.Circle);
+            LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("Incorrect measured points", PPLNotCorrect, Color.Red, SymbolType.Plus);
             CorrectCurve.Line.IsVisible = false;
             IncorrectCurve.Line.IsVisible = false;
             ZedIntegral.AxisChange();
@@ -405,10 +415,11 @@ private void button1_Click_3(object sender, EventArgs e)
                 for (i = 0; i < CurrentWave.Count; i++)
                 {
                     PPLsignal.Add(i, CurrentWave[i]);
+
                 }
                 ZedSignal.GraphPane.CurveList.Clear();
-                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Blue,SymbolType.None);
-                ZedSignal.GraphPane.AxisChange();
+                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Blue);
+                ZedSignal.AxisChange();
                 ZedSignal.Update();
                 ZedSignal.Invalidate();
             }

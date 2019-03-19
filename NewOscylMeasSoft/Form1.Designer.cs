@@ -730,7 +730,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1434, 902);
             this.Controls.Add(this.Groupmeasure);
             this.Controls.Add(this.TriggerGroup);
             this.Name = "Form1";
