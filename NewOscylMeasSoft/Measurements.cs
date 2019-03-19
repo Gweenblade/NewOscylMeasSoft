@@ -67,24 +67,15 @@ namespace NewOscylMeasSoft
                 SB.Append("\r\n");
                 WaveformArray.Clear();
                 
-                if (MeasureLoopIndicator % 50 == 0)
+                if (MeasureLoopIndicator % 50 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50)
                 {
-                    using (StreamWriter SW = new StreamWriter(FilePath1))
+                    using (StreamWriter SW = new StreamWriter(FilePath1, true))
                     {
                         SW.Write(SB);
+                        SW.Flush();
                     }
                     SB.Clear();
-                }
-                if (NumberOfMeasures - MeasureLoopIndicator < 50)
-                {
-                    using (StreamWriter SW = new StreamWriter(FilePath1))
-                    {
-                        SW.Write(SB);
-                    }
-                    SB.Clear();
-                }
-
-                
+                }              
             }
             Stopwatch.Stop();
             MessageBox.Show("Koniec");
@@ -135,9 +126,9 @@ namespace NewOscylMeasSoft
             for (i = 0; i < filelenght - 1; i++)
             {
                 Temp = LoadGatheredWaveforms(FilePath1, i);
-                for (j = 0; From + i <= To; j++)
+                for (j = 0; From + j <= To; j++)
                 {
-                    LocalIntegral = LocalIntegral + Temp[From + i];
+                    LocalIntegral = LocalIntegral + Temp[From + j];
                 }
                 Wavenumber = Temp[0];
                 Integral.Add(new List<double> {Wavenumber,LocalIntegral,Temp.Last()});

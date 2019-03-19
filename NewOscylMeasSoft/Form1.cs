@@ -16,25 +16,23 @@ using CsvHelper;
 using System.Dynamic;
 using System.Reflection;
 using System.Diagnostics;
-
 namespace NewOscylMeasSoft
 {
     public partial class Form1 : Form
     {
-
         double numberofpoints;
         Oscyloskop.Form1 oscillo;
-        List<List<double>> WaveformArray;
+        List<List<double>> WaveformArray, Integral;
         bool TriggerEdge = true;
         int TriggerCH;
         short TriggerVoltage;
         ushort TriggerHis;
-        Thread Measure;
+        Thread Measure, Aw;
         ThreadStart MEASURE;
         Measurements measurements;
         StreamWriter FilepathWriter;
         StreamReader FilePathReader;
-        PointPairList PPLsignal;
+        PointPairList PPLsignal,PPLIntegralCorrect,PPLIntegralWrong;
         string loadpath;
         string savepath;
         static double[] x = new double[2] { 0, 0 };
@@ -51,17 +49,11 @@ namespace NewOscylMeasSoft
         public Form1()
         {
             PPLsignal = new PointPairList();
+            PPLIntegralCorrect = new PointPairList();
+            PPLIntegralWrong = new PointPairList();
             InitializeComponent();
             oscillo = new Oscyloskop.Form1();
-            ZedSignal.GraphPane.XAxis.Scale.Min = 0;
             double.TryParse(NumberOfPointsBox.Text, out numberofpoints);
-            ZedSignal.GraphPane.XAxis.Scale.Max = numberofpoints;
-            ZedSignal.GraphPane.YAxis.Scale.Min = -50;
-            ZedSignal.GraphPane.YAxis.Scale.Max = 50;
-            ZedSignal.GraphPane.XAxis.Scale.MajorStep = 200;
-            ZedSignal.GraphPane.YAxis.Scale.MajorStep = 10;
-            ZedSignal.GraphPane.XAxis.Scale.MinorStep = 100;
-            ZedSignal.GraphPane.YAxis.Scale.MinorStep = 5;
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
             ZedSignal.GraphPane.YAxis.Title.Text = "Signal";
             DataSlider.BackColor = Color.LightGray;
@@ -128,15 +120,7 @@ namespace NewOscylMeasSoft
 
         private void NumberOfPointsBox_TextChanged_1(object sender, EventArgs e)
         {
-            ZedSignal.GraphPane.XAxis.Scale.Min = 0;
             double.TryParse(NumberOfPointsBox.Text, out numberofpoints);
-            ZedSignal.GraphPane.XAxis.Scale.Max = numberofpoints;
-            ZedSignal.GraphPane.YAxis.Scale.Min = -50;
-            ZedSignal.GraphPane.YAxis.Scale.Max = 50;
-            ZedSignal.GraphPane.XAxis.Scale.MajorStep = 200;
-            ZedSignal.GraphPane.YAxis.Scale.MajorStep = 10;
-            ZedSignal.GraphPane.XAxis.Scale.MinorStep = 100;
-            ZedSignal.GraphPane.YAxis.Scale.MinorStep = 5;
             TrackMin.Maximum = (int)numberofpoints - 1;
             TrackMax.Maximum = (int)numberofpoints - 1;
             ZedSignal.Invalidate();
@@ -144,6 +128,7 @@ namespace NewOscylMeasSoft
 
         private void TrackMin_Scroll(object sender, EventArgs e)
         {
+
             lineItem1.Clear();
             lineItem1.AddPoint(TrackMin.Value, 100);
             lineItem1.AddPoint(TrackMin.Value, -100);
@@ -301,10 +286,6 @@ namespace NewOscylMeasSoft
 
         private void DataSaverDialog_FileOk(object sender, CancelEventArgs e)
         {
-            /*var records = new List<Foo>
-            {
-               new Foo { Id = 1, Name = "one" },
-            };*/
             savepath = DataSaverDialog.FileName;
             PathToFileLabel.Text = savepath;
         }
@@ -325,102 +306,81 @@ namespace NewOscylMeasSoft
 
 private void button1_Click_3(object sender, EventArgs e)
         {
-            TEST(savepath);
-           
-            //measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
+            OpenFileDialog.ShowDialog();
         }
 
         private void DataSlider_Scroll(object sender, EventArgs e)
         {
-           /* FrameLabel.Text = "Frame Number: " + DataSlider.Value.ToString();
-            CurrentWave.Clear();
-            CurrentWave = measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
-            int i;
-            PPLsignal.Clear();
-            for(i = 0; i < CurrentWave.Count; i++)
-            {
-                PPLsignal.Add(i, CurrentWave[i]);
-            }
-            ZedSignal.GraphPane.CurveList.Clear();
-            ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Green);
-            ZedSignal.GraphPane.AxisChange();
-            ZedSignal.Update();
-            ZedSignal.Invalidate();*/
         }
 
-        public void TEST(string FilePath1, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
-        {
-            int MeasureLoopIndicator;
-            int i;
-            bool WARNING;
-            WaveformArray = new List<List<double>>();
-            List<double> temp = new List<double>();
-            StreamWriter SW = new StreamWriter(FilePath1);
-            StringBuilder SB = new StringBuilder();
-            double Wavenumber = 0;
-            Stopwatch Stopwatch = new Stopwatch();
-            Stopwatch.Start();
-            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
-            {
-                WaveformArray.Add(oscillo.odczyt()[0]); // Poprawić kanał w razie czego TO JEST WAZNE
-                /* WaveformArray = new List<List<double>> TYLKO DO TESTÓW, NIE MA ZNACZENIA JAK COS TO WYJEBAC
-             { new List<double> { 1,2 },
-             new List<double> { 3,4 },
-             new List<double> { 5,6 }};*/
-                /*  if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błędu z odczytem długości fali
-                  {
-                      Wavenumber = Wavecontrol.ReadCM();
-                      WARNING = false;
-                  }
-                  else
-                      WARNING = true;
-                  SB.Append(Wavenumber + ":");*/
-                SB.Append(Stopwatch.ElapsedMilliseconds + ":");
-                for (i = 0; i < WaveformArray[0].Count; i++)// TUTAJ moze byc bubel zwiazany z iloscia elementów (dać -1 jak cos)
-                {
-                    SB.Append(WaveformArray[0][i] + ":");
-                }/*
-                if (WARNING == true) // Jeśli ostatni element listy jest równy -1, to oznacza że był problem z odczytem długości fali i założono 
-                    SB.Append("-1");*/
-                SB.Append("KONIEC LINI \r\n");
-                WaveformArray.Clear();
-
-                if (MeasureLoopIndicator % 50 == 0)
-                {
-                    SW.Write(SB);
-                    SB.Clear();
-                }
-                if (NumberOfMeasures - MeasureLoopIndicator < 50)
-                {
-                    SW.Write(SB);
-                    SB.Clear();
-                }
-
-
-            }
-            Stopwatch.Stop();
-            SW.Close();
-            MessageBox.Show("KONIEc");
-        }
 
         private void OpenFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             if (OpenFileDialog.FileName != null)
             {
-                FilePathReader = new StreamReader(OpenFileDialog.FileName);
-                loadpath = OpenFileDialog.FileName;
-                linecount = File.ReadLines(loadpath).Count();
-                FilePathReader.Dispose();
-                DataSlider.Maximum = linecount;
-                DataSlider.Minimum = 1;
+                using (FilePathReader = new StreamReader(OpenFileDialog.FileName))
+                {
+                    loadpath = OpenFileDialog.FileName;
+                    linecount = File.ReadLines(loadpath).Count();
+                    DataSlider.Maximum = linecount;
+                    DataSlider.Minimum = 1;
+                }
             }
             else
                 MessageBox.Show("Something went wrong..");
         }
 
+        private void Checkone_Click(object sender, EventArgs e)
+        {
+            using (StreamWriter SW = new StreamWriter(savepath, true))
+            {
+                SW.Write("Jestem " + 1);
+                SW.Flush();
+            }
+            using (StreamWriter SW = new StreamWriter(savepath, true))
+            {
+                SW.Write("Jestem " + 5);
+                SW.Flush();
+            }
+        }
+
         private void DataSlider_ValueChanged(object sender, EventArgs e)
         {
             userdoneupdater = true;
+        }
+
+        private void AWinit_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void IntegralBtn_Click(object sender, EventArgs e)
+        {
+            PointPairList PPL;
+            ZedIntegral.GraphPane.CurveList.Clear();
+            ZedIntegral.GraphPane.GraphObjList.Clear();
+            PointPairList PPLCorrect = new PointPairList();
+            PointPairList PPLNotCorrect = new PointPairList();
+            StringBuilder SB = new StringBuilder();
+            Integral = measurements.IntegralCalculator(loadpath, TrackMin.Value, TrackMax.Value, linecount);
+            for (int i = 0; i < Integral.Count(); i++)
+            {
+                for (int j = 0; j < Integral[i].Count; j++)
+                {
+                    SB.Append(Integral[i][j] + " ");
+                }
+                SB.Append("\n");
+                PPLCorrect.Add(Integral[i][0], Integral[i][1]);
+                PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
+            }
+            using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(SB); }
+            LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("Correct measured points", PPLCorrect, Color.Green, SymbolType.Circle);
+            LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("Incorrect measured points", PPLNotCorrect, Color.Red, SymbolType.Plus);
+            CorrectCurve.Line.IsVisible = false;
+            IncorrectCurve.Line.IsVisible = false;
+            ZedIntegral.AxisChange();
+            ZedIntegral.Update();
+            ZedIntegral.Invalidate();
+
         }
 
         private void DataSlider_MouseUp(object sender, MouseEventArgs e)
@@ -438,8 +398,8 @@ private void button1_Click_3(object sender, EventArgs e)
                     PPLsignal.Add(i, CurrentWave[i]);
                 }
                 ZedSignal.GraphPane.CurveList.Clear();
-                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Green);
-                ZedSignal.GraphPane.AxisChange();
+                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Blue,SymbolType.Diamond);
+                ZedSignal.AxisChange();
                 ZedSignal.Update();
                 ZedSignal.Invalidate();
             }

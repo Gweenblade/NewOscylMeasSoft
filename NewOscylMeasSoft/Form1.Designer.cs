@@ -38,6 +38,7 @@
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.PathToFileLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.AWinit = new System.Windows.Forms.Button();
             this.IntegralBtn = new System.Windows.Forms.Button();
             this.TestBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
@@ -82,7 +83,7 @@
             this.TrackMax = new System.Windows.Forms.TrackBar();
             this.Groupmeasure = new System.Windows.Forms.GroupBox();
             this.TestLabel = new System.Windows.Forms.TextBox();
-            this.ZedSpectrum = new ZedGraph.ZedGraphControl();
+            this.ZedIntegral = new ZedGraph.ZedGraphControl();
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.TriggerGroup.SuspendLayout();
@@ -130,7 +131,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(428, 30);
+            this.button1.Location = new System.Drawing.Point(507, 19);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 14;
@@ -146,6 +147,7 @@
             this.Checkone.TabIndex = 18;
             this.Checkone.Text = "Check signal";
             this.Checkone.UseVisualStyleBackColor = true;
+            this.Checkone.Click += new System.EventHandler(this.Checkone_Click);
             // 
             // DeleteFrame
             // 
@@ -190,6 +192,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.AWinit);
             this.groupBox2.Controls.Add(this.IntegralBtn);
             this.groupBox2.Controls.Add(this.TestBtn);
             this.groupBox2.Controls.Add(this.SaveBtn);
@@ -212,6 +215,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Experiment parameters";
             // 
+            // AWinit
+            // 
+            this.AWinit.Location = new System.Drawing.Point(306, 91);
+            this.AWinit.Name = "AWinit";
+            this.AWinit.Size = new System.Drawing.Size(75, 32);
+            this.AWinit.TabIndex = 19;
+            this.AWinit.Text = "Ad Win Init";
+            this.AWinit.UseVisualStyleBackColor = true;
+            this.AWinit.Click += new System.EventHandler(this.AWinit_Click);
+            // 
             // IntegralBtn
             // 
             this.IntegralBtn.Location = new System.Drawing.Point(6, 84);
@@ -220,6 +233,7 @@
             this.IntegralBtn.TabIndex = 19;
             this.IntegralBtn.Text = "Calculate Integral";
             this.IntegralBtn.UseVisualStyleBackColor = true;
+            this.IntegralBtn.Click += new System.EventHandler(this.IntegralBtn_Click);
             // 
             // TestBtn
             // 
@@ -650,25 +664,29 @@
             // TrackMin
             // 
             this.TrackMin.Location = new System.Drawing.Point(13, 470);
-            this.TrackMin.Maximum = 2047;
+            this.TrackMin.Maximum = 2046;
+            this.TrackMin.Minimum = 1;
             this.TrackMin.Name = "TrackMin";
             this.TrackMin.Size = new System.Drawing.Size(649, 45);
             this.TrackMin.TabIndex = 9;
+            this.TrackMin.Value = 1;
             this.TrackMin.Scroll += new System.EventHandler(this.TrackMin_Scroll);
             // 
             // TrackMax
             // 
             this.TrackMax.Location = new System.Drawing.Point(13, 513);
-            this.TrackMax.Maximum = 2047;
+            this.TrackMax.Maximum = 2046;
+            this.TrackMax.Minimum = 1;
             this.TrackMax.Name = "TrackMax";
             this.TrackMax.Size = new System.Drawing.Size(649, 45);
             this.TrackMax.TabIndex = 10;
+            this.TrackMax.Value = 1;
             this.TrackMax.Scroll += new System.EventHandler(this.TrackMax_Scroll);
             // 
             // Groupmeasure
             // 
             this.Groupmeasure.Controls.Add(this.TestLabel);
-            this.Groupmeasure.Controls.Add(this.ZedSpectrum);
+            this.Groupmeasure.Controls.Add(this.ZedIntegral);
             this.Groupmeasure.Location = new System.Drawing.Point(732, 12);
             this.Groupmeasure.Name = "Groupmeasure";
             this.Groupmeasure.Size = new System.Drawing.Size(729, 764);
@@ -685,19 +703,19 @@
             this.TestLabel.Size = new System.Drawing.Size(424, 146);
             this.TestLabel.TabIndex = 4;
             // 
-            // ZedSpectrum
+            // ZedIntegral
             // 
-            this.ZedSpectrum.Location = new System.Drawing.Point(15, 19);
-            this.ZedSpectrum.Name = "ZedSpectrum";
-            this.ZedSpectrum.ScrollGrace = 0D;
-            this.ZedSpectrum.ScrollMaxX = 0D;
-            this.ZedSpectrum.ScrollMaxY = 0D;
-            this.ZedSpectrum.ScrollMaxY2 = 0D;
-            this.ZedSpectrum.ScrollMinX = 0D;
-            this.ZedSpectrum.ScrollMinY = 0D;
-            this.ZedSpectrum.ScrollMinY2 = 0D;
-            this.ZedSpectrum.Size = new System.Drawing.Size(691, 550);
-            this.ZedSpectrum.TabIndex = 3;
+            this.ZedIntegral.Location = new System.Drawing.Point(15, 19);
+            this.ZedIntegral.Name = "ZedIntegral";
+            this.ZedIntegral.ScrollGrace = 0D;
+            this.ZedIntegral.ScrollMaxX = 0D;
+            this.ZedIntegral.ScrollMaxY = 0D;
+            this.ZedIntegral.ScrollMaxY2 = 0D;
+            this.ZedIntegral.ScrollMinX = 0D;
+            this.ZedIntegral.ScrollMinY = 0D;
+            this.ZedIntegral.ScrollMinY2 = 0D;
+            this.ZedIntegral.Size = new System.Drawing.Size(691, 550);
+            this.ZedIntegral.TabIndex = 3;
             // 
             // DataSaverDialog
             // 
@@ -712,7 +730,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 840);
+            this.ClientSize = new System.Drawing.Size(1434, 902);
             this.Controls.Add(this.Groupmeasure);
             this.Controls.Add(this.TriggerGroup);
             this.Name = "Form1";
@@ -747,7 +765,7 @@
         private System.Windows.Forms.TextBox NumberOfPointsBox;
         private System.Windows.Forms.TrackBar TrackMax;
         private System.Windows.Forms.GroupBox Groupmeasure;
-        private ZedGraph.ZedGraphControl ZedSpectrum;
+        private ZedGraph.ZedGraphControl ZedIntegral;
         private System.Windows.Forms.Label Bar1Label;
         private System.Windows.Forms.Label Bar2Label;
         private System.Windows.Forms.GroupBox ChannelsOption;
@@ -795,6 +813,7 @@
         private System.Windows.Forms.TextBox TestLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button IntegralBtn;
+        private System.Windows.Forms.Button AWinit;
     }
 }
 
