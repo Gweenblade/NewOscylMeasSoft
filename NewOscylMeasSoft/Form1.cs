@@ -150,11 +150,6 @@ namespace NewOscylMeasSoft
             Bar2Label.Text = TrackMax.Value.ToString();
         }
 
-        private void ZedTrigger_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void TrackMin_MouseUp(object sender, MouseEventArgs e)
         {
 

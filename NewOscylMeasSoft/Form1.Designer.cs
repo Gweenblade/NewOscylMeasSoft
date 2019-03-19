@@ -659,7 +659,7 @@
             this.ZedSignal.Size = new System.Drawing.Size(679, 450);
             this.ZedSignal.TabIndex = 8;
             this.ZedSignal.ZoomStepFraction = 1D;
-            this.ZedSignal.Load += new System.EventHandler(this.ZedTrigger_Load);
+            this.ZedSignal.Load += new System.EventHandler(this.ZedSignal_Load);
             // 
             // TrackMin
             // 
