@@ -126,7 +126,6 @@ namespace NewOscylMeasSoft
             for (i = 0; i < filelenght - 1; i++)
             {
                 Temp = LoadGatheredWaveforms(FilePath1, i);
-                LocalIntegral = 0;
                 for (j = 0; From + j <= To; j++)
                 {
                     LocalIntegral = LocalIntegral + Temp[From + j];

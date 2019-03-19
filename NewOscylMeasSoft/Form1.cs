@@ -39,7 +39,8 @@ namespace NewOscylMeasSoft
         static double[] y = new double[2] { -50, 50 };
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
         ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
-        bool userdoneupdater = false;        public List<double> WaveformRead()
+        bool userdoneupdater = false;
+        public List<double> WaveformRead()
         {
             return measurements.LoadGatheredWaveforms(loadpath, linecount);
         }
@@ -52,15 +53,7 @@ namespace NewOscylMeasSoft
             PPLIntegralWrong = new PointPairList();
             InitializeComponent();
             oscillo = new Oscyloskop.Form1();
-            ZedSignal.GraphPane.XAxis.Scale.Min = 0;
             double.TryParse(NumberOfPointsBox.Text, out numberofpoints);
-            ZedSignal.GraphPane.XAxis.Scale.Max = numberofpoints;
-            ZedSignal.GraphPane.YAxis.Scale.Min = -50;
-            ZedSignal.GraphPane.YAxis.Scale.Max = 50;
-            ZedSignal.GraphPane.XAxis.Scale.MajorStep = 200;
-            ZedSignal.GraphPane.YAxis.Scale.MajorStep = 10;
-            ZedSignal.GraphPane.XAxis.Scale.MinorStep = 100;
-            ZedSignal.GraphPane.YAxis.Scale.MinorStep = 5;
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
             ZedSignal.GraphPane.YAxis.Title.Text = "Signal";
             DataSlider.BackColor = Color.LightGray;
@@ -127,15 +120,7 @@ namespace NewOscylMeasSoft
 
         private void NumberOfPointsBox_TextChanged_1(object sender, EventArgs e)
         {
-            ZedSignal.GraphPane.XAxis.Scale.Min = 0;
             double.TryParse(NumberOfPointsBox.Text, out numberofpoints);
-            ZedSignal.GraphPane.XAxis.Scale.Max = numberofpoints;
-            ZedSignal.GraphPane.YAxis.Scale.Min = -50;
-            ZedSignal.GraphPane.YAxis.Scale.Max = 50;
-            ZedSignal.GraphPane.XAxis.Scale.MajorStep = 200;
-            ZedSignal.GraphPane.YAxis.Scale.MajorStep = 10;
-            ZedSignal.GraphPane.XAxis.Scale.MinorStep = 100;
-            ZedSignal.GraphPane.YAxis.Scale.MinorStep = 5;
             TrackMin.Maximum = (int)numberofpoints - 1;
             TrackMax.Maximum = (int)numberofpoints - 1;
             ZedSignal.Invalidate();
@@ -301,10 +286,6 @@ namespace NewOscylMeasSoft
 
         private void DataSaverDialog_FileOk(object sender, CancelEventArgs e)
         {
-            /*var records = new List<Foo>
-            {
-               new Foo { Id = 1, Name = "one" },
-            };*/
             savepath = DataSaverDialog.FileName;
             PathToFileLabel.Text = savepath;
         }
@@ -415,10 +396,9 @@ private void button1_Click_3(object sender, EventArgs e)
                 for (i = 0; i < CurrentWave.Count; i++)
                 {
                     PPLsignal.Add(i, CurrentWave[i]);
-
                 }
                 ZedSignal.GraphPane.CurveList.Clear();
-                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Blue);
+                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Blue,SymbolType.Diamond);
                 ZedSignal.AxisChange();
                 ZedSignal.Update();
                 ZedSignal.Invalidate();
