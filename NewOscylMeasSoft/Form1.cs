@@ -35,10 +35,13 @@ namespace NewOscylMeasSoft
         PointPairList PPLsignal,PPLIntegralCorrect,PPLIntegralWrong;
         string loadpath;
         string savepath;
-        static double[] x = new double[2] { 0, 0 };
+        static double[] xmin = new double[2] { 0, 0 };
+        static double[] xmax = new double[2] { 0, 0 };
         static double[] y = new double[2] { -50, 50 };
-        ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
-        ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", x, y, Color.BlueViolet, ZedGraph.SymbolType.None,2);
+        ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", xmin, y, Color.White, ZedGraph.SymbolType.None, 2);
+        ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", xmax, y, Color.White, ZedGraph.SymbolType.None, 2);
+        PointPairList  PPLmax = new PointPairList();
+        PointPairList PPLmin = new PointPairList();
         bool userdoneupdater = false;
         public List<double> WaveformRead()
         {
@@ -59,6 +62,12 @@ namespace NewOscylMeasSoft
             DataSlider.BackColor = Color.LightGray;
             ZedSignal.GraphPane.CurveList.Add(lineItem1);
             ZedSignal.GraphPane.CurveList.Add(lineItem2);
+            ZedSignal.GraphPane.YAxis.Scale.Max = 5500;
+            ZedSignal.GraphPane.YAxis.Scale.Min = -5500;
+            ZedSignal.GraphPane.YAxis.Scale.MajorStep = 1000;
+            ZedSignal.GraphPane.YAxis.Scale.MinorStep = 250;
+
+
             WaveformArray = new List<List<double>>();
             CurrentWave = new List<double>();
             lineItem1.Label.IsVisible = false;
@@ -83,6 +92,10 @@ namespace NewOscylMeasSoft
                 TriggerCH = 2;
             if (CH4Trigg.Checked)
                 TriggerCH = 3;
+        }
+        private void LineZedSignalRedrawer()
+        {
+
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -125,26 +138,34 @@ namespace NewOscylMeasSoft
             TrackMax.Maximum = (int)numberofpoints - 1;
             ZedSignal.Invalidate();
         }
-
-        private void TrackMin_Scroll(object sender, EventArgs e)
+        LineItem lmin = new LineItem("init");
+        LineItem lmax = new LineItem("init");
+        private void TrackMin_Scroll(object sender, EventArgs e)// Z jakegos dziwnego powodu tak działa lepiej.
         {
-
-            lineItem1.Clear();
-            lineItem1.AddPoint(TrackMin.Value, 100);
-            lineItem1.AddPoint(TrackMin.Value, -100);
-            lineItem1.Label.IsVisible = false;
+            PPLmin.Clear();
+            PPLmin.Add(TrackMin.Value, ZedSignal.GraphPane.YAxis.Scale.Min);
+            PPLmin.Add(TrackMin.Value, ZedSignal.GraphPane.YAxis.Scale.Max);
+           // LineItem LImin = ZedSignal.GraphPane.AddCurve("LImin", PPLmin, Color.Orange);
+            lmin = ZedSignal.GraphPane.AddCurve("min", PPLmin, Color.Orange);
+            //LImin.Label.IsVisible = false;
+            lmin.Label.IsVisible = false;
+            ZedSignal.AxisChange();
             ZedSignal.Update();
             ZedSignal.Invalidate();
             Bar1Label.Text = TrackMin.Value.ToString();
-            
         }
 
         private void TrackMax_Scroll(object sender, EventArgs e)
         {
-            lineItem2.Clear();
-            lineItem2.AddPoint(TrackMax.Value, 100);
-            lineItem2.AddPoint(TrackMax.Value, -100);
-            lineItem2.Label.IsVisible = false;
+       
+            PPLmax.Clear();
+            PPLmax.Add(TrackMax.Value, ZedSignal.GraphPane.YAxis.Scale.Min);
+            PPLmax.Add(TrackMax.Value, ZedSignal.GraphPane.YAxis.Scale.Max);
+            //LineItem LImax = ZedSignal.GraphPane.AddCurve("LImax", PPLmax, Color.Orange);
+            lmax = ZedSignal.GraphPane.AddCurve("LImax", PPLmax, Color.Orange);
+            //LImax.Label.IsVisible = false;
+            lmax.Label.IsVisible = false;
+            ZedSignal.AxisChange();
             ZedSignal.Update();
             ZedSignal.Invalidate();
             Bar2Label.Text = TrackMax.Value.ToString();
@@ -327,16 +348,7 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void Checkone_Click(object sender, EventArgs e)
         {
-            using (StreamWriter SW = new StreamWriter(savepath, true))
-            {
-                SW.Write("Jestem " + 1);
-                SW.Flush();
-            }
-            using (StreamWriter SW = new StreamWriter(savepath, true))
-            {
-                SW.Write("Jestem " + 5);
-                SW.Flush();
-            }
+            LineZedSignalRedrawer();
         }
 
         private void DataSlider_ValueChanged(object sender, EventArgs e)
