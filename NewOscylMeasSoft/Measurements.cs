@@ -22,19 +22,10 @@ namespace NewOscylMeasSoft
         Oscyloskop.Form1 oscillo = new Oscyloskop.Form1();
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
-        List<List<double>> WaveformArray;
+        List<List<double>> WaveformArray, Integral = null;
         EventWaitHandle FileSaving, FileFree;
-        public struct MeasurementParameters
-        {
-            string FilePath1;
-            int NumberOfMeasures;
-            int NumberOfPointsPerWF;
-            bool pause;
-            bool STOP;
-            bool Trigger;
-            int ChannelTrig;
-            int ChannelSig;
-        }
+
+
         public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
         {
             int MeasureLoopIndicator;
@@ -132,6 +123,22 @@ namespace NewOscylMeasSoft
                 }
                 Wavenumber = Temp[0];
                 Integral.Add(new List<double> {Wavenumber,LocalIntegral,Temp.Last()});
+            }
+            return Integral;
+        }
+        public List<List<double>> FixedIntegral(string FilePath1, int From, int To)
+        {
+            List<List<double>> ReadData = new List<List<double>>();
+            using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (BufferedStream BS = new BufferedStream(FS))
+                {
+                    using (StreamReader SR = new StreamReader(BS))
+                    {
+                        string line;
+
+                    }
+                }
             }
             return Integral;
         }
