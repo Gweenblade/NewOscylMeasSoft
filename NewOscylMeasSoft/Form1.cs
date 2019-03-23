@@ -38,6 +38,7 @@ namespace NewOscylMeasSoft
         static double[] xmin = new double[2] { 0, 0 };
         static double[] xmax = new double[2] { 0, 0 };
         static double[] y = new double[2] { -50, 50 };
+        List<List<double>> ReadData = new List<List<double>>();
         ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", xmin, y, Color.White, ZedGraph.SymbolType.None, 2);
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", xmax, y, Color.White, ZedGraph.SymbolType.None, 2);
         PointPairList  PPLmax = new PointPairList();
@@ -373,6 +374,11 @@ private void button1_Click_3(object sender, EventArgs e)
             ZedIntegral.AxisChange();
             ZedIntegral.Update();
             ZedIntegral.Invalidate();
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            ReadData = measurements.JustReadingData(loadpath);
         }
 
         private void DataSlider_ValueChanged(object sender, EventArgs e)
