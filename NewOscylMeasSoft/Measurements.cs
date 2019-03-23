@@ -135,6 +135,9 @@ namespace NewOscylMeasSoft
             string DataInBetween;
             List<double> temp = new List<double>();
             List<List<double>> ReadData = new List<List<double>>();
+            List<List<double>> Integral = new List<List<double>>();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 using (BufferedStream BS = new BufferedStream(FS))
@@ -144,6 +147,7 @@ namespace NewOscylMeasSoft
                         string line;
                         while ((line = SR.ReadLine()) != null)
                         {
+                            last = 0;
                             for (i = 0; i < line.Length - 1; i++)
                             {
                                 if (line.ElementAt(i) == ':' || i == line.Length - 1)
@@ -152,19 +156,19 @@ namespace NewOscylMeasSoft
                                     {
                                         i = line.Length;
                                     }
-
                                     DataInBetween = line.Substring(last, i - last);
-                                    //MessageBox.Show("" + DataInBetween);
                                     converter = double.Parse(DataInBetween);
                                     temp.Add(converter);
                                     last = i + 1;
                                 }
-
                             }
+                            Integral.Add(new List<double> {temp[0], temp.Skip(From - 1).Take(To).Sum() });
                         }
                     }
                 }
             }
+            stopwatch.Stop();
+            MessageBox.Show("Done" + stopwatch.ElapsedMilliseconds);
             return Integral;
         }
     }
