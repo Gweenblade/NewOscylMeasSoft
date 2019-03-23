@@ -126,8 +126,14 @@ namespace NewOscylMeasSoft
             }
             return Integral;
         }
+
+
         public List<List<double>> FixedIntegral(string FilePath1, int From, int To)
         {
+            int i, last = 0;
+            double converter;
+            string DataInBetween;
+            List<double> temp = new List<double>();
             List<List<double>> ReadData = new List<List<double>>();
             using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
@@ -136,7 +142,26 @@ namespace NewOscylMeasSoft
                     using (StreamReader SR = new StreamReader(BS))
                     {
                         string line;
+                        while ((line = SR.ReadLine()) != null)
+                        {
+                            for (i = 0; i < line.Length - 1; i++)
+                            {
+                                if (line.ElementAt(i) == ':' || i == line.Length - 1)
+                                {
+                                    if (i == line.Length - 1)
+                                    {
+                                        i = line.Length;
+                                    }
 
+                                    DataInBetween = line.Substring(last, i - last);
+                                    //MessageBox.Show("" + DataInBetween);
+                                    converter = double.Parse(DataInBetween);
+                                    temp.Add(converter);
+                                    last = i + 1;
+                                }
+
+                            }
+                        }
                     }
                 }
             }
