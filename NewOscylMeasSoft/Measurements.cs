@@ -14,6 +14,7 @@ using System.IO;
 using Laser;
 using Oscyloskop;
 using CsvHelper;
+using System.Text.RegularExpressions;
 
 namespace NewOscylMeasSoft
 {
@@ -95,6 +96,7 @@ namespace NewOscylMeasSoft
                         }
 
                         DataInBetween = LineText.Substring(last, i - last);
+
                         //MessageBox.Show("" + DataInBetween);
                         converter = double.Parse(DataInBetween);
                         temp.Add(converter);
@@ -211,6 +213,45 @@ namespace NewOscylMeasSoft
             }
             stopwatch.Stop();
             MessageBox.Show("Done" + stopwatch.ElapsedMilliseconds);
+            return Integral;
+        }
+
+        public List<List<double>> RegexReaderIntegral(string FilePath1, int From, int To) // DO DALSZEJ DIAGNOSTKI.
+        {
+            string line;
+            List<List<double>> Integral = new List<List<double>>();
+            string[] Test;
+            List<long> a= new List<long>();
+            int i, j;
+            double sum = 0; ;
+            List<string> StringList = new List<string>();
+            List<double> DoubleList = new List<double>();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (BufferedStream BS = new BufferedStream(FS))
+                {
+                    using (StreamReader SR = new StreamReader(BS))
+                    {
+                        while ((line = SR.ReadLine()) != null)
+                        {
+                            a.Add(stopwatch.ElapsedMilliseconds);
+                            StringList = Regex.Split(line, ":").ToList();
+                            for (i = 0; i < StringList.Count - 1; i++)
+                                DoubleList.Add(double.Parse(StringList[i]));
+
+                            Integral.Add(new List<double> { DoubleList[0], DoubleList.Skip(From - 1).Take(To).Sum() });
+                            line = "";
+                            StringList.Clear();
+                            DoubleList.Clear();
+                            a.Add(stopwatch.ElapsedMilliseconds);
+                        }
+                    }
+                }
+            }
+            stopwatch.Stop();
+            MessageBox.Show("" + a[0] + " " + a[1] + " " + a[500] + " " + a[501]);
             return Integral;
         }
     }

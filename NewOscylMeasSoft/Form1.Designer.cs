@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.OscilInit = new System.Windows.Forms.Button();
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Checkone = new System.Windows.Forms.Button();
             this.DeleteFrame = new System.Windows.Forms.Button();
@@ -86,7 +87,6 @@
             this.ZedIntegral = new ZedGraph.ZedGraphControl();
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.button2 = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -116,7 +116,6 @@
             this.TriggerGroup.Controls.Add(this.DeleteFrame);
             this.TriggerGroup.Controls.Add(this.FrameLabel);
             this.TriggerGroup.Controls.Add(this.DataSlider);
-            this.TriggerGroup.Controls.Add(this.PathToFileLabel);
             this.TriggerGroup.Controls.Add(this.groupBox2);
             this.TriggerGroup.Controls.Add(this.ChannelsOption);
             this.TriggerGroup.Controls.Add(this.Bar1Label);
@@ -130,6 +129,16 @@
             this.TriggerGroup.TabIndex = 8;
             this.TriggerGroup.TabStop = false;
             this.TriggerGroup.Text = "Trigger control";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(395, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 23);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "LeadDataTester";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // button1
             // 
@@ -186,7 +195,7 @@
             // 
             this.PathToFileLabel.AutoSize = true;
             this.PathToFileLabel.ForeColor = System.Drawing.Color.Blue;
-            this.PathToFileLabel.Location = new System.Drawing.Point(6, 826);
+            this.PathToFileLabel.Location = new System.Drawing.Point(22, 865);
             this.PathToFileLabel.Name = "PathToFileLabel";
             this.PathToFileLabel.Size = new System.Drawing.Size(35, 13);
             this.PathToFileLabel.TabIndex = 14;
@@ -728,23 +737,14 @@
             this.OpenFileDialog.FileName = "openFileDialog1";
             this.OpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileDialog_FileOk);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(395, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 23);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "LeadDataTester";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1490, 903);
             this.Controls.Add(this.Groupmeasure);
             this.Controls.Add(this.TriggerGroup);
+            this.Controls.Add(this.PathToFileLabel);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -764,6 +764,7 @@
             this.Groupmeasure.ResumeLayout(false);
             this.Groupmeasure.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
