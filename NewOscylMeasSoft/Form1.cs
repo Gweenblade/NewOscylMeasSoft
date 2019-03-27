@@ -379,6 +379,7 @@ private void button1_Click_3(object sender, EventArgs e)
         private void button2_Click_1(object sender, EventArgs e)
         {
             measurements.RegexReaderIntegral(loadpath, 5, 25);
+           // measurements.JustReadReges(loadpath);
         }
 
         private void DataSlider_ValueChanged(object sender, EventArgs e)
