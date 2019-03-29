@@ -173,56 +173,55 @@ namespace NewOscylMeasSoft
             return Integral;
         }
 
-        public List<List<double>> JustReadingData(string FilePath1)
-        {
-            int i, last = 0;
-            double converter;
-            string DataInBetween;
-            List<double> temp = new List<double>();
-            List<List<double>> ReadData = new List<List<double>>();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                using (BufferedStream BS = new BufferedStream(FS))
-                {
-                    using (StreamReader SR = new StreamReader(BS))
-                    {
-                        string line;
-                        while ((line = SR.ReadLine()) != null)
-                        {
-                            last = 0;
-                            for (i = 0; i < line.Length - 1; i++)
-                            {
-                                if (line.ElementAt(i) == ':' || i == line.Length - 1)
-                                {
-                                    if (i == line.Length - 1)
-                                    {
-                                        i = line.Length;
-                                    }
-                                    DataInBetween = line.Substring(last, i - last);
-                                    converter = double.Parse(DataInBetween);
-                                    temp.Add(converter);
-                                    last = i + 1;
-                                }
-                            }
-                            ReadData.Add(temp);
-                        }
-                    }
-                }
-            }
-            stopwatch.Stop();
-            MessageBox.Show("Done" + stopwatch.ElapsedMilliseconds);
-            return Integral;
-        }
+        //public List<List<double>> JustReadingData(string FilePath1) ### Z regexem szybciej
+        //{
+        //    int i, last = 0;
+        //    double converter;
+        //    string DataInBetween;
+        //    List<double> temp = new List<double>();
+        //    List<List<double>> ReadData = new List<List<double>>();
+        //    Stopwatch stopwatch = new Stopwatch();
+        //    stopwatch.Start();
+        //    using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        //    {
+        //        using (BufferedStream BS = new BufferedStream(FS))
+        //        {
+        //            using (StreamReader SR = new StreamReader(BS))
+        //            {
+        //                string line;
+        //                while ((line = SR.ReadLine()) != null)
+        //                {
+        //                    last = 0;
+        //                    for (i = 0; i < line.Length - 1; i++)
+        //                    {
+        //                        if (line.ElementAt(i) == ':' || i == line.Length - 1)
+        //                        {
+        //                            if (i == line.Length - 1)
+        //                            {
+        //                                i = line.Length;
+        //                            }
+        //                            DataInBetween = line.Substring(last, i - last);
+        //                            converter = double.Parse(DataInBetween);
+        //                            temp.Add(converter);
+        //                            last = i + 1;
+        //                        }
+        //                    }
+        //                    ReadData.Add(temp);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    stopwatch.Stop();
+        //    MessageBox.Show("Done" + stopwatch.ElapsedMilliseconds);
+        //    return Integral;
+        //}
 
-        public List<double> RegexReaderIntegral(string FilePath1, int From, int To) // DO DALSZEJ DIAGNOSTKI.
+        public List<List<double>> RegexReader(string FilePath1, int From, int To) // DO DALSZEJ DIAGNOSTKI.
         {
             string line;
-            List<List<double>> Integral = new List<List<double>>();
+            List<List<double>> ReadDataInDoubles = new List<List<double>>();
             string[] Test;
             int i, j;
-            double sum = 0; ;
             List<string> StringList = new List<string>();
             List<double> DoubleList = new List<double>();
             Stopwatch stopwatch = new Stopwatch();
@@ -238,37 +237,44 @@ namespace NewOscylMeasSoft
                             StringList = Regex.Split(line, ":").ToList();
                             for (i = 0; i < StringList.Count - 1; i++)
                                 DoubleList.Add(double.Parse(StringList[i]));
-                            Integral.Add(new List<double> { DoubleList[0], DoubleList.Skip(From - 1).Take(To).Sum() });
-                            StringList.Clear();
+                            ReadDataInDoubles.Add(DoubleList);
+
+                            //DoubleList.Clear();
+                            //StringList.Clear();
                         }
                     }
                 }
             }
-            stopwatch.Stop();
-            MessageBox.Show(""+stopwatch.ElapsedMilliseconds);
-            return DoubleList;
-        }
-        public void JustReadReges(string FilePath1)
-        {
-            List<string> StringList = new List<string>();
-            string line;
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            for (j = 0; j < 10000;j = j + 10)
             {
-                using (BufferedStream BS = new BufferedStream(FS))
-                {
-                    using (StreamReader SR = new StreamReader(BS))
-                    {
-                        line = SR.ReadToEnd();
-                    }
-                }
+                MessageBox.Show(ReadDataInDoubles[0][j].ToString());
             }
-            MessageBox.Show("" + stopwatch.ElapsedMilliseconds);
-            StringList = Regex.Split(line, ":").ToList();
-            MessageBox.Show("" + stopwatch.ElapsedMilliseconds);
-            stopwatch.Stop();   
+            stopwatch.Stop();
+            MessageBox.Show(""+stopwatch.ElapsedMilliseconds + " " + ReadDataInDoubles.Count);
+            return ReadDataInDoubles;
         }
+//     //   public void JustReadReges(string FilePath1) ########Test samego czytania
+//        {
+//            List<string[]> StringList = new List<string[]>();
+//        string line;
+//        Stopwatch stopwatch = new Stopwatch();
+//        stopwatch.Start();
+//            using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+//            {
+//                using (BufferedStream BS = new BufferedStream(FS))
+//                {
+//                    using (StreamReader SR = new StreamReader(BS))
+//                    {
+//                        while ((line = SR.ReadLine()) != null)
+//                        {
+//                            StringList.Add(Regex.Split(line, ":"));
+//                        }
+//}
+//                }
+//            }
+//            stopwatch.Stop();
+//            MessageBox.Show(stopwatch.ElapsedMilliseconds.ToString() + " " +  StringList.Count);
+//        }
     }
 }
 
