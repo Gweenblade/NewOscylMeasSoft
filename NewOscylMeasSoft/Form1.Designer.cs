@@ -37,9 +37,7 @@
             this.DeleteFrame = new System.Windows.Forms.Button();
             this.FrameLabel = new System.Windows.Forms.Label();
             this.DataSlider = new System.Windows.Forms.TrackBar();
-            this.PathToFileLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.AWinit = new System.Windows.Forms.Button();
             this.IntegralBtn = new System.Windows.Forms.Button();
             this.TestBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
@@ -82,6 +80,7 @@
             this.ZedSignal = new ZedGraph.ZedGraphControl();
             this.TrackMin = new System.Windows.Forms.TrackBar();
             this.TrackMax = new System.Windows.Forms.TrackBar();
+            this.PathToFileLabel = new System.Windows.Forms.Label();
             this.Groupmeasure = new System.Windows.Forms.GroupBox();
             this.TestLabel = new System.Windows.Forms.TextBox();
             this.ZedIntegral = new ZedGraph.ZedGraphControl();
@@ -111,6 +110,7 @@
             // TriggerGroup
             // 
             this.TriggerGroup.Controls.Add(this.button2);
+            this.TriggerGroup.Controls.Add(this.TestBtn);
             this.TriggerGroup.Controls.Add(this.button1);
             this.TriggerGroup.Controls.Add(this.Checkone);
             this.TriggerGroup.Controls.Add(this.DeleteFrame);
@@ -191,21 +191,9 @@
             this.DataSlider.ValueChanged += new System.EventHandler(this.DataSlider_ValueChanged);
             this.DataSlider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DataSlider_MouseUp);
             // 
-            // PathToFileLabel
-            // 
-            this.PathToFileLabel.AutoSize = true;
-            this.PathToFileLabel.ForeColor = System.Drawing.Color.Blue;
-            this.PathToFileLabel.Location = new System.Drawing.Point(22, 865);
-            this.PathToFileLabel.Name = "PathToFileLabel";
-            this.PathToFileLabel.Size = new System.Drawing.Size(35, 13);
-            this.PathToFileLabel.TabIndex = 14;
-            this.PathToFileLabel.Text = "Path: ";
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.AWinit);
             this.groupBox2.Controls.Add(this.IntegralBtn);
-            this.groupBox2.Controls.Add(this.TestBtn);
             this.groupBox2.Controls.Add(this.SaveBtn);
             this.groupBox2.Controls.Add(this.ReadDataBtn);
             this.groupBox2.Controls.Add(this.PauseBtn);
@@ -226,16 +214,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Experiment parameters";
             // 
-            // AWinit
-            // 
-            this.AWinit.Location = new System.Drawing.Point(306, 91);
-            this.AWinit.Name = "AWinit";
-            this.AWinit.Size = new System.Drawing.Size(75, 32);
-            this.AWinit.TabIndex = 19;
-            this.AWinit.Text = "Ad Win Init";
-            this.AWinit.UseVisualStyleBackColor = true;
-            this.AWinit.Click += new System.EventHandler(this.AWinit_Click);
-            // 
             // IntegralBtn
             // 
             this.IntegralBtn.Location = new System.Drawing.Point(6, 84);
@@ -248,7 +226,7 @@
             // 
             // TestBtn
             // 
-            this.TestBtn.Location = new System.Drawing.Point(115, 122);
+            this.TestBtn.Location = new System.Drawing.Point(481, 441);
             this.TestBtn.Name = "TestBtn";
             this.TestBtn.Size = new System.Drawing.Size(75, 23);
             this.TestBtn.TabIndex = 22;
@@ -694,6 +672,16 @@
             this.TrackMax.Value = 1;
             this.TrackMax.Scroll += new System.EventHandler(this.TrackMax_Scroll);
             // 
+            // PathToFileLabel
+            // 
+            this.PathToFileLabel.AutoSize = true;
+            this.PathToFileLabel.ForeColor = System.Drawing.Color.Blue;
+            this.PathToFileLabel.Location = new System.Drawing.Point(22, 865);
+            this.PathToFileLabel.Name = "PathToFileLabel";
+            this.PathToFileLabel.Size = new System.Drawing.Size(35, 13);
+            this.PathToFileLabel.TabIndex = 14;
+            this.PathToFileLabel.Text = "Path: ";
+            // 
             // Groupmeasure
             // 
             this.Groupmeasure.Controls.Add(this.TestLabel);
@@ -741,7 +729,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1490, 903);
+            this.ClientSize = new System.Drawing.Size(1370, 749);
             this.Controls.Add(this.Groupmeasure);
             this.Controls.Add(this.TriggerGroup);
             this.Controls.Add(this.PathToFileLabel);
@@ -826,7 +814,6 @@
         private System.Windows.Forms.TextBox TestLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button IntegralBtn;
-        private System.Windows.Forms.Button AWinit;
         private System.Windows.Forms.Button button2;
     }
 }

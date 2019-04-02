@@ -39,6 +39,7 @@ namespace NewOscylMeasSoft
         static double[] xmax = new double[2] { 0, 0 };
         static double[] y = new double[2] { -50, 50 };
         List<List<double>> ReadData = new List<List<double>>();
+        List<List<double>> RawData = new List<List<double>>();
         ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", xmin, y, Color.White, ZedGraph.SymbolType.None, 2);
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", xmax, y, Color.White, ZedGraph.SymbolType.None, 2);
         PointPairList  PPLmax = new PointPairList();
@@ -309,6 +310,7 @@ namespace NewOscylMeasSoft
 
         private void TestBtn_Click(object sender, EventArgs e)
         {
+            measurements.SingleLineReader(loadpath, 5);
         }
 
         private void button1_Click_2(object sender, EventArgs e)
@@ -355,7 +357,7 @@ private void button1_Click_3(object sender, EventArgs e)
             PointPairList PPLCorrect = new PointPairList();
             PointPairList PPLNotCorrect = new PointPairList();
             StringBuilder SB = new StringBuilder();
-            Integral = measurements.FixedIntegral(loadpath, TrackMin.Value, TrackMax.Value);
+            Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
             for (int i = 0; i < Integral.Count(); i++)
             {
                 for (int j = 0; j < Integral[i].Count; j++)
@@ -378,8 +380,8 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            measurements.RegexReader(loadpath, 5, 25);
-           // measurements.JustReadReges(loadpath);
+            RawData = measurements.RegexReader(loadpath);
+            // measurements.JustReadReges(loadpath);
         }
 
         private void DataSlider_ValueChanged(object sender, EventArgs e)
@@ -387,11 +389,7 @@ private void button1_Click_3(object sender, EventArgs e)
             userdoneupdater = true;
         }
 
-        private void AWinit_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void IntegralBtn_Click(object sender, EventArgs e)
+        private void IntegralBtn_Click(object sender, EventArgs e) // INTEGRAL to samo co w check
         {
             PointPairList PPL;
             ZedIntegral.GraphPane.CurveList.Clear();
@@ -399,7 +397,8 @@ private void button1_Click_3(object sender, EventArgs e)
             PointPairList PPLCorrect = new PointPairList();
             PointPairList PPLNotCorrect = new PointPairList();
             StringBuilder SB = new StringBuilder();
-            Integral = measurements.IntegralCalculator(loadpath, TrackMin.Value, TrackMax.Value, linecount);
+            Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
+            
             for (int i = 0; i < Integral.Count(); i++)
             {
                 for (int j = 0; j < Integral[i].Count; j++)
@@ -428,15 +427,16 @@ private void button1_Click_3(object sender, EventArgs e)
                 userdoneupdater = false;
                 FrameLabel.Text = "Frame Number: " + DataSlider.Value.ToString();
                 CurrentWave.Clear();
-                CurrentWave = measurements.LoadGatheredWaveforms(loadpath, DataSlider.Value);
-                int i;
+                CurrentWave = measurements.SingleLineReader(loadpath, DataSlider.Value);
+                TrackMin.Maximum = CurrentWave.Count();
+                TrackMax.Maximum = CurrentWave.Count();
                 PPLsignal.Clear();
-                for (i = 0; i < CurrentWave.Count; i++)
+                for (int i = 0; i < CurrentWave.Count; i++)
                 {
                     PPLsignal.Add(i, CurrentWave[i]);
                 }
                 ZedSignal.GraphPane.CurveList.Clear();
-                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Blue,SymbolType.Diamond);
+                ZedSignal.GraphPane.AddCurve("", PPLsignal, Color.Blue,SymbolType.None);
                 ZedSignal.AxisChange();
                 ZedSignal.Update();
                 ZedSignal.Invalidate();
