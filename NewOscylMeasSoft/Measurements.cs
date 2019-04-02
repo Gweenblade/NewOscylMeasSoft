@@ -238,19 +238,14 @@ namespace NewOscylMeasSoft
                             for (i = 0; i < StringList.Count - 1; i++)
                                 DoubleList.Add(double.Parse(StringList[i]));
                             ReadDataInDoubles.Add(DoubleList);
-
-                            //DoubleList.Clear();
-                            //StringList.Clear();
+                            DoubleList = new List<double>();
+                            StringList = new List<string>();
                         }
                     }
                 }
             }
-            for (j = 0; j < 10000;j = j + 10)
-            {
-                MessageBox.Show(ReadDataInDoubles[0][j].ToString());
-            }
             stopwatch.Stop();
-            MessageBox.Show(""+stopwatch.ElapsedMilliseconds + " " + ReadDataInDoubles.Count);
+            MessageBox.Show(""+stopwatch.ElapsedMilliseconds + " " + ReadDataInDoubles[1].Count);
             return ReadDataInDoubles;
         }
 //     //   public void JustReadReges(string FilePath1) ########Test samego czytania
@@ -275,6 +270,15 @@ namespace NewOscylMeasSoft
 //            stopwatch.Stop();
 //            MessageBox.Show(stopwatch.ElapsedMilliseconds.ToString() + " " +  StringList.Count);
 //        }
+            public List<List<double>> IntegralOnLists(List<List<double>> RawData,int From,int HowMany)
+        {
+            List<List<double>> IntegralData = new List<List<double>>();
+            for (int i = 0; i < IntegralData.Count; i++)
+            {
+                IntegralData.Add(new List<double> { RawData[i][0], RawData[i].Skip(From - 1).Take(HowMany).Sum() });
+            }
+            return Integral;
+        }
     }
 }
 
