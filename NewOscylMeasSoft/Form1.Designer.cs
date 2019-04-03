@@ -31,14 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.OscilInit = new System.Windows.Forms.Button();
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
-            this.LoadData = new System.Windows.Forms.Button();
-            this.TestBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Checkone = new System.Windows.Forms.Button();
             this.DeleteFrame = new System.Windows.Forms.Button();
             this.FrameLabel = new System.Windows.Forms.Label();
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.LoadData = new System.Windows.Forms.Button();
             this.IntegralBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.ReadDataBtn = new System.Windows.Forms.Button();
@@ -109,7 +108,6 @@
             // 
             // TriggerGroup
             // 
-            this.TriggerGroup.Controls.Add(this.TestBtn);
             this.TriggerGroup.Controls.Add(this.button1);
             this.TriggerGroup.Controls.Add(this.Checkone);
             this.TriggerGroup.Controls.Add(this.DeleteFrame);
@@ -128,27 +126,6 @@
             this.TriggerGroup.TabIndex = 8;
             this.TriggerGroup.TabStop = false;
             this.TriggerGroup.Text = "Trigger control";
-            // 
-            // LoadData
-            // 
-            this.LoadData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LoadData.Location = new System.Drawing.Point(293, 55);
-            this.LoadData.Name = "LoadData";
-            this.LoadData.Size = new System.Drawing.Size(88, 36);
-            this.LoadData.TabIndex = 19;
-            this.LoadData.Text = "Load Data";
-            this.LoadData.UseVisualStyleBackColor = true;
-            this.LoadData.Click += new System.EventHandler(this.LoadData_Click);
-            // 
-            // TestBtn
-            // 
-            this.TestBtn.Location = new System.Drawing.Point(481, 441);
-            this.TestBtn.Name = "TestBtn";
-            this.TestBtn.Size = new System.Drawing.Size(75, 23);
-            this.TestBtn.TabIndex = 22;
-            this.TestBtn.Text = "Test";
-            this.TestBtn.UseVisualStyleBackColor = true;
-            this.TestBtn.Click += new System.EventHandler(this.TestBtn_Click);
             // 
             // button1
             // 
@@ -224,6 +201,17 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Experiment parameters";
+            // 
+            // LoadData
+            // 
+            this.LoadData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LoadData.Location = new System.Drawing.Point(293, 55);
+            this.LoadData.Name = "LoadData";
+            this.LoadData.Size = new System.Drawing.Size(88, 36);
+            this.LoadData.TabIndex = 19;
+            this.LoadData.Text = "Load Data";
+            this.LoadData.UseVisualStyleBackColor = true;
+            this.LoadData.Click += new System.EventHandler(this.LoadData_Click);
             // 
             // IntegralBtn
             // 
@@ -810,7 +798,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button ReadDataBtn;
         private System.Windows.Forms.OpenFileDialog OpenFileDialog;
-        private System.Windows.Forms.Button TestBtn;
         private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.TextBox TestLabel;
         private System.Windows.Forms.Button button1;

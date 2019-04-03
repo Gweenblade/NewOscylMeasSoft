@@ -64,11 +64,14 @@ namespace NewOscylMeasSoft
             DataSlider.BackColor = Color.LightGray;
             ZedSignal.GraphPane.CurveList.Add(lineItem1);
             ZedSignal.GraphPane.CurveList.Add(lineItem2);
-            ZedSignal.GraphPane.YAxis.Scale.Max = 5500;
-            ZedSignal.GraphPane.YAxis.Scale.Min = -5500;
-            ZedSignal.GraphPane.YAxis.Scale.MajorStep = 1000;
+            ZedSignal.GraphPane.YAxis.Scale.Max = 1500;
+            ZedSignal.GraphPane.YAxis.Scale.Min = -1500;
+            ZedSignal.GraphPane.YAxis.Scale.MajorStep = 500;
             ZedSignal.GraphPane.YAxis.Scale.MinorStep = 250;
-
+            ZedIntegral.GraphPane.XAxis.Title.Text = "Time (ms)";
+            ZedIntegral.GraphPane.YAxis.Title.Text = "Counts (a.u.)";
+            ZedSignal.GraphPane.Title.Text = "Waveform";
+            ZedIntegral.GraphPane.Title.Text = "Spectrum";
 
             WaveformArray = new List<List<double>>();
             CurrentWave = new List<double>();
@@ -308,10 +311,6 @@ namespace NewOscylMeasSoft
             PathToFileLabel.Text = savepath;
         }
 
-        private void TestBtn_Click(object sender, EventArgs e)
-        {
-            measurements.SingleLineReader(loadpath, 5);
-        }
 
         private void button1_Click_2(object sender, EventArgs e)
         {
