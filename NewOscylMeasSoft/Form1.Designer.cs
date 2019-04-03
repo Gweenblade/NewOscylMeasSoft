@@ -31,7 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.OscilInit = new System.Windows.Forms.Button();
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.LoadData = new System.Windows.Forms.Button();
+            this.TestBtn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.Checkone = new System.Windows.Forms.Button();
             this.DeleteFrame = new System.Windows.Forms.Button();
@@ -39,13 +40,12 @@
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.IntegralBtn = new System.Windows.Forms.Button();
-            this.TestBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.ReadDataBtn = new System.Windows.Forms.Button();
             this.PauseBtn = new System.Windows.Forms.Button();
             this.StopBtn = new System.Windows.Forms.Button();
             this.StartBtn = new System.Windows.Forms.Button();
-            this.LoadingData = new System.Windows.Forms.Button();
+            this.FindFile = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.WavemeterInit = new System.Windows.Forms.Button();
             this.NumOfWaveforms = new System.Windows.Forms.TextBox();
@@ -99,7 +99,7 @@
             // 
             // OscilInit
             // 
-            this.OscilInit.Location = new System.Drawing.Point(307, 10);
+            this.OscilInit.Location = new System.Drawing.Point(225, 136);
             this.OscilInit.Name = "OscilInit";
             this.OscilInit.Size = new System.Drawing.Size(75, 35);
             this.OscilInit.TabIndex = 0;
@@ -109,7 +109,6 @@
             // 
             // TriggerGroup
             // 
-            this.TriggerGroup.Controls.Add(this.button2);
             this.TriggerGroup.Controls.Add(this.TestBtn);
             this.TriggerGroup.Controls.Add(this.button1);
             this.TriggerGroup.Controls.Add(this.Checkone);
@@ -130,15 +129,26 @@
             this.TriggerGroup.TabStop = false;
             this.TriggerGroup.Text = "Trigger control";
             // 
-            // button2
+            // LoadData
             // 
-            this.button2.Location = new System.Drawing.Point(395, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 23);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "LeadDataTester";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.LoadData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LoadData.Location = new System.Drawing.Point(293, 55);
+            this.LoadData.Name = "LoadData";
+            this.LoadData.Size = new System.Drawing.Size(88, 36);
+            this.LoadData.TabIndex = 19;
+            this.LoadData.Text = "Load Data";
+            this.LoadData.UseVisualStyleBackColor = true;
+            this.LoadData.Click += new System.EventHandler(this.LoadData_Click);
+            // 
+            // TestBtn
+            // 
+            this.TestBtn.Location = new System.Drawing.Point(481, 441);
+            this.TestBtn.Name = "TestBtn";
+            this.TestBtn.Size = new System.Drawing.Size(75, 23);
+            this.TestBtn.TabIndex = 22;
+            this.TestBtn.Text = "Test";
+            this.TestBtn.UseVisualStyleBackColor = true;
+            this.TestBtn.Click += new System.EventHandler(this.TestBtn_Click);
             // 
             // button1
             // 
@@ -193,13 +203,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.LoadData);
             this.groupBox2.Controls.Add(this.IntegralBtn);
             this.groupBox2.Controls.Add(this.SaveBtn);
             this.groupBox2.Controls.Add(this.ReadDataBtn);
             this.groupBox2.Controls.Add(this.PauseBtn);
             this.groupBox2.Controls.Add(this.StopBtn);
             this.groupBox2.Controls.Add(this.StartBtn);
-            this.groupBox2.Controls.Add(this.LoadingData);
+            this.groupBox2.Controls.Add(this.FindFile);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.WavemeterInit);
             this.groupBox2.Controls.Add(this.NumOfWaveforms);
@@ -223,16 +234,6 @@
             this.IntegralBtn.Text = "Calculate Integral";
             this.IntegralBtn.UseVisualStyleBackColor = true;
             this.IntegralBtn.Click += new System.EventHandler(this.IntegralBtn_Click);
-            // 
-            // TestBtn
-            // 
-            this.TestBtn.Location = new System.Drawing.Point(481, 441);
-            this.TestBtn.Name = "TestBtn";
-            this.TestBtn.Size = new System.Drawing.Size(75, 23);
-            this.TestBtn.TabIndex = 22;
-            this.TestBtn.Text = "Test";
-            this.TestBtn.UseVisualStyleBackColor = true;
-            this.TestBtn.Click += new System.EventHandler(this.TestBtn_Click);
             // 
             // SaveBtn
             // 
@@ -289,16 +290,16 @@
             this.StartBtn.UseVisualStyleBackColor = false;
             this.StartBtn.Click += new System.EventHandler(this.StartBtn_Click);
             // 
-            // LoadingData
+            // FindFile
             // 
-            this.LoadingData.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LoadingData.Location = new System.Drawing.Point(245, 150);
-            this.LoadingData.Name = "LoadingData";
-            this.LoadingData.Size = new System.Drawing.Size(136, 53);
-            this.LoadingData.TabIndex = 17;
-            this.LoadingData.Text = "Load data to analyse";
-            this.LoadingData.UseVisualStyleBackColor = true;
-            this.LoadingData.Click += new System.EventHandler(this.LoadingData_Click);
+            this.FindFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.FindFile.Location = new System.Drawing.Point(293, 10);
+            this.FindFile.Name = "FindFile";
+            this.FindFile.Size = new System.Drawing.Size(88, 39);
+            this.FindFile.TabIndex = 17;
+            this.FindFile.Text = "Find File";
+            this.FindFile.UseVisualStyleBackColor = true;
+            this.FindFile.Click += new System.EventHandler(this.FindFile_Click);
             // 
             // label3
             // 
@@ -311,7 +312,7 @@
             // 
             // WavemeterInit
             // 
-            this.WavemeterInit.Location = new System.Drawing.Point(306, 49);
+            this.WavemeterInit.Location = new System.Drawing.Point(306, 164);
             this.WavemeterInit.Name = "WavemeterInit";
             this.WavemeterInit.Size = new System.Drawing.Size(75, 36);
             this.WavemeterInit.TabIndex = 15;
@@ -729,7 +730,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 749);
+            this.ClientSize = new System.Drawing.Size(1493, 896);
             this.Controls.Add(this.Groupmeasure);
             this.Controls.Add(this.TriggerGroup);
             this.Controls.Add(this.PathToFileLabel);
@@ -791,7 +792,7 @@
         private System.Windows.Forms.Label PathToFileLabel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox EdgeOptions;
-        private System.Windows.Forms.Button LoadingData;
+        private System.Windows.Forms.Button FindFile;
         private System.Windows.Forms.TrackBar DataSlider;
         private System.Windows.Forms.Button DeleteFrame;
         private System.Windows.Forms.Label FrameLabel;
@@ -814,7 +815,7 @@
         private System.Windows.Forms.TextBox TestLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button IntegralBtn;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button LoadData;
     }
 }
 

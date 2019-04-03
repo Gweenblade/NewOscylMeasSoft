@@ -207,12 +207,15 @@ namespace NewOscylMeasSoft
             return ReadDataInDoubles;
         }
 
-        public List<List<double>> IntegralOnLists(List<List<double>> RawData,int From,int HowMany)
+        public List<List<double>> IntegralOnLists(List<List<double>> RawData,int From,int To)
         {
             List<List<double>> IntegralData = new List<List<double>>();
-            for (int i = 0; i < IntegralData.Count; i++)
+            int HowMany = To - From;
+            double Average;
+            for (int i = 0; i < RawData.Count; i++)
             {
-                IntegralData.Add(new List<double> { RawData[i][0], RawData[i].Skip(From - 1).Take(HowMany).Sum() });
+                Average = RawData[i].Skip(From - 1).Take(HowMany).Sum() / HowMany;
+                IntegralData.Add(new List<double> { RawData[i][0], RawData[i].Skip(From - 1).Take(HowMany).Sum() , Average});
             }
             return IntegralData;
         }

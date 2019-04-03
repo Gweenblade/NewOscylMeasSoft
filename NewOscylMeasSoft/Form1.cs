@@ -378,10 +378,15 @@ private void button1_Click_3(object sender, EventArgs e)
             ZedIntegral.Invalidate();
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void LoadData_Click(object sender, EventArgs e)
         {
             RawData = measurements.RegexReader(loadpath);
-            // measurements.JustReadReges(loadpath);
+        }
+
+        private void FindFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog.ShowDialog();
+            PathToFileLabel.Text = "Path: " + OpenFileDialog.FileName;
         }
 
         private void DataSlider_ValueChanged(object sender, EventArgs e)
@@ -398,7 +403,6 @@ private void button1_Click_3(object sender, EventArgs e)
             PointPairList PPLNotCorrect = new PointPairList();
             StringBuilder SB = new StringBuilder();
             Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
-            
             for (int i = 0; i < Integral.Count(); i++)
             {
                 for (int j = 0; j < Integral[i].Count; j++)
