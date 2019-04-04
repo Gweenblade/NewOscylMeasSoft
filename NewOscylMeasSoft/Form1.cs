@@ -64,9 +64,9 @@ namespace NewOscylMeasSoft
             DataSlider.BackColor = Color.LightGray;
             ZedSignal.GraphPane.CurveList.Add(lineItem1);
             ZedSignal.GraphPane.CurveList.Add(lineItem2);
-            ZedSignal.GraphPane.YAxis.Scale.Max = 1500;
-            ZedSignal.GraphPane.YAxis.Scale.Min = -1500;
-            ZedSignal.GraphPane.YAxis.Scale.MajorStep = 500;
+            ZedSignal.GraphPane.YAxis.Scale.Max = 5000;
+            ZedSignal.GraphPane.YAxis.Scale.Min = -5000;
+            ZedSignal.GraphPane.YAxis.Scale.MajorStep = 1000;
             ZedSignal.GraphPane.YAxis.Scale.MinorStep = 250;
             ZedIntegral.GraphPane.XAxis.Title.Text = "Time (ms)";
             ZedIntegral.GraphPane.YAxis.Title.Text = "Counts (a.u.)";
@@ -87,17 +87,7 @@ namespace NewOscylMeasSoft
             return Measure;
         }
 
-        private void TriggerChannelChecker()
-        {
-            if (CH1Trigg.Checked)
-                TriggerCH = 0;
-            if (CH2Trigg.Checked)
-                TriggerCH = 1;
-            if (CH3Trigg.Checked)
-                TriggerCH = 2;
-            if (CH4Trigg.Checked)
-                TriggerCH = 3;
-        }
+
         private void LineZedSignalRedrawer()
         {
 
@@ -191,20 +181,6 @@ namespace NewOscylMeasSoft
 
         }
 
-        private void TriggON_CheckedChanged(object sender, EventArgs e)
-        {
-            if (TriggOFF.Checked)
-            {
-                TriggOptions.Enabled = false;
-                CH1Trigg.Checked = false;
-            }
-            else
-            {
-                TriggOptions.Enabled = true;
-                CH1Trigg.Checked = true;
-                EdgeOptions.SelectedIndex = 0;
-            }
-        }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
@@ -255,13 +231,6 @@ namespace NewOscylMeasSoft
 
         }
 
-        private void EdgeOptions_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (EdgeOptions.SelectedIndex == 0)
-                TriggerEdge = true;
-            else
-                TriggerEdge = false;
-        }
 
         private void SetTriggerButton_Click(object sender, EventArgs e)
         {
@@ -324,7 +293,6 @@ namespace NewOscylMeasSoft
 
 private void button1_Click_3(object sender, EventArgs e)
         {
-            OpenFileDialog.ShowDialog();
         }
 
         private void DataSlider_Scroll(object sender, EventArgs e)
@@ -348,34 +316,6 @@ private void button1_Click_3(object sender, EventArgs e)
                 MessageBox.Show("Something went wrong..");
         }
 
-        private void Checkone_Click(object sender, EventArgs e)
-        {
-            PointPairList PPL;
-            ZedIntegral.GraphPane.CurveList.Clear();
-            ZedIntegral.GraphPane.GraphObjList.Clear();
-            PointPairList PPLCorrect = new PointPairList();
-            PointPairList PPLNotCorrect = new PointPairList();
-            StringBuilder SB = new StringBuilder();
-            Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
-            for (int i = 0; i < Integral.Count(); i++)
-            {
-                for (int j = 0; j < Integral[i].Count; j++)
-                {
-                    SB.Append(Integral[i][j] + " ");
-                }
-                SB.Append("\n");
-                PPLCorrect.Add(Integral[i][0], Integral[i][1]);
-                PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
-            }
-            using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(SB); }
-            LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("Correct measured points", PPLCorrect, Color.Green, SymbolType.Circle);
-            LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("Incorrect measured points", PPLNotCorrect, Color.Red, SymbolType.Plus);
-            CorrectCurve.Line.IsVisible = false;
-            IncorrectCurve.Line.IsVisible = false;
-            ZedIntegral.AxisChange();
-            ZedIntegral.Update();
-            ZedIntegral.Invalidate();
-        }
 
         private void LoadData_Click(object sender, EventArgs e)
         {
