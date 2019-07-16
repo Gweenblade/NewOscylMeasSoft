@@ -58,7 +58,6 @@ namespace NewOscylMeasSoft
             PPLIntegralWrong = new PointPairList();
             InitializeComponent();
             oscillo = new Oscyloskop.Form1();
-            double.TryParse(NumberOfPointsBox.Text, out numberofpoints);
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
             ZedSignal.GraphPane.YAxis.Title.Text = "Signal";
             DataSlider.BackColor = Color.LightGray;
@@ -128,7 +127,7 @@ namespace NewOscylMeasSoft
 
         private void NumberOfPointsBox_TextChanged_1(object sender, EventArgs e)
         {
-            double.TryParse(NumberOfPointsBox.Text, out numberofpoints);
+            numberofpoints = RawData[0].Count();
             TrackMin.Maximum = (int)numberofpoints - 1;
             TrackMax.Maximum = (int)numberofpoints - 1;
             ZedSignal.Invalidate();
@@ -258,21 +257,6 @@ namespace NewOscylMeasSoft
             public string Name { get; set; }
         }
 
-        void funkcjatestowa()
-        {
-            var records = new List<dynamic>();
-            records = new List<dynamic> { 1, 2, 3, 4, 5, 6 };
-            dynamic record = new ExpandoObject();
-            record.Id = 1;
-            record.Name = "one";
-            records.Add(record);
-
-            using (var writer = new StringWriter())
-            using (var csv = new CsvWriter(writer))
-            {
-                csv.WriteRecords(records);
-            }
-        }
 
         private void DataSaverDialog_FileOk(object sender, CancelEventArgs e)
         {
@@ -320,6 +304,16 @@ private void button1_Click_3(object sender, EventArgs e)
         private void LoadData_Click(object sender, EventArgs e)
         {
             RawData = measurements.RegexReader(loadpath);
+        }
+
+        private void PathToFileLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TestLabel_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void FindFile_Click(object sender, EventArgs e)

@@ -24,6 +24,7 @@ namespace NewOscylMeasSoft
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
+        List<List<double>> WavemeterMeasurements;
         EventWaitHandle FileSaving, FileFree;
 
 
@@ -32,6 +33,7 @@ namespace NewOscylMeasSoft
             int MeasureLoopIndicator;
             int i;
             bool WARNING;
+            WavemeterMeasurements = new List<List<double>>();
             WaveformArray = new List<List<double>>();
             List<double> temp = new List<double>();
             StringBuilder SB = new StringBuilder();
