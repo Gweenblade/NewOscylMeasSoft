@@ -24,51 +24,69 @@ namespace NewOscylMeasSoft
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
-        List<List<double>> WavemeterMeasurements;
         EventWaitHandle FileSaving, FileFree;
+        obslugaNW WSU = new obslugaNW();
 
-
+        private void WavemeterReadings(string FilePath1, int NumberOfMeasures = 500)
+        {
+            int i = 0;
+        }
         public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
         {
             int MeasureLoopIndicator;
             int i;
             bool WARNING;
-            WavemeterMeasurements = new List<List<double>>();
+            PointPairList PPLWSU = new PointPairList();
+            PointPairList PPLPIC = new PointPairList();
             WaveformArray = new List<List<double>>();
             List<double> temp = new List<double>();
             StringBuilder SB = new StringBuilder();
+            StringBuilder SBWSU = new StringBuilder();
             Stopwatch Stopwatch = new Stopwatch();
             double Wavenumber =0;
             Stopwatch.Start();
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
             {
-                WaveformArray.Add(oscillo.odczyt()[0]); // Poprawić kanał w razie czego TO JEST WAZNE
-                /*  if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błędu z odczytem długości fali
-                  {
-                      Wavenumber = Wavecontrol.ReadCM();
-                      WARNING = false;
-                  }
-                  else
-                      WARNING = true;
-                  SB.Append(Wavenumber + ":");*/
+                WaveformArray.Add(oscillo.odczyt()[0]);
+                var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
                 SB.Append(Stopwatch.ElapsedMilliseconds + ":");
+                SBWSU.Append(Stopwatch.ElapsedMilliseconds + ":");
                 for (i = 0; i < WaveformArray[0].Count; i++)// TUTAJ moze byc bubel zwiazany z iloscia elementów (dać -1 jak cos)
                 {
                     SB.Append(WaveformArray[0][i] + ":");
-                }/*
-                if (WARNING == true) // Jeśli ostatni element listy jest równy -1, to oznacza że był problem z odczytem długości fali i założono 
-                    SB.Append("-1");*/
-                SB.Append("\r\n");
+                    PPLPIC.Add(i, WaveformArray[0][i]);
+                }
                 WaveformArray.Clear();
-                
+                SB.Append("\r\n");
+                SBWSU.Append(obslugaNW.odczytNowegoWMcm(false) + ":" + obslugaNW.odczytszerokosci() + ":");
+                i = 0;
+                foreach (var z in x)
+                {
+                    SBWSU.Append(z.ToString() + ":");
+                    PPLWSU.Add(i, z);
+                    i++;
+                }
+                SBWSU.Append("\r\n");
+                form1.OscilloSignal.GraphPane.AddCurve("", PPLWSU, Color.Red, SymbolType.None);
+                form1.WavemeterSignal.GraphPane.AddCurve("", PPLPIC, Color.Blue, SymbolType.None);
+                form1.WavemeterSignal.AxisChange();
+                form1.WavemeterSignal.Invalidate();
+                form1.OscilloSignal.AxisChange();
+                form1.OscilloSignal.Invalidate();
                 if (MeasureLoopIndicator % 50 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50)
                 {
-                    using (StreamWriter SW = new StreamWriter(FilePath1, true))
+                    using (StreamWriter SW = new StreamWriter(FilePath1+"PICO", true))
                     {
                         SW.Write(SB);
                         SW.Flush();
                     }
+                    using (StreamWriter SW = new StreamWriter(FilePath1+"WSU", true))
+                    {
+                        SW.Write(SBWSU);
+                        SW.Flush();
+                    }
                     SB.Clear();
+                    SBWSU.Clear();
                 }              
             }
             Stopwatch.Stop();

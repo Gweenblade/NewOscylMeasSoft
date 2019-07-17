@@ -45,6 +45,7 @@ namespace NewOscylMeasSoft
         PointPairList  PPLmax = new PointPairList();
         PointPairList PPLmin = new PointPairList();
         bool userdoneupdater = false;
+        obslugaNW WMU = new obslugaNW();
         public List<double> WaveformRead()
         {
             return measurements.LoadGatheredWaveforms(loadpath, linecount);
@@ -53,6 +54,7 @@ namespace NewOscylMeasSoft
         List<double> CurrentWave;
         public Form1()
         {
+            
             PPLsignal = new PointPairList();
             PPLIntegralCorrect = new PointPairList();
             PPLIntegralWrong = new PointPairList();
@@ -85,8 +87,25 @@ namespace NewOscylMeasSoft
             Measure.Start();
             return Measure;
         }
-
-
+        public Thread StartTheThread2() // DO USUNIECIA
+        {
+            Measure = new Thread(() => Rysowaniewykresów());
+            Measure.Start();
+            return Measure;
+        }
+        private void Rysowaniewykresów() // DO USUNIECIA
+        {
+            PointPairList PPLCorrect = new PointPairList();
+            LineItem CorrectCurve;
+            for (int i = 0; i < 10000; i++)
+            {
+                PPLCorrect.Add(i, i);
+            }
+            ZedIntegral.AxisChange();
+            ZedIntegral.Invalidate();
+            WavemeterSignal.GraphPane.AddCurve("", PPLCorrect, Color.Red, SymbolType.None);
+            CorrectCurve = ZedIntegral.GraphPane.AddCurve("", PPLCorrect, Color.Green, SymbolType.Circle);
+        }
         private void LineZedSignalRedrawer()
         {
 
@@ -314,6 +333,11 @@ private void button1_Click_3(object sender, EventArgs e)
         private void TestLabel_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_4(object sender, EventArgs e) // DO USUNIECIA
+        {
+            StartTheThread2();
         }
 
         private void FindFile_Click(object sender, EventArgs e)

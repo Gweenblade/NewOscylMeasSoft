@@ -63,6 +63,7 @@
             this.ZedIntegral = new ZedGraph.ZedGraphControl();
             this.WavemeterSignal = new ZedGraph.ZedGraphControl();
             this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -332,6 +333,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.WavemeterSignal);
             this.groupBox1.Controls.Add(this.label1);
@@ -452,6 +454,16 @@
             this.label2.TabIndex = 24;
             this.label2.Text = "Initialize wavemeter -";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(362, 709);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_4);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -504,15 +516,16 @@
         private System.Windows.Forms.Button IntegralBtn;
         private System.Windows.Forms.Button LoadData;
         private System.Windows.Forms.GroupBox groupBox1;
-        private ZedGraph.ZedGraphControl OscilloSignal;
         private System.Windows.Forms.Button ShowOneInterferometer;
         private System.Windows.Forms.TextBox CutoffParameter;
         private System.Windows.Forms.Label Cutoff;
         private ZedGraph.ZedGraphControl zedGraphControl1;
         private ZedGraph.ZedGraphControl ZedIntegral;
         private System.Windows.Forms.Label label1;
-        private ZedGraph.ZedGraphControl WavemeterSignal;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
+        public ZedGraph.ZedGraphControl OscilloSignal;
+        public ZedGraph.ZedGraphControl WavemeterSignal;
     }
 }
 
