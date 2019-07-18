@@ -81,9 +81,9 @@ namespace NewOscylMeasSoft
             ZedSignal.Invalidate();
         }
 
-        public Thread StartTheThread(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
+        public Thread StartTheThread(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10)
         {
-            Measure = new Thread(() => measurements.GatherWaveforms(FilePath, oscillo));
+            Measure = new Thread(() => measurements.GatherWaveforms(FilePath, oscillo, NumberOfMeasures, Averages));
             Measure.Start();
             return Measure;
         }
@@ -219,7 +219,17 @@ namespace NewOscylMeasSoft
             PauseBtn.BackColor = Color.Yellow;
             StopBtn.BackColor = Color.Red;
             StartBtn.BackColor = Color.White;
-            StartTheThread(savepath,oscillo);
+            int x, y;
+            int.TryParse(MeasuresTB.Text, out x);
+            int.TryParse(AveragesTB.Text, out y);
+            if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
+            {
+                StartTheThread(savepath, oscillo, x, y);
+            }
+            else
+            {
+                MessageBox.Show("Niepoprawne parametry");
+            }
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
@@ -338,6 +348,32 @@ private void button1_Click_3(object sender, EventArgs e)
         private void button1_Click_4(object sender, EventArgs e) // DO USUNIECIA
         {
             StartTheThread2();
+        }
+
+        private void CheckOne_Click(object sender, EventArgs e)
+        {
+            var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
+            StringBuilder SB = new StringBuilder();
+            PointPairList PPL = new PointPairList();
+            int i = 0;
+            foreach (var z in x)
+            {
+                SB.Append(z + "\n");
+                PPL.Add(i, z);
+                i++;
+            }
+            TestLabel.Text = SB.ToString();
+            WavemeterSignal.GraphPane.CurveList.Clear();
+            WavemeterSignal.GraphPane.AddCurve("", PPL, Color.Red, SymbolType.None);
+            WavemeterSignal.AxisChange();
+            WavemeterSignal.Update();
+            WavemeterSignal.Invalidate();
+
+        }
+
+        private void AveragesTB_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void FindFile_Click(object sender, EventArgs e)
