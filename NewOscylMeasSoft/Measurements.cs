@@ -197,7 +197,7 @@ namespace NewOscylMeasSoft
         }
 
 
-        public List<List<double>> RegexReader(string FilePath1) // DO DALSZEJ DIAGNOSTKI.
+        public List<List<double>> RegexReader(string FilePath1, string Separator) // DO DALSZEJ DIAGNOSTKI.
         {
             string line;
             List<List<double>> ReadDataInDoubles = new List<List<double>>();
@@ -215,7 +215,7 @@ namespace NewOscylMeasSoft
                     {
                         while ((line = SR.ReadLine()) != null)
                         {
-                            StringList = Regex.Split(line, ":").ToList();
+                            StringList = Regex.Split(line, Separator).ToList();
                             for (i = 0; i < StringList.Count - 1; i++)
                                 DoubleList.Add(double.Parse(StringList[i]));
                             ReadDataInDoubles.Add(DoubleList);

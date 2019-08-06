@@ -32,7 +32,7 @@
             this.OscilInit = new System.Windows.Forms.Button();
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
             this.ShowOneInterferometer = new System.Windows.Forms.Button();
-            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
+            this.ZedInteferogram = new ZedGraph.ZedGraphControl();
             this.ZedIntegral = new ZedGraph.ZedGraphControl();
             this.DeleteFrame = new System.Windows.Forms.Button();
             this.FrameLabel = new System.Windows.Forms.Label();
@@ -59,22 +59,31 @@
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.MeasuresTB = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.AveragesTB = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.CheckOne = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.WavemeterSignal = new ZedGraph.ZedGraphControl();
             this.label1 = new System.Windows.Forms.Label();
             this.OscilloSignal = new ZedGraph.ZedGraphControl();
-            this.CheckOne = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.AveragesTB = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.MeasuresTB = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.FileSeparator = new System.Windows.Forms.TextBox();
+            this.CutOffFunction = new System.Windows.Forms.Button();
+            this.LoadInteferometer = new System.Windows.Forms.Button();
+            this.FindInterferogram = new System.Windows.Forms.Button();
+            this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
+            this.InteferometerSlider = new System.Windows.Forms.TrackBar();
+            this.FrameInteferometer = new System.Windows.Forms.Label();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // OscilInit
@@ -89,8 +98,10 @@
             // 
             // TriggerGroup
             // 
+            this.TriggerGroup.Controls.Add(this.FrameInteferometer);
+            this.TriggerGroup.Controls.Add(this.InteferometerSlider);
             this.TriggerGroup.Controls.Add(this.ShowOneInterferometer);
-            this.TriggerGroup.Controls.Add(this.zedGraphControl1);
+            this.TriggerGroup.Controls.Add(this.ZedInteferogram);
             this.TriggerGroup.Controls.Add(this.ZedIntegral);
             this.TriggerGroup.Controls.Add(this.DeleteFrame);
             this.TriggerGroup.Controls.Add(this.FrameLabel);
@@ -117,23 +128,23 @@
             this.ShowOneInterferometer.Text = "Recalcuate";
             this.ShowOneInterferometer.UseVisualStyleBackColor = true;
             // 
-            // zedGraphControl1
+            // ZedInteferogram
             // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(727, 19);
-            this.zedGraphControl1.Name = "zedGraphControl1";
-            this.zedGraphControl1.ScrollGrace = 0D;
-            this.zedGraphControl1.ScrollMaxX = 0D;
-            this.zedGraphControl1.ScrollMaxY = 0D;
-            this.zedGraphControl1.ScrollMaxY2 = 0D;
-            this.zedGraphControl1.ScrollMinX = 0D;
-            this.zedGraphControl1.ScrollMinY = 0D;
-            this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(691, 334);
-            this.zedGraphControl1.TabIndex = 17;
+            this.ZedInteferogram.Location = new System.Drawing.Point(727, 23);
+            this.ZedInteferogram.Name = "ZedInteferogram";
+            this.ZedInteferogram.ScrollGrace = 0D;
+            this.ZedInteferogram.ScrollMaxX = 0D;
+            this.ZedInteferogram.ScrollMaxY = 0D;
+            this.ZedInteferogram.ScrollMaxY2 = 0D;
+            this.ZedInteferogram.ScrollMinX = 0D;
+            this.ZedInteferogram.ScrollMinY = 0D;
+            this.ZedInteferogram.ScrollMinY2 = 0D;
+            this.ZedInteferogram.Size = new System.Drawing.Size(543, 334);
+            this.ZedInteferogram.TabIndex = 17;
             // 
             // ZedIntegral
             // 
-            this.ZedIntegral.Location = new System.Drawing.Point(727, 411);
+            this.ZedIntegral.Location = new System.Drawing.Point(729, 409);
             this.ZedIntegral.Name = "ZedIntegral";
             this.ZedIntegral.ScrollGrace = 0D;
             this.ZedIntegral.ScrollMaxX = 0D;
@@ -142,7 +153,7 @@
             this.ZedIntegral.ScrollMinX = 0D;
             this.ZedIntegral.ScrollMinY = 0D;
             this.ZedIntegral.ScrollMinY2 = 0D;
-            this.ZedIntegral.Size = new System.Drawing.Size(691, 334);
+            this.ZedIntegral.Size = new System.Drawing.Size(543, 334);
             this.ZedIntegral.TabIndex = 16;
             // 
             // DeleteFrame
@@ -166,7 +177,7 @@
             // 
             // DataSlider
             // 
-            this.DataSlider.BackColor = System.Drawing.Color.Gainsboro;
+            this.DataSlider.BackColor = System.Drawing.Color.Bisque;
             this.DataSlider.Location = new System.Drawing.Point(13, 563);
             this.DataSlider.Maximum = 0;
             this.DataSlider.Name = "DataSlider";
@@ -178,6 +189,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.LoadInteferometer);
+            this.groupBox2.Controls.Add(this.FindInterferogram);
+            this.groupBox2.Controls.Add(this.CutOffFunction);
+            this.groupBox2.Controls.Add(this.FileSeparator);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.LoadData);
             this.groupBox2.Controls.Add(this.CutoffTB);
             this.groupBox2.Controls.Add(this.Cutoff);
@@ -185,17 +201,18 @@
             this.groupBox2.Controls.Add(this.FindFile);
             this.groupBox2.Location = new System.Drawing.Point(13, 614);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(695, 73);
+            this.groupBox2.Size = new System.Drawing.Size(695, 132);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Experiment parameters";
+            this.groupBox2.Text = "File analysis parameters";
             // 
             // LoadData
             // 
+            this.LoadData.Enabled = false;
             this.LoadData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LoadData.Location = new System.Drawing.Point(100, 19);
+            this.LoadData.Location = new System.Drawing.Point(118, 19);
             this.LoadData.Name = "LoadData";
-            this.LoadData.Size = new System.Drawing.Size(88, 39);
+            this.LoadData.Size = new System.Drawing.Size(97, 39);
             this.LoadData.TabIndex = 19;
             this.LoadData.Text = "Load Data";
             this.LoadData.UseVisualStyleBackColor = true;
@@ -203,7 +220,7 @@
             // 
             // CutoffTB
             // 
-            this.CutoffTB.Location = new System.Drawing.Point(396, 19);
+            this.CutoffTB.Location = new System.Drawing.Point(440, 19);
             this.CutoffTB.Name = "CutoffTB";
             this.CutoffTB.Size = new System.Drawing.Size(100, 20);
             this.CutoffTB.TabIndex = 19;
@@ -211,7 +228,7 @@
             // Cutoff
             // 
             this.Cutoff.AutoSize = true;
-            this.Cutoff.Location = new System.Drawing.Point(288, 22);
+            this.Cutoff.Location = new System.Drawing.Point(332, 22);
             this.Cutoff.Name = "Cutoff";
             this.Cutoff.Size = new System.Drawing.Size(102, 13);
             this.Cutoff.TabIndex = 18;
@@ -220,9 +237,9 @@
             // IntegralBtn
             // 
             this.IntegralBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.IntegralBtn.Location = new System.Drawing.Point(194, 20);
+            this.IntegralBtn.Location = new System.Drawing.Point(221, 19);
             this.IntegralBtn.Name = "IntegralBtn";
-            this.IntegralBtn.Size = new System.Drawing.Size(88, 39);
+            this.IntegralBtn.Size = new System.Drawing.Size(105, 39);
             this.IntegralBtn.TabIndex = 19;
             this.IntegralBtn.Text = "Calculate Integral";
             this.IntegralBtn.UseVisualStyleBackColor = true;
@@ -233,7 +250,7 @@
             this.FindFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FindFile.Location = new System.Drawing.Point(6, 19);
             this.FindFile.Name = "FindFile";
-            this.FindFile.Size = new System.Drawing.Size(88, 39);
+            this.FindFile.Size = new System.Drawing.Size(110, 39);
             this.FindFile.TabIndex = 17;
             this.FindFile.Text = "Find File";
             this.FindFile.UseVisualStyleBackColor = true;
@@ -275,7 +292,8 @@
             // 
             // TrackMin
             // 
-            this.TrackMin.Location = new System.Drawing.Point(13, 479);
+            this.TrackMin.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.TrackMin.Location = new System.Drawing.Point(13, 471);
             this.TrackMin.Maximum = 2046;
             this.TrackMin.Minimum = 1;
             this.TrackMin.Name = "TrackMin";
@@ -286,7 +304,8 @@
             // 
             // TrackMax
             // 
-            this.TrackMax.Location = new System.Drawing.Point(13, 522);
+            this.TrackMax.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.TrackMax.Location = new System.Drawing.Point(13, 514);
             this.TrackMax.Maximum = 2046;
             this.TrackMax.Minimum = 1;
             this.TrackMax.Name = "TrackMax";
@@ -416,15 +435,48 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Signal";
             // 
-            // button1
+            // MeasuresTB
             // 
-            this.button1.Location = new System.Drawing.Point(918, 806);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_4);
+            this.MeasuresTB.Location = new System.Drawing.Point(168, 754);
+            this.MeasuresTB.Name = "MeasuresTB";
+            this.MeasuresTB.Size = new System.Drawing.Size(100, 20);
+            this.MeasuresTB.TabIndex = 28;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 757);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(153, 13);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Number of measurement points";
+            // 
+            // AveragesTB
+            // 
+            this.AveragesTB.Location = new System.Drawing.Point(168, 778);
+            this.AveragesTB.Name = "AveragesTB";
+            this.AveragesTB.Size = new System.Drawing.Size(100, 20);
+            this.AveragesTB.TabIndex = 26;
+            this.AveragesTB.TextChanged += new System.EventHandler(this.AveragesTB_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 781);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 13);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Number of averages -";
+            // 
+            // CheckOne
+            // 
+            this.CheckOne.Location = new System.Drawing.Point(373, 709);
+            this.CheckOne.Name = "CheckOne";
+            this.CheckOne.Size = new System.Drawing.Size(75, 23);
+            this.CheckOne.TabIndex = 16;
+            this.CheckOne.Text = "Check one";
+            this.CheckOne.UseVisualStyleBackColor = true;
+            this.CheckOne.Click += new System.EventHandler(this.CheckOne_Click);
             // 
             // label2
             // 
@@ -474,54 +526,98 @@
             this.OscilloSignal.TabIndex = 16;
             this.OscilloSignal.ZoomStepFraction = 1D;
             // 
-            // CheckOne
+            // button1
             // 
-            this.CheckOne.Location = new System.Drawing.Point(373, 709);
-            this.CheckOne.Name = "CheckOne";
-            this.CheckOne.Size = new System.Drawing.Size(75, 23);
-            this.CheckOne.TabIndex = 16;
-            this.CheckOne.Text = "Check one";
-            this.CheckOne.UseVisualStyleBackColor = true;
-            this.CheckOne.Click += new System.EventHandler(this.CheckOne_Click);
+            this.button1.Location = new System.Drawing.Point(918, 806);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_4);
             // 
-            // label4
+            // label6
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 781);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(109, 13);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "Number of averages -";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(332, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Data separator in file";
             // 
-            // AveragesTB
+            // FileSeparator
             // 
-            this.AveragesTB.Location = new System.Drawing.Point(168, 778);
-            this.AveragesTB.Name = "AveragesTB";
-            this.AveragesTB.Size = new System.Drawing.Size(100, 20);
-            this.AveragesTB.TabIndex = 26;
-            this.AveragesTB.TextChanged += new System.EventHandler(this.AveragesTB_TextChanged);
+            this.FileSeparator.Location = new System.Drawing.Point(440, 41);
+            this.FileSeparator.Name = "FileSeparator";
+            this.FileSeparator.Size = new System.Drawing.Size(10, 20);
+            this.FileSeparator.TabIndex = 21;
+            this.FileSeparator.Text = ":";
             // 
-            // label5
+            // CutOffFunction
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 757);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(153, 13);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "Number of measurement points";
+            this.CutOffFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CutOffFunction.Location = new System.Drawing.Point(546, 19);
+            this.CutOffFunction.Name = "CutOffFunction";
+            this.CutOffFunction.Size = new System.Drawing.Size(88, 39);
+            this.CutOffFunction.TabIndex = 26;
+            this.CutOffFunction.Text = "Aply cutoff";
+            this.CutOffFunction.UseVisualStyleBackColor = true;
+            this.CutOffFunction.Click += new System.EventHandler(this.CutOffFunction_Click);
             // 
-            // MeasuresTB
+            // LoadInteferometer
             // 
-            this.MeasuresTB.Location = new System.Drawing.Point(168, 754);
-            this.MeasuresTB.Name = "MeasuresTB";
-            this.MeasuresTB.Size = new System.Drawing.Size(100, 20);
-            this.MeasuresTB.TabIndex = 28;
+            this.LoadInteferometer.Enabled = false;
+            this.LoadInteferometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LoadInteferometer.Location = new System.Drawing.Point(118, 64);
+            this.LoadInteferometer.Name = "LoadInteferometer";
+            this.LoadInteferometer.Size = new System.Drawing.Size(97, 39);
+            this.LoadInteferometer.TabIndex = 28;
+            this.LoadInteferometer.Text = "Load Inteferogram";
+            this.LoadInteferometer.UseVisualStyleBackColor = true;
+            this.LoadInteferometer.Click += new System.EventHandler(this.Button2_Click_1);
+            // 
+            // FindInterferogram
+            // 
+            this.FindInterferogram.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.FindInterferogram.Location = new System.Drawing.Point(6, 64);
+            this.FindInterferogram.Name = "FindInterferogram";
+            this.FindInterferogram.Size = new System.Drawing.Size(110, 39);
+            this.FindInterferogram.TabIndex = 27;
+            this.FindInterferogram.Text = "Find Interferogram";
+            this.FindInterferogram.UseVisualStyleBackColor = true;
+            this.FindInterferogram.Click += new System.EventHandler(this.FindInterferogram_Click);
+            // 
+            // InteferometerPathway
+            // 
+            this.InteferometerPathway.FileName = "openFileDialog1";
+            this.InteferometerPathway.FileOk += new System.ComponentModel.CancelEventHandler(this.InteferometerPathway_FileOk);
+            // 
+            // InteferometerSlider
+            // 
+            this.InteferometerSlider.BackColor = System.Drawing.Color.Bisque;
+            this.InteferometerSlider.Location = new System.Drawing.Point(729, 358);
+            this.InteferometerSlider.Maximum = 0;
+            this.InteferometerSlider.Name = "InteferometerSlider";
+            this.InteferometerSlider.Size = new System.Drawing.Size(444, 45);
+            this.InteferometerSlider.TabIndex = 21;
+            this.InteferometerSlider.Scroll += new System.EventHandler(this.InteferometerSlider_Scroll);
+            this.InteferometerSlider.ValueChanged += new System.EventHandler(this.InteferometerSlider_ValueChanged);
+            this.InteferometerSlider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.InteferometerSlider_MouseUp);
+            // 
+            // FrameInteferometer
+            // 
+            this.FrameInteferometer.AutoSize = true;
+            this.FrameInteferometer.Location = new System.Drawing.Point(1179, 374);
+            this.FrameInteferometer.Name = "FrameInteferometer";
+            this.FrameInteferometer.Size = new System.Drawing.Size(83, 13);
+            this.FrameInteferometer.TabIndex = 22;
+            this.FrameInteferometer.Text = "Frame number : ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1993, 912);
+            this.ClientSize = new System.Drawing.Size(1825, 912);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.TriggerGroup);
@@ -538,6 +634,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -573,7 +670,7 @@
         private System.Windows.Forms.Button ShowOneInterferometer;
         private System.Windows.Forms.TextBox CutoffTB;
         private System.Windows.Forms.Label Cutoff;
-        private ZedGraph.ZedGraphControl zedGraphControl1;
+        private ZedGraph.ZedGraphControl ZedInteferogram;
         private ZedGraph.ZedGraphControl ZedIntegral;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -585,6 +682,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox MeasuresTB;
+        private System.Windows.Forms.TextBox FileSeparator;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button CutOffFunction;
+        private System.Windows.Forms.Button LoadInteferometer;
+        private System.Windows.Forms.Button FindInterferogram;
+        private System.Windows.Forms.OpenFileDialog InteferometerPathway;
+        private System.Windows.Forms.TrackBar InteferometerSlider;
+        private System.Windows.Forms.Label FrameInteferometer;
     }
 }
 

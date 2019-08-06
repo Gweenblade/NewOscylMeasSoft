@@ -32,7 +32,7 @@ namespace NewOscylMeasSoft
         Measurements measurements;
         StreamWriter FilepathWriter;
         StreamReader FilePathReader;
-        PointPairList PPLsignal,PPLIntegralCorrect,PPLIntegralWrong;
+        PointPairList PPLsignal, PPLInterferometer,PPLIntegralCorrect,PPLIntegralWrong;
         string loadpath;
         string savepath;
         static double[] xmin = new double[2] { 0, 0 };
@@ -40,11 +40,13 @@ namespace NewOscylMeasSoft
         static double[] y = new double[2] { -50, 50 };
         List<List<double>> ReadData = new List<List<double>>();
         List<List<double>> RawData = new List<List<double>>();
+        List<List<double>> InteferogramData = new List<List<double>>();
         ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", xmin, y, Color.White, ZedGraph.SymbolType.None, 2);
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", xmax, y, Color.White, ZedGraph.SymbolType.None, 2);
         PointPairList  PPLmax = new PointPairList();
         PointPairList PPLmin = new PointPairList();
         bool userdoneupdater = false;
+        bool userdoneupdaterinteferometer = false;
         obslugaNW WMU = new obslugaNW();
         public List<double> WaveformRead()
         {
@@ -52,12 +54,14 @@ namespace NewOscylMeasSoft
         }
         int linecount = 1;
         List<double> CurrentWave;
+        List<double> CurrentInteferometer;
         public Form1()
         {
             
             PPLsignal = new PointPairList();
             PPLIntegralCorrect = new PointPairList();
             PPLIntegralWrong = new PointPairList();
+            PPLInterferometer = new PointPairList();
             InitializeComponent();
             oscillo = new Oscyloskop.Form1();
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
@@ -73,9 +77,9 @@ namespace NewOscylMeasSoft
             ZedIntegral.GraphPane.YAxis.Title.Text = "Counts (a.u.)";
             ZedSignal.GraphPane.Title.Text = "Waveform";
             ZedIntegral.GraphPane.Title.Text = "Spectrum";
-
             WaveformArray = new List<List<double>>();
             CurrentWave = new List<double>();
+            CurrentInteferometer = new List<double>();
             lineItem1.Label.IsVisible = false;
             lineItem2.Label.IsVisible = false;
             ZedSignal.Invalidate();
@@ -332,7 +336,7 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void LoadData_Click(object sender, EventArgs e)
         {
-            RawData = measurements.RegexReader(loadpath);
+            RawData = measurements.RegexReader(loadpath, FileSeparator.Text);
         }
 
         private void PathToFileLabel_Click(object sender, EventArgs e)
@@ -376,9 +380,71 @@ private void button1_Click_3(object sender, EventArgs e)
 
         }
 
+        private void CutOffFunction_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FindInterferogram_Click(object sender, EventArgs e)
+        {
+            InteferometerPathway.ShowDialog();
+            LoadInteferometer.Enabled = true;
+        }
+
+        private void Button2_Click_1(object sender, EventArgs e)
+        {
+            InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text);
+        }
+
+        private void InteferometerPathway_FileOk(object sender, CancelEventArgs e)
+        {
+            if (InteferometerPathway.FileName != null)
+            {
+                using (FilePathReader = new StreamReader(InteferometerPathway.FileName))
+                {
+                    InteferometerSlider.Maximum = File.ReadLines(InteferometerPathway.FileName).Count();
+                    InteferometerSlider.Minimum = 1;
+                }
+            }
+            else
+                MessageBox.Show("Something went wrong..");
+        }
+
+        private void InteferometerSlider_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InteferometerSlider_ValueChanged(object sender, EventArgs e)
+        {
+            userdoneupdaterinteferometer = true;
+        }
+
+        private void InteferometerSlider_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (userdoneupdaterinteferometer)
+            {
+                userdoneupdaterinteferometer = false;
+                FrameInteferometer.Text = "Frame Number: " + InteferometerSlider.Value.ToString();
+                CurrentInteferometer.Clear();
+                CurrentInteferometer = measurements.SingleLineReader(InteferometerPathway.FileName, InteferometerSlider.Value);
+                PPLInterferometer.Clear();
+                for (int i = 0; i < CurrentInteferometer.Count; i++)
+                {
+                    PPLInterferometer.Add(i, CurrentInteferometer[i]);
+                }
+                ZedInteferogram.GraphPane.CurveList.Clear();
+                ZedInteferogram.GraphPane.AddCurve("", PPLInterferometer, Color.Blue, SymbolType.None);
+                ZedInteferogram.AxisChange();
+                ZedInteferogram.Update();
+                ZedInteferogram.Invalidate();
+            }
+        }
+
         private void FindFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog.ShowDialog();
+            LoadData.Enabled = true;
             PathToFileLabel.Text = "Path: " + OpenFileDialog.FileName;
         }
 

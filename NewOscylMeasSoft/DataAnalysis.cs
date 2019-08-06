@@ -8,7 +8,7 @@ namespace NewOscylMeasSoft
 {
     class DataAnalysis
     {
-        public double[] CutoffFunction(short[] WSUsignal, double CutoffValue)
+        public double[] CutoffFunction(double[] WSUsignal, double CutoffValue)
         {
             double[] CutoffArray;
             CutoffArray = new double[WSUsignal.Length];
