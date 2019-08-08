@@ -31,13 +31,19 @@
             this.components = new System.ComponentModel.Container();
             this.OscilInit = new System.Windows.Forms.Button();
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
-            this.ShowOneInterferometer = new System.Windows.Forms.Button();
+            this.FrameInteferometer = new System.Windows.Forms.Label();
+            this.InteferometerSlider = new System.Windows.Forms.TrackBar();
             this.ZedInteferogram = new ZedGraph.ZedGraphControl();
             this.ZedIntegral = new ZedGraph.ZedGraphControl();
             this.DeleteFrame = new System.Windows.Forms.Button();
             this.FrameLabel = new System.Windows.Forms.Label();
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.LoadInteferometer = new System.Windows.Forms.Button();
+            this.FindInterferogram = new System.Windows.Forms.Button();
+            this.CutOffFunction = new System.Windows.Forms.Button();
+            this.FileSeparator = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.LoadData = new System.Windows.Forms.Button();
             this.CutoffTB = new System.Windows.Forms.TextBox();
             this.Cutoff = new System.Windows.Forms.Label();
@@ -69,21 +75,18 @@
             this.label1 = new System.Windows.Forms.Label();
             this.OscilloSignal = new ZedGraph.ZedGraphControl();
             this.button1 = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.FileSeparator = new System.Windows.Forms.TextBox();
-            this.CutOffFunction = new System.Windows.Forms.Button();
-            this.LoadInteferometer = new System.Windows.Forms.Button();
-            this.FindInterferogram = new System.Windows.Forms.Button();
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
-            this.InteferometerSlider = new System.Windows.Forms.TrackBar();
-            this.FrameInteferometer = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.IgnoredColumnsForInteferometer = new System.Windows.Forms.TextBox();
+            this.IgnoredColumsForData = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.TriggerGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             this.SuspendLayout();
             // 
             // OscilInit
@@ -100,7 +103,6 @@
             // 
             this.TriggerGroup.Controls.Add(this.FrameInteferometer);
             this.TriggerGroup.Controls.Add(this.InteferometerSlider);
-            this.TriggerGroup.Controls.Add(this.ShowOneInterferometer);
             this.TriggerGroup.Controls.Add(this.ZedInteferogram);
             this.TriggerGroup.Controls.Add(this.ZedIntegral);
             this.TriggerGroup.Controls.Add(this.DeleteFrame);
@@ -119,14 +121,26 @@
             this.TriggerGroup.TabStop = false;
             this.TriggerGroup.Text = "Data analysis section";
             // 
-            // ShowOneInterferometer
+            // FrameInteferometer
             // 
-            this.ShowOneInterferometer.Location = new System.Drawing.Point(727, 19);
-            this.ShowOneInterferometer.Name = "ShowOneInterferometer";
-            this.ShowOneInterferometer.Size = new System.Drawing.Size(84, 26);
-            this.ShowOneInterferometer.TabIndex = 20;
-            this.ShowOneInterferometer.Text = "Recalcuate";
-            this.ShowOneInterferometer.UseVisualStyleBackColor = true;
+            this.FrameInteferometer.AutoSize = true;
+            this.FrameInteferometer.Location = new System.Drawing.Point(1179, 374);
+            this.FrameInteferometer.Name = "FrameInteferometer";
+            this.FrameInteferometer.Size = new System.Drawing.Size(83, 13);
+            this.FrameInteferometer.TabIndex = 22;
+            this.FrameInteferometer.Text = "Frame number : ";
+            // 
+            // InteferometerSlider
+            // 
+            this.InteferometerSlider.BackColor = System.Drawing.Color.Bisque;
+            this.InteferometerSlider.Location = new System.Drawing.Point(729, 358);
+            this.InteferometerSlider.Maximum = 0;
+            this.InteferometerSlider.Name = "InteferometerSlider";
+            this.InteferometerSlider.Size = new System.Drawing.Size(444, 45);
+            this.InteferometerSlider.TabIndex = 21;
+            this.InteferometerSlider.Scroll += new System.EventHandler(this.InteferometerSlider_Scroll);
+            this.InteferometerSlider.ValueChanged += new System.EventHandler(this.InteferometerSlider_ValueChanged);
+            this.InteferometerSlider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.InteferometerSlider_MouseUp);
             // 
             // ZedInteferogram
             // 
@@ -189,6 +203,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.IgnoredColumsForData);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.IgnoredColumnsForInteferometer);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.LoadInteferometer);
             this.groupBox2.Controls.Add(this.FindInterferogram);
             this.groupBox2.Controls.Add(this.CutOffFunction);
@@ -205,6 +223,57 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File analysis parameters";
+            // 
+            // LoadInteferometer
+            // 
+            this.LoadInteferometer.Enabled = false;
+            this.LoadInteferometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LoadInteferometer.Location = new System.Drawing.Point(118, 64);
+            this.LoadInteferometer.Name = "LoadInteferometer";
+            this.LoadInteferometer.Size = new System.Drawing.Size(97, 39);
+            this.LoadInteferometer.TabIndex = 28;
+            this.LoadInteferometer.Text = "Load Inteferogram";
+            this.LoadInteferometer.UseVisualStyleBackColor = true;
+            this.LoadInteferometer.Click += new System.EventHandler(this.Button2_Click_1);
+            // 
+            // FindInterferogram
+            // 
+            this.FindInterferogram.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.FindInterferogram.Location = new System.Drawing.Point(6, 64);
+            this.FindInterferogram.Name = "FindInterferogram";
+            this.FindInterferogram.Size = new System.Drawing.Size(110, 39);
+            this.FindInterferogram.TabIndex = 27;
+            this.FindInterferogram.Text = "Find Interferogram";
+            this.FindInterferogram.UseVisualStyleBackColor = true;
+            this.FindInterferogram.Click += new System.EventHandler(this.FindInterferogram_Click);
+            // 
+            // CutOffFunction
+            // 
+            this.CutOffFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CutOffFunction.Location = new System.Drawing.Point(546, 19);
+            this.CutOffFunction.Name = "CutOffFunction";
+            this.CutOffFunction.Size = new System.Drawing.Size(88, 39);
+            this.CutOffFunction.TabIndex = 26;
+            this.CutOffFunction.Text = "Aply cutoff";
+            this.CutOffFunction.UseVisualStyleBackColor = true;
+            this.CutOffFunction.Click += new System.EventHandler(this.CutOffFunction_Click);
+            // 
+            // FileSeparator
+            // 
+            this.FileSeparator.Location = new System.Drawing.Point(440, 41);
+            this.FileSeparator.Name = "FileSeparator";
+            this.FileSeparator.Size = new System.Drawing.Size(10, 20);
+            this.FileSeparator.TabIndex = 21;
+            this.FileSeparator.Text = ":";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(332, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Data separator in file";
             // 
             // LoadData
             // 
@@ -536,82 +605,44 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_4);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(332, 44);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(104, 13);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Data separator in file";
-            // 
-            // FileSeparator
-            // 
-            this.FileSeparator.Location = new System.Drawing.Point(440, 41);
-            this.FileSeparator.Name = "FileSeparator";
-            this.FileSeparator.Size = new System.Drawing.Size(10, 20);
-            this.FileSeparator.TabIndex = 21;
-            this.FileSeparator.Text = ":";
-            // 
-            // CutOffFunction
-            // 
-            this.CutOffFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CutOffFunction.Location = new System.Drawing.Point(546, 19);
-            this.CutOffFunction.Name = "CutOffFunction";
-            this.CutOffFunction.Size = new System.Drawing.Size(88, 39);
-            this.CutOffFunction.TabIndex = 26;
-            this.CutOffFunction.Text = "Aply cutoff";
-            this.CutOffFunction.UseVisualStyleBackColor = true;
-            this.CutOffFunction.Click += new System.EventHandler(this.CutOffFunction_Click);
-            // 
-            // LoadInteferometer
-            // 
-            this.LoadInteferometer.Enabled = false;
-            this.LoadInteferometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LoadInteferometer.Location = new System.Drawing.Point(118, 64);
-            this.LoadInteferometer.Name = "LoadInteferometer";
-            this.LoadInteferometer.Size = new System.Drawing.Size(97, 39);
-            this.LoadInteferometer.TabIndex = 28;
-            this.LoadInteferometer.Text = "Load Inteferogram";
-            this.LoadInteferometer.UseVisualStyleBackColor = true;
-            this.LoadInteferometer.Click += new System.EventHandler(this.Button2_Click_1);
-            // 
-            // FindInterferogram
-            // 
-            this.FindInterferogram.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.FindInterferogram.Location = new System.Drawing.Point(6, 64);
-            this.FindInterferogram.Name = "FindInterferogram";
-            this.FindInterferogram.Size = new System.Drawing.Size(110, 39);
-            this.FindInterferogram.TabIndex = 27;
-            this.FindInterferogram.Text = "Find Interferogram";
-            this.FindInterferogram.UseVisualStyleBackColor = true;
-            this.FindInterferogram.Click += new System.EventHandler(this.FindInterferogram_Click);
-            // 
             // InteferometerPathway
             // 
             this.InteferometerPathway.FileName = "openFileDialog1";
             this.InteferometerPathway.FileOk += new System.ComponentModel.CancelEventHandler(this.InteferometerPathway_FileOk);
             // 
-            // InteferometerSlider
+            // label7
             // 
-            this.InteferometerSlider.BackColor = System.Drawing.Color.Bisque;
-            this.InteferometerSlider.Location = new System.Drawing.Point(729, 358);
-            this.InteferometerSlider.Maximum = 0;
-            this.InteferometerSlider.Name = "InteferometerSlider";
-            this.InteferometerSlider.Size = new System.Drawing.Size(444, 45);
-            this.InteferometerSlider.TabIndex = 21;
-            this.InteferometerSlider.Scroll += new System.EventHandler(this.InteferometerSlider_Scroll);
-            this.InteferometerSlider.ValueChanged += new System.EventHandler(this.InteferometerSlider_ValueChanged);
-            this.InteferometerSlider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.InteferometerSlider_MouseUp);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(332, 85);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(88, 13);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Ignored columns:";
             // 
-            // FrameInteferometer
+            // IgnoredColumnsForInteferometer
             // 
-            this.FrameInteferometer.AutoSize = true;
-            this.FrameInteferometer.Location = new System.Drawing.Point(1179, 374);
-            this.FrameInteferometer.Name = "FrameInteferometer";
-            this.FrameInteferometer.Size = new System.Drawing.Size(83, 13);
-            this.FrameInteferometer.TabIndex = 22;
-            this.FrameInteferometer.Text = "Frame number : ";
+            this.IgnoredColumnsForInteferometer.Location = new System.Drawing.Point(426, 82);
+            this.IgnoredColumnsForInteferometer.Name = "IgnoredColumnsForInteferometer";
+            this.IgnoredColumnsForInteferometer.Size = new System.Drawing.Size(12, 20);
+            this.IgnoredColumnsForInteferometer.TabIndex = 30;
+            this.IgnoredColumnsForInteferometer.Text = "0";
+            // 
+            // IgnoredColumsForData
+            // 
+            this.IgnoredColumsForData.Location = new System.Drawing.Point(426, 61);
+            this.IgnoredColumsForData.Name = "IgnoredColumsForData";
+            this.IgnoredColumsForData.Size = new System.Drawing.Size(12, 20);
+            this.IgnoredColumsForData.TabIndex = 32;
+            this.IgnoredColumsForData.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(332, 64);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(88, 13);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "Ignored columns:";
             // 
             // Form1
             // 
@@ -627,6 +658,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TriggerGroup.ResumeLayout(false);
             this.TriggerGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -634,7 +666,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -667,7 +698,6 @@
         private System.Windows.Forms.Button IntegralBtn;
         private System.Windows.Forms.Button LoadData;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button ShowOneInterferometer;
         private System.Windows.Forms.TextBox CutoffTB;
         private System.Windows.Forms.Label Cutoff;
         private ZedGraph.ZedGraphControl ZedInteferogram;
@@ -690,6 +720,10 @@
         private System.Windows.Forms.OpenFileDialog InteferometerPathway;
         private System.Windows.Forms.TrackBar InteferometerSlider;
         private System.Windows.Forms.Label FrameInteferometer;
+        private System.Windows.Forms.TextBox IgnoredColumnsForInteferometer;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox IgnoredColumsForData;
+        private System.Windows.Forms.Label label8;
     }
 }
 

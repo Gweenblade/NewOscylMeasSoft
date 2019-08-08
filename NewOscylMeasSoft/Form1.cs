@@ -393,7 +393,7 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void Button2_Click_1(object sender, EventArgs e)
         {
-            InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text);
+            InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text, int.Parse(IgnoredColumnsForInteferometer.Text));
         }
 
         private void InteferometerPathway_FileOk(object sender, CancelEventArgs e)
@@ -420,6 +420,11 @@ private void button1_Click_3(object sender, EventArgs e)
             userdoneupdaterinteferometer = true;
         }
 
+        private void ShowOneInterferometer_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void InteferometerSlider_MouseUp(object sender, MouseEventArgs e)
         {
             if (userdoneupdaterinteferometer)
@@ -427,7 +432,7 @@ private void button1_Click_3(object sender, EventArgs e)
                 userdoneupdaterinteferometer = false;
                 FrameInteferometer.Text = "Frame Number: " + InteferometerSlider.Value.ToString();
                 CurrentInteferometer.Clear();
-                CurrentInteferometer = measurements.SingleLineReader(InteferometerPathway.FileName, InteferometerSlider.Value);
+                CurrentInteferometer = measurements.SingleLineReader(InteferometerPathway.FileName, InteferometerSlider.Value, int.Parse(IgnoredColumnsForInteferometer.Text));
                 PPLInterferometer.Clear();
                 for (int i = 0; i < CurrentInteferometer.Count; i++)
                 {

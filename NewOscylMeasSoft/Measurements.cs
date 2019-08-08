@@ -197,7 +197,7 @@ namespace NewOscylMeasSoft
         }
 
 
-        public List<List<double>> RegexReader(string FilePath1, string Separator) // DO DALSZEJ DIAGNOSTKI.
+        public List<List<double>> RegexReader(string FilePath1, string Separator, int IgnoredColumns = 0) // DO DALSZEJ DIAGNOSTKI.
         {
             string line;
             List<List<double>> ReadDataInDoubles = new List<List<double>>();
@@ -216,8 +216,10 @@ namespace NewOscylMeasSoft
                         while ((line = SR.ReadLine()) != null)
                         {
                             StringList = Regex.Split(line, Separator).ToList();
-                            for (i = 0; i < StringList.Count - 1; i++)
-                                DoubleList.Add(double.Parse(StringList[i]));
+                            for (i = IgnoredColumns; i < StringList.Count - 1; i++)
+                            {
+                               DoubleList.Add(double.Parse(StringList[i]));
+                            }
                             ReadDataInDoubles.Add(DoubleList);
                             DoubleList = new List<double>();
                             StringList = new List<string>();
@@ -242,7 +244,7 @@ namespace NewOscylMeasSoft
             }
             return IntegralData;
         }
-        public List<double> SingleLineReader(string FilePath, int ReadLineNumber)
+        public List<double> SingleLineReader(string FilePath, int ReadLineNumber, int IgnoredColumns = 0)
         {
             List<double> temp = new List<double>();
             List<string> StringList = new List<string>();
@@ -254,7 +256,7 @@ namespace NewOscylMeasSoft
                     {
                         var ReadLine = File.ReadLines(FilePath).Skip(ReadLineNumber - 1).FirstOrDefault();
                         StringList = Regex.Split(ReadLine, ":").ToList();
-                        for (int i = 0; i < StringList.Count - 1; i++)
+                        for (int i = IgnoredColumns; i < StringList.Count - 1; i++)
                             temp.Add(double.Parse(StringList[i]));
                     }
                 }
