@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace NewOscylMeasSoft
 {
     class DataAnalysis
     {
         public double[] CutoffFunction(double[] WSUsignal, double CutoffValue)
         {
-            double[] CutoffArray;
-            CutoffArray = new double[WSUsignal.Length];
-            for(int i = 0; i < WSUsignal.Length; i++)
+            double Max = 0;
+            for (int i = 0; i < WSUsignal.Length; i++)
             {
-                CutoffArray[i] = WSUsignal[i];
-                CutoffArray[i] = CutoffArray[i] - (CutoffArray[i] * CutoffValue / 100);
-                if (CutoffArray[i] < 0)
-                    CutoffArray[i] = 0;
+                if (Max < WSUsignal[i])
+                    Max = WSUsignal[i];
             }
-            return CutoffArray;
+            for (int i = 0; i < WSUsignal.Length; i++)
+            {
+                WSUsignal[i] = WSUsignal[i] - (CutoffValue / 100 * Max);
+                if (WSUsignal[i] < 0)
+                    WSUsignal[i] = 0;
+            }
+            return WSUsignal;
         }
         public int MaximumsCounter(double[] CutoffArray)
         {
@@ -30,6 +32,10 @@ namespace NewOscylMeasSoft
                     CounterofMax++;
             }
             return CounterofMax;
+        }
+        public double MaximumsUncertainty(int CounterofMAX)
+        {
+            return Math.Sqrt(CounterofMAX);
         }
     }
 }
