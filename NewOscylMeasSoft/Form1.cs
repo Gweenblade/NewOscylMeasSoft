@@ -30,6 +30,7 @@ namespace NewOscylMeasSoft
         Thread Measure, Aw;
         ThreadStart MEASURE;
         Measurements measurements;
+        DataAnalysis DA;
         StreamWriter FilepathWriter;
         StreamReader FilePathReader;
         PointPairList PPLsignal, PPLInterferometer,PPLIntegralCorrect,PPLIntegralWrong;
@@ -45,6 +46,7 @@ namespace NewOscylMeasSoft
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", xmax, y, Color.White, ZedGraph.SymbolType.None, 2);
         PointPairList  PPLmax = new PointPairList();
         PointPairList PPLmin = new PointPairList();
+        PointPairList CutoffPoints = new PointPairList();
         bool userdoneupdater = false;
         bool userdoneupdaterinteferometer = false;
         obslugaNW WMU = new obslugaNW();
@@ -55,14 +57,15 @@ namespace NewOscylMeasSoft
         int linecount = 1;
         List<double> CurrentWave;
         List<double> CurrentInteferometer;
+        List<double> AfterCutoff;
         public Form1()
         {
-            
             PPLsignal = new PointPairList();
             PPLIntegralCorrect = new PointPairList();
             PPLIntegralWrong = new PointPairList();
             PPLInterferometer = new PointPairList();
             InitializeComponent();
+            DA = new DataAnalysis();
             oscillo = new Oscyloskop.Form1();
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
             ZedSignal.GraphPane.YAxis.Title.Text = "Signal";
@@ -80,6 +83,7 @@ namespace NewOscylMeasSoft
             WaveformArray = new List<List<double>>();
             CurrentWave = new List<double>();
             CurrentInteferometer = new List<double>();
+            AfterCutoff = new List<double>();
             lineItem1.Label.IsVisible = false;
             lineItem2.Label.IsVisible = false;
             ZedSignal.Invalidate();
@@ -157,6 +161,8 @@ namespace NewOscylMeasSoft
         }
         LineItem lmin = new LineItem("init");
         LineItem lmax = new LineItem("init");
+        private object interferometerlabel;
+
         private void TrackMin_Scroll(object sender, EventArgs e)// Z jakegos dziwnego powodu tak działa lepiej.
         {
             PPLmin.Clear();
@@ -382,7 +388,20 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void CutOffFunction_Click(object sender, EventArgs e)
         {
-
+            CutoffSaver.ShowDialog();
+            Stopwatch Stopwatch = new Stopwatch();
+            Stopwatch.Start();
+            for(int i = 0; i < File.ReadLines(InteferometerPathway.FileName).Count(); i++)
+            {
+                CurrentInteferometer = measurements.SingleLineReader(InteferometerPathway.FileName, i, int.Parse(IgnoredColumnsForInteferometer.Text));
+                AfterCutoff = DA.CutoffFunction(CurrentInteferometer, double.Parse(CutoffTB.Text));
+                using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
+                {
+                    SW.Write(Stopwatch.ElapsedMilliseconds + " " + i + " " + DA.MaximumsCounter(AfterCutoff) + Environment.NewLine);
+                    SW.Flush();
+                }
+                // CutoffPoints.Add(i, DA.MaximumsCounter(AfterCutoff));
+            }
         }
 
         private void FindInterferogram_Click(object sender, EventArgs e)
@@ -429,12 +448,17 @@ private void button1_Click_3(object sender, EventArgs e)
         {
             if (userdoneupdaterinteferometer)
             {
+                InteferometerParameters.Text = "";
                 userdoneupdaterinteferometer = false;
                 FrameInteferometer.Text = "Frame Number: " + InteferometerSlider.Value.ToString();
                 CurrentInteferometer.Clear();
-                CurrentInteferometer = measurements.SingleLineReader(InteferometerPathway.FileName, InteferometerSlider.Value, int.Parse(IgnoredColumnsForInteferometer.Text));
+                CurrentInteferometer = measurements.SingleLineReader(InteferometerPathway.FileName, InteferometerSlider.Value);
                 PPLInterferometer.Clear();
-                for (int i = 0; i < CurrentInteferometer.Count; i++)
+                for(int i = 0; i < int.Parse(IgnoredColumnsForInteferometer.Text); i++)
+                {
+                    InteferometerParameters.Text += CurrentInteferometer[i] + " ";
+                }
+                for (int i = int.Parse(IgnoredColumnsForInteferometer.Text); i < CurrentInteferometer.Count; i++)
                 {
                     PPLInterferometer.Add(i, CurrentInteferometer[i]);
                 }

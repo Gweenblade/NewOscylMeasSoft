@@ -7,15 +7,10 @@ namespace NewOscylMeasSoft
 {
     class DataAnalysis
     {
-        public double[] CutoffFunction(double[] WSUsignal, double CutoffValue)
+        public List<double> CutoffFunction(List<double> WSUsignal, double CutoffValue)
         {
-            double Max = 0;
-            for (int i = 0; i < WSUsignal.Length; i++)
-            {
-                if (Max < WSUsignal[i])
-                    Max = WSUsignal[i];
-            }
-            for (int i = 0; i < WSUsignal.Length; i++)
+            double Max = WSUsignal.Max();
+            for (int i = 0; i < WSUsignal.Count; i++)
             {
                 WSUsignal[i] = WSUsignal[i] - (CutoffValue / 100 * Max);
                 if (WSUsignal[i] < 0)
@@ -23,10 +18,10 @@ namespace NewOscylMeasSoft
             }
             return WSUsignal;
         }
-        public int MaximumsCounter(double[] CutoffArray)
+        public int MaximumsCounter(List<double> CutoffArray)
         {
             int CounterofMax = 0;
-            for (int i = 0; i < CutoffArray.Length; i++)
+            for (int i = 1; i < CutoffArray.Count; i++)
             {
                 if (CutoffArray[i] > 0 && CutoffArray[i - 1] == 0)
                     CounterofMax++;

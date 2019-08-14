@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.OscilInit = new System.Windows.Forms.Button();
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
+            this.InteferometerParameters = new System.Windows.Forms.Label();
             this.FrameInteferometer = new System.Windows.Forms.Label();
             this.InteferometerSlider = new System.Windows.Forms.TrackBar();
             this.ZedInteferogram = new ZedGraph.ZedGraphControl();
@@ -39,6 +40,10 @@
             this.FrameLabel = new System.Windows.Forms.Label();
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.IgnoredColumsForData = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.IgnoredColumnsForInteferometer = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.LoadInteferometer = new System.Windows.Forms.Button();
             this.FindInterferogram = new System.Windows.Forms.Button();
             this.CutOffFunction = new System.Windows.Forms.Button();
@@ -76,10 +81,7 @@
             this.OscilloSignal = new ZedGraph.ZedGraphControl();
             this.button1 = new System.Windows.Forms.Button();
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
-            this.label7 = new System.Windows.Forms.Label();
-            this.IgnoredColumnsForInteferometer = new System.Windows.Forms.TextBox();
-            this.IgnoredColumsForData = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -101,6 +103,7 @@
             // 
             // TriggerGroup
             // 
+            this.TriggerGroup.Controls.Add(this.InteferometerParameters);
             this.TriggerGroup.Controls.Add(this.FrameInteferometer);
             this.TriggerGroup.Controls.Add(this.InteferometerSlider);
             this.TriggerGroup.Controls.Add(this.ZedInteferogram);
@@ -120,6 +123,14 @@
             this.TriggerGroup.TabIndex = 8;
             this.TriggerGroup.TabStop = false;
             this.TriggerGroup.Text = "Data analysis section";
+            // 
+            // InteferometerParameters
+            // 
+            this.InteferometerParameters.AutoSize = true;
+            this.InteferometerParameters.Location = new System.Drawing.Point(731, 27);
+            this.InteferometerParameters.Name = "InteferometerParameters";
+            this.InteferometerParameters.Size = new System.Drawing.Size(0, 13);
+            this.InteferometerParameters.TabIndex = 23;
             // 
             // FrameInteferometer
             // 
@@ -224,6 +235,40 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File analysis parameters";
             // 
+            // IgnoredColumsForData
+            // 
+            this.IgnoredColumsForData.Location = new System.Drawing.Point(488, 61);
+            this.IgnoredColumsForData.Name = "IgnoredColumsForData";
+            this.IgnoredColumsForData.Size = new System.Drawing.Size(12, 20);
+            this.IgnoredColumsForData.TabIndex = 32;
+            this.IgnoredColumsForData.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(332, 64);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(120, 13);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "Ignored columns (Data):";
+            // 
+            // IgnoredColumnsForInteferometer
+            // 
+            this.IgnoredColumnsForInteferometer.Location = new System.Drawing.Point(488, 82);
+            this.IgnoredColumnsForInteferometer.Name = "IgnoredColumnsForInteferometer";
+            this.IgnoredColumnsForInteferometer.Size = new System.Drawing.Size(12, 20);
+            this.IgnoredColumnsForInteferometer.TabIndex = 30;
+            this.IgnoredColumnsForInteferometer.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(332, 85);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(159, 13);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Ignored columns (Inteferometer):";
+            // 
             // LoadInteferometer
             // 
             this.LoadInteferometer.Enabled = false;
@@ -250,9 +295,9 @@
             // CutOffFunction
             // 
             this.CutOffFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CutOffFunction.Location = new System.Drawing.Point(546, 19);
+            this.CutOffFunction.Location = new System.Drawing.Point(221, 64);
             this.CutOffFunction.Name = "CutOffFunction";
-            this.CutOffFunction.Size = new System.Drawing.Size(88, 39);
+            this.CutOffFunction.Size = new System.Drawing.Size(105, 39);
             this.CutOffFunction.TabIndex = 26;
             this.CutOffFunction.Text = "Aply cutoff";
             this.CutOffFunction.UseVisualStyleBackColor = true;
@@ -291,8 +336,9 @@
             // 
             this.CutoffTB.Location = new System.Drawing.Point(440, 19);
             this.CutoffTB.Name = "CutoffTB";
-            this.CutoffTB.Size = new System.Drawing.Size(100, 20);
+            this.CutoffTB.Size = new System.Drawing.Size(21, 20);
             this.CutoffTB.TabIndex = 19;
+            this.CutoffTB.Text = "5";
             // 
             // Cutoff
             // 
@@ -610,40 +656,6 @@
             this.InteferometerPathway.FileName = "openFileDialog1";
             this.InteferometerPathway.FileOk += new System.ComponentModel.CancelEventHandler(this.InteferometerPathway_FileOk);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(332, 85);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(88, 13);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Ignored columns:";
-            // 
-            // IgnoredColumnsForInteferometer
-            // 
-            this.IgnoredColumnsForInteferometer.Location = new System.Drawing.Point(426, 82);
-            this.IgnoredColumnsForInteferometer.Name = "IgnoredColumnsForInteferometer";
-            this.IgnoredColumnsForInteferometer.Size = new System.Drawing.Size(12, 20);
-            this.IgnoredColumnsForInteferometer.TabIndex = 30;
-            this.IgnoredColumnsForInteferometer.Text = "0";
-            // 
-            // IgnoredColumsForData
-            // 
-            this.IgnoredColumsForData.Location = new System.Drawing.Point(426, 61);
-            this.IgnoredColumsForData.Name = "IgnoredColumsForData";
-            this.IgnoredColumsForData.Size = new System.Drawing.Size(12, 20);
-            this.IgnoredColumsForData.TabIndex = 32;
-            this.IgnoredColumsForData.Text = "0";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(332, 64);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(88, 13);
-            this.label8.TabIndex = 31;
-            this.label8.Text = "Ignored columns:";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -724,6 +736,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox IgnoredColumsForData;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label InteferometerParameters;
+        private System.Windows.Forms.SaveFileDialog CutoffSaver;
     }
 }
 
