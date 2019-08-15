@@ -7,10 +7,10 @@ namespace NewOscylMeasSoft
 {
     class DataAnalysis
     {
-        public List<double> CutoffFunction(List<double> WSUsignal, double CutoffValue)
+        public List<double> CutoffFunction(List<double> WSUsignal, double CutoffValue, int IgnoredColumns = 0)
         {
             double Max = WSUsignal.Max();
-            for (int i = 0; i < WSUsignal.Count; i++)
+            for (int i = IgnoredColumns; i < WSUsignal.Count; i++)
             {
                 WSUsignal[i] = WSUsignal[i] - (CutoffValue / 100 * Max);
                 if (WSUsignal[i] < 0)

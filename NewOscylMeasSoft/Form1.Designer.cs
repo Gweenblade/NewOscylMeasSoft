@@ -82,6 +82,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
+            this.CutoffTest = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -214,6 +215,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.CutoffTest);
             this.groupBox2.Controls.Add(this.IgnoredColumsForData);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.IgnoredColumnsForInteferometer);
@@ -656,6 +658,16 @@
             this.InteferometerPathway.FileName = "openFileDialog1";
             this.InteferometerPathway.FileOk += new System.ComponentModel.CancelEventHandler(this.InteferometerPathway_FileOk);
             // 
+            // CutoffTest
+            // 
+            this.CutoffTest.Location = new System.Drawing.Point(479, 19);
+            this.CutoffTest.Name = "CutoffTest";
+            this.CutoffTest.Size = new System.Drawing.Size(75, 23);
+            this.CutoffTest.TabIndex = 26;
+            this.CutoffTest.Text = "CutoffTest";
+            this.CutoffTest.UseVisualStyleBackColor = true;
+            this.CutoffTest.Click += new System.EventHandler(this.CutoffTest_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -738,6 +750,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label InteferometerParameters;
         private System.Windows.Forms.SaveFileDialog CutoffSaver;
+        private System.Windows.Forms.Button CutoffTest;
     }
 }
 

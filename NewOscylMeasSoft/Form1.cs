@@ -16,6 +16,7 @@ using CsvHelper;
 using System.Dynamic;
 using System.Reflection;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 namespace NewOscylMeasSoft
 {
     public partial class Form1 : Form
@@ -42,6 +43,7 @@ namespace NewOscylMeasSoft
         List<List<double>> ReadData = new List<List<double>>();
         List<List<double>> RawData = new List<List<double>>();
         List<List<double>> InteferogramData = new List<List<double>>();
+        List<List<double>> CutoffAll = new List<List<double>>();
         ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", xmin, y, Color.White, ZedGraph.SymbolType.None, 2);
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", xmax, y, Color.White, ZedGraph.SymbolType.None, 2);
         PointPairList  PPLmax = new PointPairList();
@@ -389,18 +391,16 @@ private void button1_Click_3(object sender, EventArgs e)
         private void CutOffFunction_Click(object sender, EventArgs e)
         {
             CutoffSaver.ShowDialog();
-            Stopwatch Stopwatch = new Stopwatch();
-            Stopwatch.Start();
-            for(int i = 0; i < File.ReadLines(InteferometerPathway.FileName).Count(); i++)
+            int Max = 0;
+            for (int i = 0; i < InteferogramData.Count(); i++)
             {
-                CurrentInteferometer = measurements.SingleLineReader(InteferometerPathway.FileName, i, int.Parse(IgnoredColumnsForInteferometer.Text));
-                AfterCutoff = DA.CutoffFunction(CurrentInteferometer, double.Parse(CutoffTB.Text));
+                CutoffAll.Add(DA.CutoffFunction(InteferogramData[i], double.Parse(CutoffTB.Text), int.Parse(IgnoredColumnsForInteferometer.Text)));
+                Max = DA.MaximumsCounter(CutoffAll[i]);
                 using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
                 {
-                    SW.Write(Stopwatch.ElapsedMilliseconds + " " + i + " " + DA.MaximumsCounter(AfterCutoff) + Environment.NewLine);
+                    SW.Write(i + " " + Max + Environment.NewLine);
                     SW.Flush();
                 }
-                // CutoffPoints.Add(i, DA.MaximumsCounter(AfterCutoff));
             }
         }
 
@@ -412,7 +412,7 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void Button2_Click_1(object sender, EventArgs e)
         {
-            InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text, int.Parse(IgnoredColumnsForInteferometer.Text));
+            InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text);
         }
 
         private void InteferometerPathway_FileOk(object sender, CancelEventArgs e)
@@ -442,6 +442,65 @@ private void button1_Click_3(object sender, EventArgs e)
         private void ShowOneInterferometer_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CutoffTest_Click(object sender, EventArgs e)
+        {
+            CutoffSaver.ShowDialog();
+            string line;
+            double Max;
+            int CounterOfMax = 0;
+            List<List<double>> ReadDataInDoubles = new List<List<double>>();
+            string[] Test;
+            int i;
+            List<string> StringList = new List<string>();
+            List<double> DoubleList = new List<double>();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            using (FileStream FS = File.Open(InteferometerPathway.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (BufferedStream BS = new BufferedStream(FS))
+                {
+                    using (StreamReader SR = new StreamReader(BS))
+                    {
+                        while ((line = SR.ReadLine()) != null)
+                        {
+                            StringList = Regex.Split(line, FileSeparator.Text).ToList();
+                            for (i = int.Parse(IgnoredColumnsForInteferometer.Text); i < StringList.Count - 1; i++)
+                            {
+                                DoubleList.Add(double.Parse(StringList[i]));
+                            }
+                            ReadDataInDoubles.Add(DoubleList);
+                            if(ReadDataInDoubles.Count > 100)
+                            {
+                                for(int k = 0; k <100;k++)
+                                {
+                                    Max = ReadDataInDoubles[k].Max();
+                                    CounterOfMax = 0;
+                                    for (int j = 0; j < ReadDataInDoubles[k].Count;  j++)
+                                    {
+                                        if (ReadDataInDoubles[k][j] < (double.Parse(CutoffTB.Text) / 100) * Max)
+                                            ReadDataInDoubles[k][j] = 0;
+                                        if (j > 1 && ReadDataInDoubles[k][j] - ReadDataInDoubles[k][j - 1] == 0)
+                                            CounterOfMax++;
+                                    }
+                                    using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
+                                    {
+                                        SW.Write(k + " " + stopwatch.ElapsedMilliseconds + " " + i + Environment.NewLine);
+                                        SW.Flush();
+                                    }
+                                }
+                              
+                                ReadDataInDoubles.Clear();
+                            }
+                            //DoubleList = new List<double>();
+                            //StringList = new List<string>();
+                        }
+                    }
+                }
+            }
+            stopwatch.Stop();
+            MessageBox.Show("" + stopwatch.ElapsedMilliseconds + " " + ReadDataInDoubles[1].Count);
         }
 
         private void InteferometerSlider_MouseUp(object sender, MouseEventArgs e)
