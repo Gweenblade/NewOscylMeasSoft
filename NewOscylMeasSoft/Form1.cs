@@ -398,7 +398,11 @@ private void button1_Click_3(object sender, EventArgs e)
                 Max = DA.MaximumsCounter(CutoffAll[i]);
                 using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
                 {
-                    SW.Write(i + " " + Max + Environment.NewLine);
+                    for(int j = 0; j < int.Parse(IgnoredColumnsForInteferometer.Text); j++)
+                    {
+                        SW.Write(InteferogramData[i][j] + " ");
+                    }
+                    SW.Write(i + " " + Max+ " " + DA.MaximumsUncertainty(Max) + Environment.NewLine);
                     SW.Flush();
                 }
             }
