@@ -357,9 +357,39 @@ private void button1_Click_3(object sender, EventArgs e)
 
         }
 
-        private void button1_Click_4(object sender, EventArgs e) // DO USUNIECIA
+        private void button1_Click_4(object sender, EventArgs e) 
         {
-            StartTheThread2();
+            ForRandomDataReads.ShowDialog();
+            StringBuilder SBRandomData = new StringBuilder();
+            List<List<double>> ForDataAnalysis = new List<List<double>>();
+            List<List<double>> NewList = new List<List<double>>();
+            List<double> STDlist = new List<double>();
+            ForDataAnalysis = measurements.RegexReader(ForRandomDataReads.FileName, FileSeparator.Text);
+            double lastT, lastC, SumMax = 0;
+            lastT = ForDataAnalysis[0][1];
+            lastC = ForDataAnalysis[0][2];
+            for (int i = 0; i < ForDataAnalysis.Count(); i++)
+            {
+                
+                if(lastT == ForDataAnalysis[i][1] && lastC == ForDataAnalysis[i][2])
+                {
+                    SumMax = SumMax + ForDataAnalysis[i][4];
+                    STDlist.Add(ForDataAnalysis[i][4]);
+                }
+                else
+                {
+                    SBRandomData.Append("" + lastT + " " + lastC + " " + ForDataAnalysis[i-50][3] + " " + ForDataAnalysis[i][3] + " " + SumMax / 50 + " " + DA.getStandardDeviation(STDlist) +Environment.NewLine);
+                    using (StreamWriter SW = new StreamWriter(ForRandomDataReads.FileName + " Results", true))
+                    {
+                        SW.Write(SBRandomData);
+                    }
+                    SBRandomData.Clear();
+                    STDlist.Clear();
+                    SumMax = ForDataAnalysis[i][4];
+                    lastT = ForDataAnalysis[i][1];
+                    lastC = ForDataAnalysis[i][2];
+                }
+            }
         }
 
         private void CheckOne_Click(object sender, EventArgs e)

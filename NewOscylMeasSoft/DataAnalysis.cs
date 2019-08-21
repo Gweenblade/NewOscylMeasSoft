@@ -32,5 +32,16 @@ namespace NewOscylMeasSoft
         {
             return Math.Sqrt(CounterofMAX);
         }
+        public double getStandardDeviation(List<double> doubleList)
+        {
+            double average = doubleList.Average();
+            double sumOfDerivation = 0;
+            foreach (double value in doubleList)
+            {
+                sumOfDerivation += (value) * (value);
+            }
+            double sumOfDerivationAverage = sumOfDerivation / doubleList.Count;
+            return Math.Sqrt(sumOfDerivationAverage - (average * average));
+        }
     }
 }

@@ -40,6 +40,7 @@
             this.FrameLabel = new System.Windows.Forms.Label();
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.CutoffTest = new System.Windows.Forms.Button();
             this.IgnoredColumsForData = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.IgnoredColumnsForInteferometer = new System.Windows.Forms.TextBox();
@@ -79,10 +80,10 @@
             this.WavemeterSignal = new ZedGraph.ZedGraphControl();
             this.label1 = new System.Windows.Forms.Label();
             this.OscilloSignal = new ZedGraph.ZedGraphControl();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ResultsAnalizer = new System.Windows.Forms.Button();
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
-            this.CutoffTest = new System.Windows.Forms.Button();
+            this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -236,6 +237,16 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File analysis parameters";
+            // 
+            // CutoffTest
+            // 
+            this.CutoffTest.Location = new System.Drawing.Point(479, 19);
+            this.CutoffTest.Name = "CutoffTest";
+            this.CutoffTest.Size = new System.Drawing.Size(75, 23);
+            this.CutoffTest.TabIndex = 26;
+            this.CutoffTest.Text = "CutoffTest";
+            this.CutoffTest.UseVisualStyleBackColor = true;
+            this.CutoffTest.Click += new System.EventHandler(this.CutoffTest_Click);
             // 
             // IgnoredColumsForData
             // 
@@ -643,30 +654,24 @@
             this.OscilloSignal.TabIndex = 16;
             this.OscilloSignal.ZoomStepFraction = 1D;
             // 
-            // button1
+            // ResultsAnalizer
             // 
-            this.button1.Location = new System.Drawing.Point(918, 806);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_4);
+            this.ResultsAnalizer.Location = new System.Drawing.Point(918, 806);
+            this.ResultsAnalizer.Name = "ResultsAnalizer";
+            this.ResultsAnalizer.Size = new System.Drawing.Size(75, 36);
+            this.ResultsAnalizer.TabIndex = 25;
+            this.ResultsAnalizer.Text = "Results Analizer";
+            this.ResultsAnalizer.UseVisualStyleBackColor = true;
+            this.ResultsAnalizer.Click += new System.EventHandler(this.button1_Click_4);
             // 
             // InteferometerPathway
             // 
             this.InteferometerPathway.FileName = "openFileDialog1";
             this.InteferometerPathway.FileOk += new System.ComponentModel.CancelEventHandler(this.InteferometerPathway_FileOk);
             // 
-            // CutoffTest
+            // ForRandomDataReads
             // 
-            this.CutoffTest.Location = new System.Drawing.Point(479, 19);
-            this.CutoffTest.Name = "CutoffTest";
-            this.CutoffTest.Size = new System.Drawing.Size(75, 23);
-            this.CutoffTest.TabIndex = 26;
-            this.CutoffTest.Text = "CutoffTest";
-            this.CutoffTest.UseVisualStyleBackColor = true;
-            this.CutoffTest.Click += new System.EventHandler(this.CutoffTest_Click);
+            this.ForRandomDataReads.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -674,7 +679,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1825, 912);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ResultsAnalizer);
             this.Controls.Add(this.TriggerGroup);
             this.Controls.Add(this.TestLabel);
             this.Name = "Form1";
@@ -728,7 +733,7 @@
         private ZedGraph.ZedGraphControl ZedIntegral;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ResultsAnalizer;
         public ZedGraph.ZedGraphControl OscilloSignal;
         public ZedGraph.ZedGraphControl WavemeterSignal;
         private System.Windows.Forms.Button CheckOne;
@@ -751,6 +756,7 @@
         private System.Windows.Forms.Label InteferometerParameters;
         private System.Windows.Forms.SaveFileDialog CutoffSaver;
         private System.Windows.Forms.Button CutoffTest;
+        private System.Windows.Forms.OpenFileDialog ForRandomDataReads;
     }
 }
 
