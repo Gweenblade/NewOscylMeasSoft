@@ -418,7 +418,7 @@ private void button1_Click_3(object sender, EventArgs e)
 
         }
 
-        private void CutOffFunction_Click(object sender, EventArgs e)
+        private void CutOffFunction_Click(object sender, EventArgs e) // COS TUTAJ NIE GRA
         {
             CutoffSaver.ShowDialog();
             int Max = 0;
@@ -426,13 +426,14 @@ private void button1_Click_3(object sender, EventArgs e)
             {
                 CutoffAll.Add(DA.CutoffFunction(InteferogramData[i], double.Parse(CutoffTB.Text), int.Parse(IgnoredColumnsForInteferometer.Text)));
                 Max = DA.MaximumsCounter(CutoffAll[i]);
+                //MessageBox.Show("" + Max);
                 using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
                 {
                     for(int j = 0; j < int.Parse(IgnoredColumnsForInteferometer.Text); j++)
                     {
                         SW.Write(InteferogramData[i][j] + " ");
                     }
-                    SW.Write(i + " " + Max+ " " + DA.MaximumsUncertainty(Max) + Environment.NewLine);
+                    SW.Write(i + " " + Max + " " + DA.MaximumsUncertainty(Max) + Environment.NewLine);
                     SW.Flush();
                 }
             }
