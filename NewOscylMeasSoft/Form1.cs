@@ -448,6 +448,8 @@ private void button1_Click_3(object sender, EventArgs e)
         private void Button2_Click_1(object sender, EventArgs e)
         {
             InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text);
+            TestLabel.Text = "Dane wczytane." + Environment.NewLine + "Plik:" + InteferometerPathway.FileName + Environment.NewLine + "Wielkość tablicy:" + InteferogramData.Count()
+                + Environment.NewLine + "Wielkość listy:" + InteferogramData[200].Count();
         }
 
         private void InteferometerPathway_FileOk(object sender, CancelEventArgs e)

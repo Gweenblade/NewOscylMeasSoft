@@ -228,7 +228,6 @@ namespace NewOscylMeasSoft
                 }
             }
             stopwatch.Stop();
-            MessageBox.Show(""+stopwatch.ElapsedMilliseconds + " " + ReadDataInDoubles[1].Count);
             return ReadDataInDoubles;
         }
 
