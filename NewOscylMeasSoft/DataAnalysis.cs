@@ -9,7 +9,7 @@ namespace NewOscylMeasSoft
     {
         public List<double> CutoffFunction(List<double> WSUsignal, double CutoffValue, int IgnoredColumns = 0)
         {
-            double Max = WSUsignal.Max();
+            double Max = WSUsignal.Max(); // TUTAJ JEST BLAD
             for (int i = IgnoredColumns; i < WSUsignal.Count; i++)
             {
                 WSUsignal[i] = WSUsignal[i] - (CutoffValue / 100 * Max);
