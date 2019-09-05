@@ -9,14 +9,19 @@ namespace NewOscylMeasSoft
     {
         public List<double> CutoffFunction(List<double> WSUsignal, double CutoffValue, int IgnoredColumns = 0)
         {
-            double Max = WSUsignal.Max(); // TUTAJ JEST BLAD
-            for (int i = IgnoredColumns; i < WSUsignal.Count; i++)
+            List<double> NEWLIST = new List<double>();
+            for(int j = IgnoredColumns; j < WSUsignal.Count(); j++)
             {
-                WSUsignal[i] = WSUsignal[i] - (CutoffValue / 100 * Max);
-                if (WSUsignal[i] < 0)
-                    WSUsignal[i] = 0;
+                NEWLIST.Add(WSUsignal[j]);
             }
-            return WSUsignal;
+            double Max = NEWLIST.Max(); 
+            for (int i = 0; i < NEWLIST.Count; i++)
+            {
+                NEWLIST[i] = NEWLIST[i] - (CutoffValue / 100 * Max);
+                if (NEWLIST[i] < 0)
+                    NEWLIST[i] = 0;
+            }
+            return NEWLIST;
         }
         public int MaximumsCounter(List<double> CutoffArray)
         {

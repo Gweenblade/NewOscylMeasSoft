@@ -656,7 +656,7 @@
             // 
             // ResultsAnalizer
             // 
-            this.ResultsAnalizer.Location = new System.Drawing.Point(918, 806);
+            this.ResultsAnalizer.Location = new System.Drawing.Point(844, 781);
             this.ResultsAnalizer.Name = "ResultsAnalizer";
             this.ResultsAnalizer.Size = new System.Drawing.Size(75, 36);
             this.ResultsAnalizer.TabIndex = 25;

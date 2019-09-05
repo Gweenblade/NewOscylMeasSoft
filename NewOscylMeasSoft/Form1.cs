@@ -373,8 +373,8 @@ private void button1_Click_3(object sender, EventArgs e)
                 
                 if(lastT == ForDataAnalysis[i][1] && lastC == ForDataAnalysis[i][2])
                 {
-                    SumMax = SumMax + ForDataAnalysis[i][4];
-                    STDlist.Add(ForDataAnalysis[i][4]);
+                    SumMax = SumMax + ForDataAnalysis[i][5];
+                    STDlist.Add(ForDataAnalysis[i][5]);
                 }
                 else
                 {
@@ -385,7 +385,7 @@ private void button1_Click_3(object sender, EventArgs e)
                     }
                     SBRandomData.Clear();
                     STDlist.Clear();
-                    SumMax = ForDataAnalysis[i][4];
+                    SumMax = ForDataAnalysis[i][5];
                     lastT = ForDataAnalysis[i][1];
                     lastC = ForDataAnalysis[i][2];
                 }
@@ -426,7 +426,6 @@ private void button1_Click_3(object sender, EventArgs e)
             {
                 CutoffAll.Add(DA.CutoffFunction(InteferogramData[i], double.Parse(CutoffTB.Text), int.Parse(IgnoredColumnsForInteferometer.Text)));
                 Max = DA.MaximumsCounter(CutoffAll[i]);
-                //MessageBox.Show("" + Max);
                 using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
                 {
                     for(int j = 0; j < int.Parse(IgnoredColumnsForInteferometer.Text); j++)
