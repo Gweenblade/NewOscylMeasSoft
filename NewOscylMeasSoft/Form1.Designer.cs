@@ -84,6 +84,9 @@
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -91,6 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // OscilInit
@@ -320,7 +324,7 @@
             // 
             this.FileSeparator.Location = new System.Drawing.Point(440, 41);
             this.FileSeparator.Name = "FileSeparator";
-            this.FileSeparator.Size = new System.Drawing.Size(10, 20);
+            this.FileSeparator.Size = new System.Drawing.Size(21, 20);
             this.FileSeparator.TabIndex = 21;
             this.FileSeparator.Text = ":";
             // 
@@ -539,6 +543,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.MeasuresTB);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.AveragesTB);
@@ -598,9 +603,9 @@
             // 
             // CheckOne
             // 
-            this.CheckOne.Location = new System.Drawing.Point(373, 709);
+            this.CheckOne.Location = new System.Drawing.Point(311, 729);
             this.CheckOne.Name = "CheckOne";
-            this.CheckOne.Size = new System.Drawing.Size(75, 23);
+            this.CheckOne.Size = new System.Drawing.Size(75, 21);
             this.CheckOne.TabIndex = 16;
             this.CheckOne.Text = "Check one";
             this.CheckOne.UseVisualStyleBackColor = true;
@@ -673,6 +678,39 @@
             // 
             this.ForRandomDataReads.FileName = "openFileDialog1";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.radioButton2);
+            this.groupBox3.Controls.Add(this.radioButton1);
+            this.groupBox3.Location = new System.Drawing.Point(308, 681);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(188, 44);
+            this.groupBox3.TabIndex = 29;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Trigger";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(12, 18);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(73, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.Text = "Trigger on";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Checked = true;
+            this.radioButton2.Location = new System.Drawing.Point(103, 18);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(73, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Trigger off";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -695,6 +733,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -757,6 +797,9 @@
         private System.Windows.Forms.SaveFileDialog CutoffSaver;
         private System.Windows.Forms.Button CutoffTest;
         private System.Windows.Forms.OpenFileDialog ForRandomDataReads;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 
