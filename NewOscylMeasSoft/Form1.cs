@@ -91,9 +91,9 @@ namespace NewOscylMeasSoft
             ZedSignal.Invalidate();
         }
 
-        public Thread StartTheThread(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10)
+        public Thread StartTheThread(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool Trigger = false)
         {
-            Measure = new Thread(() => measurements.GatherWaveforms(FilePath, oscillo, NumberOfMeasures, Averages));
+            Measure = new Thread(() => measurements.GatherWaveforms(FilePath, oscillo, NumberOfMeasures, Averages, TriggerBtnOn.Checked));
             Measure.Start();
             return Measure;
         }
@@ -234,9 +234,10 @@ namespace NewOscylMeasSoft
             int x, y;
             int.TryParse(MeasuresTB.Text, out x);
             int.TryParse(AveragesTB.Text, out y);
+            bool z = false;
             if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
             {
-                StartTheThread(savepath, oscillo, x, y);
+                StartTheThread(savepath, oscillo, x, y, TriggerBtnOn.Checked);
             }
             else
             {

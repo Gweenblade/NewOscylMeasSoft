@@ -71,6 +71,9 @@
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.TriggerBtnOff = new System.Windows.Forms.RadioButton();
+            this.TriggerBtnOn = new System.Windows.Forms.RadioButton();
             this.MeasuresTB = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.AveragesTB = new System.Windows.Forms.TextBox();
@@ -84,9 +87,6 @@
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -568,6 +568,39 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Signal";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.TriggerBtnOff);
+            this.groupBox3.Controls.Add(this.TriggerBtnOn);
+            this.groupBox3.Location = new System.Drawing.Point(308, 681);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(188, 44);
+            this.groupBox3.TabIndex = 29;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Trigger";
+            // 
+            // TriggerBtnOff
+            // 
+            this.TriggerBtnOff.AutoSize = true;
+            this.TriggerBtnOff.Checked = true;
+            this.TriggerBtnOff.Location = new System.Drawing.Point(103, 18);
+            this.TriggerBtnOff.Name = "TriggerBtnOff";
+            this.TriggerBtnOff.Size = new System.Drawing.Size(73, 17);
+            this.TriggerBtnOff.TabIndex = 1;
+            this.TriggerBtnOff.TabStop = true;
+            this.TriggerBtnOff.Text = "Trigger off";
+            this.TriggerBtnOff.UseVisualStyleBackColor = true;
+            // 
+            // TriggerBtnOn
+            // 
+            this.TriggerBtnOn.AutoSize = true;
+            this.TriggerBtnOn.Location = new System.Drawing.Point(12, 18);
+            this.TriggerBtnOn.Name = "TriggerBtnOn";
+            this.TriggerBtnOn.Size = new System.Drawing.Size(73, 17);
+            this.TriggerBtnOn.TabIndex = 0;
+            this.TriggerBtnOn.Text = "Trigger on";
+            this.TriggerBtnOn.UseVisualStyleBackColor = true;
+            // 
             // MeasuresTB
             // 
             this.MeasuresTB.Location = new System.Drawing.Point(168, 754);
@@ -678,39 +711,6 @@
             // 
             this.ForRandomDataReads.FileName = "openFileDialog1";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.radioButton2);
-            this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Location = new System.Drawing.Point(308, 681);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(188, 44);
-            this.groupBox3.TabIndex = 29;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Trigger";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(12, 18);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(73, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.Text = "Trigger on";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(103, 18);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(73, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Trigger off";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -798,8 +798,8 @@
         private System.Windows.Forms.Button CutoffTest;
         private System.Windows.Forms.OpenFileDialog ForRandomDataReads;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton TriggerBtnOff;
+        private System.Windows.Forms.RadioButton TriggerBtnOn;
     }
 }
 

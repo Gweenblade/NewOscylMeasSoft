@@ -24,15 +24,18 @@ namespace NewOscylMeasSoft
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
-        EventWaitHandle FileSaving, FileFree;
+        public static EventWaitHandle FileSaving, FileFree,DiodeLaserTuned, TuneDiodeLaser,BREAK;
         obslugaNW WSU = new obslugaNW();
 
         private void WavemeterReadings(string FilePath1, int NumberOfMeasures = 500)
         {
             int i = 0;
         }
-        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10)
+        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10,bool TriggerBtn = false)
         {
+            DiodeLaserTuned = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJONO");
+            TuneDiodeLaser = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
+            BREAK = new EventWaitHandle(false, EventResetMode.AutoReset, "BREAK");
             int MeasureLoopIndicator;
             int i;
             bool WARNING;
@@ -47,13 +50,21 @@ namespace NewOscylMeasSoft
             Stopwatch.Start();
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
             {
+                if(TriggerBtn == true)
+                {
+                    DiodeLaserTuned.WaitOne();
+                }
+                if(BREAK.WaitOne(1))
+                {
+                    break;
+                }
                 for (int j = 0; j < Averages; j++)
                 {
                     WaveformArray.Add(oscillo.odczyt()[0]);
                     var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
                     SB.Append(Stopwatch.ElapsedMilliseconds + ":");
                     SBWSU.Append(Stopwatch.ElapsedMilliseconds + ":");
-                    for (i = 0; i < WaveformArray[0].Count; i++)// TUTAJ moze byc bubel zwiazany z iloscia elementów (dać -1 jak cos)
+                    for (i = 0; i < WaveformArray[0].Count; i++)
                     {
                         SB.Append(WaveformArray[0][i] + ":");
                         PPLPIC.Add(i, WaveformArray[0][i]);
@@ -71,6 +82,8 @@ namespace NewOscylMeasSoft
                     SBWSU.Append("\r\n");
                     form1.OscilloSignal.GraphPane.AddCurve("", PPLWSU, Color.Red, SymbolType.None);
                     form1.WavemeterSignal.GraphPane.AddCurve("", PPLPIC, Color.Blue, SymbolType.None);
+                    PPLWSU.Clear();
+                    PPLPIC.Clear();
                     form1.WavemeterSignal.AxisChange();
                     form1.WavemeterSignal.Invalidate();
                     form1.OscilloSignal.AxisChange();
