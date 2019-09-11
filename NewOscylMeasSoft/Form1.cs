@@ -254,6 +254,11 @@ namespace NewOscylMeasSoft
             PauseBtn.BackColor = Color.White;
             StopBtn.BackColor = Color.White;
             StartBtn.BackColor = Color.Green;
+            DialogResult DR = MessageBox.Show("Are you sure you want to stop measurements?", "OMG YOU ARE GOING TO STOP THE MEASUREMENTS!", MessageBoxButtons.YesNo);
+            if (DR == DialogResult.Yes)
+                Measure.Abort();
+            else
+                MessageBox.Show("Measurements were not stopped");
         }
 
         private void PauseBtn_Click(object sender, EventArgs e)
