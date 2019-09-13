@@ -24,7 +24,8 @@ namespace NewOscylMeasSoft
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
-        public static EventWaitHandle FileSaving, FileFree,DiodeLaserTuned, TuneDiodeLaser,BREAK;
+        public static EventWaitHandle DiodeLaserTuned, TuneDiodeLaser,BREAK;
+        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHPICO, EWHWM;
         obslugaNW WSU = new obslugaNW();
 
         private void WavemeterReadings(string FilePath1, int NumberOfMeasures = 500)
@@ -33,9 +34,9 @@ namespace NewOscylMeasSoft
         }
         public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10,bool TriggerBtn = false)
         {
-            DiodeLaserTuned = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJONO");
-            TuneDiodeLaser = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
-            BREAK = new EventWaitHandle(false, EventResetMode.AutoReset, "BREAK");
+
+            EWHustawiono = new EventWaitHandle(false, EventResetMode.AutoReset, "USTAWIONO");
+            EWHprzestroj = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
             int MeasureLoopIndicator;
             int i;
             bool WARNING;
@@ -52,11 +53,7 @@ namespace NewOscylMeasSoft
             {
                 if(TriggerBtn == true)
                 {
-                    DiodeLaserTuned.WaitOne();
-                }
-                if(BREAK.WaitOne(1))
-                {
-                    break;
+                    EWHustawiono.WaitOne();
                 }
                 for (int j = 0; j < Averages; j++)
                 {
@@ -102,6 +99,10 @@ namespace NewOscylMeasSoft
                         }
                         SB.Clear();
                         SBWSU.Clear();
+                    }
+                    if (TriggerBtn == true)
+                    {
+                        EWHprzestroj.WaitOne();
                     }
                 }
             }

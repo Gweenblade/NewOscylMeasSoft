@@ -62,6 +62,7 @@ namespace NewOscylMeasSoft
         List<double> AfterCutoff;
         public Form1()
         {
+            
             PPLsignal = new PointPairList();
             PPLIntegralCorrect = new PointPairList();
             PPLIntegralWrong = new PointPairList();
