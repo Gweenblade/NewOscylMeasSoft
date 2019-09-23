@@ -25,18 +25,20 @@ namespace NewOscylMeasSoft
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
         public static EventWaitHandle DiodeLaserTuned, TuneDiodeLaser,BREAK;
-        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHPICO, EWHWM;
+        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning;
         obslugaNW WSU = new obslugaNW();
 
         private void WavemeterReadings(string FilePath1, int NumberOfMeasures = 500)
         {
             int i = 0;
         }
-        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10,bool TriggerBtn = false)
+        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool TriggerBtn = false)
         {
 
             EWHustawiono = new EventWaitHandle(false, EventResetMode.AutoReset, "USTAWIONO");
             EWHprzestroj = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
+            EWHbreak = new EventWaitHandle(false, EventResetMode.AutoReset, "ZATRZYMAJ");
+            EWHendoftuning = new EventWaitHandle(false, EventResetMode.AutoReset, "KONIEC");
             int MeasureLoopIndicator;
             int i;
             bool WARNING;
@@ -47,11 +49,11 @@ namespace NewOscylMeasSoft
             StringBuilder SB = new StringBuilder();
             StringBuilder SBWSU = new StringBuilder();
             Stopwatch Stopwatch = new Stopwatch();
-            double Wavenumber =0;
+            double Wavenumber = 0;
             Stopwatch.Start();
-            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
+            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
             {
-                if(TriggerBtn == true)
+                if (TriggerBtn == true)
                 {
                     EWHustawiono.WaitOne();
                 }
@@ -102,9 +104,15 @@ namespace NewOscylMeasSoft
                     }
                     if (TriggerBtn == true)
                     {
-                        EWHprzestroj.WaitOne();
+                        EWHprzestroj.Set();
                     }
                 }
+                if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
+                {
+                    break;
+                    MessageBox.Show("Zakończono pomiar.");
+                }
+
             }
             Stopwatch.Stop();
             MessageBox.Show("Koniec");
