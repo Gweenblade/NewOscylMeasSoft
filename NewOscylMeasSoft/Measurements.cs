@@ -41,7 +41,7 @@ namespace NewOscylMeasSoft
             EWHendoftuning = new EventWaitHandle(false, EventResetMode.AutoReset, "KONIEC");
             int MeasureLoopIndicator;
             int i;
-            bool WARNING;
+            bool WARNING, Ender = false;
             PointPairList PPLWSU = new PointPairList();
             PointPairList PPLPIC = new PointPairList();
             WaveformArray = new List<List<double>>();
@@ -87,7 +87,11 @@ namespace NewOscylMeasSoft
                     form1.WavemeterSignal.Invalidate();
                     form1.OscilloSignal.AxisChange();
                     form1.OscilloSignal.Invalidate();
-                    if (MeasureLoopIndicator % 50 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50)
+                    if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
+                    {
+                        Ender = true;
+                    }
+                    if (MeasureLoopIndicator % 50 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
                     {
                         using (StreamWriter SW = new StreamWriter(FilePath1 + "PICO", true))
                         {
@@ -107,10 +111,11 @@ namespace NewOscylMeasSoft
                         EWHprzestroj.Set();
                     }
                 }
-                if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
+
+                if(Ender == true)
                 {
+                    MessageBox.Show("Koniec pomiaru");
                     break;
-                    MessageBox.Show("Zakończono pomiar.");
                 }
 
             }
