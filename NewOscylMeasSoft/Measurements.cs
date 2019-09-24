@@ -81,13 +81,9 @@ namespace NewOscylMeasSoft
                         i++;
                     }
                     SBWSU.Append("\r\n");
-                    form1.OscilloSignal.GraphPane.AddCurve("", PPLWSU, Color.Red, SymbolType.None);
-                    form1.WavemeterSignal.GraphPane.AddCurve("", PPLPIC, Color.Blue, SymbolType.None);
+                    form1.GraphDrawerWavemeter(PPLWSU);
                     PPLWSU.Clear();
                     PPLPIC.Clear();
-                    form1.WavemeterSignal.AxisChange();
-                    form1.WavemeterSignal.Update();
-                    form1.WavemeterSignal.Invalidate();
                     form1.OscilloSignal.AxisChange();
                     form1.OscilloSignal.Invalidate();
                     if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))

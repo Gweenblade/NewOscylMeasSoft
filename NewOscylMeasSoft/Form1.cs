@@ -105,23 +105,23 @@ namespace NewOscylMeasSoft
             return Measure;
         }
 
-        public void GraphDrawer(GraphPane GrapgPTR, PointPairList PPL)// TO TRZEBA ZROBIC
+        public void GraphDrawerWavemeter(PointPairList PPL)// TO TRZEBA ZROBIC
         {
-            GrapgPTR.AxisChange();
+            WavemeterSignal.GraphPane.CurveList.Clear();
+            WavemeterSignal.GraphPane.AddCurve("", PPL, Color.Red, SymbolType.None);
+            WavemeterSignal.AxisChange();
+            WavemeterSignal.Invalidate();
+            
         }
 
         private void Rysowaniewykresów() // DO USUNIECIA
         {
             PointPairList PPLCorrect = new PointPairList();
-            LineItem CorrectCurve;
             for (int i = 0; i < 10000; i++)
             {
                 PPLCorrect.Add(i, i);
             }
-            ZedIntegral.AxisChange();
-            ZedIntegral.Invalidate();
-            WavemeterSignal.GraphPane.AddCurve("", PPLCorrect, Color.Red, SymbolType.None);
-            CorrectCurve = ZedIntegral.GraphPane.AddCurve("", PPLCorrect, Color.Green, SymbolType.Circle);
+            GraphDrawerWavemeter(PPLCorrect);
         }
         private void LineZedSignalRedrawer()
         {
@@ -550,6 +550,11 @@ private void button1_Click_3(object sender, EventArgs e)
             }
             stopwatch.Stop();
             MessageBox.Show("" + stopwatch.ElapsedMilliseconds + " " + ReadDataInDoubles[1].Count);
+        }
+
+        private void button1_Click_5(object sender, EventArgs e)
+        {
+            StartTheThread2();
         }
 
         private void InteferometerSlider_MouseUp(object sender, MouseEventArgs e)
