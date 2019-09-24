@@ -133,3 +133,18 @@ C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\Ne
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CopyComplete
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe.config
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.pdb
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\CsvHelper.dll
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\NationalInstruments.VisaNS.dll
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\Oscyloskop.dll
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\System.ValueTuple.dll
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\CsvHelper.xml
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\System.ValueTuple.xml
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csprojResolveAssemblyReference.cache
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Form1.resources
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Properties.Resources.resources
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.GenerateResource.Cache

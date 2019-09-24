@@ -59,6 +59,8 @@ namespace NewOscylMeasSoft
                 }
                 for (int j = 0; j < Averages; j++)
                 {
+                    form1.OscilloSignal.GraphPane.CurveList.Clear();
+                    form1.WavemeterSignal.GraphPane.CurveList.Clear();
                     WaveformArray.Add(oscillo.odczyt()[0]);
                     var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
                     SB.Append(Stopwatch.ElapsedMilliseconds + ":");
@@ -84,6 +86,7 @@ namespace NewOscylMeasSoft
                     PPLWSU.Clear();
                     PPLPIC.Clear();
                     form1.WavemeterSignal.AxisChange();
+                    form1.WavemeterSignal.Update();
                     form1.WavemeterSignal.Invalidate();
                     form1.OscilloSignal.AxisChange();
                     form1.OscilloSignal.Invalidate();

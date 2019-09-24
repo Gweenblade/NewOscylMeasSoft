@@ -104,6 +104,12 @@ namespace NewOscylMeasSoft
             Measure.Start();
             return Measure;
         }
+
+        public void GraphDrawer(GraphPane GrapgPTR, PointPairList PPL)// TO TRZEBA ZROBIC
+        {
+            GrapgPTR.AxisChange();
+        }
+
         private void Rysowaniewykresów() // DO USUNIECIA
         {
             PointPairList PPLCorrect = new PointPairList();
