@@ -27,6 +27,9 @@ namespace NewOscylMeasSoft
         public static EventWaitHandle DiodeLaserTuned, TuneDiodeLaser,BREAK;
         public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning;
         obslugaNW WSU = new obslugaNW();
+        public PointPairList PPLWSU = new PointPairList();
+        public PointPairList PPLPIC = new PointPairList();
+        public bool DrawTheGraph = false;
 
         private void WavemeterReadings(string FilePath1, int NumberOfMeasures = 500)
         {
@@ -42,8 +45,6 @@ namespace NewOscylMeasSoft
             int MeasureLoopIndicator;
             int i;
             bool WARNING, Ender = false;
-            PointPairList PPLWSU = new PointPairList();
-            PointPairList PPLPIC = new PointPairList();
             WaveformArray = new List<List<double>>();
             List<double> temp = new List<double>();
             StringBuilder SB = new StringBuilder();
@@ -59,10 +60,10 @@ namespace NewOscylMeasSoft
                 }
                 for (int j = 0; j < Averages; j++)
                 {
-                    form1.OscilloSignal.GraphPane.CurveList.Clear();
-                    form1.WavemeterSignal.GraphPane.CurveList.Clear();
                     WaveformArray.Add(oscillo.odczyt()[0]);
                     var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
+                    PPLWSU.Clear();
+                    PPLPIC.Clear();
                     SB.Append(Stopwatch.ElapsedMilliseconds + ":");
                     SBWSU.Append(Stopwatch.ElapsedMilliseconds + ":");
                     for (i = 0; i < WaveformArray[0].Count; i++)
@@ -80,12 +81,8 @@ namespace NewOscylMeasSoft
                         PPLWSU.Add(i, z);
                         i++;
                     }
+                    DrawTheGraph = true;
                     SBWSU.Append("\r\n");
-                    form1.GraphDrawerWavemeter(PPLWSU);
-                    PPLWSU.Clear();
-                    PPLPIC.Clear();
-                    form1.OscilloSignal.AxisChange();
-                    form1.OscilloSignal.Invalidate();
                     if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
                     {
                         Ender = true;

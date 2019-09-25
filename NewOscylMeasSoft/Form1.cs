@@ -28,8 +28,8 @@ namespace NewOscylMeasSoft
         int TriggerCH;
         short TriggerVoltage;
         ushort TriggerHis;
-        Thread Measure, Aw;
-        ThreadStart MEASURE;
+        Thread Measure, Graphdrawer;
+        ThreadStart MEASURE,GRAPHDRAWER;
         Measurements measurements;
         DataAnalysis DA;
         StreamWriter FilepathWriter;
@@ -73,6 +73,8 @@ namespace NewOscylMeasSoft
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
             ZedSignal.GraphPane.YAxis.Title.Text = "Signal";
             DataSlider.BackColor = Color.LightGray;
+            GRAPHDRAWER = new ThreadStart(GraphDrawer);
+            Graphdrawer = new Thread(GRAPHDRAWER);
             ZedSignal.GraphPane.CurveList.Add(lineItem1);
             ZedSignal.GraphPane.CurveList.Add(lineItem2);
             ZedSignal.GraphPane.YAxis.Scale.Max = 5000;
@@ -105,12 +107,24 @@ namespace NewOscylMeasSoft
             return Measure;
         }
 
-        public void GraphDrawerWavemeter(PointPairList PPL)// TO TRZEBA ZROBIC
+        public void GraphDrawer()// TO TRZEBA ZROBIC
         {
-            WavemeterSignal.GraphPane.CurveList.Clear();
-            WavemeterSignal.GraphPane.AddCurve("", PPL, Color.Red, SymbolType.None);
-            WavemeterSignal.AxisChange();
-            WavemeterSignal.Invalidate();
+            while (true)
+            {
+                if(measurements.DrawTheGraph == true)
+                {
+                    measurements.DrawTheGraph = false;
+                    WavemeterSignal.GraphPane.CurveList.Clear();
+                    OscilloSignal.GraphPane.CurveList.Clear();
+                    WavemeterSignal.GraphPane.AddCurve("", measurements.PPLWSU, Color.Red, SymbolType.None);
+                    OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
+                    WavemeterSignal.AxisChange();
+                    OscilloSignal.AxisChange();
+                    WavemeterSignal.Invalidate();
+                    OscilloSignal.Invalidate();
+                }
+
+            }
             
         }
 
@@ -121,7 +135,7 @@ namespace NewOscylMeasSoft
             {
                 PPLCorrect.Add(i, i);
             }
-            GraphDrawerWavemeter(PPLCorrect);
+           GraphDrawer();
         }
         private void LineZedSignalRedrawer()
         {
@@ -244,6 +258,7 @@ namespace NewOscylMeasSoft
             bool z = false;
             if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
             {
+                Graphdrawer.Start();
                 StartTheThread(savepath, oscillo, x, y, TriggerBtnOn.Checked);
             }
             else
