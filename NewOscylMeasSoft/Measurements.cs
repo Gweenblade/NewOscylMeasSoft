@@ -14,6 +14,7 @@ using System.IO;
 using Laser;
 using Oscyloskop;
 using CsvHelper;
+using System.Text.RegularExpressions;
 
 namespace NewOscylMeasSoft
 {
@@ -22,60 +23,100 @@ namespace NewOscylMeasSoft
         Oscyloskop.Form1 oscillo = new Oscyloskop.Form1();
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
-        List<List<double>> WaveformArray;
-        EventWaitHandle FileSaving, FileFree;
-        public struct MeasurementParameters
+        List<List<double>> WaveformArray, Integral = null;
+        public static EventWaitHandle DiodeLaserTuned, TuneDiodeLaser,BREAK;
+        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning;
+        obslugaNW WSU = new obslugaNW();
+
+        private void WavemeterReadings(string FilePath1, int NumberOfMeasures = 500)
         {
-            string FilePath1;
-            int NumberOfMeasures;
-            int NumberOfPointsPerWF;
-            bool pause;
-            bool STOP;
-            bool Trigger;
-            int ChannelTrig;
-            int ChannelSig;
+            int i = 0;
         }
-        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int NumberOfPointsPerWF = 2048, bool pause = false, bool STOP = false, bool Trigger = false, int ChannelTrig = 0, int ChannelSig = 0)
+        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool TriggerBtn = false)
         {
+
+            EWHustawiono = new EventWaitHandle(false, EventResetMode.AutoReset, "USTAWIONO");
+            EWHprzestroj = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
+            EWHbreak = new EventWaitHandle(false, EventResetMode.AutoReset, "ZATRZYMAJ");
+            EWHendoftuning = new EventWaitHandle(false, EventResetMode.AutoReset, "KONIEC");
             int MeasureLoopIndicator;
             int i;
-            bool WARNING;
+            bool WARNING, Ender = false;
+            PointPairList PPLWSU = new PointPairList();
+            PointPairList PPLPIC = new PointPairList();
             WaveformArray = new List<List<double>>();
             List<double> temp = new List<double>();
             StringBuilder SB = new StringBuilder();
+            StringBuilder SBWSU = new StringBuilder();
             Stopwatch Stopwatch = new Stopwatch();
-            double Wavenumber =0;
+            double Wavenumber = 0;
             Stopwatch.Start();
-            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
+            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
             {
-                WaveformArray.Add(oscillo.odczyt()[0]); // Poprawić kanał w razie czego TO JEST WAZNE
-                /*  if (Wavecontrol.ReadCM() > 0) //Zabezpieczenie błędu z odczytem długości fali
-                  {
-                      Wavenumber = Wavecontrol.ReadCM();
-                      WARNING = false;
-                  }
-                  else
-                      WARNING = true;
-                  SB.Append(Wavenumber + ":");*/
-                SB.Append(Stopwatch.ElapsedMilliseconds + ":");
-                for (i = 0; i < WaveformArray[0].Count; i++)// TUTAJ moze byc bubel zwiazany z iloscia elementów (dać -1 jak cos)
+                if (TriggerBtn == true)
                 {
-                    SB.Append(WaveformArray[0][i] + ":");
-                }/*
-                if (WARNING == true) // Jeśli ostatni element listy jest równy -1, to oznacza że był problem z odczytem długości fali i założono 
-                    SB.Append("-1");*/
-                SB.Append("\r\n");
-                WaveformArray.Clear();
-                
-                if (MeasureLoopIndicator % 50 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50)
+                    EWHustawiono.WaitOne();
+                }
+                for (int j = 0; j < Averages; j++)
                 {
-                    using (StreamWriter SW = new StreamWriter(FilePath1, true))
+                    form1.OscilloSignal.GraphPane.CurveList.Clear();
+                    form1.WavemeterSignal.GraphPane.CurveList.Clear();
+                    WaveformArray.Add(oscillo.odczyt()[0]);
+                    var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
+                    SB.Append(Stopwatch.ElapsedMilliseconds + ":");
+                    SBWSU.Append(Stopwatch.ElapsedMilliseconds + ":");
+                    for (i = 0; i < WaveformArray[0].Count; i++)
                     {
-                        SW.Write(SB);
-                        SW.Flush();
+                        SB.Append(WaveformArray[0][i] + ":");
+                        PPLPIC.Add(i, WaveformArray[0][i]);
                     }
-                    SB.Clear();
-                }              
+                    WaveformArray.Clear();
+                    SB.Append("\r\n");
+                    SBWSU.Append(obslugaNW.odczytNowegoWMcm(false) + ":" + obslugaNW.odczytszerokosci() + ":");
+                    i = 0;
+                    foreach (var z in x)
+                    {
+                        SBWSU.Append(z.ToString() + ":");
+                        PPLWSU.Add(i, z);
+                        i++;
+                    }
+                    SBWSU.Append("\r\n");
+                    form1.GraphDrawerWavemeter(PPLWSU);
+                    PPLWSU.Clear();
+                    PPLPIC.Clear();
+                    form1.OscilloSignal.AxisChange();
+                    form1.OscilloSignal.Invalidate();
+                    if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
+                    {
+                        Ender = true;
+                    }
+                    if (MeasureLoopIndicator % 50 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
+                    {
+                        using (StreamWriter SW = new StreamWriter(FilePath1 + "PICO", true))
+                        {
+                            SW.Write(SB);
+                            SW.Flush();
+                        }
+                        using (StreamWriter SW = new StreamWriter(FilePath1 + "WSU", true))
+                        {
+                            SW.Write(SBWSU);
+                            SW.Flush();
+                        }
+                        SB.Clear();
+                        SBWSU.Clear();
+                    }
+                    if (TriggerBtn == true)
+                    {
+                        EWHprzestroj.Set();
+                    }
+                }
+
+                if(Ender == true)
+                {
+                    MessageBox.Show("Koniec pomiaru");
+                    break;
+                }
+
             }
             Stopwatch.Stop();
             MessageBox.Show("Koniec");
@@ -104,6 +145,7 @@ namespace NewOscylMeasSoft
                         }
 
                         DataInBetween = LineText.Substring(last, i - last);
+
                         //MessageBox.Show("" + DataInBetween);
                         converter = double.Parse(DataInBetween);
                         temp.Add(converter);
@@ -135,5 +177,117 @@ namespace NewOscylMeasSoft
             }
             return Integral;
         }
+
+        public List<List<double>> FixedIntegral(string FilePath1, int From, int To)
+        {
+            int i, last = 0;
+            double converter;
+            string DataInBetween;
+            List<double> temp = new List<double>();
+            List<List<double>> ReadData = new List<List<double>>();
+            List<List<double>> Integral = new List<List<double>>();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (BufferedStream BS = new BufferedStream(FS))
+                {
+                    using (StreamReader SR = new StreamReader(BS))
+                    {
+                        string line;
+                        while ((line = SR.ReadLine()) != null)
+                        {
+                            last = 0;
+                            for (i = 0; i < line.Length - 1; i++)
+                            {
+                                if (line.ElementAt(i) == ':' || i == line.Length - 1)
+                                {
+                                    if (i == line.Length - 1)
+                                    {
+                                        i = line.Length;
+                                    }
+                                    DataInBetween = line.Substring(last, i - last);
+                                    converter = double.Parse(DataInBetween);
+                                    temp.Add(converter);
+                                    last = i + 1;
+                                }
+                            }
+                            Integral.Add(new List<double> {temp[0], temp.Skip(From - 1).Take(To).Sum() });
+                        }
+                    }
+                }
+            }
+            stopwatch.Stop();
+            MessageBox.Show("Done" + stopwatch.ElapsedMilliseconds);
+            return Integral;
+        }
+
+
+        public List<List<double>> RegexReader(string FilePath1, string Separator, int IgnoredColumns = 0) // DO DALSZEJ DIAGNOSTKI.
+        {
+            string line;
+            List<List<double>> ReadDataInDoubles = new List<List<double>>();
+            string[] Test;
+            int i, j;
+            List<string> StringList = new List<string>();
+            List<double> DoubleList = new List<double>();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (BufferedStream BS = new BufferedStream(FS))
+                {
+                    using (StreamReader SR = new StreamReader(BS))
+                    {
+                        while ((line = SR.ReadLine()) != null)
+                        {
+                            StringList = Regex.Split(line, Separator).ToList();
+                            for (i = IgnoredColumns; i < StringList.Count - 1; i++)
+                            {
+                               DoubleList.Add(double.Parse(StringList[i]));
+                            }
+                            ReadDataInDoubles.Add(DoubleList);
+                            DoubleList = new List<double>();
+                            StringList = new List<string>();
+                        }
+                    }
+                }
+            }
+            stopwatch.Stop();
+            return ReadDataInDoubles;
+        }
+
+        public List<List<double>> IntegralOnLists(List<List<double>> RawData,int From,int To)
+        {
+            List<List<double>> IntegralData = new List<List<double>>();
+            int HowMany = To - From;
+            double Average;
+            for (int i = 0; i < RawData.Count; i++)
+            {
+                Average = RawData[i].Skip(From - 1).Take(HowMany).Sum() / HowMany;
+                IntegralData.Add(new List<double> { RawData[i][0], RawData[i].Skip(From - 1).Take(HowMany).Sum() , Average});
+            }
+            return IntegralData;
+        }
+        public List<double> SingleLineReader(string FilePath, int ReadLineNumber, int IgnoredColumns = 0)
+        {
+            List<double> temp = new List<double>();
+            List<string> StringList = new List<string>();
+            using (FileStream FS = File.Open(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (BufferedStream BS = new BufferedStream(FS))
+                {
+                    using (StreamReader SR = new StreamReader(BS))
+                    {
+                        var ReadLine = File.ReadLines(FilePath).Skip(ReadLineNumber - 1).FirstOrDefault();
+                        StringList = Regex.Split(ReadLine, ":").ToList();
+                        for (int i = IgnoredColumns; i < StringList.Count - 1; i++)
+                            temp.Add(double.Parse(StringList[i]));
+                    }
+                }
+            }
+        return temp;
+        }
     }
 }
+

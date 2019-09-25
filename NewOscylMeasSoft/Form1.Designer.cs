@@ -31,77 +31,78 @@
             this.components = new System.ComponentModel.Container();
             this.OscilInit = new System.Windows.Forms.Button();
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.Checkone = new System.Windows.Forms.Button();
+            this.InteferometerParameters = new System.Windows.Forms.Label();
+            this.FrameInteferometer = new System.Windows.Forms.Label();
+            this.InteferometerSlider = new System.Windows.Forms.TrackBar();
+            this.ZedInteferogram = new ZedGraph.ZedGraphControl();
+            this.ZedIntegral = new ZedGraph.ZedGraphControl();
             this.DeleteFrame = new System.Windows.Forms.Button();
             this.FrameLabel = new System.Windows.Forms.Label();
             this.DataSlider = new System.Windows.Forms.TrackBar();
-            this.PathToFileLabel = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.AWinit = new System.Windows.Forms.Button();
+            this.CutoffTest = new System.Windows.Forms.Button();
+            this.IgnoredColumsForData = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.IgnoredColumnsForInteferometer = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.LoadInteferometer = new System.Windows.Forms.Button();
+            this.FindInterferogram = new System.Windows.Forms.Button();
+            this.CutOffFunction = new System.Windows.Forms.Button();
+            this.FileSeparator = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.LoadData = new System.Windows.Forms.Button();
+            this.CutoffTB = new System.Windows.Forms.TextBox();
+            this.Cutoff = new System.Windows.Forms.Label();
             this.IntegralBtn = new System.Windows.Forms.Button();
-            this.TestBtn = new System.Windows.Forms.Button();
-            this.SaveBtn = new System.Windows.Forms.Button();
-            this.ReadDataBtn = new System.Windows.Forms.Button();
-            this.PauseBtn = new System.Windows.Forms.Button();
-            this.StopBtn = new System.Windows.Forms.Button();
-            this.StartBtn = new System.Windows.Forms.Button();
-            this.LoadingData = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.WavemeterInit = new System.Windows.Forms.Button();
-            this.NumOfWaveforms = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.HowManyPoints = new System.Windows.Forms.Label();
-            this.NumberOfPointsBox = new System.Windows.Forms.TextBox();
-            this.ChannelsOption = new System.Windows.Forms.GroupBox();
-            this.SetTriggerButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.TriggerVoltageBox = new System.Windows.Forms.TextBox();
-            this.TriggerHisBox = new System.Windows.Forms.TextBox();
-            this.HisLabel = new System.Windows.Forms.Label();
-            this.LabelVol = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.CH4Sig = new System.Windows.Forms.CheckBox();
-            this.CH3Sig = new System.Windows.Forms.CheckBox();
-            this.CH2Sig = new System.Windows.Forms.CheckBox();
-            this.CH1Sig = new System.Windows.Forms.CheckBox();
-            this.TriggOptions = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.EdgeOptions = new System.Windows.Forms.ComboBox();
-            this.CH4Trigg = new System.Windows.Forms.RadioButton();
-            this.CH3Trigg = new System.Windows.Forms.RadioButton();
-            this.CH2Trigg = new System.Windows.Forms.RadioButton();
-            this.CH1Trigg = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TriggOFF = new System.Windows.Forms.RadioButton();
-            this.TriggON = new System.Windows.Forms.RadioButton();
+            this.FindFile = new System.Windows.Forms.Button();
             this.Bar1Label = new System.Windows.Forms.Label();
             this.Bar2Label = new System.Windows.Forms.Label();
             this.ZedSignal = new ZedGraph.ZedGraphControl();
             this.TrackMin = new System.Windows.Forms.TrackBar();
             this.TrackMax = new System.Windows.Forms.TrackBar();
-            this.Groupmeasure = new System.Windows.Forms.GroupBox();
+            this.SaveBtn = new System.Windows.Forms.Button();
+            this.PauseBtn = new System.Windows.Forms.Button();
+            this.StopBtn = new System.Windows.Forms.Button();
+            this.StartBtn = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.WavemeterInit = new System.Windows.Forms.Button();
+            this.PathToFileLabel = new System.Windows.Forms.Label();
             this.TestLabel = new System.Windows.Forms.TextBox();
-            this.ZedIntegral = new ZedGraph.ZedGraphControl();
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.TriggerBtnOff = new System.Windows.Forms.RadioButton();
+            this.TriggerBtnOn = new System.Windows.Forms.RadioButton();
+            this.MeasuresTB = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.AveragesTB = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.CheckOne = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.WavemeterSignal = new ZedGraph.ZedGraphControl();
+            this.label1 = new System.Windows.Forms.Label();
+            this.OscilloSignal = new ZedGraph.ZedGraphControl();
+            this.ResultsAnalizer = new System.Windows.Forms.Button();
+            this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
+            this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
+            this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
-            this.ChannelsOption.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.TriggOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).BeginInit();
-            this.Groupmeasure.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // OscilInit
             // 
-            this.OscilInit.Location = new System.Drawing.Point(307, 10);
+            this.OscilInit.Location = new System.Drawing.Point(167, 681);
             this.OscilInit.Name = "OscilInit";
-            this.OscilInit.Size = new System.Drawing.Size(75, 35);
+            this.OscilInit.Size = new System.Drawing.Size(138, 20);
             this.OscilInit.TabIndex = 0;
             this.OscilInit.Text = "Oscilloscope initialization";
             this.OscilInit.UseVisualStyleBackColor = true;
@@ -109,50 +110,88 @@
             // 
             // TriggerGroup
             // 
-            this.TriggerGroup.Controls.Add(this.button1);
-            this.TriggerGroup.Controls.Add(this.Checkone);
+            this.TriggerGroup.Controls.Add(this.InteferometerParameters);
+            this.TriggerGroup.Controls.Add(this.FrameInteferometer);
+            this.TriggerGroup.Controls.Add(this.InteferometerSlider);
+            this.TriggerGroup.Controls.Add(this.ZedInteferogram);
+            this.TriggerGroup.Controls.Add(this.ZedIntegral);
             this.TriggerGroup.Controls.Add(this.DeleteFrame);
             this.TriggerGroup.Controls.Add(this.FrameLabel);
             this.TriggerGroup.Controls.Add(this.DataSlider);
-            this.TriggerGroup.Controls.Add(this.PathToFileLabel);
             this.TriggerGroup.Controls.Add(this.groupBox2);
-            this.TriggerGroup.Controls.Add(this.ChannelsOption);
             this.TriggerGroup.Controls.Add(this.Bar1Label);
             this.TriggerGroup.Controls.Add(this.Bar2Label);
             this.TriggerGroup.Controls.Add(this.ZedSignal);
             this.TriggerGroup.Controls.Add(this.TrackMin);
             this.TriggerGroup.Controls.Add(this.TrackMax);
-            this.TriggerGroup.Location = new System.Drawing.Point(12, 12);
+            this.TriggerGroup.Location = new System.Drawing.Point(532, 12);
             this.TriggerGroup.Name = "TriggerGroup";
-            this.TriggerGroup.Size = new System.Drawing.Size(714, 850);
+            this.TriggerGroup.Size = new System.Drawing.Size(1440, 757);
             this.TriggerGroup.TabIndex = 8;
             this.TriggerGroup.TabStop = false;
-            this.TriggerGroup.Text = "Trigger control";
+            this.TriggerGroup.Text = "Data analysis section";
             // 
-            // button1
+            // InteferometerParameters
             // 
-            this.button1.Location = new System.Drawing.Point(507, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_3);
+            this.InteferometerParameters.AutoSize = true;
+            this.InteferometerParameters.Location = new System.Drawing.Point(731, 27);
+            this.InteferometerParameters.Name = "InteferometerParameters";
+            this.InteferometerParameters.Size = new System.Drawing.Size(0, 13);
+            this.InteferometerParameters.TabIndex = 23;
             // 
-            // Checkone
+            // FrameInteferometer
             // 
-            this.Checkone.Location = new System.Drawing.Point(617, 19);
-            this.Checkone.Name = "Checkone";
-            this.Checkone.Size = new System.Drawing.Size(75, 23);
-            this.Checkone.TabIndex = 18;
-            this.Checkone.Text = "Check signal";
-            this.Checkone.UseVisualStyleBackColor = true;
-            this.Checkone.Click += new System.EventHandler(this.Checkone_Click);
+            this.FrameInteferometer.AutoSize = true;
+            this.FrameInteferometer.Location = new System.Drawing.Point(1179, 374);
+            this.FrameInteferometer.Name = "FrameInteferometer";
+            this.FrameInteferometer.Size = new System.Drawing.Size(83, 13);
+            this.FrameInteferometer.TabIndex = 22;
+            this.FrameInteferometer.Text = "Frame number : ";
+            // 
+            // InteferometerSlider
+            // 
+            this.InteferometerSlider.BackColor = System.Drawing.Color.Bisque;
+            this.InteferometerSlider.Location = new System.Drawing.Point(729, 358);
+            this.InteferometerSlider.Maximum = 0;
+            this.InteferometerSlider.Name = "InteferometerSlider";
+            this.InteferometerSlider.Size = new System.Drawing.Size(444, 45);
+            this.InteferometerSlider.TabIndex = 21;
+            this.InteferometerSlider.Scroll += new System.EventHandler(this.InteferometerSlider_Scroll);
+            this.InteferometerSlider.ValueChanged += new System.EventHandler(this.InteferometerSlider_ValueChanged);
+            this.InteferometerSlider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.InteferometerSlider_MouseUp);
+            // 
+            // ZedInteferogram
+            // 
+            this.ZedInteferogram.Location = new System.Drawing.Point(727, 23);
+            this.ZedInteferogram.Name = "ZedInteferogram";
+            this.ZedInteferogram.ScrollGrace = 0D;
+            this.ZedInteferogram.ScrollMaxX = 0D;
+            this.ZedInteferogram.ScrollMaxY = 0D;
+            this.ZedInteferogram.ScrollMaxY2 = 0D;
+            this.ZedInteferogram.ScrollMinX = 0D;
+            this.ZedInteferogram.ScrollMinY = 0D;
+            this.ZedInteferogram.ScrollMinY2 = 0D;
+            this.ZedInteferogram.Size = new System.Drawing.Size(543, 334);
+            this.ZedInteferogram.TabIndex = 17;
+            // 
+            // ZedIntegral
+            // 
+            this.ZedIntegral.Location = new System.Drawing.Point(729, 409);
+            this.ZedIntegral.Name = "ZedIntegral";
+            this.ZedIntegral.ScrollGrace = 0D;
+            this.ZedIntegral.ScrollMaxX = 0D;
+            this.ZedIntegral.ScrollMaxY = 0D;
+            this.ZedIntegral.ScrollMaxY2 = 0D;
+            this.ZedIntegral.ScrollMinX = 0D;
+            this.ZedIntegral.ScrollMinY = 0D;
+            this.ZedIntegral.ScrollMinY2 = 0D;
+            this.ZedIntegral.Size = new System.Drawing.Size(543, 334);
+            this.ZedIntegral.TabIndex = 16;
             // 
             // DeleteFrame
             // 
             this.DeleteFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.DeleteFrame.Location = new System.Drawing.Point(668, 557);
+            this.DeleteFrame.Location = new System.Drawing.Point(668, 566);
             this.DeleteFrame.Name = "DeleteFrame";
             this.DeleteFrame.Size = new System.Drawing.Size(43, 32);
             this.DeleteFrame.TabIndex = 15;
@@ -162,7 +201,7 @@
             // FrameLabel
             // 
             this.FrameLabel.AutoSize = true;
-            this.FrameLabel.Location = new System.Drawing.Point(556, 568);
+            this.FrameLabel.Location = new System.Drawing.Point(556, 577);
             this.FrameLabel.Name = "FrameLabel";
             this.FrameLabel.Size = new System.Drawing.Size(83, 13);
             this.FrameLabel.TabIndex = 14;
@@ -170,8 +209,8 @@
             // 
             // DataSlider
             // 
-            this.DataSlider.BackColor = System.Drawing.Color.Gainsboro;
-            this.DataSlider.Location = new System.Drawing.Point(13, 554);
+            this.DataSlider.BackColor = System.Drawing.Color.Bisque;
+            this.DataSlider.Location = new System.Drawing.Point(13, 563);
             this.DataSlider.Maximum = 0;
             this.DataSlider.Name = "DataSlider";
             this.DataSlider.Size = new System.Drawing.Size(543, 45);
@@ -180,457 +219,180 @@
             this.DataSlider.ValueChanged += new System.EventHandler(this.DataSlider_ValueChanged);
             this.DataSlider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DataSlider_MouseUp);
             // 
-            // PathToFileLabel
-            // 
-            this.PathToFileLabel.AutoSize = true;
-            this.PathToFileLabel.ForeColor = System.Drawing.Color.Blue;
-            this.PathToFileLabel.Location = new System.Drawing.Point(6, 826);
-            this.PathToFileLabel.Name = "PathToFileLabel";
-            this.PathToFileLabel.Size = new System.Drawing.Size(35, 13);
-            this.PathToFileLabel.TabIndex = 14;
-            this.PathToFileLabel.Text = "Path: ";
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.AWinit);
+            this.groupBox2.Controls.Add(this.CutoffTest);
+            this.groupBox2.Controls.Add(this.IgnoredColumsForData);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.IgnoredColumnsForInteferometer);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.LoadInteferometer);
+            this.groupBox2.Controls.Add(this.FindInterferogram);
+            this.groupBox2.Controls.Add(this.CutOffFunction);
+            this.groupBox2.Controls.Add(this.FileSeparator);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.LoadData);
+            this.groupBox2.Controls.Add(this.CutoffTB);
+            this.groupBox2.Controls.Add(this.Cutoff);
             this.groupBox2.Controls.Add(this.IntegralBtn);
-            this.groupBox2.Controls.Add(this.TestBtn);
-            this.groupBox2.Controls.Add(this.SaveBtn);
-            this.groupBox2.Controls.Add(this.ReadDataBtn);
-            this.groupBox2.Controls.Add(this.PauseBtn);
-            this.groupBox2.Controls.Add(this.StopBtn);
-            this.groupBox2.Controls.Add(this.StartBtn);
-            this.groupBox2.Controls.Add(this.LoadingData);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.WavemeterInit);
-            this.groupBox2.Controls.Add(this.NumOfWaveforms);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.OscilInit);
-            this.groupBox2.Controls.Add(this.HowManyPoints);
-            this.groupBox2.Controls.Add(this.NumberOfPointsBox);
-            this.groupBox2.Location = new System.Drawing.Point(13, 602);
+            this.groupBox2.Controls.Add(this.FindFile);
+            this.groupBox2.Location = new System.Drawing.Point(13, 614);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(387, 210);
+            this.groupBox2.Size = new System.Drawing.Size(695, 132);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Experiment parameters";
+            this.groupBox2.Text = "File analysis parameters";
             // 
-            // AWinit
+            // CutoffTest
             // 
-            this.AWinit.Location = new System.Drawing.Point(306, 91);
-            this.AWinit.Name = "AWinit";
-            this.AWinit.Size = new System.Drawing.Size(75, 32);
-            this.AWinit.TabIndex = 19;
-            this.AWinit.Text = "Ad Win Init";
-            this.AWinit.UseVisualStyleBackColor = true;
-            this.AWinit.Click += new System.EventHandler(this.AWinit_Click);
+            this.CutoffTest.Location = new System.Drawing.Point(479, 19);
+            this.CutoffTest.Name = "CutoffTest";
+            this.CutoffTest.Size = new System.Drawing.Size(75, 23);
+            this.CutoffTest.TabIndex = 26;
+            this.CutoffTest.Text = "CutoffTest";
+            this.CutoffTest.UseVisualStyleBackColor = true;
+            this.CutoffTest.Click += new System.EventHandler(this.CutoffTest_Click);
+            // 
+            // IgnoredColumsForData
+            // 
+            this.IgnoredColumsForData.Location = new System.Drawing.Point(488, 61);
+            this.IgnoredColumsForData.Name = "IgnoredColumsForData";
+            this.IgnoredColumsForData.Size = new System.Drawing.Size(12, 20);
+            this.IgnoredColumsForData.TabIndex = 32;
+            this.IgnoredColumsForData.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(332, 64);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(120, 13);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "Ignored columns (Data):";
+            // 
+            // IgnoredColumnsForInteferometer
+            // 
+            this.IgnoredColumnsForInteferometer.Location = new System.Drawing.Point(488, 82);
+            this.IgnoredColumnsForInteferometer.Name = "IgnoredColumnsForInteferometer";
+            this.IgnoredColumnsForInteferometer.Size = new System.Drawing.Size(12, 20);
+            this.IgnoredColumnsForInteferometer.TabIndex = 30;
+            this.IgnoredColumnsForInteferometer.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(332, 85);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(159, 13);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Ignored columns (Inteferometer):";
+            // 
+            // LoadInteferometer
+            // 
+            this.LoadInteferometer.Enabled = false;
+            this.LoadInteferometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LoadInteferometer.Location = new System.Drawing.Point(118, 64);
+            this.LoadInteferometer.Name = "LoadInteferometer";
+            this.LoadInteferometer.Size = new System.Drawing.Size(97, 39);
+            this.LoadInteferometer.TabIndex = 28;
+            this.LoadInteferometer.Text = "Load Inteferogram";
+            this.LoadInteferometer.UseVisualStyleBackColor = true;
+            this.LoadInteferometer.Click += new System.EventHandler(this.Button2_Click_1);
+            // 
+            // FindInterferogram
+            // 
+            this.FindInterferogram.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.FindInterferogram.Location = new System.Drawing.Point(6, 64);
+            this.FindInterferogram.Name = "FindInterferogram";
+            this.FindInterferogram.Size = new System.Drawing.Size(110, 39);
+            this.FindInterferogram.TabIndex = 27;
+            this.FindInterferogram.Text = "Find Interferogram";
+            this.FindInterferogram.UseVisualStyleBackColor = true;
+            this.FindInterferogram.Click += new System.EventHandler(this.FindInterferogram_Click);
+            // 
+            // CutOffFunction
+            // 
+            this.CutOffFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CutOffFunction.Location = new System.Drawing.Point(221, 64);
+            this.CutOffFunction.Name = "CutOffFunction";
+            this.CutOffFunction.Size = new System.Drawing.Size(105, 39);
+            this.CutOffFunction.TabIndex = 26;
+            this.CutOffFunction.Text = "Aply cutoff";
+            this.CutOffFunction.UseVisualStyleBackColor = true;
+            this.CutOffFunction.Click += new System.EventHandler(this.CutOffFunction_Click);
+            // 
+            // FileSeparator
+            // 
+            this.FileSeparator.Location = new System.Drawing.Point(440, 41);
+            this.FileSeparator.Name = "FileSeparator";
+            this.FileSeparator.Size = new System.Drawing.Size(21, 20);
+            this.FileSeparator.TabIndex = 21;
+            this.FileSeparator.Text = ":";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(332, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(104, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Data separator in file";
+            // 
+            // LoadData
+            // 
+            this.LoadData.Enabled = false;
+            this.LoadData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LoadData.Location = new System.Drawing.Point(118, 19);
+            this.LoadData.Name = "LoadData";
+            this.LoadData.Size = new System.Drawing.Size(97, 39);
+            this.LoadData.TabIndex = 19;
+            this.LoadData.Text = "Load Data";
+            this.LoadData.UseVisualStyleBackColor = true;
+            this.LoadData.Click += new System.EventHandler(this.LoadData_Click);
+            // 
+            // CutoffTB
+            // 
+            this.CutoffTB.Location = new System.Drawing.Point(440, 19);
+            this.CutoffTB.Name = "CutoffTB";
+            this.CutoffTB.Size = new System.Drawing.Size(21, 20);
+            this.CutoffTB.TabIndex = 19;
+            this.CutoffTB.Text = "5";
+            // 
+            // Cutoff
+            // 
+            this.Cutoff.AutoSize = true;
+            this.Cutoff.Location = new System.Drawing.Point(332, 22);
+            this.Cutoff.Name = "Cutoff";
+            this.Cutoff.Size = new System.Drawing.Size(102, 13);
+            this.Cutoff.TabIndex = 18;
+            this.Cutoff.Text = "Set cut off value (%)";
             // 
             // IntegralBtn
             // 
-            this.IntegralBtn.Location = new System.Drawing.Point(6, 84);
+            this.IntegralBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.IntegralBtn.Location = new System.Drawing.Point(221, 19);
             this.IntegralBtn.Name = "IntegralBtn";
-            this.IntegralBtn.Size = new System.Drawing.Size(75, 39);
+            this.IntegralBtn.Size = new System.Drawing.Size(105, 39);
             this.IntegralBtn.TabIndex = 19;
             this.IntegralBtn.Text = "Calculate Integral";
             this.IntegralBtn.UseVisualStyleBackColor = true;
             this.IntegralBtn.Click += new System.EventHandler(this.IntegralBtn_Click);
             // 
-            // TestBtn
-            // 
-            this.TestBtn.Location = new System.Drawing.Point(115, 122);
-            this.TestBtn.Name = "TestBtn";
-            this.TestBtn.Size = new System.Drawing.Size(75, 23);
-            this.TestBtn.TabIndex = 22;
-            this.TestBtn.Text = "Test";
-            this.TestBtn.UseVisualStyleBackColor = true;
-            this.TestBtn.Click += new System.EventHandler(this.TestBtn_Click);
-            // 
-            // SaveBtn
-            // 
-            this.SaveBtn.Location = new System.Drawing.Point(227, 69);
-            this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(52, 22);
-            this.SaveBtn.TabIndex = 21;
-            this.SaveBtn.Text = "Save";
-            this.SaveBtn.UseVisualStyleBackColor = true;
-            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
-            // 
-            // ReadDataBtn
-            // 
-            this.ReadDataBtn.Location = new System.Drawing.Point(9, 148);
-            this.ReadDataBtn.Name = "ReadDataBtn";
-            this.ReadDataBtn.Size = new System.Drawing.Size(75, 23);
-            this.ReadDataBtn.TabIndex = 17;
-            this.ReadDataBtn.Text = "Read Data";
-            this.ReadDataBtn.UseVisualStyleBackColor = true;
-            this.ReadDataBtn.Click += new System.EventHandler(this.ReadDataBtn_Click);
-            // 
-            // PauseBtn
-            // 
-            this.PauseBtn.BackColor = System.Drawing.Color.White;
-            this.PauseBtn.Enabled = false;
-            this.PauseBtn.Location = new System.Drawing.Point(90, 177);
-            this.PauseBtn.Name = "PauseBtn";
-            this.PauseBtn.Size = new System.Drawing.Size(75, 23);
-            this.PauseBtn.TabIndex = 20;
-            this.PauseBtn.Text = "Pause";
-            this.PauseBtn.UseVisualStyleBackColor = false;
-            this.PauseBtn.Click += new System.EventHandler(this.PauseBtn_Click);
-            // 
-            // StopBtn
-            // 
-            this.StopBtn.BackColor = System.Drawing.Color.White;
-            this.StopBtn.Enabled = false;
-            this.StopBtn.Location = new System.Drawing.Point(169, 177);
-            this.StopBtn.Name = "StopBtn";
-            this.StopBtn.Size = new System.Drawing.Size(75, 23);
-            this.StopBtn.TabIndex = 19;
-            this.StopBtn.Text = "Stop";
-            this.StopBtn.UseVisualStyleBackColor = false;
-            this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
-            // 
-            // StartBtn
-            // 
-            this.StartBtn.BackColor = System.Drawing.Color.Green;
-            this.StartBtn.Location = new System.Drawing.Point(9, 177);
-            this.StartBtn.Name = "StartBtn";
-            this.StartBtn.Size = new System.Drawing.Size(75, 23);
-            this.StartBtn.TabIndex = 18;
-            this.StartBtn.Text = "Start";
-            this.StartBtn.UseVisualStyleBackColor = false;
-            this.StartBtn.Click += new System.EventHandler(this.StartBtn_Click);
-            // 
-            // LoadingData
-            // 
-            this.LoadingData.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LoadingData.Location = new System.Drawing.Point(245, 150);
-            this.LoadingData.Name = "LoadingData";
-            this.LoadingData.Size = new System.Drawing.Size(136, 53);
-            this.LoadingData.TabIndex = 17;
-            this.LoadingData.Text = "Load data to analyse";
-            this.LoadingData.UseVisualStyleBackColor = true;
-            this.LoadingData.Click += new System.EventHandler(this.LoadingData_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 68);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(215, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Where do you want to save measurements?";
-            // 
-            // WavemeterInit
-            // 
-            this.WavemeterInit.Location = new System.Drawing.Point(306, 49);
-            this.WavemeterInit.Name = "WavemeterInit";
-            this.WavemeterInit.Size = new System.Drawing.Size(75, 36);
-            this.WavemeterInit.TabIndex = 15;
-            this.WavemeterInit.Text = "Wavemeter Initializaction";
-            this.WavemeterInit.UseVisualStyleBackColor = true;
-            this.WavemeterInit.Click += new System.EventHandler(this.WavemeterInit_Click);
-            // 
-            // NumOfWaveforms
-            // 
-            this.NumOfWaveforms.Location = new System.Drawing.Point(214, 41);
-            this.NumOfWaveforms.Name = "NumOfWaveforms";
-            this.NumOfWaveforms.Size = new System.Drawing.Size(30, 20);
-            this.NumOfWaveforms.TabIndex = 14;
-            this.NumOfWaveforms.Text = "10";
-            this.NumOfWaveforms.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(196, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "How many measures on one waveform?";
-            // 
-            // HowManyPoints
-            // 
-            this.HowManyPoints.AutoSize = true;
-            this.HowManyPoints.Location = new System.Drawing.Point(6, 19);
-            this.HowManyPoints.Name = "HowManyPoints";
-            this.HowManyPoints.Size = new System.Drawing.Size(174, 13);
-            this.HowManyPoints.TabIndex = 12;
-            this.HowManyPoints.Text = "How many point on one waveform?";
-            // 
-            // NumberOfPointsBox
-            // 
-            this.NumberOfPointsBox.Location = new System.Drawing.Point(214, 17);
-            this.NumberOfPointsBox.Name = "NumberOfPointsBox";
-            this.NumberOfPointsBox.Size = new System.Drawing.Size(30, 20);
-            this.NumberOfPointsBox.TabIndex = 11;
-            this.NumberOfPointsBox.Text = "2048";
-            this.NumberOfPointsBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumberOfPointsBox.TextChanged += new System.EventHandler(this.NumberOfPointsBox_TextChanged_1);
-            // 
-            // ChannelsOption
-            // 
-            this.ChannelsOption.Controls.Add(this.SetTriggerButton);
-            this.ChannelsOption.Controls.Add(this.textBox1);
-            this.ChannelsOption.Controls.Add(this.label5);
-            this.ChannelsOption.Controls.Add(this.TriggerVoltageBox);
-            this.ChannelsOption.Controls.Add(this.TriggerHisBox);
-            this.ChannelsOption.Controls.Add(this.HisLabel);
-            this.ChannelsOption.Controls.Add(this.LabelVol);
-            this.ChannelsOption.Controls.Add(this.groupBox1);
-            this.ChannelsOption.Controls.Add(this.TriggOptions);
-            this.ChannelsOption.Controls.Add(this.label1);
-            this.ChannelsOption.Controls.Add(this.TriggOFF);
-            this.ChannelsOption.Controls.Add(this.TriggON);
-            this.ChannelsOption.Location = new System.Drawing.Point(406, 602);
-            this.ChannelsOption.Name = "ChannelsOption";
-            this.ChannelsOption.Size = new System.Drawing.Size(292, 242);
-            this.ChannelsOption.TabIndex = 13;
-            this.ChannelsOption.TabStop = false;
-            this.ChannelsOption.Text = "Channel Options";
-            // 
-            // SetTriggerButton
-            // 
-            this.SetTriggerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.SetTriggerButton.Location = new System.Drawing.Point(169, 215);
-            this.SetTriggerButton.Name = "SetTriggerButton";
-            this.SetTriggerButton.Size = new System.Drawing.Size(117, 23);
-            this.SetTriggerButton.TabIndex = 14;
-            this.SetTriggerButton.Text = "Set trigger param.";
-            this.SetTriggerButton.UseVisualStyleBackColor = true;
-            this.SetTriggerButton.Click += new System.EventHandler(this.SetTriggerButton_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(113, 217);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(52, 20);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.Text = "0";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 220);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Delay (ms)";
-            // 
-            // TriggerVoltageBox
-            // 
-            this.TriggerVoltageBox.Location = new System.Drawing.Point(113, 195);
-            this.TriggerVoltageBox.Name = "TriggerVoltageBox";
-            this.TriggerVoltageBox.Size = new System.Drawing.Size(52, 20);
-            this.TriggerVoltageBox.TabIndex = 14;
-            this.TriggerVoltageBox.Text = "1000";
-            this.TriggerVoltageBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TriggerHisBox
-            // 
-            this.TriggerHisBox.Location = new System.Drawing.Point(231, 195);
-            this.TriggerHisBox.Name = "TriggerHisBox";
-            this.TriggerHisBox.Size = new System.Drawing.Size(55, 20);
-            this.TriggerHisBox.TabIndex = 15;
-            this.TriggerHisBox.Text = "10";
-            this.TriggerHisBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // HisLabel
-            // 
-            this.HisLabel.AutoSize = true;
-            this.HisLabel.Location = new System.Drawing.Point(166, 198);
-            this.HisLabel.Name = "HisLabel";
-            this.HisLabel.Size = new System.Drawing.Size(58, 13);
-            this.HisLabel.TabIndex = 15;
-            this.HisLabel.Text = "Trigger His";
-            // 
-            // LabelVol
-            // 
-            this.LabelVol.AutoSize = true;
-            this.LabelVol.Location = new System.Drawing.Point(8, 198);
-            this.LabelVol.Name = "LabelVol";
-            this.LabelVol.Size = new System.Drawing.Size(103, 13);
-            this.LabelVol.TabIndex = 14;
-            this.LabelVol.Text = "Trigger Voltage [mV]";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.CH4Sig);
-            this.groupBox1.Controls.Add(this.CH3Sig);
-            this.groupBox1.Controls.Add(this.CH2Sig);
-            this.groupBox1.Controls.Add(this.CH1Sig);
-            this.groupBox1.Location = new System.Drawing.Point(6, 122);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(280, 72);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Read signals from channels";
-            // 
-            // CH4Sig
-            // 
-            this.CH4Sig.AutoSize = true;
-            this.CH4Sig.Location = new System.Drawing.Point(170, 49);
-            this.CH4Sig.Name = "CH4Sig";
-            this.CH4Sig.Size = new System.Drawing.Size(86, 17);
-            this.CH4Sig.TabIndex = 3;
-            this.CH4Sig.Text = "CHANNEL 4";
-            this.CH4Sig.UseVisualStyleBackColor = true;
-            // 
-            // CH3Sig
-            // 
-            this.CH3Sig.AutoSize = true;
-            this.CH3Sig.Location = new System.Drawing.Point(8, 49);
-            this.CH3Sig.Name = "CH3Sig";
-            this.CH3Sig.Size = new System.Drawing.Size(86, 17);
-            this.CH3Sig.TabIndex = 2;
-            this.CH3Sig.Text = "CHANNEL 3";
-            this.CH3Sig.UseVisualStyleBackColor = true;
-            // 
-            // CH2Sig
-            // 
-            this.CH2Sig.AutoSize = true;
-            this.CH2Sig.Location = new System.Drawing.Point(170, 19);
-            this.CH2Sig.Name = "CH2Sig";
-            this.CH2Sig.Size = new System.Drawing.Size(86, 17);
-            this.CH2Sig.TabIndex = 1;
-            this.CH2Sig.Text = "CHANNEL 2";
-            this.CH2Sig.UseVisualStyleBackColor = true;
-            this.CH2Sig.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
-            // 
-            // CH1Sig
-            // 
-            this.CH1Sig.AutoSize = true;
-            this.CH1Sig.Checked = true;
-            this.CH1Sig.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CH1Sig.Location = new System.Drawing.Point(8, 19);
-            this.CH1Sig.Name = "CH1Sig";
-            this.CH1Sig.Size = new System.Drawing.Size(86, 17);
-            this.CH1Sig.TabIndex = 0;
-            this.CH1Sig.Text = "CHANNEL 1";
-            this.CH1Sig.UseVisualStyleBackColor = true;
-            // 
-            // TriggOptions
-            // 
-            this.TriggOptions.Controls.Add(this.label4);
-            this.TriggOptions.Controls.Add(this.EdgeOptions);
-            this.TriggOptions.Controls.Add(this.CH4Trigg);
-            this.TriggOptions.Controls.Add(this.CH3Trigg);
-            this.TriggOptions.Controls.Add(this.CH2Trigg);
-            this.TriggOptions.Controls.Add(this.CH1Trigg);
-            this.TriggOptions.Enabled = false;
-            this.TriggOptions.Location = new System.Drawing.Point(6, 44);
-            this.TriggOptions.Name = "TriggOptions";
-            this.TriggOptions.Size = new System.Drawing.Size(280, 72);
-            this.TriggOptions.TabIndex = 3;
-            this.TriggOptions.TabStop = false;
-            this.TriggOptions.Text = "Triggering Channel";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(112, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 13);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Edge";
-            // 
-            // EdgeOptions
-            // 
-            this.EdgeOptions.FormattingEnabled = true;
-            this.EdgeOptions.Items.AddRange(new object[] {
-            "Ascending",
-            "Descending"});
-            this.EdgeOptions.Location = new System.Drawing.Point(95, 38);
-            this.EdgeOptions.Name = "EdgeOptions";
-            this.EdgeOptions.Size = new System.Drawing.Size(67, 21);
-            this.EdgeOptions.TabIndex = 15;
-            this.EdgeOptions.SelectedIndexChanged += new System.EventHandler(this.EdgeOptions_SelectedIndexChanged);
-            // 
-            // CH4Trigg
-            // 
-            this.CH4Trigg.AutoSize = true;
-            this.CH4Trigg.Location = new System.Drawing.Point(170, 48);
-            this.CH4Trigg.Name = "CH4Trigg";
-            this.CH4Trigg.Size = new System.Drawing.Size(85, 17);
-            this.CH4Trigg.TabIndex = 3;
-            this.CH4Trigg.TabStop = true;
-            this.CH4Trigg.Text = "CHANNEL 4";
-            this.CH4Trigg.UseVisualStyleBackColor = true;
-            // 
-            // CH3Trigg
-            // 
-            this.CH3Trigg.AutoSize = true;
-            this.CH3Trigg.Location = new System.Drawing.Point(6, 49);
-            this.CH3Trigg.Name = "CH3Trigg";
-            this.CH3Trigg.Size = new System.Drawing.Size(85, 17);
-            this.CH3Trigg.TabIndex = 2;
-            this.CH3Trigg.TabStop = true;
-            this.CH3Trigg.Text = "CHANNEL 3";
-            this.CH3Trigg.UseVisualStyleBackColor = true;
-            // 
-            // CH2Trigg
-            // 
-            this.CH2Trigg.AutoSize = true;
-            this.CH2Trigg.Location = new System.Drawing.Point(170, 19);
-            this.CH2Trigg.Name = "CH2Trigg";
-            this.CH2Trigg.Size = new System.Drawing.Size(85, 17);
-            this.CH2Trigg.TabIndex = 1;
-            this.CH2Trigg.TabStop = true;
-            this.CH2Trigg.Text = "CHANNEL 2";
-            this.CH2Trigg.UseVisualStyleBackColor = true;
-            this.CH2Trigg.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
-            // 
-            // CH1Trigg
-            // 
-            this.CH1Trigg.AutoSize = true;
-            this.CH1Trigg.Location = new System.Drawing.Point(6, 19);
-            this.CH1Trigg.Name = "CH1Trigg";
-            this.CH1Trigg.Size = new System.Drawing.Size(85, 17);
-            this.CH1Trigg.TabIndex = 0;
-            this.CH1Trigg.TabStop = true;
-            this.CH1Trigg.Text = "CHANNEL 1";
-            this.CH1Trigg.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.ForeColor = System.Drawing.Color.Blue;
-            this.label1.Location = new System.Drawing.Point(83, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 20);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "State of trigger";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // TriggOFF
-            // 
-            this.TriggOFF.AutoSize = true;
-            this.TriggOFF.Checked = true;
-            this.TriggOFF.Location = new System.Drawing.Point(231, 21);
-            this.TriggOFF.Name = "TriggOFF";
-            this.TriggOFF.Size = new System.Drawing.Size(45, 17);
-            this.TriggOFF.TabIndex = 1;
-            this.TriggOFF.TabStop = true;
-            this.TriggOFF.Text = "OFF";
-            this.TriggOFF.UseVisualStyleBackColor = true;
-            // 
-            // TriggON
-            // 
-            this.TriggON.AutoSize = true;
-            this.TriggON.Location = new System.Drawing.Point(13, 21);
-            this.TriggON.Name = "TriggON";
-            this.TriggON.Size = new System.Drawing.Size(41, 17);
-            this.TriggON.TabIndex = 0;
-            this.TriggON.Text = "ON";
-            this.TriggON.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.TriggON.UseVisualStyleBackColor = true;
-            this.TriggON.CheckedChanged += new System.EventHandler(this.TriggON_CheckedChanged);
+            // FindFile
+            // 
+            this.FindFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.FindFile.Location = new System.Drawing.Point(6, 19);
+            this.FindFile.Name = "FindFile";
+            this.FindFile.Size = new System.Drawing.Size(110, 39);
+            this.FindFile.TabIndex = 17;
+            this.FindFile.Text = "Find File";
+            this.FindFile.UseVisualStyleBackColor = true;
+            this.FindFile.Click += new System.EventHandler(this.FindFile_Click);
             // 
             // Bar1Label
             // 
             this.Bar1Label.AutoSize = true;
-            this.Bar1Label.Location = new System.Drawing.Point(673, 485);
+            this.Bar1Label.Location = new System.Drawing.Point(673, 494);
             this.Bar1Label.Name = "Bar1Label";
             this.Bar1Label.Size = new System.Drawing.Size(9, 13);
             this.Bar1Label.TabIndex = 4;
@@ -639,7 +401,7 @@
             // Bar2Label
             // 
             this.Bar2Label.AutoSize = true;
-            this.Bar2Label.Location = new System.Drawing.Point(673, 528);
+            this.Bar2Label.Location = new System.Drawing.Point(673, 537);
             this.Bar2Label.Name = "Bar2Label";
             this.Bar2Label.Size = new System.Drawing.Size(9, 13);
             this.Bar2Label.TabIndex = 5;
@@ -659,11 +421,12 @@
             this.ZedSignal.Size = new System.Drawing.Size(679, 450);
             this.ZedSignal.TabIndex = 8;
             this.ZedSignal.ZoomStepFraction = 1D;
-            this.ZedSignal.Load += new System.EventHandler(this.ZedTrigger_Load);
+            this.ZedSignal.Load += new System.EventHandler(this.ZedSignal_Load);
             // 
             // TrackMin
             // 
-            this.TrackMin.Location = new System.Drawing.Point(13, 470);
+            this.TrackMin.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.TrackMin.Location = new System.Drawing.Point(13, 471);
             this.TrackMin.Maximum = 2046;
             this.TrackMin.Minimum = 1;
             this.TrackMin.Name = "TrackMin";
@@ -674,7 +437,8 @@
             // 
             // TrackMax
             // 
-            this.TrackMax.Location = new System.Drawing.Point(13, 513);
+            this.TrackMax.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.TrackMax.Location = new System.Drawing.Point(13, 514);
             this.TrackMax.Maximum = 2046;
             this.TrackMax.Minimum = 1;
             this.TrackMax.Name = "TrackMax";
@@ -683,39 +447,91 @@
             this.TrackMax.Value = 1;
             this.TrackMax.Scroll += new System.EventHandler(this.TrackMax_Scroll);
             // 
-            // Groupmeasure
+            // SaveBtn
             // 
-            this.Groupmeasure.Controls.Add(this.TestLabel);
-            this.Groupmeasure.Controls.Add(this.ZedIntegral);
-            this.Groupmeasure.Location = new System.Drawing.Point(732, 12);
-            this.Groupmeasure.Name = "Groupmeasure";
-            this.Groupmeasure.Size = new System.Drawing.Size(729, 764);
-            this.Groupmeasure.TabIndex = 13;
-            this.Groupmeasure.TabStop = false;
-            this.Groupmeasure.Text = "Measured Data";
-            this.Groupmeasure.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.SaveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.SaveBtn.Location = new System.Drawing.Point(167, 729);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(138, 21);
+            this.SaveBtn.TabIndex = 21;
+            this.SaveBtn.Text = "Save";
+            this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            // 
+            // PauseBtn
+            // 
+            this.PauseBtn.BackColor = System.Drawing.Color.White;
+            this.PauseBtn.Enabled = false;
+            this.PauseBtn.Location = new System.Drawing.Point(89, 807);
+            this.PauseBtn.Name = "PauseBtn";
+            this.PauseBtn.Size = new System.Drawing.Size(75, 23);
+            this.PauseBtn.TabIndex = 20;
+            this.PauseBtn.Text = "Pause";
+            this.PauseBtn.UseVisualStyleBackColor = false;
+            this.PauseBtn.Click += new System.EventHandler(this.PauseBtn_Click);
+            // 
+            // StopBtn
+            // 
+            this.StopBtn.BackColor = System.Drawing.Color.White;
+            this.StopBtn.Enabled = false;
+            this.StopBtn.Location = new System.Drawing.Point(170, 807);
+            this.StopBtn.Name = "StopBtn";
+            this.StopBtn.Size = new System.Drawing.Size(75, 23);
+            this.StopBtn.TabIndex = 19;
+            this.StopBtn.Text = "Stop";
+            this.StopBtn.UseVisualStyleBackColor = false;
+            this.StopBtn.Click += new System.EventHandler(this.StopBtn_Click);
+            // 
+            // StartBtn
+            // 
+            this.StartBtn.BackColor = System.Drawing.Color.Green;
+            this.StartBtn.Location = new System.Drawing.Point(8, 807);
+            this.StartBtn.Name = "StartBtn";
+            this.StartBtn.Size = new System.Drawing.Size(75, 23);
+            this.StartBtn.TabIndex = 18;
+            this.StartBtn.Text = "Start";
+            this.StartBtn.UseVisualStyleBackColor = false;
+            this.StartBtn.Click += new System.EventHandler(this.StartBtn_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 685);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(145, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Set oscilloscope parameters -";
+            // 
+            // WavemeterInit
+            // 
+            this.WavemeterInit.Location = new System.Drawing.Point(168, 705);
+            this.WavemeterInit.Name = "WavemeterInit";
+            this.WavemeterInit.Size = new System.Drawing.Size(138, 20);
+            this.WavemeterInit.TabIndex = 15;
+            this.WavemeterInit.Text = "Wavemeter Initializaction";
+            this.WavemeterInit.UseVisualStyleBackColor = true;
+            this.WavemeterInit.Click += new System.EventHandler(this.WavemeterInit_Click);
+            // 
+            // PathToFileLabel
+            // 
+            this.PathToFileLabel.AutoSize = true;
+            this.PathToFileLabel.ForeColor = System.Drawing.Color.Blue;
+            this.PathToFileLabel.Location = new System.Drawing.Point(10, 833);
+            this.PathToFileLabel.Name = "PathToFileLabel";
+            this.PathToFileLabel.Size = new System.Drawing.Size(35, 13);
+            this.PathToFileLabel.TabIndex = 14;
+            this.PathToFileLabel.Text = "Path: ";
+            this.PathToFileLabel.Click += new System.EventHandler(this.PathToFileLabel_Click);
             // 
             // TestLabel
             // 
-            this.TestLabel.Location = new System.Drawing.Point(198, 612);
+            this.TestLabel.Location = new System.Drawing.Point(572, 775);
             this.TestLabel.Multiline = true;
             this.TestLabel.Name = "TestLabel";
-            this.TestLabel.Size = new System.Drawing.Size(424, 146);
+            this.TestLabel.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TestLabel.Size = new System.Drawing.Size(237, 108);
             this.TestLabel.TabIndex = 4;
-            // 
-            // ZedIntegral
-            // 
-            this.ZedIntegral.Location = new System.Drawing.Point(15, 19);
-            this.ZedIntegral.Name = "ZedIntegral";
-            this.ZedIntegral.ScrollGrace = 0D;
-            this.ZedIntegral.ScrollMaxX = 0D;
-            this.ZedIntegral.ScrollMaxY = 0D;
-            this.ZedIntegral.ScrollMaxY2 = 0D;
-            this.ZedIntegral.ScrollMinX = 0D;
-            this.ZedIntegral.ScrollMinY = 0D;
-            this.ZedIntegral.ScrollMinY2 = 0D;
-            this.ZedIntegral.Size = new System.Drawing.Size(691, 550);
-            this.ZedIntegral.TabIndex = 3;
+            this.TestLabel.TextChanged += new System.EventHandler(this.TestLabel_TextChanged);
             // 
             // DataSaverDialog
             // 
@@ -726,32 +542,213 @@
             this.OpenFileDialog.FileName = "openFileDialog1";
             this.OpenFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.OpenFileDialog_FileOk);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.groupBox3);
+            this.groupBox1.Controls.Add(this.MeasuresTB);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.AveragesTB);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.CheckOne);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.WavemeterSignal);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.OscilloSignal);
+            this.groupBox1.Controls.Add(this.WavemeterInit);
+            this.groupBox1.Controls.Add(this.PauseBtn);
+            this.groupBox1.Controls.Add(this.StopBtn);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.StartBtn);
+            this.groupBox1.Controls.Add(this.PathToFileLabel);
+            this.groupBox1.Controls.Add(this.SaveBtn);
+            this.groupBox1.Controls.Add(this.OscilInit);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(514, 854);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Signal";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.TriggerBtnOff);
+            this.groupBox3.Controls.Add(this.TriggerBtnOn);
+            this.groupBox3.Location = new System.Drawing.Point(308, 681);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(188, 44);
+            this.groupBox3.TabIndex = 29;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Trigger";
+            // 
+            // TriggerBtnOff
+            // 
+            this.TriggerBtnOff.AutoSize = true;
+            this.TriggerBtnOff.Checked = true;
+            this.TriggerBtnOff.Location = new System.Drawing.Point(103, 18);
+            this.TriggerBtnOff.Name = "TriggerBtnOff";
+            this.TriggerBtnOff.Size = new System.Drawing.Size(73, 17);
+            this.TriggerBtnOff.TabIndex = 1;
+            this.TriggerBtnOff.TabStop = true;
+            this.TriggerBtnOff.Text = "Trigger off";
+            this.TriggerBtnOff.UseVisualStyleBackColor = true;
+            // 
+            // TriggerBtnOn
+            // 
+            this.TriggerBtnOn.AutoSize = true;
+            this.TriggerBtnOn.Location = new System.Drawing.Point(12, 18);
+            this.TriggerBtnOn.Name = "TriggerBtnOn";
+            this.TriggerBtnOn.Size = new System.Drawing.Size(73, 17);
+            this.TriggerBtnOn.TabIndex = 0;
+            this.TriggerBtnOn.Text = "Trigger on";
+            this.TriggerBtnOn.UseVisualStyleBackColor = true;
+            // 
+            // MeasuresTB
+            // 
+            this.MeasuresTB.Location = new System.Drawing.Point(168, 754);
+            this.MeasuresTB.Name = "MeasuresTB";
+            this.MeasuresTB.Size = new System.Drawing.Size(100, 20);
+            this.MeasuresTB.TabIndex = 28;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 757);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(153, 13);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Number of measurement points";
+            // 
+            // AveragesTB
+            // 
+            this.AveragesTB.Location = new System.Drawing.Point(168, 778);
+            this.AveragesTB.Name = "AveragesTB";
+            this.AveragesTB.Size = new System.Drawing.Size(100, 20);
+            this.AveragesTB.TabIndex = 26;
+            this.AveragesTB.TextChanged += new System.EventHandler(this.AveragesTB_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 781);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 13);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "Number of averages -";
+            // 
+            // CheckOne
+            // 
+            this.CheckOne.Location = new System.Drawing.Point(311, 729);
+            this.CheckOne.Name = "CheckOne";
+            this.CheckOne.Size = new System.Drawing.Size(75, 21);
+            this.CheckOne.TabIndex = 16;
+            this.CheckOne.Text = "Check one";
+            this.CheckOne.UseVisualStyleBackColor = true;
+            this.CheckOne.Click += new System.EventHandler(this.CheckOne_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 709);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 13);
+            this.label2.TabIndex = 24;
+            this.label2.Text = "Initialize wavemeter -";
+            // 
+            // WavemeterSignal
+            // 
+            this.WavemeterSignal.Location = new System.Drawing.Point(6, 350);
+            this.WavemeterSignal.Name = "WavemeterSignal";
+            this.WavemeterSignal.ScrollGrace = 0D;
+            this.WavemeterSignal.ScrollMaxX = 0D;
+            this.WavemeterSignal.ScrollMaxY = 0D;
+            this.WavemeterSignal.ScrollMaxY2 = 0D;
+            this.WavemeterSignal.ScrollMinX = 0D;
+            this.WavemeterSignal.ScrollMinY = 0D;
+            this.WavemeterSignal.ScrollMinY2 = 0D;
+            this.WavemeterSignal.Size = new System.Drawing.Size(500, 325);
+            this.WavemeterSignal.TabIndex = 23;
+            this.WavemeterSignal.ZoomStepFraction = 1D;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 733);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Choose file for data -";
+            // 
+            // OscilloSignal
+            // 
+            this.OscilloSignal.Location = new System.Drawing.Point(6, 23);
+            this.OscilloSignal.Name = "OscilloSignal";
+            this.OscilloSignal.ScrollGrace = 0D;
+            this.OscilloSignal.ScrollMaxX = 0D;
+            this.OscilloSignal.ScrollMaxY = 0D;
+            this.OscilloSignal.ScrollMaxY2 = 0D;
+            this.OscilloSignal.ScrollMinX = 0D;
+            this.OscilloSignal.ScrollMinY = 0D;
+            this.OscilloSignal.ScrollMinY2 = 0D;
+            this.OscilloSignal.Size = new System.Drawing.Size(500, 325);
+            this.OscilloSignal.TabIndex = 16;
+            this.OscilloSignal.ZoomStepFraction = 1D;
+            // 
+            // ResultsAnalizer
+            // 
+            this.ResultsAnalizer.Location = new System.Drawing.Point(844, 781);
+            this.ResultsAnalizer.Name = "ResultsAnalizer";
+            this.ResultsAnalizer.Size = new System.Drawing.Size(75, 36);
+            this.ResultsAnalizer.TabIndex = 25;
+            this.ResultsAnalizer.Text = "Results Analizer";
+            this.ResultsAnalizer.UseVisualStyleBackColor = true;
+            this.ResultsAnalizer.Click += new System.EventHandler(this.button1_Click_4);
+            // 
+            // InteferometerPathway
+            // 
+            this.InteferometerPathway.FileName = "openFileDialog1";
+            this.InteferometerPathway.FileOk += new System.ComponentModel.CancelEventHandler(this.InteferometerPathway_FileOk);
+            // 
+            // ForRandomDataReads
+            // 
+            this.ForRandomDataReads.FileName = "openFileDialog1";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(296, 872);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 26;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_5);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1434, 902);
-            this.Controls.Add(this.Groupmeasure);
+            this.ClientSize = new System.Drawing.Size(1825, 912);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.ResultsAnalizer);
             this.Controls.Add(this.TriggerGroup);
+            this.Controls.Add(this.TestLabel);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TriggerGroup.ResumeLayout(false);
             this.TriggerGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.ChannelsOption.ResumeLayout(false);
-            this.ChannelsOption.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.TriggOptions.ResumeLayout(false);
-            this.TriggOptions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TrackMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).EndInit();
-            this.Groupmeasure.ResumeLayout(false);
-            this.Groupmeasure.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -760,60 +757,62 @@
         private System.Windows.Forms.Button OscilInit;
         private System.Windows.Forms.GroupBox TriggerGroup;
         private ZedGraph.ZedGraphControl ZedSignal;
-        private System.Windows.Forms.Label HowManyPoints;
         private System.Windows.Forms.TrackBar TrackMin;
-        private System.Windows.Forms.TextBox NumberOfPointsBox;
         private System.Windows.Forms.TrackBar TrackMax;
-        private System.Windows.Forms.GroupBox Groupmeasure;
-        private ZedGraph.ZedGraphControl ZedIntegral;
         private System.Windows.Forms.Label Bar1Label;
         private System.Windows.Forms.Label Bar2Label;
-        private System.Windows.Forms.GroupBox ChannelsOption;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton TriggOFF;
-        private System.Windows.Forms.RadioButton TriggON;
-        private System.Windows.Forms.GroupBox TriggOptions;
-        private System.Windows.Forms.RadioButton CH4Trigg;
-        private System.Windows.Forms.RadioButton CH3Trigg;
-        private System.Windows.Forms.RadioButton CH2Trigg;
-        private System.Windows.Forms.RadioButton CH1Trigg;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox CH4Sig;
-        private System.Windows.Forms.CheckBox CH3Sig;
-        private System.Windows.Forms.CheckBox CH2Sig;
-        private System.Windows.Forms.CheckBox CH1Sig;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox NumOfWaveforms;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button WavemeterInit;
         private System.Windows.Forms.Label PathToFileLabel;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox EdgeOptions;
-        private System.Windows.Forms.Button LoadingData;
+        private System.Windows.Forms.Button FindFile;
         private System.Windows.Forms.TrackBar DataSlider;
         private System.Windows.Forms.Button DeleteFrame;
         private System.Windows.Forms.Label FrameLabel;
-        private System.Windows.Forms.Button Checkone;
         private System.Windows.Forms.Button PauseBtn;
         private System.Windows.Forms.Button StopBtn;
         private System.Windows.Forms.Button StartBtn;
         private System.Windows.Forms.SaveFileDialog DataSaverDialog;
-        private System.Windows.Forms.TextBox TriggerVoltageBox;
-        private System.Windows.Forms.TextBox TriggerHisBox;
-        private System.Windows.Forms.Label HisLabel;
-        private System.Windows.Forms.Label LabelVol;
-        private System.Windows.Forms.Button SetTriggerButton;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button ReadDataBtn;
         private System.Windows.Forms.OpenFileDialog OpenFileDialog;
-        private System.Windows.Forms.Button TestBtn;
         private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.TextBox TestLabel;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button IntegralBtn;
-        private System.Windows.Forms.Button AWinit;
+        private System.Windows.Forms.Button LoadData;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox CutoffTB;
+        private System.Windows.Forms.Label Cutoff;
+        private ZedGraph.ZedGraphControl ZedInteferogram;
+        private ZedGraph.ZedGraphControl ZedIntegral;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button ResultsAnalizer;
+        public ZedGraph.ZedGraphControl OscilloSignal;
+        public ZedGraph.ZedGraphControl WavemeterSignal;
+        private System.Windows.Forms.Button CheckOne;
+        private System.Windows.Forms.TextBox AveragesTB;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox MeasuresTB;
+        private System.Windows.Forms.TextBox FileSeparator;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button CutOffFunction;
+        private System.Windows.Forms.Button LoadInteferometer;
+        private System.Windows.Forms.Button FindInterferogram;
+        private System.Windows.Forms.OpenFileDialog InteferometerPathway;
+        private System.Windows.Forms.TrackBar InteferometerSlider;
+        private System.Windows.Forms.Label FrameInteferometer;
+        private System.Windows.Forms.TextBox IgnoredColumnsForInteferometer;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox IgnoredColumsForData;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label InteferometerParameters;
+        private System.Windows.Forms.SaveFileDialog CutoffSaver;
+        private System.Windows.Forms.Button CutoffTest;
+        private System.Windows.Forms.OpenFileDialog ForRandomDataReads;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton TriggerBtnOff;
+        private System.Windows.Forms.RadioButton TriggerBtnOn;
+        private System.Windows.Forms.Button button1;
     }
 }
 
