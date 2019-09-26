@@ -24,7 +24,6 @@ namespace NewOscylMeasSoft
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
-        public static EventWaitHandle DiodeLaserTuned, TuneDiodeLaser,BREAK;
         public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning;
         obslugaNW WSU = new obslugaNW();
         public PointPairList PPLWSU = new PointPairList();

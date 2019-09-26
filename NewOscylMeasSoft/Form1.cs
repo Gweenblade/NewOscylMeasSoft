@@ -72,6 +72,12 @@ namespace NewOscylMeasSoft
             oscillo = new Oscyloskop.Form1();
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
             ZedSignal.GraphPane.YAxis.Title.Text = "Signal";
+            OscilloSignal.GraphPane.XAxis.Title.Text = "Number of point";
+            OscilloSignal.GraphPane.YAxis.Title.Text = "Intensity (mV)";
+            WavemeterSignal.GraphPane.XAxis.Title.Text = "Number of point";
+            WavemeterSignal.GraphPane.YAxis.Title.Text = "Intensity";
+            OscilloSignal.GraphPane.Title.Text = "PicoScope";
+            WavemeterSignal.GraphPane.Title.Text = "Wavemeter";
             DataSlider.BackColor = Color.LightGray;
             GRAPHDRAWER = new ThreadStart(GraphDrawer);
             Graphdrawer = new Thread(GRAPHDRAWER);
@@ -109,6 +115,7 @@ namespace NewOscylMeasSoft
 
         public void GraphDrawer()// TO TRZEBA ZROBIC
         {
+            int i = 1;
             while (true)
             {
                 if(measurements.DrawTheGraph == true)
@@ -122,6 +129,8 @@ namespace NewOscylMeasSoft
                     OscilloSignal.AxisChange();
                     WavemeterSignal.Invalidate();
                     OscilloSignal.Invalidate();
+                    MeasurementNumberLabel.Text = "Number of measures: " + i;
+                    i++;
                 }
 
             }

@@ -88,6 +88,7 @@
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
             this.button1 = new System.Windows.Forms.Button();
+            this.MeasurementNumberLabel = new System.Windows.Forms.Label();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -544,6 +545,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.MeasurementNumberLabel);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.MeasuresTB);
             this.groupBox1.Controls.Add(this.label5);
@@ -722,6 +724,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_5);
             // 
+            // MeasurementNumberLabel
+            // 
+            this.MeasurementNumberLabel.AutoSize = true;
+            this.MeasurementNumberLabel.Location = new System.Drawing.Point(368, 27);
+            this.MeasurementNumberLabel.Name = "MeasurementNumberLabel";
+            this.MeasurementNumberLabel.Size = new System.Drawing.Size(110, 13);
+            this.MeasurementNumberLabel.TabIndex = 24;
+            this.MeasurementNumberLabel.Text = "Number of measures: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -813,6 +824,7 @@
         private System.Windows.Forms.RadioButton TriggerBtnOff;
         private System.Windows.Forms.RadioButton TriggerBtnOn;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label MeasurementNumberLabel;
     }
 }
 
