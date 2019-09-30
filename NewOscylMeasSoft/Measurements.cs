@@ -24,7 +24,7 @@ namespace NewOscylMeasSoft
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
-        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning;
+        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning, EWHstart;
         obslugaNW WSU = new obslugaNW();
         public PointPairList PPLWSU = new PointPairList();
         public PointPairList PPLPIC = new PointPairList();
@@ -34,13 +34,14 @@ namespace NewOscylMeasSoft
         {
             int i = 0;
         }
-        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool TriggerBtn = false)
+        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
 
             EWHustawiono = new EventWaitHandle(false, EventResetMode.AutoReset, "USTAWIONO");
             EWHprzestroj = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
             EWHbreak = new EventWaitHandle(false, EventResetMode.AutoReset, "ZATRZYMAJ");
             EWHendoftuning = new EventWaitHandle(false, EventResetMode.AutoReset, "KONIEC");
+           // EWHstart = new EventWaitHandle(false, EventResetMode.AutoReset, "START");
             int MeasureLoopIndicator;
             int i;
             bool WARNING, Ender = false;
@@ -51,6 +52,7 @@ namespace NewOscylMeasSoft
             Stopwatch Stopwatch = new Stopwatch();
             double Wavenumber = 0;
             Stopwatch.Start();
+            EWHprzestroj.Set();
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
             {
                 if (TriggerBtn == true)
