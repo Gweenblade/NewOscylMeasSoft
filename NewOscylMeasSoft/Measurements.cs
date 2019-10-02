@@ -52,11 +52,11 @@ namespace NewOscylMeasSoft
             Stopwatch Stopwatch = new Stopwatch();
             double Wavenumber = 0;
             Stopwatch.Start();
-            EWHprzestroj.Set();
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
             {
                 if (TriggerBtn == true)
                 {
+                    EWHprzestroj.Set();
                     EWHustawiono.WaitOne();
                 }
                 for (int j = 0; j < Averages; j++)
@@ -88,7 +88,7 @@ namespace NewOscylMeasSoft
                     {
                         Ender = true;
                     }
-                    if (MeasureLoopIndicator % 50 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
+                    if (MeasureLoopIndicator % 5 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
                     {
                         using (StreamWriter SW = new StreamWriter(FilePath1 + "PICO", true))
                         {
@@ -103,18 +103,13 @@ namespace NewOscylMeasSoft
                         SB.Clear();
                         SBWSU.Clear();
                     }
-                    if (TriggerBtn == true)
-                    {
-                        EWHprzestroj.Set();
-                    }
-                }
 
+                }
                 if(Ender == true)
                 {
                     MessageBox.Show("Koniec pomiaru");
                     break;
                 }
-
             }
             Stopwatch.Stop();
             MessageBox.Show("Koniec");
