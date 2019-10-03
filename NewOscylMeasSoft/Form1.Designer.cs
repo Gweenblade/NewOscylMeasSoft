@@ -71,6 +71,7 @@
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.MeasurementNumberLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.TriggerBtnOff = new System.Windows.Forms.RadioButton();
             this.TriggerBtnOn = new System.Windows.Forms.RadioButton();
@@ -88,7 +89,6 @@
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
             this.button1 = new System.Windows.Forms.Button();
-            this.MeasurementNumberLabel = new System.Windows.Forms.Label();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -571,6 +571,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Signal";
             // 
+            // MeasurementNumberLabel
+            // 
+            this.MeasurementNumberLabel.AutoSize = true;
+            this.MeasurementNumberLabel.Location = new System.Drawing.Point(368, 27);
+            this.MeasurementNumberLabel.Name = "MeasurementNumberLabel";
+            this.MeasurementNumberLabel.Size = new System.Drawing.Size(110, 13);
+            this.MeasurementNumberLabel.TabIndex = 24;
+            this.MeasurementNumberLabel.Text = "Number of measures: ";
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.TriggerBtnOff);
@@ -603,6 +612,7 @@
             this.TriggerBtnOn.TabIndex = 0;
             this.TriggerBtnOn.Text = "Trigger on";
             this.TriggerBtnOn.UseVisualStyleBackColor = true;
+            this.TriggerBtnOn.CheckedChanged += new System.EventHandler(this.TriggerBtnOn_CheckedChanged);
             // 
             // MeasuresTB
             // 
@@ -724,15 +734,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_5);
             // 
-            // MeasurementNumberLabel
-            // 
-            this.MeasurementNumberLabel.AutoSize = true;
-            this.MeasurementNumberLabel.Location = new System.Drawing.Point(368, 27);
-            this.MeasurementNumberLabel.Name = "MeasurementNumberLabel";
-            this.MeasurementNumberLabel.Size = new System.Drawing.Size(110, 13);
-            this.MeasurementNumberLabel.TabIndex = 24;
-            this.MeasurementNumberLabel.Text = "Number of measures: ";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -745,6 +746,7 @@
             this.Controls.Add(this.TestLabel);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TriggerGroup.ResumeLayout(false);
             this.TriggerGroup.PerformLayout();

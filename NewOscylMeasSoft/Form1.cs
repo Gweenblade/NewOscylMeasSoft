@@ -102,6 +102,8 @@ namespace NewOscylMeasSoft
 
         public Thread StartTheThread(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool Trigger = false)
         {
+            if (TriggerBtnOn.Checked)
+                NumberOfMeasures = 1000000;
             Measure = new Thread(() => measurements.GatherWaveforms(FilePath, oscillo, NumberOfMeasures, Averages, TriggerBtnOn.Checked));
             Measure.Start();
             return Measure;
@@ -265,6 +267,8 @@ namespace NewOscylMeasSoft
             int.TryParse(MeasuresTB.Text, out x);
             int.TryParse(AveragesTB.Text, out y);
             bool z = false;
+            if (DataSaverDialog.FileName == "")
+                DataSaverDialog.ShowDialog();
             if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
             {
                 Graphdrawer.Start();
@@ -576,9 +580,30 @@ private void button1_Click_3(object sender, EventArgs e)
             MessageBox.Show("" + stopwatch.ElapsedMilliseconds + " " + ReadDataInDoubles[1].Count);
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(Measure != null)
+            {
+                if (Measure.IsAlive) Measure.Abort();
+            }
+            if(Graphdrawer != null)
+            {
+                if (Graphdrawer.IsAlive) Graphdrawer.Abort();
+            }
+            Environment.Exit(Environment.ExitCode);
+        }
+
+        private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (TriggerBtnOn.Checked)
+                MeasuresTB.Enabled = false;
+            else
+                MeasuresTB.Enabled = true;
+            
+        }
+
         private void button1_Click_5(object sender, EventArgs e)
         {
-            StartTheThread2();
         }
 
         private void InteferometerSlider_MouseUp(object sender, MouseEventArgs e)
