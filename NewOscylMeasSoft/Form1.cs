@@ -385,6 +385,8 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void LoadData_Click(object sender, EventArgs e)
         {
+            if (RawData != null)
+                RawData.Clear();
             RawData = measurements.RegexReader(loadpath, FileSeparator.Text);
         }
 
@@ -685,7 +687,7 @@ private void button1_Click_3(object sender, EventArgs e)
                 TrackMin.Maximum = CurrentWave.Count();
                 TrackMax.Maximum = CurrentWave.Count();
                 PPLsignal.Clear();
-                for (int i = 0; i < CurrentWave.Count; i++)
+                for (int i = int.Parse(IgnoredColumsForData.Text); i < CurrentWave.Count; i++)
                 {
                     PPLsignal.Add(i, CurrentWave[i]);
                 }
