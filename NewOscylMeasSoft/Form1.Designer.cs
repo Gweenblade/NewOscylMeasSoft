@@ -505,6 +505,7 @@
             // 
             // WavemeterInit
             // 
+            this.WavemeterInit.Enabled = false;
             this.WavemeterInit.Location = new System.Drawing.Point(168, 705);
             this.WavemeterInit.Name = "WavemeterInit";
             this.WavemeterInit.Size = new System.Drawing.Size(138, 20);
@@ -574,7 +575,7 @@
             // MeasurementNumberLabel
             // 
             this.MeasurementNumberLabel.AutoSize = true;
-            this.MeasurementNumberLabel.Location = new System.Drawing.Point(368, 27);
+            this.MeasurementNumberLabel.Location = new System.Drawing.Point(350, 27);
             this.MeasurementNumberLabel.Name = "MeasurementNumberLabel";
             this.MeasurementNumberLabel.Size = new System.Drawing.Size(110, 13);
             this.MeasurementNumberLabel.TabIndex = 24;
