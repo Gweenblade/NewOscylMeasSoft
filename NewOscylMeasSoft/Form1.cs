@@ -385,7 +385,8 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void LoadData_Click(object sender, EventArgs e)
         {
-            if (RawData != null)
+            MessageBox.Show(RawData.Count().ToString());
+            if (RawData.Count > 0)
                 RawData.Clear();
             RawData = measurements.RegexReader(loadpath, FileSeparator.Text);
         }
@@ -648,32 +649,36 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void IntegralBtn_Click(object sender, EventArgs e) // INTEGRAL to samo co w check
         {
-            PointPairList PPL;
-            ZedIntegral.GraphPane.CurveList.Clear();
-            ZedIntegral.GraphPane.GraphObjList.Clear();
-            PointPairList PPLCorrect = new PointPairList();
-            PointPairList PPLNotCorrect = new PointPairList();
-            StringBuilder SB = new StringBuilder();
-            Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
-            for (int i = 0; i < Integral.Count(); i++)
+            if (RawData.Count() != 0)
             {
-                for (int j = 0; j < Integral[i].Count; j++)
+                PointPairList PPL;
+                ZedIntegral.GraphPane.CurveList.Clear();
+                ZedIntegral.GraphPane.GraphObjList.Clear();
+                PointPairList PPLCorrect = new PointPairList();
+                PointPairList PPLNotCorrect = new PointPairList();
+                StringBuilder SB = new StringBuilder();
+                Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
+                for (int i = 0; i < Integral.Count(); i++)
                 {
-                    SB.Append(Integral[i][j] + " ");
+                    for (int j = 0; j < Integral[i].Count; j++)
+                    {
+                        SB.Append(Integral[i][j] + " ");
+                    }
+                    SB.Append("\n");
+                    PPLCorrect.Add(Integral[i][0], Integral[i][1]);
+                    PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
                 }
-                SB.Append("\n");
-                PPLCorrect.Add(Integral[i][0], Integral[i][1]);
-                PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
+                using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(SB); }
+                LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("Correct measured points", PPLCorrect, Color.Green, SymbolType.Circle);
+                LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("Incorrect measured points", PPLNotCorrect, Color.Red, SymbolType.Plus);
+                CorrectCurve.Line.IsVisible = false;
+                IncorrectCurve.Line.IsVisible = false;
+                ZedIntegral.AxisChange();
+                ZedIntegral.Update();
+                ZedIntegral.Invalidate();
             }
-            using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(SB); }
-            LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("Correct measured points", PPLCorrect, Color.Green, SymbolType.Circle);
-            LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("Incorrect measured points", PPLNotCorrect, Color.Red, SymbolType.Plus);
-            CorrectCurve.Line.IsVisible = false;
-            IncorrectCurve.Line.IsVisible = false;
-            ZedIntegral.AxisChange();
-            ZedIntegral.Update();
-            ZedIntegral.Invalidate();
-
+            else
+                LoadData.PerformClick();
         }
 
         private void DataSlider_MouseUp(object sender, MouseEventArgs e)
