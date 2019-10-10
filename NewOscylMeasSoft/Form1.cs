@@ -466,10 +466,10 @@ private void button1_Click_3(object sender, EventArgs e)
         {
             CutoffSaver.ShowDialog();
             int Max = 0;
-            for (int i = 0; i < InteferogramData.Count(); i++)
+            for (int i = 1; i < InteferogramData.Count(); i++)
             {
                 CutoffAll.Add(DA.CutoffFunction(InteferogramData[i], double.Parse(CutoffTB.Text), int.Parse(IgnoredColumnsForInteferometer.Text)));
-                Max = DA.MaximumsCounter(CutoffAll[i]);
+                Max = DA.MaximumsCounter(CutoffAll[i-1]);
                 using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
                 {
                     for(int j = 0; j < int.Parse(IgnoredColumnsForInteferometer.Text); j++)
