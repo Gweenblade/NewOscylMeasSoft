@@ -73,9 +73,9 @@ namespace NewOscylMeasSoft
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
             ZedSignal.GraphPane.YAxis.Title.Text = "Signal";
             OscilloSignal.GraphPane.XAxis.Title.Text = "Number of point";
-            OscilloSignal.GraphPane.YAxis.Title.Text = "Intensity (mV)";
+            OscilloSignal.GraphPane.YAxis.Title.Text = "Voltage (mV)";
             WavemeterSignal.GraphPane.XAxis.Title.Text = "Number of point";
-            WavemeterSignal.GraphPane.YAxis.Title.Text = "Intensity";
+            WavemeterSignal.GraphPane.YAxis.Title.Text = "Intensity (a.u.)";
             OscilloSignal.GraphPane.Title.Text = "PicoScope";
             WavemeterSignal.GraphPane.Title.Text = "Wavemeter";
             DataSlider.BackColor = Color.LightGray;
