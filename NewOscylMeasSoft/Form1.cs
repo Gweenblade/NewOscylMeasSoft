@@ -410,6 +410,7 @@ private void button1_Click_3(object sender, EventArgs e)
             List<double> STDlist = new List<double>();
             ForDataAnalysis = measurements.RegexReader(ForRandomDataReads.FileName, FileSeparator.Text);
             double lastT, lastC, SumMax = 0;
+            MessageBox.Show("" + ForDataAnalysis.Count() + " " + ForDataAnalysis[0].Count() + " " + ForDataAnalysis[1].Count());
             lastT = ForDataAnalysis[0][1];
             lastC = ForDataAnalysis[0][2];
             for (int i = 0; i < ForDataAnalysis.Count(); i++)
@@ -417,8 +418,9 @@ private void button1_Click_3(object sender, EventArgs e)
                 
                 if(lastT == ForDataAnalysis[i][1] && lastC == ForDataAnalysis[i][2])
                 {
-                    SumMax = SumMax + ForDataAnalysis[i][5];
-                    STDlist.Add(ForDataAnalysis[i][5]);
+                    SumMax = SumMax + ForDataAnalysis[i][6];
+               //     MessageBox.Show("" + ForDataAnalysis[i][6]);
+                    STDlist.Add(ForDataAnalysis[i][6]);
                 }
                 else
                 {
@@ -429,7 +431,7 @@ private void button1_Click_3(object sender, EventArgs e)
                     }
                     SBRandomData.Clear();
                     STDlist.Clear();
-                    SumMax = ForDataAnalysis[i][5];
+                    SumMax = ForDataAnalysis[i][6];
                     lastT = ForDataAnalysis[i][1];
                     lastC = ForDataAnalysis[i][2];
                 }
