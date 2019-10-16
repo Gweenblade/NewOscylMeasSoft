@@ -40,6 +40,8 @@
             this.FrameLabel = new System.Windows.Forms.Label();
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ReadFilesAveTB = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.CutoffTest = new System.Windows.Forms.Button();
             this.IgnoredColumsForData = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -89,8 +91,6 @@
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
             this.button1 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.ReadFilesAveTB = new System.Windows.Forms.TextBox();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -224,8 +224,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.ReadFilesAveTB);
             this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.ResultsAnalizer);
             this.groupBox2.Controls.Add(this.CutoffTest);
             this.groupBox2.Controls.Add(this.IgnoredColumsForData);
             this.groupBox2.Controls.Add(this.label8);
@@ -247,6 +249,24 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File analysis parameters";
+            // 
+            // ReadFilesAveTB
+            // 
+            this.ReadFilesAveTB.Location = new System.Drawing.Point(488, 102);
+            this.ReadFilesAveTB.Name = "ReadFilesAveTB";
+            this.ReadFilesAveTB.Size = new System.Drawing.Size(21, 20);
+            this.ReadFilesAveTB.TabIndex = 27;
+            this.ReadFilesAveTB.Text = "20";
+            this.ReadFilesAveTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(331, 105);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(136, 13);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "Number of avareges in file: ";
             // 
             // CutoffTest
             // 
@@ -716,7 +736,7 @@
             // 
             // ResultsAnalizer
             // 
-            this.ResultsAnalizer.Location = new System.Drawing.Point(844, 781);
+            this.ResultsAnalizer.Location = new System.Drawing.Point(546, 44);
             this.ResultsAnalizer.Name = "ResultsAnalizer";
             this.ResultsAnalizer.Size = new System.Drawing.Size(75, 36);
             this.ResultsAnalizer.TabIndex = 25;
@@ -735,37 +755,19 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(922, 781);
+            this.button1.Location = new System.Drawing.Point(546, 85);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 26;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(331, 105);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(136, 13);
-            this.label9.TabIndex = 33;
-            this.label9.Text = "Number of avareges in file: ";
-            // 
-            // ReadFilesAveTB
-            // 
-            this.ReadFilesAveTB.Location = new System.Drawing.Point(488, 102);
-            this.ReadFilesAveTB.Name = "ReadFilesAveTB";
-            this.ReadFilesAveTB.Size = new System.Drawing.Size(21, 20);
-            this.ReadFilesAveTB.TabIndex = 27;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1825, 912);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.ResultsAnalizer);
             this.Controls.Add(this.TriggerGroup);
             this.Controls.Add(this.TestLabel);
             this.Name = "Form1";

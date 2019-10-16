@@ -413,7 +413,7 @@ private void button1_Click_3(object sender, EventArgs e)
             MessageBox.Show("" + ForDataAnalysis.Count() + " " + ForDataAnalysis[0].Count() + " " + ForDataAnalysis[1].Count());
             lastT = ForDataAnalysis[0][1];
             lastC = ForDataAnalysis[0][2];
-            int a
+            int ave = int.Parse(ReadFilesAveTB.Text);
             for (int i = 0; i < ForDataAnalysis.Count(); i++)
             {
                 
@@ -425,7 +425,7 @@ private void button1_Click_3(object sender, EventArgs e)
                 }
                 else
                 {
-                    SBRandomData.Append("" + lastT + " " + lastC + " " + ForDataAnalysis[i-50][3] + " " + ForDataAnalysis[i][3] + " " + SumMax / 50 + " " + DA.getStandardDeviation(STDlist) +Environment.NewLine);
+                    SBRandomData.Append("" + lastT + " " + lastC + " " + ForDataAnalysis[i-ave][3] + " " + ForDataAnalysis[i][3] + " " + SumMax / ave + " " + DA.getStandardDeviation(STDlist) +Environment.NewLine);
                     using (StreamWriter SW = new StreamWriter(ForRandomDataReads.FileName + " Results", true))
                     {
                         SW.Write(SBRandomData);
