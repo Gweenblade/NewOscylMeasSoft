@@ -413,6 +413,7 @@ private void button1_Click_3(object sender, EventArgs e)
             MessageBox.Show("" + ForDataAnalysis.Count() + " " + ForDataAnalysis[0].Count() + " " + ForDataAnalysis[1].Count());
             lastT = ForDataAnalysis[0][1];
             lastC = ForDataAnalysis[0][2];
+            int a
             for (int i = 0; i < ForDataAnalysis.Count(); i++)
             {
                 
