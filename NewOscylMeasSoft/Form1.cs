@@ -118,6 +118,7 @@ namespace NewOscylMeasSoft
         public void GraphDrawer()// TO TRZEBA ZROBIC
         {
             int i = 1;
+            ZedIntegral.GraphPane.AddCurve("", measurements.PPLSPEC, Color.Azure, SymbolType.Triangle);
             while (true)
             {
                 if(measurements.DrawTheGraph == true)
@@ -127,6 +128,9 @@ namespace NewOscylMeasSoft
                     OscilloSignal.GraphPane.CurveList.Clear();
                     WavemeterSignal.GraphPane.AddCurve("", measurements.PPLWSU, Color.Red, SymbolType.None);
                     OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
+                    ZedIntegral.Update();
+                    ZedIntegral.AxisChange();
+                    ZedIntegral.Invalidate();
                     WavemeterSignal.AxisChange();
                     OscilloSignal.AxisChange();
                     WavemeterSignal.Invalidate();

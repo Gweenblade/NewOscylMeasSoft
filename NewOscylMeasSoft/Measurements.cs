@@ -28,6 +28,7 @@ namespace NewOscylMeasSoft
         obslugaNW WSU = new obslugaNW();
         public PointPairList PPLWSU = new PointPairList();
         public PointPairList PPLPIC = new PointPairList();
+        public PointPairList PPLSPEC = new PointPairList();
         public bool DrawTheGraph = false;
 
         private void WavemeterReadings(string FilePath1, int NumberOfMeasures = 500)
@@ -50,7 +51,8 @@ namespace NewOscylMeasSoft
             StringBuilder SB = new StringBuilder();
             StringBuilder SBWSU = new StringBuilder();
             Stopwatch Stopwatch = new Stopwatch();
-            double Wavenumber = 0;
+            double Wavenumber = 0, SUMPICO;
+            long SW1, SW2;
             Stopwatch.Start();
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
             {
@@ -61,17 +63,20 @@ namespace NewOscylMeasSoft
                 }
                 for (int j = 0; j < Averages; j++)
                 {
+                    SW1 = Stopwatch.ElapsedMilliseconds;
                     WaveformArray.Add(oscillo.odczyt()[0]);
+                    SW2 = Stopwatch.ElapsedMilliseconds;
                     var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
                     PPLWSU.Clear();
                     PPLPIC.Clear();
-                    SB.Append(Stopwatch.ElapsedMilliseconds + ":");
-                    SBWSU.Append(Stopwatch.ElapsedMilliseconds + ":");
+                    SB.Append(SW1 + ":");
+                    SBWSU.Append(SW2 + ":");
                     for (i = 0; i < WaveformArray[0].Count; i++)
                     {
                         SB.Append(WaveformArray[0][i] + ":");
                         PPLPIC.Add(i, WaveformArray[0][i]);
                     }
+                    SUMPICO = WaveformArray[0].Sum();
                     WaveformArray.Clear();
                     SB.Append("\r\n");
                     SBWSU.Append(obslugaNW.odczytNowegoWMcm(false) + ":" + obslugaNW.odczytszerokosci() + ":");
@@ -82,6 +87,8 @@ namespace NewOscylMeasSoft
                         PPLWSU.Add(i, z);
                         i++;
                     }
+                    if(obslugaNW.odczytNowegoWMcm(false) > 0)
+                        PPLSPEC.Add(obslugaNW.odczytNowegoWMcm(false), SUMPICO);
                     DrawTheGraph = true;
                     SBWSU.Append("\r\n");
                     if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
