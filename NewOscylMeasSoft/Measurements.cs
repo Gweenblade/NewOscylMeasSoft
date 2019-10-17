@@ -35,6 +35,65 @@ namespace NewOscylMeasSoft
         {
             int i = 0;
         }
+        
+        public void OnlyOscilloMeasurements(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
+        {
+            int MeasureLoopIndicator;
+            int i;
+            bool WARNING, Ender = false;
+            WaveformArray = new List<List<double>>();
+            List<double> temp = new List<double>();
+            StringBuilder SB = new StringBuilder();
+            StringBuilder SBWSU = new StringBuilder();
+            Stopwatch Stopwatch = new Stopwatch();
+            double Wavenumber = 0, SUMPICO;
+            long SW1, SW2;
+            Stopwatch.Start();
+            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures; MeasureLoopIndicator++)
+            {
+                for (int j = 0; j < Averages; j++)
+                {
+                    SW1 = Stopwatch.ElapsedMilliseconds;
+                    WaveformArray.Add(oscillo.odczyt()[0]);
+                    SW2 = Stopwatch.ElapsedMilliseconds;
+                    PPLPIC.Clear();
+                    SB.Append(SW1 + ":" + SW2 + ":");
+                    for (i = 0; i < WaveformArray[0].Count; i++)
+                    {
+                        SB.Append(WaveformArray[0][i] + ":");
+                        PPLPIC.Add(i, WaveformArray[0][i]);
+                    }
+                    SUMPICO = WaveformArray[0].Sum();
+                    WaveformArray.Clear();
+                    SB.Append("\r\n");
+                    i = 0;
+                    DrawTheGraph = true;
+                    if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
+                    {
+                        Ender = true;
+                    }
+                    if (MeasureLoopIndicator % 5 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
+                    {
+                        using (StreamWriter SW = new StreamWriter(FilePath1 + "PICO", true))
+                        {
+                            SW.Write(SB);
+                            SW.Flush();
+                        }
+                        SB.Clear();
+                    }
+
+                }
+                if (Ender == true)
+                {
+                    MessageBox.Show("Koniec pomiaru");
+                    break;
+                }
+            }
+            Stopwatch.Stop();
+            MessageBox.Show("Koniec");
+        }
+        
+
         public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
 

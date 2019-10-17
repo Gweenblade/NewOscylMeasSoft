@@ -28,7 +28,7 @@ namespace NewOscylMeasSoft
         int TriggerCH;
         short TriggerVoltage;
         ushort TriggerHis;
-        Thread Measure, Graphdrawer;
+        Thread Measure, Graphdrawer,OscilloMeasure;
         ThreadStart MEASURE,GRAPHDRAWER;
         Measurements measurements;
         DataAnalysis DA;
@@ -114,7 +114,12 @@ namespace NewOscylMeasSoft
             Measure.Start();
             return Measure;
         }
-
+        public Thread OnlyOscilloMeasures(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool Trigger = false) // DO USUNIECIA
+        {
+            OscilloMeasure = new Thread(() => measurements.OnlyOscilloMeasurements(FilePath,oscillo,NumberOfMeasures,Averages,Trigger));
+            OscilloMeasure.Start();
+            return OscilloMeasure;
+        }
         public void GraphDrawer()// TO TRZEBA ZROBIC
         {
             int i = 1;
@@ -601,6 +606,25 @@ private void button1_Click_3(object sender, EventArgs e)
                 if (Graphdrawer.IsAlive) Graphdrawer.Abort();
             }
             Environment.Exit(Environment.ExitCode);
+        }
+
+        private void OnlyPico_Click(object sender, EventArgs e)
+        {
+            int x, y;
+            int.TryParse(MeasuresTB.Text, out x);
+            int.TryParse(AveragesTB.Text, out y);
+            bool z = false;
+            if (DataSaverDialog.FileName == "")
+                DataSaverDialog.ShowDialog();
+            if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
+            {
+                Graphdrawer.Start();
+                OnlyOscilloMeasures(savepath, oscillo, x, y, TriggerBtnOn.Checked);
+            }
+            else
+            {
+                MessageBox.Show("Niepoprawne parametry");
+            }
         }
 
         private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)

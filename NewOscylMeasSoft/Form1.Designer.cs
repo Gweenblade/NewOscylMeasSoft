@@ -40,8 +40,10 @@
             this.FrameLabel = new System.Windows.Forms.Label();
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.OnlyPico = new System.Windows.Forms.Button();
             this.ReadFilesAveTB = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.ResultsAnalizer = new System.Windows.Forms.Button();
             this.CutoffTest = new System.Windows.Forms.Button();
             this.IgnoredColumsForData = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -86,11 +88,9 @@
             this.WavemeterSignal = new ZedGraph.ZedGraphControl();
             this.label1 = new System.Windows.Forms.Label();
             this.OscilloSignal = new ZedGraph.ZedGraphControl();
-            this.ResultsAnalizer = new System.Windows.Forms.Button();
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -224,7 +224,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.ReadFilesAveTB);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.ResultsAnalizer);
@@ -250,6 +249,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File analysis parameters";
             // 
+            // OnlyPico
+            // 
+            this.OnlyPico.Location = new System.Drawing.Point(353, 807);
+            this.OnlyPico.Name = "OnlyPico";
+            this.OnlyPico.Size = new System.Drawing.Size(75, 23);
+            this.OnlyPico.TabIndex = 26;
+            this.OnlyPico.Text = "Only Pico";
+            this.OnlyPico.UseVisualStyleBackColor = true;
+            this.OnlyPico.Click += new System.EventHandler(this.OnlyPico_Click);
+            // 
             // ReadFilesAveTB
             // 
             this.ReadFilesAveTB.Location = new System.Drawing.Point(488, 102);
@@ -267,6 +276,16 @@
             this.label9.Size = new System.Drawing.Size(136, 13);
             this.label9.TabIndex = 33;
             this.label9.Text = "Number of avareges in file: ";
+            // 
+            // ResultsAnalizer
+            // 
+            this.ResultsAnalizer.Location = new System.Drawing.Point(546, 44);
+            this.ResultsAnalizer.Name = "ResultsAnalizer";
+            this.ResultsAnalizer.Size = new System.Drawing.Size(75, 36);
+            this.ResultsAnalizer.TabIndex = 25;
+            this.ResultsAnalizer.Text = "Results Analizer";
+            this.ResultsAnalizer.UseVisualStyleBackColor = true;
+            this.ResultsAnalizer.Click += new System.EventHandler(this.button1_Click_4);
             // 
             // CutoffTest
             // 
@@ -574,6 +593,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.OnlyPico);
             this.groupBox1.Controls.Add(this.MeasurementNumberLabel);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.MeasuresTB);
@@ -734,16 +754,6 @@
             this.OscilloSignal.TabIndex = 16;
             this.OscilloSignal.ZoomStepFraction = 1D;
             // 
-            // ResultsAnalizer
-            // 
-            this.ResultsAnalizer.Location = new System.Drawing.Point(546, 44);
-            this.ResultsAnalizer.Name = "ResultsAnalizer";
-            this.ResultsAnalizer.Size = new System.Drawing.Size(75, 36);
-            this.ResultsAnalizer.TabIndex = 25;
-            this.ResultsAnalizer.Text = "Results Analizer";
-            this.ResultsAnalizer.UseVisualStyleBackColor = true;
-            this.ResultsAnalizer.Click += new System.EventHandler(this.button1_Click_4);
-            // 
             // InteferometerPathway
             // 
             this.InteferometerPathway.FileName = "openFileDialog1";
@@ -752,15 +762,6 @@
             // ForRandomDataReads
             // 
             this.ForRandomDataReads.FileName = "openFileDialog1";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(546, 85);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 26;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -851,7 +852,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton TriggerBtnOff;
         private System.Windows.Forms.RadioButton TriggerBtnOn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button OnlyPico;
         private System.Windows.Forms.Label MeasurementNumberLabel;
         private System.Windows.Forms.TextBox ReadFilesAveTB;
         private System.Windows.Forms.Label label9;
