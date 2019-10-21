@@ -111,7 +111,7 @@ namespace NewOscylMeasSoft
             StringBuilder SBWSU = new StringBuilder();
             Stopwatch Stopwatch = new Stopwatch();
             double Wavenumber = 0, SUMPICO;
-            long SW1, SW2;
+            long SW1, SW2, SW3;
             Stopwatch.Start();
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
             {
@@ -126,10 +126,11 @@ namespace NewOscylMeasSoft
                     WaveformArray.Add(oscillo.odczyt()[0]);
                     SW2 = Stopwatch.ElapsedMilliseconds;
                     var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
+                    SW3 = Stopwatch.ElapsedMilliseconds;
                     PPLWSU.Clear();
                     PPLPIC.Clear();
-                    SB.Append(SW1 + ":");
-                    SBWSU.Append(SW2 + ":");
+                    SB.Append(SW1 + ":" + SW2 + ":");
+                    SBWSU.Append(SW2 + ":" + SW3 + ":");
                     for (i = 0; i < WaveformArray[0].Count; i++)
                     {
                         SB.Append(WaveformArray[0][i] + ":");
@@ -146,7 +147,7 @@ namespace NewOscylMeasSoft
                         PPLWSU.Add(i, z);
                         i++;
                     }
-                    if(obslugaNW.odczytNowegoWMcm(false) > 0)
+                    if(obslugaNW.odczytNowegoWMcm(false) > 0 || true)// usunac true jak działa
                         PPLSPEC.Add(obslugaNW.odczytNowegoWMcm(false), SUMPICO);
                     DrawTheGraph = true;
                     SBWSU.Append("\r\n");
