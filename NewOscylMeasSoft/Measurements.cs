@@ -104,8 +104,80 @@ namespace NewOscylMeasSoft
 
         public void WSUmeasures(string FilePath, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
+            EWHustawiono = new EventWaitHandle(false, EventResetMode.AutoReset, "USTAWIONO");
+            EWHprzestroj = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
+            EWHbreak = new EventWaitHandle(false, EventResetMode.AutoReset, "ZATRZYMAJ");
+            EWHendoftuning = new EventWaitHandle(false, EventResetMode.AutoReset, "KONIEC");
+            PICOready = new EventWaitHandle(false, EventResetMode.AutoReset, "PICOready");
+            WSUready = new EventWaitHandle(false, EventResetMode.AutoReset, "WSUready");
+            // EWHstart = new EventWaitHandle(false, EventResetMode.AutoReset, "START");
+            int MeasureLoopIndicator;
+            int i;
+            bool WARNING, Ender = false;
+            WaveformArray = new List<List<double>>();
+            List<double> temp = new List<double>();
+            StringBuilder SBWSU = new StringBuilder();
+            Stopwatch Stopwatch = new Stopwatch();
+            double Wavenumber = 0, SUMPICO;
+            long SW1, SW2, SW3;
+            Stopwatch.Start();
+            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
+            {
+                if (TriggerBtn)
+                {
+                    EWHprzestroj.Set();
+                    EWHustawiono.WaitOne();
+                }
+                for (int j = 0; j < Averages; j++)
+                {
+                    if (TriggerBtn)
+                    {
+                        WSUready.Set();
+                        PICOready.WaitOne();
+                    }
+                    SW2 = Stopwatch.ElapsedMilliseconds;
+                    var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
+                    SW3 = Stopwatch.ElapsedMilliseconds;
+                    PPLWSU.Clear();
+                    SBWSU.Append(SW2 + ":" + SW3 + ":");
+                    WaveformArray.Clear();
+                    SBWSU.Append(obslugaNW.odczytNowegoWMcm(false) + ":" + obslugaNW.odczytszerokosci() + ":");
+                    i = 0;
+                    foreach (var z in x)
+                    {
+                        SBWSU.Append(z.ToString() + ":");
+                        PPLWSU.Add(i, z);
+                        i++;
+                    }
+                    if (obslugaNW.odczytNowegoWMcm(false) > 0 || true)// usunac true jak działa
+                        PPLSPEC.Add(obslugaNW.odczytNowegoWMcm(false), SUMPICO);
+                    DrawTheGraph = true;
+                    SBWSU.Append("\r\n");
+                    if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
+                    {
+                        Ender = true;
+                    }
+                    if (MeasureLoopIndicator % 5 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
+                    {
+                        using (StreamWriter SW = new StreamWriter(FilePath + "WSU", true))
+                        {
+                            SW.Write(SBWSU);
+                            SW.Flush();
+                        }
+                        SBWSU.Clear();
+                    }
 
+                }
+                if (Ender == true)
+                {
+                    MessageBox.Show("Koniec pomiaru");
+                    break;
+                }
+            }
+            Stopwatch.Stop();
+            MessageBox.Show("Koniec");
         }
+
         public void OnlyOscilloMeasurements(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
             int MeasureLoopIndicator;
