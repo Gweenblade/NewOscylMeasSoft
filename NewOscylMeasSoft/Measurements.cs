@@ -24,18 +24,88 @@ namespace NewOscylMeasSoft
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
-        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning, EWHstart;
+        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning, EWHstart, PICOready, WSUready;
         obslugaNW WSU = new obslugaNW();
         public PointPairList PPLWSU = new PointPairList();
         public PointPairList PPLPIC = new PointPairList();
         public PointPairList PPLSPEC = new PointPairList();
-        public bool DrawTheGraph = false;
-
-        private void WavemeterReadings(string FilePath1, int NumberOfMeasures = 500)
+        public bool DrawTheGraph = false, WSUmarker = false, PICOmarker = false;
+        public void PicoMeasures(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
-            int i = 0;
+
+            EWHustawiono = new EventWaitHandle(false, EventResetMode.AutoReset, "USTAWIONO");
+            EWHprzestroj = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
+            EWHbreak = new EventWaitHandle(false, EventResetMode.AutoReset, "ZATRZYMAJ");
+            EWHendoftuning = new EventWaitHandle(false, EventResetMode.AutoReset, "KONIEC");
+            PICOready = new EventWaitHandle(false, EventResetMode.AutoReset, "PICOready");
+            WSUready = new EventWaitHandle(false, EventResetMode.AutoReset, "WSUready");
+            // EWHstart = new EventWaitHandle(false, EventResetMode.AutoReset, "START");
+            int MeasureLoopIndicator;
+            int i;
+            bool WARNING, Ender = false;
+            WaveformArray = new List<List<double>>();
+            List<double> temp = new List<double>();
+            StringBuilder SB = new StringBuilder();
+            Stopwatch Stopwatch = new Stopwatch();
+            double SUMPICO;
+            long SW1, SW2, SW3;
+            Stopwatch.Start();
+            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
+            {
+                if (TriggerBtn == true)
+                {
+                    EWHprzestroj.Set();
+                    EWHustawiono.WaitOne();
+                }
+                for (int j = 0; j < Averages; j++)
+                {
+                    SW1 = Stopwatch.ElapsedMilliseconds;
+                    if(TriggerBtn == true)
+                    {
+                        PICOready.Set();
+                        WSUready.WaitOne();
+                    }
+                    WaveformArray.Add(oscillo.odczyt()[0]);
+                    SW2 = Stopwatch.ElapsedMilliseconds;
+                    PPLPIC.Clear();
+                    SB.Append(SW1 + ":" + SW2 + ":");
+                    for (i = 0; i < WaveformArray[0].Count; i++)
+                    {
+                        SB.Append(WaveformArray[0][i] + ":");
+                        PPLPIC.Add(i, WaveformArray[0][i]);
+                    }
+                    WaveformArray.Clear();
+                    SB.Append("\r\n");
+                    i = 0;
+                    DrawTheGraph = true;
+                    if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
+                    {
+                        Ender = true;
+                    }
+                    if (MeasureLoopIndicator % 5 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
+                    {
+                        using (StreamWriter SW = new StreamWriter(FilePath + "PICO", true))
+                        {
+                            SW.Write(SB);
+                            SW.Flush();
+                        }
+                        SB.Clear();
+                    }
+                }
+                if (Ender == true)
+                {
+                    MessageBox.Show("Koniec pomiaru");
+                    break;
+                }
+            }
+            Stopwatch.Stop();
+            MessageBox.Show("Koniec");
         }
-        
+
+        public void WSUmeasures(string FilePath, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
+        {
+
+        }
         public void OnlyOscilloMeasurements(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
             int MeasureLoopIndicator;
