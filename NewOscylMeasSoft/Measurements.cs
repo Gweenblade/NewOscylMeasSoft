@@ -149,8 +149,6 @@ namespace NewOscylMeasSoft
                         PPLWSU.Add(i, z);
                         i++;
                     }
-                    if (obslugaNW.odczytNowegoWMcm(false) > 0 || true)// usunac true jak działa
-                        PPLSPEC.Add(obslugaNW.odczytNowegoWMcm(false), SUMPICO);
                     DrawTheGraph = true;
                     SBWSU.Append("\r\n");
                     if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))

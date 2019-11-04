@@ -40,7 +40,6 @@
             this.FrameLabel = new System.Windows.Forms.Label();
             this.DataSlider = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.OnlyPico = new System.Windows.Forms.Button();
             this.ReadFilesAveTB = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.ResultsAnalizer = new System.Windows.Forms.Button();
@@ -64,6 +63,7 @@
             this.ZedSignal = new ZedGraph.ZedGraphControl();
             this.TrackMin = new System.Windows.Forms.TrackBar();
             this.TrackMax = new System.Windows.Forms.TrackBar();
+            this.OnlyPico = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.PauseBtn = new System.Windows.Forms.Button();
             this.StopBtn = new System.Windows.Forms.Button();
@@ -91,6 +91,7 @@
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
+            this.NewMeasureButton = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -248,16 +249,6 @@
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File analysis parameters";
-            // 
-            // OnlyPico
-            // 
-            this.OnlyPico.Location = new System.Drawing.Point(353, 807);
-            this.OnlyPico.Name = "OnlyPico";
-            this.OnlyPico.Size = new System.Drawing.Size(75, 23);
-            this.OnlyPico.TabIndex = 26;
-            this.OnlyPico.Text = "Only Pico";
-            this.OnlyPico.UseVisualStyleBackColor = true;
-            this.OnlyPico.Click += new System.EventHandler(this.OnlyPico_Click);
             // 
             // ReadFilesAveTB
             // 
@@ -495,6 +486,16 @@
             this.TrackMax.Value = 1;
             this.TrackMax.Scroll += new System.EventHandler(this.TrackMax_Scroll);
             // 
+            // OnlyPico
+            // 
+            this.OnlyPico.Location = new System.Drawing.Point(353, 807);
+            this.OnlyPico.Name = "OnlyPico";
+            this.OnlyPico.Size = new System.Drawing.Size(75, 23);
+            this.OnlyPico.TabIndex = 26;
+            this.OnlyPico.Text = "Only Pico";
+            this.OnlyPico.UseVisualStyleBackColor = true;
+            this.OnlyPico.Click += new System.EventHandler(this.OnlyPico_Click);
+            // 
             // SaveBtn
             // 
             this.SaveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -593,6 +594,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.NewMeasureButton);
             this.groupBox1.Controls.Add(this.OnlyPico);
             this.groupBox1.Controls.Add(this.MeasurementNumberLabel);
             this.groupBox1.Controls.Add(this.groupBox3);
@@ -763,6 +765,16 @@
             // 
             this.ForRandomDataReads.FileName = "openFileDialog1";
             // 
+            // NewMeasureButton
+            // 
+            this.NewMeasureButton.Location = new System.Drawing.Point(274, 754);
+            this.NewMeasureButton.Name = "NewMeasureButton";
+            this.NewMeasureButton.Size = new System.Drawing.Size(135, 23);
+            this.NewMeasureButton.TabIndex = 16;
+            this.NewMeasureButton.Text = "New measure button";
+            this.NewMeasureButton.UseVisualStyleBackColor = true;
+            this.NewMeasureButton.Click += new System.EventHandler(this.NewMeasureButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -856,6 +868,7 @@
         private System.Windows.Forms.Label MeasurementNumberLabel;
         private System.Windows.Forms.TextBox ReadFilesAveTB;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button NewMeasureButton;
     }
 }
 

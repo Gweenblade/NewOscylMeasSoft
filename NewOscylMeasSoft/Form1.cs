@@ -108,6 +108,22 @@ namespace NewOscylMeasSoft
             Measure.Start();
             return Measure;
         }
+        public Thread JustPICO(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool Trigger = false)
+        {
+            if (TriggerBtnOn.Checked)
+                NumberOfMeasures = 1000000;
+            Measure = new Thread(() => measurements.PicoMeasures(FilePath, oscillo, NumberOfMeasures, Averages, TriggerBtnOn.Checked));
+            Measure.Start();
+            return Measure;
+        }
+        public Thread JustWSU(string FilePath, int NumberOfMeasures = 500, int Averages = 10, bool Trigger = false)
+        {
+            if (TriggerBtnOn.Checked)
+                NumberOfMeasures = 1000000;
+            Measure = new Thread(() => measurements.WSUmeasures(FilePath, NumberOfMeasures, Averages, TriggerBtnOn.Checked));
+            Measure.Start();
+            return Measure;
+        }
         public Thread StartTheThread2() // DO USUNIECIA
         {
             Measure = new Thread(() => Rysowaniewykresów());
@@ -620,6 +636,26 @@ private void button1_Click_3(object sender, EventArgs e)
             {
                 Graphdrawer.Start();
                 OnlyOscilloMeasures(savepath, oscillo, x, y, TriggerBtnOn.Checked);
+            }
+            else
+            {
+                MessageBox.Show("Niepoprawne parametry");
+            }
+        }
+
+        private void NewMeasureButton_Click(object sender, EventArgs e)
+        {
+            int x, y;
+            int.TryParse(MeasuresTB.Text, out x);
+            int.TryParse(AveragesTB.Text, out y);
+            bool z = false;
+            if (DataSaverDialog.FileName == "")
+                DataSaverDialog.ShowDialog();
+            if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
+            {
+                Graphdrawer.Start();
+                JustPICO(savepath, oscillo, x, y, TriggerBtnOn.Checked);
+                JustWSU(savepath, x, y, TriggerBtnOn.Checked);
             }
             else
             {
