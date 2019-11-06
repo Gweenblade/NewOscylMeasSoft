@@ -140,7 +140,6 @@ namespace NewOscylMeasSoft
                     SW3 = Stopwatch.ElapsedMilliseconds;
                     PPLWSU.Clear();
                     SBWSU.Append(SW2 + ":" + SW3 + ":");
-                    WaveformArray.Clear();
                     SBWSU.Append(obslugaNW.odczytNowegoWMcm(false) + ":" + obslugaNW.odczytszerokosci() + ":");
                     i = 0;
                     foreach (var z in x)

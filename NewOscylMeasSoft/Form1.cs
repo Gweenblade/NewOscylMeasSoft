@@ -665,10 +665,6 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)
         {
-            if (TriggerBtnOn.Checked)
-                MeasuresTB.Enabled = false;
-            else
-                MeasuresTB.Enabled = true;
             
         }
 
