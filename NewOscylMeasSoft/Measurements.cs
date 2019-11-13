@@ -26,10 +26,14 @@ namespace NewOscylMeasSoft
         List<List<double>> WaveformArray, Integral = null;
         public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning, EWHstart, PICOready, WSUready;
         obslugaNW WSU = new obslugaNW();
+        public double IntegralPico;
+        public double CurrentWavelenght;
         public PointPairList PPLWSU = new PointPairList();
         public PointPairList PPLPIC = new PointPairList();
         public PointPairList PPLSPEC = new PointPairList();
         public bool DrawTheGraph = false, WSUmarker = false, PICOmarker = false;
+        
+
         public void PicoMeasures(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
 
@@ -66,6 +70,7 @@ namespace NewOscylMeasSoft
                         WSUready.WaitOne();
                     }
                     WaveformArray.Add(oscillo.odczyt()[0]);
+                    IntegralPico = WaveformArray[0].Sum();
                     SW2 = Stopwatch.ElapsedMilliseconds;
                     PPLPIC.Clear();
                     SB.Append(SW1 + ":" + SW2 + ":");
@@ -141,6 +146,7 @@ namespace NewOscylMeasSoft
                     PPLWSU.Clear();
                     SBWSU.Append(SW2 + ":" + SW3 + ":");
                     SBWSU.Append(obslugaNW.odczytNowegoWMcm(false) + ":" + obslugaNW.odczytszerokosci() + ":");
+                    CurrentWavelenght = obslugaNW.odczytNowegoWMcm(false);
                     i = 0;
                     foreach (var z in x)
                     {

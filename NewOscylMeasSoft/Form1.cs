@@ -49,6 +49,7 @@ namespace NewOscylMeasSoft
         PointPairList  PPLmax = new PointPairList();
         PointPairList PPLmin = new PointPairList();
         PointPairList CutoffPoints = new PointPairList();
+        PointPairList BriefSpectrum = new PointPairList();
         bool userdoneupdater = false;
         bool userdoneupdaterinteferometer = false;
         obslugaNW WMU = new obslugaNW();
@@ -139,7 +140,9 @@ namespace NewOscylMeasSoft
         public void GraphDrawer()// TO TRZEBA ZROBIC
         {
             int i = 1;
-            ZedIntegral.GraphPane.AddCurve("", measurements.PPLSPEC, Color.Azure, SymbolType.Triangle);
+            LineItem LBriefIntegral;
+            LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("", BriefSpectrum, Color.BlueViolet, SymbolType.Circle);
+            LBriefIntegral.Line.IsVisible = false;
             while (true)
             {
                 if(measurements.DrawTheGraph == true)
@@ -149,9 +152,15 @@ namespace NewOscylMeasSoft
                     OscilloSignal.GraphPane.CurveList.Clear();
                     WavemeterSignal.GraphPane.AddCurve("", measurements.PPLWSU, Color.Red, SymbolType.None);
                     OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
-                    ZedIntegral.Update();
-                    ZedIntegral.AxisChange();
-                    ZedIntegral.Invalidate();
+                    if(measurements.IntegralPico != 0 && measurements.CurrentWavelenght > 0)
+                    {
+                        BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
+                        measurements.CurrentWavelenght = 0;
+                        measurements.IntegralPico = 0;
+                        ZedBriefIntegral.Update();
+                        ZedBriefIntegral.AxisChange();
+                        ZedBriefIntegral.Invalidate();
+                    }
                     WavemeterSignal.AxisChange();
                     OscilloSignal.AxisChange();
                     WavemeterSignal.Invalidate();
@@ -661,6 +670,29 @@ private void button1_Click_3(object sender, EventArgs e)
             {
                 MessageBox.Show("Niepoprawne parametry");
             }
+        }
+
+        private void ZedSignal_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_6(object sender, EventArgs e)
+        {
+            //LineItem LBriefIntegral;
+            //LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("bla", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
+            //BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    BriefSpectrum.Add(i, i);
+            //    measurements.CurrentWavelenght = 0;
+            //    measurements.IntegralPico = 0;
+            //    LBriefIntegral.Line.IsVisible = false;
+            //    ZedBriefIntegral.Update();
+            //    ZedBriefIntegral.AxisChange();
+            //    ZedBriefIntegral.Invalidate();
+            //}
+
         }
 
         private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)

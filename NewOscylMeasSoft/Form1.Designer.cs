@@ -60,7 +60,6 @@
             this.FindFile = new System.Windows.Forms.Button();
             this.Bar1Label = new System.Windows.Forms.Label();
             this.Bar2Label = new System.Windows.Forms.Label();
-            this.ZedSignal = new ZedGraph.ZedGraphControl();
             this.TrackMin = new System.Windows.Forms.TrackBar();
             this.TrackMax = new System.Windows.Forms.TrackBar();
             this.OnlyPico = new System.Windows.Forms.Button();
@@ -75,6 +74,7 @@
             this.DataSaverDialog = new System.Windows.Forms.SaveFileDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.NewMeasureButton = new System.Windows.Forms.Button();
             this.MeasurementNumberLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.TriggerBtnOff = new System.Windows.Forms.RadioButton();
@@ -91,7 +91,12 @@
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
-            this.NewMeasureButton = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.ZedSignal = new ZedGraph.ZedGraphControl();
+            this.ZedBriefIntegral = new ZedGraph.ZedGraphControl();
+            this.button1 = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
@@ -100,6 +105,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // OscilInit
@@ -114,6 +122,7 @@
             // 
             // TriggerGroup
             // 
+            this.TriggerGroup.Controls.Add(this.tabControl1);
             this.TriggerGroup.Controls.Add(this.InteferometerParameters);
             this.TriggerGroup.Controls.Add(this.FrameInteferometer);
             this.TriggerGroup.Controls.Add(this.InteferometerSlider);
@@ -125,7 +134,6 @@
             this.TriggerGroup.Controls.Add(this.groupBox2);
             this.TriggerGroup.Controls.Add(this.Bar1Label);
             this.TriggerGroup.Controls.Add(this.Bar2Label);
-            this.TriggerGroup.Controls.Add(this.ZedSignal);
             this.TriggerGroup.Controls.Add(this.TrackMin);
             this.TriggerGroup.Controls.Add(this.TrackMax);
             this.TriggerGroup.Location = new System.Drawing.Point(532, 12);
@@ -446,22 +454,6 @@
             this.Bar2Label.TabIndex = 5;
             this.Bar2Label.Text = "l";
             // 
-            // ZedSignal
-            // 
-            this.ZedSignal.Location = new System.Drawing.Point(13, 19);
-            this.ZedSignal.Name = "ZedSignal";
-            this.ZedSignal.ScrollGrace = 0D;
-            this.ZedSignal.ScrollMaxX = 0D;
-            this.ZedSignal.ScrollMaxY = 0D;
-            this.ZedSignal.ScrollMaxY2 = 0D;
-            this.ZedSignal.ScrollMinX = 0D;
-            this.ZedSignal.ScrollMinY = 0D;
-            this.ZedSignal.ScrollMinY2 = 0D;
-            this.ZedSignal.Size = new System.Drawing.Size(679, 450);
-            this.ZedSignal.TabIndex = 8;
-            this.ZedSignal.ZoomStepFraction = 1D;
-            this.ZedSignal.Load += new System.EventHandler(this.ZedSignal_Load);
-            // 
             // TrackMin
             // 
             this.TrackMin.BackColor = System.Drawing.SystemColors.InactiveCaption;
@@ -488,7 +480,7 @@
             // 
             // OnlyPico
             // 
-            this.OnlyPico.Location = new System.Drawing.Point(353, 807);
+            this.OnlyPico.Location = new System.Drawing.Point(274, 778);
             this.OnlyPico.Name = "OnlyPico";
             this.OnlyPico.Size = new System.Drawing.Size(75, 23);
             this.OnlyPico.TabIndex = 26;
@@ -621,6 +613,16 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Signal";
+            // 
+            // NewMeasureButton
+            // 
+            this.NewMeasureButton.Location = new System.Drawing.Point(274, 754);
+            this.NewMeasureButton.Name = "NewMeasureButton";
+            this.NewMeasureButton.Size = new System.Drawing.Size(135, 23);
+            this.NewMeasureButton.TabIndex = 16;
+            this.NewMeasureButton.Text = "New measure button";
+            this.NewMeasureButton.UseVisualStyleBackColor = true;
+            this.NewMeasureButton.Click += new System.EventHandler(this.NewMeasureButton_Click);
             // 
             // MeasurementNumberLabel
             // 
@@ -765,21 +767,85 @@
             // 
             this.ForRandomDataReads.FileName = "openFileDialog1";
             // 
-            // NewMeasureButton
+            // tabControl1
             // 
-            this.NewMeasureButton.Location = new System.Drawing.Point(274, 754);
-            this.NewMeasureButton.Name = "NewMeasureButton";
-            this.NewMeasureButton.Size = new System.Drawing.Size(135, 23);
-            this.NewMeasureButton.TabIndex = 16;
-            this.NewMeasureButton.Text = "New measure button";
-            this.NewMeasureButton.UseVisualStyleBackColor = true;
-            this.NewMeasureButton.Click += new System.EventHandler(this.NewMeasureButton_Click);
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(6, 17);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(686, 474);
+            this.tabControl1.TabIndex = 24;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.ZedBriefIntegral);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(678, 448);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.ZedSignal);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(678, 448);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // ZedSignal
+            // 
+            this.ZedSignal.Location = new System.Drawing.Point(-1, -4);
+            this.ZedSignal.Name = "ZedSignal";
+            this.ZedSignal.ScrollGrace = 0D;
+            this.ZedSignal.ScrollMaxX = 0D;
+            this.ZedSignal.ScrollMaxY = 0D;
+            this.ZedSignal.ScrollMaxY2 = 0D;
+            this.ZedSignal.ScrollMinX = 0D;
+            this.ZedSignal.ScrollMinY = 0D;
+            this.ZedSignal.ScrollMinY2 = 0D;
+            this.ZedSignal.Size = new System.Drawing.Size(683, 460);
+            this.ZedSignal.TabIndex = 9;
+            this.ZedSignal.ZoomStepFraction = 1D;
+            this.ZedSignal.Load += new System.EventHandler(this.ZedSignal_Load_1);
+            // 
+            // ZedBriefIntegral
+            // 
+            this.ZedBriefIntegral.Location = new System.Drawing.Point(-2, -6);
+            this.ZedBriefIntegral.Name = "ZedBriefIntegral";
+            this.ZedBriefIntegral.ScrollGrace = 0D;
+            this.ZedBriefIntegral.ScrollMaxX = 0D;
+            this.ZedBriefIntegral.ScrollMaxY = 0D;
+            this.ZedBriefIntegral.ScrollMaxY2 = 0D;
+            this.ZedBriefIntegral.ScrollMinX = 0D;
+            this.ZedBriefIntegral.ScrollMinY = 0D;
+            this.ZedBriefIntegral.ScrollMinY2 = 0D;
+            this.ZedBriefIntegral.Size = new System.Drawing.Size(683, 460);
+            this.ZedBriefIntegral.TabIndex = 10;
+            this.ZedBriefIntegral.ZoomStepFraction = 1D;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(922, 793);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_6);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1825, 912);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.TriggerGroup);
             this.Controls.Add(this.TestLabel);
@@ -799,6 +865,9 @@
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -808,7 +877,6 @@
 
         private System.Windows.Forms.Button OscilInit;
         private System.Windows.Forms.GroupBox TriggerGroup;
-        private ZedGraph.ZedGraphControl ZedSignal;
         private System.Windows.Forms.TrackBar TrackMin;
         private System.Windows.Forms.TrackBar TrackMax;
         private System.Windows.Forms.Label Bar1Label;
@@ -869,6 +937,12 @@
         private System.Windows.Forms.TextBox ReadFilesAveTB;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button NewMeasureButton;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private ZedGraph.ZedGraphControl ZedSignal;
+        private ZedGraph.ZedGraphControl ZedBriefIntegral;
+        private System.Windows.Forms.Button button1;
     }
 }
 
