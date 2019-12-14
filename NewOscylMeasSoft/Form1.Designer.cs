@@ -31,6 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.OscilInit = new System.Windows.Forms.Button();
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ZedBriefIntegral = new ZedGraph.ZedGraphControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.ZedSignal = new ZedGraph.ZedGraphControl();
             this.InteferometerParameters = new System.Windows.Forms.Label();
             this.FrameInteferometer = new System.Windows.Forms.Label();
             this.InteferometerSlider = new System.Windows.Forms.TrackBar();
@@ -91,13 +96,11 @@
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.ZedSignal = new ZedGraph.ZedGraphControl();
-            this.ZedBriefIntegral = new ZedGraph.ZedGraphControl();
             this.button1 = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -105,9 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // OscilInit
@@ -142,6 +142,69 @@
             this.TriggerGroup.TabIndex = 8;
             this.TriggerGroup.TabStop = false;
             this.TriggerGroup.Text = "Data analysis section";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(6, 17);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(686, 448);
+            this.tabControl1.TabIndex = 24;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.ZedBriefIntegral);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(678, 422);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // ZedBriefIntegral
+            // 
+            this.ZedBriefIntegral.Location = new System.Drawing.Point(0, 0);
+            this.ZedBriefIntegral.Name = "ZedBriefIntegral";
+            this.ZedBriefIntegral.ScrollGrace = 0D;
+            this.ZedBriefIntegral.ScrollMaxX = 0D;
+            this.ZedBriefIntegral.ScrollMaxY = 0D;
+            this.ZedBriefIntegral.ScrollMaxY2 = 0D;
+            this.ZedBriefIntegral.ScrollMinX = 0D;
+            this.ZedBriefIntegral.ScrollMinY = 0D;
+            this.ZedBriefIntegral.ScrollMinY2 = 0D;
+            this.ZedBriefIntegral.Size = new System.Drawing.Size(678, 422);
+            this.ZedBriefIntegral.TabIndex = 10;
+            this.ZedBriefIntegral.ZoomStepFraction = 1D;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.ZedSignal);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(678, 422);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // ZedSignal
+            // 
+            this.ZedSignal.Location = new System.Drawing.Point(0, 0);
+            this.ZedSignal.Name = "ZedSignal";
+            this.ZedSignal.ScrollGrace = 0D;
+            this.ZedSignal.ScrollMaxX = 0D;
+            this.ZedSignal.ScrollMaxY = 0D;
+            this.ZedSignal.ScrollMaxY2 = 0D;
+            this.ZedSignal.ScrollMinX = 0D;
+            this.ZedSignal.ScrollMinY = 0D;
+            this.ZedSignal.ScrollMinY2 = 0D;
+            this.ZedSignal.Size = new System.Drawing.Size(678, 422);
+            this.ZedSignal.TabIndex = 9;
+            this.ZedSignal.ZoomStepFraction = 1D;
+            this.ZedSignal.Load += new System.EventHandler(this.ZedSignal_Load_1);
             // 
             // InteferometerParameters
             // 
@@ -767,69 +830,6 @@
             // 
             this.ForRandomDataReads.FileName = "openFileDialog1";
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(6, 17);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(686, 474);
-            this.tabControl1.TabIndex = 24;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.ZedBriefIntegral);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(678, 448);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.ZedSignal);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(678, 448);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // ZedSignal
-            // 
-            this.ZedSignal.Location = new System.Drawing.Point(-1, -4);
-            this.ZedSignal.Name = "ZedSignal";
-            this.ZedSignal.ScrollGrace = 0D;
-            this.ZedSignal.ScrollMaxX = 0D;
-            this.ZedSignal.ScrollMaxY = 0D;
-            this.ZedSignal.ScrollMaxY2 = 0D;
-            this.ZedSignal.ScrollMinX = 0D;
-            this.ZedSignal.ScrollMinY = 0D;
-            this.ZedSignal.ScrollMinY2 = 0D;
-            this.ZedSignal.Size = new System.Drawing.Size(683, 460);
-            this.ZedSignal.TabIndex = 9;
-            this.ZedSignal.ZoomStepFraction = 1D;
-            this.ZedSignal.Load += new System.EventHandler(this.ZedSignal_Load_1);
-            // 
-            // ZedBriefIntegral
-            // 
-            this.ZedBriefIntegral.Location = new System.Drawing.Point(-2, -6);
-            this.ZedBriefIntegral.Name = "ZedBriefIntegral";
-            this.ZedBriefIntegral.ScrollGrace = 0D;
-            this.ZedBriefIntegral.ScrollMaxX = 0D;
-            this.ZedBriefIntegral.ScrollMaxY = 0D;
-            this.ZedBriefIntegral.ScrollMaxY2 = 0D;
-            this.ZedBriefIntegral.ScrollMinX = 0D;
-            this.ZedBriefIntegral.ScrollMinY = 0D;
-            this.ZedBriefIntegral.ScrollMinY2 = 0D;
-            this.ZedBriefIntegral.Size = new System.Drawing.Size(683, 460);
-            this.ZedBriefIntegral.TabIndex = 10;
-            this.ZedBriefIntegral.ZoomStepFraction = 1D;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(922, 793);
@@ -855,6 +855,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TriggerGroup.ResumeLayout(false);
             this.TriggerGroup.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).EndInit();
             this.groupBox2.ResumeLayout(false);
@@ -865,9 +868,6 @@
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

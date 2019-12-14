@@ -148,3 +148,19 @@ C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylM
 C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Form1.resources
 C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Properties.Resources.resources
 C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.GenerateResource.Cache
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe.config
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.exe
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\NewOscylMeasSoft.pdb
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\CsvHelper.dll
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\NationalInstruments.VisaNS.dll
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\Oscyloskop.dll
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\System.ValueTuple.dll
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\CsvHelper.xml
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\System.ValueTuple.xml
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csprojAssemblyReference.cache
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Form1.resources
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Properties.Resources.resources
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.GenerateResource.cache
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CopyComplete
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
