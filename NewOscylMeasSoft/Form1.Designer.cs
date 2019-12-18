@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.OscilInit = new System.Windows.Forms.Button();
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.Pico = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ZedBriefIntegral = new ZedGraph.ZedGraphControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -98,7 +98,7 @@
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
             this.button1 = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.Pico.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
@@ -122,7 +122,7 @@
             // 
             // TriggerGroup
             // 
-            this.TriggerGroup.Controls.Add(this.tabControl1);
+            this.TriggerGroup.Controls.Add(this.Pico);
             this.TriggerGroup.Controls.Add(this.InteferometerParameters);
             this.TriggerGroup.Controls.Add(this.FrameInteferometer);
             this.TriggerGroup.Controls.Add(this.InteferometerSlider);
@@ -143,15 +143,15 @@
             this.TriggerGroup.TabStop = false;
             this.TriggerGroup.Text = "Data analysis section";
             // 
-            // tabControl1
+            // Pico
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(6, 17);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(686, 448);
-            this.tabControl1.TabIndex = 24;
+            this.Pico.Controls.Add(this.tabPage1);
+            this.Pico.Controls.Add(this.tabPage2);
+            this.Pico.Location = new System.Drawing.Point(6, 17);
+            this.Pico.Name = "Pico";
+            this.Pico.SelectedIndex = 0;
+            this.Pico.Size = new System.Drawing.Size(686, 448);
+            this.Pico.TabIndex = 24;
             // 
             // tabPage1
             // 
@@ -161,7 +161,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(678, 422);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Brief Integral";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // ZedBriefIntegral
@@ -187,7 +187,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(678, 422);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Pico Signal";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // ZedSignal
@@ -298,7 +298,6 @@
             // 
             this.groupBox2.Controls.Add(this.ReadFilesAveTB);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.ResultsAnalizer);
             this.groupBox2.Controls.Add(this.CutoffTest);
             this.groupBox2.Controls.Add(this.IgnoredColumsForData);
             this.groupBox2.Controls.Add(this.label8);
@@ -341,7 +340,7 @@
             // 
             // ResultsAnalizer
             // 
-            this.ResultsAnalizer.Location = new System.Drawing.Point(546, 44);
+            this.ResultsAnalizer.Location = new System.Drawing.Point(1013, 783);
             this.ResultsAnalizer.Name = "ResultsAnalizer";
             this.ResultsAnalizer.Size = new System.Drawing.Size(75, 36);
             this.ResultsAnalizer.TabIndex = 25;
@@ -532,7 +531,7 @@
             // TrackMax
             // 
             this.TrackMax.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.TrackMax.Location = new System.Drawing.Point(13, 514);
+            this.TrackMax.Location = new System.Drawing.Point(13, 516);
             this.TrackMax.Maximum = 2046;
             this.TrackMax.Minimum = 1;
             this.TrackMax.Name = "TrackMax";
@@ -847,6 +846,7 @@
             this.ClientSize = new System.Drawing.Size(1825, 912);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.ResultsAnalizer);
             this.Controls.Add(this.TriggerGroup);
             this.Controls.Add(this.TestLabel);
             this.Name = "Form1";
@@ -855,7 +855,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TriggerGroup.ResumeLayout(false);
             this.TriggerGroup.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.Pico.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).EndInit();
@@ -937,7 +937,7 @@
         private System.Windows.Forms.TextBox ReadFilesAveTB;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button NewMeasureButton;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl Pico;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private ZedGraph.ZedGraphControl ZedSignal;

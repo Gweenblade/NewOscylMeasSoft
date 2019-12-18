@@ -150,11 +150,12 @@ namespace NewOscylMeasSoft
                     measurements.DrawTheGraph = false;
                     WavemeterSignal.GraphPane.CurveList.Clear();
                     OscilloSignal.GraphPane.CurveList.Clear();
+                    ZedBriefIntegral.GraphPane.CurveList.Clear();
                     WavemeterSignal.GraphPane.AddCurve("", measurements.PPLWSU, Color.Red, SymbolType.None);
                     OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
                     if(measurements.IntegralPico != 0 && measurements.CurrentWavelenght > 0)
                     {
-                        BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
+                        ZedBriefIntegral.GraphPane.AddCurve("", measurements.PPLSPEC,Color.Red,SymbolType.None);
                         measurements.CurrentWavelenght = 0;
                         measurements.IntegralPico = 0;
                         ZedBriefIntegral.Update();
@@ -734,6 +735,9 @@ private void button1_Click_3(object sender, EventArgs e)
         {
             OpenFileDialog.ShowDialog();
             LoadData.Enabled = true;
+            DataSlider.BackColor = Color.PaleGreen;
+            TrackMin.BackColor = Color.LightBlue;
+            TrackMax.BackColor = Color.LightBlue;
             PathToFileLabel.Text = "Path: " + OpenFileDialog.FileName;
         }
 

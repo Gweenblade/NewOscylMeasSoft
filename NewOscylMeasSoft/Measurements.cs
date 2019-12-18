@@ -292,7 +292,7 @@ namespace NewOscylMeasSoft
                         PPLWSU.Add(i, z);
                         i++;
                     }
-                    if(obslugaNW.odczytNowegoWMcm(false) > 0 || true)// usunac true jak działa
+                    if(obslugaNW.odczytNowegoWMcm(false) > 0 && obslugaNW.odczytNowegoWMcm(false) < 20000)// usunac true jak działa
                         PPLSPEC.Add(obslugaNW.odczytNowegoWMcm(false), SUMPICO);
                     DrawTheGraph = true;
                     SBWSU.Append("\r\n");
