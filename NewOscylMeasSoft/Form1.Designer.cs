@@ -47,7 +47,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ReadFilesAveTB = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.ResultsAnalizer = new System.Windows.Forms.Button();
             this.CutoffTest = new System.Windows.Forms.Button();
             this.IgnoredColumsForData = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -67,6 +66,7 @@
             this.Bar2Label = new System.Windows.Forms.Label();
             this.TrackMin = new System.Windows.Forms.TrackBar();
             this.TrackMax = new System.Windows.Forms.TrackBar();
+            this.ResultsAnalizer = new System.Windows.Forms.Button();
             this.OnlyPico = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.PauseBtn = new System.Windows.Forms.Button();
@@ -338,19 +338,9 @@
             this.label9.TabIndex = 33;
             this.label9.Text = "Number of avareges in file: ";
             // 
-            // ResultsAnalizer
-            // 
-            this.ResultsAnalizer.Location = new System.Drawing.Point(1013, 783);
-            this.ResultsAnalizer.Name = "ResultsAnalizer";
-            this.ResultsAnalizer.Size = new System.Drawing.Size(75, 36);
-            this.ResultsAnalizer.TabIndex = 25;
-            this.ResultsAnalizer.Text = "Results Analizer";
-            this.ResultsAnalizer.UseVisualStyleBackColor = true;
-            this.ResultsAnalizer.Click += new System.EventHandler(this.button1_Click_4);
-            // 
             // CutoffTest
             // 
-            this.CutoffTest.Location = new System.Drawing.Point(546, 17);
+            this.CutoffTest.Location = new System.Drawing.Point(515, 12);
             this.CutoffTest.Name = "CutoffTest";
             this.CutoffTest.Size = new System.Drawing.Size(75, 23);
             this.CutoffTest.TabIndex = 26;
@@ -540,6 +530,16 @@
             this.TrackMax.Value = 1;
             this.TrackMax.Scroll += new System.EventHandler(this.TrackMax_Scroll);
             // 
+            // ResultsAnalizer
+            // 
+            this.ResultsAnalizer.Location = new System.Drawing.Point(1013, 783);
+            this.ResultsAnalizer.Name = "ResultsAnalizer";
+            this.ResultsAnalizer.Size = new System.Drawing.Size(75, 36);
+            this.ResultsAnalizer.TabIndex = 25;
+            this.ResultsAnalizer.Text = "Results Analizer";
+            this.ResultsAnalizer.UseVisualStyleBackColor = true;
+            this.ResultsAnalizer.Click += new System.EventHandler(this.button1_Click_4);
+            // 
             // OnlyPico
             // 
             this.OnlyPico.Location = new System.Drawing.Point(274, 778);
@@ -629,11 +629,11 @@
             // 
             // TestLabel
             // 
-            this.TestLabel.Location = new System.Drawing.Point(572, 775);
+            this.TestLabel.Location = new System.Drawing.Point(532, 775);
             this.TestLabel.Multiline = true;
             this.TestLabel.Name = "TestLabel";
             this.TestLabel.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TestLabel.Size = new System.Drawing.Size(237, 108);
+            this.TestLabel.Size = new System.Drawing.Size(237, 91);
             this.TestLabel.TabIndex = 4;
             this.TestLabel.TextChanged += new System.EventHandler(this.TestLabel_TextChanged);
             // 
@@ -850,7 +850,7 @@
             this.Controls.Add(this.TriggerGroup);
             this.Controls.Add(this.TestLabel);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Pico Measurement Software";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.TriggerGroup.ResumeLayout(false);

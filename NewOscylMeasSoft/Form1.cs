@@ -77,6 +77,8 @@ namespace NewOscylMeasSoft
             OscilloSignal.GraphPane.YAxis.Title.Text = "Voltage (mV)";
             WavemeterSignal.GraphPane.XAxis.Title.Text = "Number of point";
             WavemeterSignal.GraphPane.YAxis.Title.Text = "Intensity (a.u.)";
+            ZedBriefIntegral.GraphPane.XAxis.Title.Text = "Wavenumber (cm^-1)";
+            ZedBriefIntegral.GraphPane.YAxis.Title.Text = "Total integral (a.u.)";
             OscilloSignal.GraphPane.Title.Text = "PicoScope";
             WavemeterSignal.GraphPane.Title.Text = "Wavemeter";
             DataSlider.BackColor = Color.LightGray;
@@ -141,8 +143,8 @@ namespace NewOscylMeasSoft
         {
             int i = 1;
             LineItem LBriefIntegral;
-            LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("", BriefSpectrum, Color.BlueViolet, SymbolType.Circle);
-            LBriefIntegral.Line.IsVisible = false;
+            LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
+            BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
             while (true)
             {
                 if(measurements.DrawTheGraph == true)
@@ -155,9 +157,7 @@ namespace NewOscylMeasSoft
                     OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
                     if(measurements.IntegralPico != 0 && measurements.CurrentWavelenght > 0)
                     {
-                        ZedBriefIntegral.GraphPane.AddCurve("", measurements.PPLSPEC,Color.Red,SymbolType.None);
-                        measurements.CurrentWavelenght = 0;
-                        measurements.IntegralPico = 0;
+                        BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.SUMPICO);
                         ZedBriefIntegral.Update();
                         ZedBriefIntegral.AxisChange();
                         ZedBriefIntegral.Invalidate();
@@ -680,19 +680,19 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void button1_Click_6(object sender, EventArgs e)
         {
-            //LineItem LBriefIntegral;
-            //LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("bla", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
-            //BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    BriefSpectrum.Add(i, i);
-            //    measurements.CurrentWavelenght = 0;
-            //    measurements.IntegralPico = 0;
-            //    LBriefIntegral.Line.IsVisible = false;
-            //    ZedBriefIntegral.Update();
-            //    ZedBriefIntegral.AxisChange();
-            //    ZedBriefIntegral.Invalidate();
-            //}
+            LineItem LBriefIntegral;
+            LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("bla", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
+            BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
+            for (int i = 0; i < 100; i++)
+            {
+                BriefSpectrum.Add(i, i);
+                measurements.CurrentWavelenght = 0;
+                measurements.IntegralPico = 0;
+                LBriefIntegral.Line.IsVisible = false;
+                ZedBriefIntegral.Update();
+                ZedBriefIntegral.AxisChange();
+                ZedBriefIntegral.Invalidate();
+            }
 
         }
 

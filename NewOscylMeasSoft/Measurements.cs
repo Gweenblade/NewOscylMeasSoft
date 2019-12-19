@@ -32,7 +32,7 @@ namespace NewOscylMeasSoft
         public PointPairList PPLPIC = new PointPairList();
         public PointPairList PPLSPEC = new PointPairList();
         public bool DrawTheGraph = false, WSUmarker = false, PICOmarker = false;
-        
+        public double SUMPICO;
 
         public void PicoMeasures(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
@@ -123,7 +123,7 @@ namespace NewOscylMeasSoft
             List<double> temp = new List<double>();
             StringBuilder SBWSU = new StringBuilder();
             Stopwatch Stopwatch = new Stopwatch();
-            double Wavenumber = 0, SUMPICO;
+            double Wavenumber = 0;
             long SW1, SW2, SW3;
             Stopwatch.Start();
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
@@ -255,7 +255,7 @@ namespace NewOscylMeasSoft
             StringBuilder SB = new StringBuilder();
             StringBuilder SBWSU = new StringBuilder();
             Stopwatch Stopwatch = new Stopwatch();
-            double Wavenumber = 0, SUMPICO;
+            double Wavenumber = 0;
             long SW1, SW2, SW3;
             Stopwatch.Start();
             for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
