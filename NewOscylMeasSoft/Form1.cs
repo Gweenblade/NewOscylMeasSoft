@@ -427,6 +427,8 @@ private void button1_Click_3(object sender, EventArgs e)
                 RawData = measurements.RegexReader(loadpath, FileSeparator.Text);
             });
             TestLabel.Text += "Wczytano dane!\n";
+            IntegralBtn.Enabled = true;
+            IntegralBtn.BackColor = Color.LightGreen;
         }
         public async Task WSULoad()
         {
@@ -438,6 +440,8 @@ private void button1_Click_3(object sender, EventArgs e)
                 InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text);
             });
             TestLabel.Text += "Wczytano dane!" + Environment.NewLine;
+            CutOffFunction.Enabled = true;
+            CutOffFunction.BackColor = Color.LightGreen;
         }
         private void LoadData_Click(object sender, EventArgs e)
         {
@@ -764,8 +768,6 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void IntegralBtn_Click(object sender, EventArgs e) // INTEGRAL to samo co w check
         {
-            if (RawData.Count() != 0)
-            {
                 PointPairList PPL;
                 ZedIntegral.GraphPane.CurveList.Clear();
                 ZedIntegral.GraphPane.GraphObjList.Clear();
@@ -791,9 +793,7 @@ private void button1_Click_3(object sender, EventArgs e)
                 ZedIntegral.AxisChange();
                 ZedIntegral.Update();
                 ZedIntegral.Invalidate();
-            }
-            else
-                LoadData.PerformClick();
+            
         }
 
         private void DataSlider_MouseUp(object sender, MouseEventArgs e)

@@ -409,6 +409,7 @@
             // 
             // CutOffFunction
             // 
+            this.CutOffFunction.Enabled = false;
             this.CutOffFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CutOffFunction.Location = new System.Drawing.Point(221, 64);
             this.CutOffFunction.Name = "CutOffFunction";
@@ -468,6 +469,7 @@
             // 
             // IntegralBtn
             // 
+            this.IntegralBtn.Enabled = false;
             this.IntegralBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.IntegralBtn.Location = new System.Drawing.Point(221, 19);
             this.IntegralBtn.Name = "IntegralBtn";
