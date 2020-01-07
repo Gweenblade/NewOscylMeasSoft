@@ -417,13 +417,31 @@ private void button1_Click_3(object sender, EventArgs e)
                 MessageBox.Show("Something went wrong..");
         }
 
-
-        private void LoadData_Click(object sender, EventArgs e)
+        public async Task PicoLoad()
         {
-            MessageBox.Show(RawData.Count().ToString());
             if (RawData.Count > 0)
                 RawData.Clear();
-            RawData = measurements.RegexReader(loadpath, FileSeparator.Text);
+            TestLabel.Text += "Rozpoczęto wczytywanie danych.\n";
+            await Task.Run(() =>
+            {
+                RawData = measurements.RegexReader(loadpath, FileSeparator.Text);
+            });
+            TestLabel.Text += "Wczytano dane!\n";
+        }
+        public async Task WSULoad()
+        {
+            if (RawData.Count > 0)
+                RawData.Clear();
+            TestLabel.Text += "Rozpoczęto wczytywanie interferometru." + Environment.NewLine;
+            await Task.Run(() =>
+            {
+                InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text);
+            });
+            TestLabel.Text += "Wczytano dane!" + Environment.NewLine;
+        }
+        private void LoadData_Click(object sender, EventArgs e)
+        {
+            PicoLoad();
         }
 
         private void PathToFileLabel_Click(object sender, EventArgs e)
@@ -528,9 +546,7 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void Button2_Click_1(object sender, EventArgs e)
         {
-            InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text);
-            TestLabel.Text = "Dane wczytane." + Environment.NewLine + "Plik:" + InteferometerPathway.FileName + Environment.NewLine + "Wielkość tablicy:" + InteferogramData.Count()
-                + Environment.NewLine + "Wielkość listy:" + InteferogramData[200].Count();
+            WSULoad();
         }
 
         private void InteferometerPathway_FileOk(object sender, CancelEventArgs e)
