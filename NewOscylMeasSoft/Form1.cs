@@ -291,55 +291,58 @@ namespace NewOscylMeasSoft
 
         private void StartBtn_Click(object sender, EventArgs e)
         {
-            StopBtn.Enabled = true;
-            PauseBtn.Enabled = true;
-            StartBtn.Enabled = false;
-            StartBtn.Text = "Start";
-            PauseBtn.BackColor = Color.Yellow;
-            StopBtn.BackColor = Color.Red;
-            StartBtn.BackColor = Color.White;
-            int x, y;
-            int.TryParse(MeasuresTB.Text, out x);
-            int.TryParse(AveragesTB.Text, out y);
-            bool z = false;
             if (DataSaverDialog.FileName == "")
-                DataSaverDialog.ShowDialog();
-            if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
             {
-                Graphdrawer.Start();
-                StartTheThread(savepath, oscillo, x, y, TriggerBtnOn.Checked);
+                MessageBox.Show("Najpierw wybierz miejsce zapisu pliku, klikając przycisk 'Save'.");
             }
             else
             {
-                MessageBox.Show("Niepoprawne parametry");
+                int x, y;
+                int.TryParse(MeasuresTB.Text, out x);
+                int.TryParse(AveragesTB.Text, out y);
+                bool z = false;
+                if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
+                {
+                    StopBtn.Enabled = true;
+                    PauseBtn.Enabled = true;
+                    StartBtn.Enabled = false;
+                    StartBtn.Text = "Start";
+                    PauseBtn.BackColor = Color.Yellow;
+                    StopBtn.BackColor = Color.Red;
+                    StartBtn.BackColor = Color.White;
+                    Graphdrawer.Start();
+                    StartTheThread(savepath, oscillo, x, y, TriggerBtnOn.Checked);
+                }
+                else
+                {
+                    MessageBox.Show("Niepoprawne parametry");
+                }
             }
         }
 
         private void StopBtn_Click(object sender, EventArgs e)
         {
-            StartBtn.Enabled = true;
-            PauseBtn.Enabled = false;
-            StopBtn.Enabled = false;
-            StartBtn.Text = "Start";
-            PauseBtn.BackColor = Color.White;
-            StopBtn.BackColor = Color.White;
-            StartBtn.BackColor = Color.Green;
             DialogResult DR = MessageBox.Show("Are you sure you want to stop measurements?", "OMG YOU ARE GOING TO STOP THE MEASUREMENTS!", MessageBoxButtons.YesNo);
             if (DR == DialogResult.Yes)
                 Measure.Abort();
             else
                 MessageBox.Show("Measurements were not stopped");
         }
-
+        private bool x = true;
         private void PauseBtn_Click(object sender, EventArgs e)
-        {
-            StartBtn.Text = "Continue";
-            StopBtn.Enabled = true;
-            StartBtn.Enabled = true;
-            PauseBtn.Enabled = false;
-            PauseBtn.BackColor = Color.White;
-            StopBtn.BackColor = Color.Red;
-            StartBtn.BackColor = Color.Green;
+        {            
+            if(x)
+            {
+                PauseBtn.Text = "Continue";
+                measurements.PauseFlag = true;
+                x = false;
+            }
+            else
+            {
+                PauseBtn.Text = "Pause";
+                measurements.PauseFlag = false;
+                x = true;
+            }
         }
 
         private void EachMeasureSave_FileOk(object sender, CancelEventArgs e)
@@ -545,7 +548,12 @@ private void button1_Click_3(object sender, EventArgs e)
         private void FindInterferogram_Click(object sender, EventArgs e)
         {
             InteferometerPathway.ShowDialog();
-            LoadInteferometer.Enabled = true;
+            if(InteferometerPathway != null)
+            {
+                InteferometerSlider.Enabled = true;
+                InteferometerSlider.BackColor = Color.PaleGreen;
+                LoadInteferometer.Enabled = true;
+            }
         }
 
         private void Button2_Click_1(object sender, EventArgs e)
@@ -754,11 +762,17 @@ private void button1_Click_3(object sender, EventArgs e)
         private void FindFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog.ShowDialog();
-            LoadData.Enabled = true;
-            DataSlider.BackColor = Color.PaleGreen;
-            TrackMin.BackColor = Color.LightBlue;
-            TrackMax.BackColor = Color.LightBlue;
-            PathToFileLabel.Text = "Path: " + OpenFileDialog.FileName;
+            if (OpenFileDialog.FileName != null)
+            {
+                LoadData.Enabled = true;
+                DataSlider.Enabled = true;
+                TrackMin.Enabled = true;
+                TrackMax.Enabled = true;
+                DataSlider.BackColor = Color.PaleGreen;
+                TrackMin.BackColor = Color.LightBlue;
+                TrackMax.BackColor = Color.LightBlue;
+                PathToFileLabel.Text = "Path: " + OpenFileDialog.FileName;
+            }
         }
 
         private void DataSlider_ValueChanged(object sender, EventArgs e)

@@ -33,7 +33,12 @@ namespace NewOscylMeasSoft
         public PointPairList PPLSPEC = new PointPairList();
         public bool DrawTheGraph = false, WSUmarker = false, PICOmarker = false;
         public double SUMPICO;
-
+        private bool pauseflag = false;
+        public bool PauseFlag
+        {
+            get { return pauseflag; }
+            set { pauseflag = PauseFlag; }
+        }
         public void PicoMeasures(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
 
@@ -63,6 +68,10 @@ namespace NewOscylMeasSoft
                 }
                 for (int j = 0; j < Averages; j++)
                 {
+                    if(PauseFlag == true)
+                    {
+                        Thread.Sleep(50);
+                    }
                     SW1 = Stopwatch.ElapsedMilliseconds;
                     if(TriggerBtn == true)
                     {
@@ -238,8 +247,18 @@ namespace NewOscylMeasSoft
             MessageBox.Show("Koniec");
         }
         
+        private async Task<List<double>> GetWaveformAsync()
+        {
+            List<double> list = await Task.Run(() => oscillo.odczyt()[0]);
+            return list;
+        }
 
-        public void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
+        private async Task<Array> GetInteferometer()
+        {
+            Array x = await Task.Run(() => obslugaNW.odczytajPrazkiPierwszyIntenf());
+            return x;
+        }
+        public async void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
 
             EWHustawiono = new EventWaitHandle(false, EventResetMode.AutoReset, "USTAWIONO");
@@ -268,9 +287,11 @@ namespace NewOscylMeasSoft
                 for (int j = 0; j < Averages; j++)
                 {
                     SW1 = Stopwatch.ElapsedMilliseconds;
-                    WaveformArray.Add(oscillo.odczyt()[0]);
+                    // WaveformArray.Add(oscillo.odczyt()[0]);
+                    WaveformArray.Add(await GetWaveformAsync());
                     SW2 = Stopwatch.ElapsedMilliseconds;
-                    var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
+                    // var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
+                    var x = await GetInteferometer();
                     SW3 = Stopwatch.ElapsedMilliseconds;
                     PPLWSU.Clear();
                     PPLPIC.Clear();
@@ -289,7 +310,7 @@ namespace NewOscylMeasSoft
                     foreach (var z in x)
                     {
                         SBWSU.Append(z.ToString() + ":");
-                        PPLWSU.Add(i, z);
+                        PPLWSU.Add(i, (double) z); // TUTAJ DODALEM CASTA
                         i++;
                     }
                     if(obslugaNW.odczytNowegoWMcm(false) > 0 && obslugaNW.odczytNowegoWMcm(false) < 20000)// usunac true jak działa

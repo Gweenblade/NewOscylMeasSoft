@@ -226,6 +226,7 @@
             // InteferometerSlider
             // 
             this.InteferometerSlider.BackColor = System.Drawing.Color.Bisque;
+            this.InteferometerSlider.Enabled = false;
             this.InteferometerSlider.Location = new System.Drawing.Point(729, 358);
             this.InteferometerSlider.Maximum = 0;
             this.InteferometerSlider.Name = "InteferometerSlider";
@@ -285,6 +286,7 @@
             // DataSlider
             // 
             this.DataSlider.BackColor = System.Drawing.Color.Bisque;
+            this.DataSlider.Enabled = false;
             this.DataSlider.Location = new System.Drawing.Point(13, 563);
             this.DataSlider.Maximum = 0;
             this.DataSlider.Name = "DataSlider";
@@ -511,6 +513,7 @@
             // TrackMin
             // 
             this.TrackMin.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.TrackMin.Enabled = false;
             this.TrackMin.Location = new System.Drawing.Point(13, 471);
             this.TrackMin.Maximum = 2046;
             this.TrackMin.Minimum = 1;
@@ -523,6 +526,7 @@
             // TrackMax
             // 
             this.TrackMax.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.TrackMax.Enabled = false;
             this.TrackMax.Location = new System.Drawing.Point(13, 516);
             this.TrackMax.Maximum = 2046;
             this.TrackMax.Minimum = 1;
