@@ -28,8 +28,8 @@ namespace NewOscylMeasSoft
         int TriggerCH;
         short TriggerVoltage;
         ushort TriggerHis;
-        Thread Measure, Aw;
-        ThreadStart MEASURE;
+        Thread Measure, Graphdrawer,OscilloMeasure;
+        ThreadStart MEASURE,GRAPHDRAWER;
         Measurements measurements;
         DataAnalysis DA;
         StreamWriter FilepathWriter;
@@ -49,6 +49,7 @@ namespace NewOscylMeasSoft
         PointPairList  PPLmax = new PointPairList();
         PointPairList PPLmin = new PointPairList();
         PointPairList CutoffPoints = new PointPairList();
+        PointPairList BriefSpectrum = new PointPairList();
         bool userdoneupdater = false;
         bool userdoneupdaterinteferometer = false;
         obslugaNW WMU = new obslugaNW();
@@ -72,7 +73,17 @@ namespace NewOscylMeasSoft
             oscillo = new Oscyloskop.Form1();
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
             ZedSignal.GraphPane.YAxis.Title.Text = "Signal";
+            OscilloSignal.GraphPane.XAxis.Title.Text = "Number of point";
+            OscilloSignal.GraphPane.YAxis.Title.Text = "Voltage (mV)";
+            WavemeterSignal.GraphPane.XAxis.Title.Text = "Number of point";
+            WavemeterSignal.GraphPane.YAxis.Title.Text = "Intensity (a.u.)";
+            ZedBriefIntegral.GraphPane.XAxis.Title.Text = "Wavenumber (cm^-1)";
+            ZedBriefIntegral.GraphPane.YAxis.Title.Text = "Total integral (a.u.)";
+            OscilloSignal.GraphPane.Title.Text = "PicoScope";
+            WavemeterSignal.GraphPane.Title.Text = "Wavemeter";
             DataSlider.BackColor = Color.LightGray;
+            GRAPHDRAWER = new ThreadStart(GraphDrawer);
+            Graphdrawer = new Thread(GRAPHDRAWER);
             ZedSignal.GraphPane.CurveList.Add(lineItem1);
             ZedSignal.GraphPane.CurveList.Add(lineItem2);
             ZedSignal.GraphPane.YAxis.Scale.Max = 5000;
@@ -94,7 +105,25 @@ namespace NewOscylMeasSoft
 
         public Thread StartTheThread(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool Trigger = false)
         {
+            if (TriggerBtnOn.Checked)
+                NumberOfMeasures = 1000000;
             Measure = new Thread(() => measurements.GatherWaveforms(FilePath, oscillo, NumberOfMeasures, Averages, TriggerBtnOn.Checked));
+            Measure.Start();
+            return Measure;
+        }
+        public Thread JustPICO(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool Trigger = false)
+        {
+            if (TriggerBtnOn.Checked)
+                NumberOfMeasures = 1000000;
+            Measure = new Thread(() => measurements.PicoMeasures(FilePath, oscillo, NumberOfMeasures, Averages, TriggerBtnOn.Checked));
+            Measure.Start();
+            return Measure;
+        }
+        public Thread JustWSU(string FilePath, int NumberOfMeasures = 500, int Averages = 10, bool Trigger = false)
+        {
+            if (TriggerBtnOn.Checked)
+                NumberOfMeasures = 1000000;
+            Measure = new Thread(() => measurements.WSUmeasures(FilePath, NumberOfMeasures, Averages, TriggerBtnOn.Checked));
             Measure.Start();
             return Measure;
         }
@@ -104,13 +133,44 @@ namespace NewOscylMeasSoft
             Measure.Start();
             return Measure;
         }
-
-        public void GraphDrawerWavemeter(PointPairList PPL)// TO TRZEBA ZROBIC
+        public Thread OnlyOscilloMeasures(string FilePath, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 500, int Averages = 10, bool Trigger = false) // DO USUNIECIA
         {
-            WavemeterSignal.GraphPane.CurveList.Clear();
-            WavemeterSignal.GraphPane.AddCurve("", PPL, Color.Red, SymbolType.None);
-            WavemeterSignal.AxisChange();
-            WavemeterSignal.Invalidate();
+            OscilloMeasure = new Thread(() => measurements.OnlyOscilloMeasurements(FilePath,oscillo,NumberOfMeasures,Averages,Trigger));
+            OscilloMeasure.Start();
+            return OscilloMeasure;
+        }
+        public void GraphDrawer()// TO TRZEBA ZROBIC
+        {
+            int i = 1;
+            LineItem LBriefIntegral;
+            LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
+            BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
+            while (true)
+            {
+                if(measurements.DrawTheGraph == true)
+                {
+                    measurements.DrawTheGraph = false;
+                    WavemeterSignal.GraphPane.CurveList.Clear();
+                    OscilloSignal.GraphPane.CurveList.Clear();
+                    ZedBriefIntegral.GraphPane.CurveList.Clear();
+                    WavemeterSignal.GraphPane.AddCurve("", measurements.PPLWSU, Color.Red, SymbolType.None);
+                    OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
+                    if(measurements.IntegralPico != 0 && measurements.CurrentWavelenght > 0)
+                    {
+                        BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.SUMPICO);
+                        ZedBriefIntegral.Update();
+                        ZedBriefIntegral.AxisChange();
+                        ZedBriefIntegral.Invalidate();
+                    }
+                    WavemeterSignal.AxisChange();
+                    OscilloSignal.AxisChange();
+                    WavemeterSignal.Invalidate();
+                    OscilloSignal.Invalidate();
+                    MeasurementNumberLabel.Text = "Number of measures: " + i;
+                    i++;
+                }
+
+            }
             
         }
 
@@ -121,7 +181,7 @@ namespace NewOscylMeasSoft
             {
                 PPLCorrect.Add(i, i);
             }
-            GraphDrawerWavemeter(PPLCorrect);
+           GraphDrawer();
         }
         private void LineZedSignalRedrawer()
         {
@@ -242,8 +302,11 @@ namespace NewOscylMeasSoft
             int.TryParse(MeasuresTB.Text, out x);
             int.TryParse(AveragesTB.Text, out y);
             bool z = false;
+            if (DataSaverDialog.FileName == "")
+                DataSaverDialog.ShowDialog();
             if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
             {
+                Graphdrawer.Start();
                 StartTheThread(savepath, oscillo, x, y, TriggerBtnOn.Checked);
             }
             else
@@ -354,10 +417,35 @@ private void button1_Click_3(object sender, EventArgs e)
                 MessageBox.Show("Something went wrong..");
         }
 
-
+        public async Task PicoLoad()
+        {
+            if (RawData.Count > 0)
+                RawData.Clear();
+            TestLabel.Text += "Rozpoczęto wczytywanie danych.\n";
+            await Task.Run(() =>
+            {
+                RawData = measurements.RegexReader(loadpath, FileSeparator.Text);
+            });
+            TestLabel.Text += "Wczytano dane!\n";
+            IntegralBtn.Enabled = true;
+            IntegralBtn.BackColor = Color.LightGreen;
+        }
+        public async Task WSULoad()
+        {
+            if (RawData.Count > 0)
+                RawData.Clear();
+            TestLabel.Text += "Rozpoczęto wczytywanie interferometru." + Environment.NewLine;
+            await Task.Run(() =>
+            {
+                InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text);
+            });
+            TestLabel.Text += "Wczytano dane!" + Environment.NewLine;
+            CutOffFunction.Enabled = true;
+            CutOffFunction.BackColor = Color.LightGreen;
+        }
         private void LoadData_Click(object sender, EventArgs e)
         {
-            RawData = measurements.RegexReader(loadpath, FileSeparator.Text);
+            PicoLoad();
         }
 
         private void PathToFileLabel_Click(object sender, EventArgs e)
@@ -379,26 +467,29 @@ private void button1_Click_3(object sender, EventArgs e)
             List<double> STDlist = new List<double>();
             ForDataAnalysis = measurements.RegexReader(ForRandomDataReads.FileName, FileSeparator.Text);
             double lastT, lastC, SumMax = 0;
+            MessageBox.Show("" + ForDataAnalysis.Count() + " " + ForDataAnalysis[0].Count() + " " + ForDataAnalysis[1].Count());
             lastT = ForDataAnalysis[0][1];
             lastC = ForDataAnalysis[0][2];
+            int ave = int.Parse(ReadFilesAveTB.Text);
             for (int i = 0; i < ForDataAnalysis.Count(); i++)
             {
                 
                 if(lastT == ForDataAnalysis[i][1] && lastC == ForDataAnalysis[i][2])
                 {
-                    SumMax = SumMax + ForDataAnalysis[i][5];
-                    STDlist.Add(ForDataAnalysis[i][5]);
+                    SumMax = SumMax + ForDataAnalysis[i][6];
+               //     MessageBox.Show("" + ForDataAnalysis[i][6]);
+                    STDlist.Add(ForDataAnalysis[i][6]);
                 }
                 else
                 {
-                    SBRandomData.Append("" + lastT + " " + lastC + " " + ForDataAnalysis[i-50][3] + " " + ForDataAnalysis[i][3] + " " + SumMax / 50 + " " + DA.getStandardDeviation(STDlist) +Environment.NewLine);
+                    SBRandomData.Append("" + lastT + " " + lastC + " " + ForDataAnalysis[i-ave][3] + " " + ForDataAnalysis[i][3] + " " + SumMax / ave + " " + DA.getStandardDeviation(STDlist) +Environment.NewLine);
                     using (StreamWriter SW = new StreamWriter(ForRandomDataReads.FileName + " Results", true))
                     {
                         SW.Write(SBRandomData);
                     }
                     SBRandomData.Clear();
                     STDlist.Clear();
-                    SumMax = ForDataAnalysis[i][5];
+                    SumMax = ForDataAnalysis[i][6];
                     lastT = ForDataAnalysis[i][1];
                     lastC = ForDataAnalysis[i][2];
                 }
@@ -435,10 +526,10 @@ private void button1_Click_3(object sender, EventArgs e)
         {
             CutoffSaver.ShowDialog();
             int Max = 0;
-            for (int i = 0; i < InteferogramData.Count(); i++)
+            for (int i = 1; i < InteferogramData.Count(); i++)
             {
                 CutoffAll.Add(DA.CutoffFunction(InteferogramData[i], double.Parse(CutoffTB.Text), int.Parse(IgnoredColumnsForInteferometer.Text)));
-                Max = DA.MaximumsCounter(CutoffAll[i]);
+                Max = DA.MaximumsCounter(CutoffAll[i-1]);
                 using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
                 {
                     for(int j = 0; j < int.Parse(IgnoredColumnsForInteferometer.Text); j++)
@@ -459,9 +550,7 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void Button2_Click_1(object sender, EventArgs e)
         {
-            InteferogramData = measurements.RegexReader(InteferometerPathway.FileName, FileSeparator.Text);
-            TestLabel.Text = "Dane wczytane." + Environment.NewLine + "Plik:" + InteferometerPathway.FileName + Environment.NewLine + "Wielkość tablicy:" + InteferogramData.Count()
-                + Environment.NewLine + "Wielkość listy:" + InteferogramData[200].Count();
+            WSULoad();
         }
 
         private void InteferometerPathway_FileOk(object sender, CancelEventArgs e)
@@ -552,9 +641,88 @@ private void button1_Click_3(object sender, EventArgs e)
             MessageBox.Show("" + stopwatch.ElapsedMilliseconds + " " + ReadDataInDoubles[1].Count);
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(Measure != null)
+            {
+                if (Measure.IsAlive) Measure.Abort();
+            }
+            if(Graphdrawer != null)
+            {
+                if (Graphdrawer.IsAlive) Graphdrawer.Abort();
+            }
+            Environment.Exit(Environment.ExitCode);
+        }
+
+        private void OnlyPico_Click(object sender, EventArgs e)
+        {
+            int x, y;
+            int.TryParse(MeasuresTB.Text, out x);
+            int.TryParse(AveragesTB.Text, out y);
+            bool z = false;
+            if (DataSaverDialog.FileName == "")
+                DataSaverDialog.ShowDialog();
+            if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
+            {
+                Graphdrawer.Start();
+                OnlyOscilloMeasures(savepath, oscillo, x, y, TriggerBtnOn.Checked);
+            }
+            else
+            {
+                MessageBox.Show("Niepoprawne parametry");
+            }
+        }
+
+        private void NewMeasureButton_Click(object sender, EventArgs e)
+        {
+            int x, y;
+            int.TryParse(MeasuresTB.Text, out x);
+            int.TryParse(AveragesTB.Text, out y);
+            bool z = false;
+            if (DataSaverDialog.FileName == "")
+                DataSaverDialog.ShowDialog();
+            if (int.TryParse(MeasuresTB.Text, out x) && int.TryParse(AveragesTB.Text, out y))
+            {
+                Graphdrawer.Start();
+                JustPICO(savepath, oscillo, x, y, TriggerBtnOn.Checked);
+                JustWSU(savepath, x, y, TriggerBtnOn.Checked);
+            }
+            else
+            {
+                MessageBox.Show("Niepoprawne parametry");
+            }
+        }
+
+        private void ZedSignal_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_6(object sender, EventArgs e)
+        {
+            LineItem LBriefIntegral;
+            LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("bla", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
+            BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
+            for (int i = 0; i < 100; i++)
+            {
+                BriefSpectrum.Add(i, i);
+                measurements.CurrentWavelenght = 0;
+                measurements.IntegralPico = 0;
+                LBriefIntegral.Line.IsVisible = false;
+                ZedBriefIntegral.Update();
+                ZedBriefIntegral.AxisChange();
+                ZedBriefIntegral.Invalidate();
+            }
+
+        }
+
+        private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
+
         private void button1_Click_5(object sender, EventArgs e)
         {
-            StartTheThread2();
         }
 
         private void InteferometerSlider_MouseUp(object sender, MouseEventArgs e)
@@ -587,6 +755,9 @@ private void button1_Click_3(object sender, EventArgs e)
         {
             OpenFileDialog.ShowDialog();
             LoadData.Enabled = true;
+            DataSlider.BackColor = Color.PaleGreen;
+            TrackMin.BackColor = Color.LightBlue;
+            TrackMax.BackColor = Color.LightBlue;
             PathToFileLabel.Text = "Path: " + OpenFileDialog.FileName;
         }
 
@@ -597,32 +768,32 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void IntegralBtn_Click(object sender, EventArgs e) // INTEGRAL to samo co w check
         {
-            PointPairList PPL;
-            ZedIntegral.GraphPane.CurveList.Clear();
-            ZedIntegral.GraphPane.GraphObjList.Clear();
-            PointPairList PPLCorrect = new PointPairList();
-            PointPairList PPLNotCorrect = new PointPairList();
-            StringBuilder SB = new StringBuilder();
-            Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
-            for (int i = 0; i < Integral.Count(); i++)
-            {
-                for (int j = 0; j < Integral[i].Count; j++)
+                PointPairList PPL;
+                ZedIntegral.GraphPane.CurveList.Clear();
+                ZedIntegral.GraphPane.GraphObjList.Clear();
+                PointPairList PPLCorrect = new PointPairList();
+                PointPairList PPLNotCorrect = new PointPairList();
+                StringBuilder SB = new StringBuilder();
+                Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
+                for (int i = 0; i < Integral.Count(); i++)
                 {
-                    SB.Append(Integral[i][j] + " ");
+                    for (int j = 0; j < Integral[i].Count; j++)
+                    {
+                        SB.Append(Integral[i][j] + " ");
+                    }
+                    SB.Append("\n");
+                    PPLCorrect.Add(Integral[i][0], Integral[i][1]);
+                    PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
                 }
-                SB.Append("\n");
-                PPLCorrect.Add(Integral[i][0], Integral[i][1]);
-                PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
-            }
-            using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(SB); }
-            LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("Correct measured points", PPLCorrect, Color.Green, SymbolType.Circle);
-            LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("Incorrect measured points", PPLNotCorrect, Color.Red, SymbolType.Plus);
-            CorrectCurve.Line.IsVisible = false;
-            IncorrectCurve.Line.IsVisible = false;
-            ZedIntegral.AxisChange();
-            ZedIntegral.Update();
-            ZedIntegral.Invalidate();
-
+                using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(SB); }
+                LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("Correct measured points", PPLCorrect, Color.Green, SymbolType.Circle);
+                LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("Incorrect measured points", PPLNotCorrect, Color.Red, SymbolType.Plus);
+                CorrectCurve.Line.IsVisible = false;
+                IncorrectCurve.Line.IsVisible = false;
+                ZedIntegral.AxisChange();
+                ZedIntegral.Update();
+                ZedIntegral.Invalidate();
+            
         }
 
         private void DataSlider_MouseUp(object sender, MouseEventArgs e)
@@ -636,7 +807,7 @@ private void button1_Click_3(object sender, EventArgs e)
                 TrackMin.Maximum = CurrentWave.Count();
                 TrackMax.Maximum = CurrentWave.Count();
                 PPLsignal.Clear();
-                for (int i = 0; i < CurrentWave.Count; i++)
+                for (int i = int.Parse(IgnoredColumsForData.Text); i < CurrentWave.Count; i++)
                 {
                     PPLsignal.Add(i, CurrentWave[i]);
                 }
