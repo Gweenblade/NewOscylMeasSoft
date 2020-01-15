@@ -302,7 +302,7 @@ namespace NewOscylMeasSoft
                     PPLPIC.Clear();
                     SB.Append(SW1 + ":" + SW2 + ":");
                     SBWSU.Append(SW2 + ":" + SW3 + ":");
-                    while (!InterferometerReading) { }
+                    //while (!InterferometerReading) { }
                     InterferometerReading = false;
                     for (i = 0; i < WaveformArray[0].Count; i++)
                     {
@@ -320,7 +320,6 @@ namespace NewOscylMeasSoft
                         PPLWSU.Add(i, (double) z); // TUTAJ DODALEM CASTA
                         i++;
                     }
-                    Array.Clear(x, 0, 2048);
                     
                     if (obslugaNW.odczytNowegoWMcm(false) > 0 && obslugaNW.odczytNowegoWMcm(false) < 20000)// usunac true jak działa
                         PPLSPEC.Add(obslugaNW.odczytNowegoWMcm(false), SUMPICO);
