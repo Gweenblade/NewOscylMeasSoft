@@ -34,6 +34,8 @@ namespace NewOscylMeasSoft
         public bool DrawTheGraph = false, WSUmarker = false, PICOmarker = false;
         public double SUMPICO;
         private bool pauseflag = false;
+        private bool InterferometerReading = false;
+
         public bool PauseFlag
         {
             get { return pauseflag; }
@@ -256,6 +258,7 @@ namespace NewOscylMeasSoft
         private async Task<Array> GetInteferometer()
         {
             Array x = await Task.Run(() => obslugaNW.odczytajPrazkiPierwszyIntenf());
+            InterferometerReading = true;
             return x;
         }
         public async void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
@@ -268,6 +271,7 @@ namespace NewOscylMeasSoft
            // EWHstart = new EventWaitHandle(false, EventResetMode.AutoReset, "START");
             int MeasureLoopIndicator;
             int i;
+            short[] interferometer = new short[2048];
             bool WARNING, Ender = false;
             WaveformArray = new List<List<double>>();
             List<double> temp = new List<double>();
@@ -287,16 +291,18 @@ namespace NewOscylMeasSoft
                 for (int j = 0; j < Averages; j++)
                 {
                     SW1 = Stopwatch.ElapsedMilliseconds;
-                    // WaveformArray.Add(oscillo.odczyt()[0]);
-                    WaveformArray.Add(await GetWaveformAsync());
-                    SW2 = Stopwatch.ElapsedMilliseconds;
-                    // var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
                     var x = await GetInteferometer();
+                    SW2 = Stopwatch.ElapsedMilliseconds;
+                    WaveformArray.Add(oscillo.odczyt()[0]);
+                    // WaveformArray.Add(await GetWaveformAsync());
+                    // var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
                     SW3 = Stopwatch.ElapsedMilliseconds;
                     PPLWSU.Clear();
                     PPLPIC.Clear();
                     SB.Append(SW1 + ":" + SW2 + ":");
                     SBWSU.Append(SW2 + ":" + SW3 + ":");
+                    while (!InterferometerReading) { }
+                    InterferometerReading = false;
                     for (i = 0; i < WaveformArray[0].Count; i++)
                     {
                         SB.Append(WaveformArray[0][i] + ":");
@@ -313,7 +319,9 @@ namespace NewOscylMeasSoft
                         PPLWSU.Add(i, (double) z); // TUTAJ DODALEM CASTA
                         i++;
                     }
-                    if(obslugaNW.odczytNowegoWMcm(false) > 0 && obslugaNW.odczytNowegoWMcm(false) < 20000)// usunac true jak działa
+                    Array.Clear(x, 0, 2048);
+                    
+                    if (obslugaNW.odczytNowegoWMcm(false) > 0 && obslugaNW.odczytNowegoWMcm(false) < 20000)// usunac true jak działa
                         PPLSPEC.Add(obslugaNW.odczytNowegoWMcm(false), SUMPICO);
                     DrawTheGraph = true;
                     SBWSU.Append("\r\n");
