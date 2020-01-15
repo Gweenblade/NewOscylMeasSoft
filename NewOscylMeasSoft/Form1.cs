@@ -144,7 +144,7 @@ namespace NewOscylMeasSoft
             int i = 1;
             LineItem LBriefIntegral;
             LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
-            BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
+            BriefSpectrum.Add(measurements.PPLSPEC);
             while (true)
             {
                 if(measurements.DrawTheGraph == true)
@@ -155,13 +155,9 @@ namespace NewOscylMeasSoft
                     ZedBriefIntegral.GraphPane.CurveList.Clear();
                     WavemeterSignal.GraphPane.AddCurve("", measurements.PPLWSU, Color.Red, SymbolType.None);
                     OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
-                    if(measurements.IntegralPico != 0 && measurements.CurrentWavelenght > 0)
-                    {
-                        BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.SUMPICO);
-                        ZedBriefIntegral.Update();
-                        ZedBriefIntegral.AxisChange();
-                        ZedBriefIntegral.Invalidate();
-                    }
+                    ZedBriefIntegral.Update();
+                    ZedBriefIntegral.AxisChange();
+                    ZedBriefIntegral.Invalidate();
                     WavemeterSignal.AxisChange();
                     OscilloSignal.AxisChange();
                     WavemeterSignal.Invalidate();
