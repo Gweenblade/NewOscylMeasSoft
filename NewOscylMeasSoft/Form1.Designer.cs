@@ -88,7 +88,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.AveragesTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.CheckOne = new System.Windows.Forms.Button();
+            this.JustGraphChecks = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.WavemeterSignal = new ZedGraph.ZedGraphControl();
             this.label1 = new System.Windows.Forms.Label();
@@ -662,7 +662,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.AveragesTB);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.CheckOne);
+            this.groupBox1.Controls.Add(this.JustGraphChecks);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.WavemeterSignal);
             this.groupBox1.Controls.Add(this.label1);
@@ -768,15 +768,15 @@
             this.label4.TabIndex = 25;
             this.label4.Text = "Number of averages -";
             // 
-            // CheckOne
+            // JustGraphChecks
             // 
-            this.CheckOne.Location = new System.Drawing.Point(311, 729);
-            this.CheckOne.Name = "CheckOne";
-            this.CheckOne.Size = new System.Drawing.Size(75, 21);
-            this.CheckOne.TabIndex = 16;
-            this.CheckOne.Text = "Check one";
-            this.CheckOne.UseVisualStyleBackColor = true;
-            this.CheckOne.Click += new System.EventHandler(this.CheckOne_Click);
+            this.JustGraphChecks.Location = new System.Drawing.Point(311, 729);
+            this.JustGraphChecks.Name = "JustGraphChecks";
+            this.JustGraphChecks.Size = new System.Drawing.Size(98, 21);
+            this.JustGraphChecks.TabIndex = 16;
+            this.JustGraphChecks.Text = "GraphChecker";
+            this.JustGraphChecks.UseVisualStyleBackColor = true;
+            this.JustGraphChecks.Click += new System.EventHandler(this.CheckOne_Click);
             // 
             // label2
             // 
@@ -914,7 +914,7 @@
         private System.Windows.Forms.Button ResultsAnalizer;
         public ZedGraph.ZedGraphControl OscilloSignal;
         public ZedGraph.ZedGraphControl WavemeterSignal;
-        private System.Windows.Forms.Button CheckOne;
+        private System.Windows.Forms.Button JustGraphChecks;
         private System.Windows.Forms.TextBox AveragesTB;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

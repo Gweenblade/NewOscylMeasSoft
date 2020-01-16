@@ -495,25 +495,32 @@ private void button1_Click_3(object sender, EventArgs e)
             }
         }
 
+        public Thread GraphDrawingsWithoutMeasures(bool Trigger = false)
+        {
+            Measure = new Thread(() => measurements.NoMeasuresJustGraphs(Trigger = false));
+            Measure.Start();
+            return Measure;
+        }
+        private bool FlagForGraph = true;
         private void CheckOne_Click(object sender, EventArgs e)
         {
-            var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
-            StringBuilder SB = new StringBuilder();
-            PointPairList PPL = new PointPairList();
-            int i = 0;
-            foreach (var z in x)
+            if(FlagForGraph)
             {
-                SB.Append(z + "\n");
-                PPL.Add(i, z);
-                i++;
+                GraphDrawingsWithoutMeasures();
+                FlagForGraph = false;
             }
-            TestLabel.Text = SB.ToString();
-            WavemeterSignal.GraphPane.CurveList.Clear();
-            WavemeterSignal.GraphPane.AddCurve("", PPL, Color.Red, SymbolType.None);
-            WavemeterSignal.AxisChange();
-            WavemeterSignal.Update();
-            WavemeterSignal.Invalidate();
-
+            else
+            {
+                try
+                {
+                    GraphDrawingsWithoutMeasures().Abort();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                FlagForGraph = true;
+            }
         }
 
         private void AveragesTB_TextChanged(object sender, EventArgs e)

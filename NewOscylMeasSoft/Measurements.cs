@@ -346,7 +346,7 @@ namespace NewOscylMeasSoft
                     }
 
                 }
-                if(Ender == true)
+                if(Ender)
                 {
                     MessageBox.Show("Koniec pomiaru");
                     break;
@@ -356,6 +356,59 @@ namespace NewOscylMeasSoft
             MessageBox.Show("Koniec");
         }
 
+        public async void NoMeasuresJustGraphs(bool TriggerBtn = false)
+        {
+            EWHustawiono = new EventWaitHandle(false, EventResetMode.AutoReset, "USTAWIONO");
+            EWHprzestroj = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
+            EWHbreak = new EventWaitHandle(false, EventResetMode.AutoReset, "ZATRZYMAJ");
+            EWHendoftuning = new EventWaitHandle(false, EventResetMode.AutoReset, "KONIEC");
+            // EWHstart = new EventWaitHandle(false, EventResetMode.AutoReset, "START");
+            bool WARNING, Ender = false;
+            WaveformArray = new List<List<double>>();
+            List<double> temp = new List<double>();
+            StringBuilder SB = new StringBuilder();
+            StringBuilder SBWSU = new StringBuilder();
+            Stopwatch Stopwatch = new Stopwatch();
+            double Wavenumber = 0;
+            long SW1, SW2, SW3;
+            Stopwatch.Start();
+            for (;true;)
+            {
+                if (TriggerBtn == true)
+                {
+                    EWHprzestroj.Set();
+                    EWHustawiono.WaitOne();
+                }
+                var x = await Task.Run(() => obslugaNW.odczytajPrazkiPierwszyIntenf());
+                WaveformArray.Add(oscillo.odczyt()[0]);
+                PPLWSU.Clear();
+                PPLPIC.Clear();
+                InterferometerReading = false;
+                int i;
+                for (i = 0; i < WaveformArray[0].Count; i++)
+                {
+                    PPLPIC.Add(i, WaveformArray[0][i]);
+                }
+                WaveformArray.Clear();
+                i = 0;
+                foreach (var z in x)
+                {
+                    PPLWSU.Add(i, (double)z); // TUTAJ DODALEM CASTA
+                    i++;
+                }
+                DrawTheGraph = true;
+                if (EWHbreak.WaitOne(1) || EWHendoftuning.WaitOne(1))
+                {
+                    Ender = true;
+                }
+                if (Ender)
+                {
+                    MessageBox.Show("Koniec pomiaru");
+                    break;
+                }
+            }
+            Stopwatch.Stop();
+        }
         public List<double> LoadGatheredWaveforms(string FilePath1, int ReadLineNumber)
         {
             using (StreamReader SR = File.OpenText(FilePath1))
