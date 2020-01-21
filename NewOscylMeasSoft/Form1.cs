@@ -293,11 +293,11 @@ namespace NewOscylMeasSoft
             }
             else
             {
-                if (GraphDrawingsWithoutMeasures().IsAlive)
-                {
-                    GraphDrawingsWithoutMeasures().Abort();
-                    Thread.Sleep(150);
-                }
+                //if (GraphDrawingsWithoutMeasures().IsAlive)
+                //{
+                //    GraphDrawingsWithoutMeasures().Abort();
+                //    Thread.Sleep(150);
+                //}
                 int x, y;
                 int.TryParse(MeasuresTB.Text, out x);
                 int.TryParse(AveragesTB.Text, out y);

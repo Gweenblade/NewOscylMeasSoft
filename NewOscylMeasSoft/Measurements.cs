@@ -25,7 +25,6 @@ namespace NewOscylMeasSoft
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
         public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning, EWHstart, PICOready, WSUready;
-        obslugaNW WSU = new obslugaNW();
         public double IntegralPico;
         public double CurrentWavelenght;
         public PointPairList PPLWSU = new PointPairList();
@@ -257,13 +256,12 @@ namespace NewOscylMeasSoft
 
         private async Task<Array> GetInteferometer()
         {
-            Array x = await Task.Run(() => obslugaNW.odczytajPrazkiPierwszyIntenf());
+            var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
             InterferometerReading = true;
             return x;
         }
         public async void GatherWaveforms(string FilePath1, Oscyloskop.Form1 oscillo, int NumberOfMeasures = 10000, int Averages = 10, bool TriggerBtn = false)
         {
-
             EWHustawiono = new EventWaitHandle(false, EventResetMode.AutoReset, "USTAWIONO");
             EWHprzestroj = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
             EWHbreak = new EventWaitHandle(false, EventResetMode.AutoReset, "ZATRZYMAJ");
@@ -292,7 +290,7 @@ namespace NewOscylMeasSoft
                 {
                     SW1 = Stopwatch.ElapsedMilliseconds;
                     //var x = await GetInteferometer();
-                    Task<Array> d = GetInteferometer();
+                    var d = Task.Run(() => obslugaNW.odczytajPrazkiPierwszyIntenf());
                     SW2 = Stopwatch.ElapsedMilliseconds;
                     WaveformArray.Add(oscillo.odczyt()[0]);
                     var x = await d;
@@ -301,8 +299,8 @@ namespace NewOscylMeasSoft
                     SW3 = Stopwatch.ElapsedMilliseconds;
                     PPLWSU.Clear();
                     PPLPIC.Clear();
-                    SB.Append(SW1 + ":" + SW2 + ":");
-                    SBWSU.Append(SW2 + ":" + SW3 + ":");
+                    SB.Append(SW1 + ":" + SW2 + ":" + SW3 + ":");
+                    SBWSU.Append(SW1 + ":" + SW2 + ":" + SW3 + ":");
                     //while (!InterferometerReading) { }
                     InterferometerReading = false;
                     for (i = 0; i < WaveformArray[0].Count; i++)
