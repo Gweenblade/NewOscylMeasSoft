@@ -292,9 +292,10 @@ namespace NewOscylMeasSoft
                 {
                     SW1 = Stopwatch.ElapsedMilliseconds;
                     //var x = await GetInteferometer();
-                    var x = await Task.Run(() => obslugaNW.odczytajPrazkiPierwszyIntenf());
+                    Task<Array> d = GetInteferometer();
                     SW2 = Stopwatch.ElapsedMilliseconds;
                     WaveformArray.Add(oscillo.odczyt()[0]);
+                    var x = await d;
                     // WaveformArray.Add(await GetWaveformAsync());
                     // var x = obslugaNW.odczytajPrazkiPierwszyIntenf();
                     SW3 = Stopwatch.ElapsedMilliseconds;
