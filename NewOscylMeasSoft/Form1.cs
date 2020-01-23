@@ -143,8 +143,8 @@ namespace NewOscylMeasSoft
         {
             int i = 1;
             LineItem LBriefIntegral;
-            LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
             BriefSpectrum.Add(measurements.PPLSPEC);
+            ZedBriefIntegral.GraphPane.AddCurve("", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
             while (true)
             {
                 if(measurements.DrawTheGraph == true)
@@ -306,7 +306,6 @@ namespace NewOscylMeasSoft
                 {
                     StopBtn.Enabled = true;
                     PauseBtn.Enabled = true;
-                    StartBtn.Enabled = false;
                     StartBtn.Text = "Start";
                     PauseBtn.BackColor = Color.Yellow;
                     StopBtn.BackColor = Color.Red;
