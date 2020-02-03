@@ -534,13 +534,18 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void CutOffFunction_Click(object sender, EventArgs e) // COS TUTAJ NIE GRA
         {
-            CutoffSaver.ShowDialog();
             int Max = 0;
+            double k=0, dk=0;
+            int n=0, m=0;
+            int ave;
+            int Maxtotal = 0;
+            int.TryParse(ReadFilesAveTB.Text, out ave);
+            StringBuilder SBave = new StringBuilder();
             for (int i = 1; i < InteferogramData.Count(); i++)
             {
                 CutoffAll.Add(DA.CutoffFunction(InteferogramData[i], double.Parse(CutoffTB.Text), int.Parse(IgnoredColumnsForInteferometer.Text)));
-                Max = DA.MaximumsCounter(CutoffAll[i-1]);
-                using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
+                Maxtotal += Max;
+                using (StreamWriter SW = new StreamWriter(InteferometerPathway.FileName + "_Inteferometer", true))
                 {
                     for(int j = 0; j < int.Parse(IgnoredColumnsForInteferometer.Text); j++)
                     {
@@ -549,7 +554,27 @@ private void button1_Click_3(object sender, EventArgs e)
                     SW.Write(i + " " + Max + " " + DA.MaximumsUncertainty(Max) + Environment.NewLine);
                     SW.Flush();
                 }
+                if (InteferogramData[i][3] > 12810 && InteferogramData[i][3] < 12820) // zmienic centrymetry jak cos
+                {
+                    k += k + InteferogramData[i][3];
+                    n += 1;
+                }
+                if (InteferogramData[i][4] > 0)
+                {
+                    dk += dk + InteferogramData[i][3];
+                    m += 1;
+                }
+                if (i % ave == 0 && i > 0 && n > 0 && m > 0)
+                {
+                    SBave.Append(k / n + " " + dk / m + " ");
+                    k = n = m = 0;
+                    dk = 0;
+                }
+                if (i % ave == 0 && i > 0)
+                    SBave.Append(Maxtotal / ave + Environment.NewLine);
             }
+            using (StreamWriter SW = new StreamWriter(InteferometerPathway.FileName + "_InteferometerAverages", true))
+                SW.Write(SBave);
         }
 
         private void FindInterferogram_Click(object sender, EventArgs e)
@@ -789,32 +814,46 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void IntegralBtn_Click(object sender, EventArgs e) // INTEGRAL to samo co w check
         {
-                PointPairList PPL;
-                ZedIntegral.GraphPane.CurveList.Clear();
-                ZedIntegral.GraphPane.GraphObjList.Clear();
-                PointPairList PPLCorrect = new PointPairList();
-                PointPairList PPLNotCorrect = new PointPairList();
-                StringBuilder SB = new StringBuilder();
-                Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
-                for (int i = 0; i < Integral.Count(); i++)
+            PointPairList PPL;
+            ZedIntegral.GraphPane.CurveList.Clear();
+            ZedIntegral.GraphPane.GraphObjList.Clear();
+            PointPairList PPLCorrect = new PointPairList();
+            PointPairList PPLNotCorrect = new PointPairList();
+            StringBuilder SB = new StringBuilder();
+            StringBuilder SBAve = new StringBuilder();
+            List<List<double>> AveragesOnIntegral = new List<List<double>> { };
+            Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
+            for (int i = 0; i < Integral.Count(); i++)
+            {
+                for (int j = 0; j < Integral[i].Count; j++)
                 {
-                    for (int j = 0; j < Integral[i].Count; j++)
-                    {
-                        SB.Append(Integral[i][j] + " ");
-                    }
-                    SB.Append("\n");
-                    PPLCorrect.Add(Integral[i][0], Integral[i][1]);
-                    PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
+                    SB.Append(Integral[i][j] + " ");
                 }
-                using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(SB); }
-                LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("Correct measured points", PPLCorrect, Color.Green, SymbolType.Circle);
-                LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("Incorrect measured points", PPLNotCorrect, Color.Red, SymbolType.Plus);
-                CorrectCurve.Line.IsVisible = false;
-                IncorrectCurve.Line.IsVisible = false;
-                ZedIntegral.AxisChange();
-                ZedIntegral.Update();
-                ZedIntegral.Invalidate();
-            
+                SB.Append("\n");
+                PPLCorrect.Add(Integral[i][0], Integral[i][1]);
+                PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
+            }
+            if (int.TryParse(ReadFilesAveTB.Text, out int m) && m > 1)
+            {
+                AveragesOnIntegral = measurements.IntegralOnListsAverages(RawData, TrackMin.Value, TrackMax.Value,m);
+                for (int i = 0; i < AveragesOnIntegral.Count(); i++)
+                {
+                    for (int j = 0; j < AveragesOnIntegral[i].Count; j++)
+                    {
+                        SBAve.Append(AveragesOnIntegral[i][j] + " ");
+                    }
+                    SBAve.Append("\n");
+                }
+            }
+            using (StreamWriter SW = new StreamWriter(loadpath + "_Integral")) { SW.Write(SB); }
+            using (StreamWriter SW = new StreamWriter(loadpath + "_IntegralAveraged")) { SW.Write(SBAve); }
+            LineItem CorrectCurve = ZedIntegral.GraphPane.AddCurve("Correct measured points", PPLCorrect, Color.Green, SymbolType.Circle);
+            //LineItem IncorrectCurve = ZedIntegral.GraphPane.AddCurve("Incorrect measured points", PPLNotCorrect, Color.Red, SymbolType.Plus);
+            CorrectCurve.Line.IsVisible = false;
+            //IncorrectCurve.Line.IsVisible = false;
+            ZedIntegral.AxisChange();
+            ZedIntegral.Update();
+            ZedIntegral.Invalidate();
         }
 
         private void DataSlider_MouseUp(object sender, MouseEventArgs e)

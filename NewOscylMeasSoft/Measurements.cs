@@ -555,6 +555,28 @@ namespace NewOscylMeasSoft
             }
             return IntegralData;
         }
+
+        public List<List<double>> IntegralOnListsAverages(List<List<double>> RawData, int From, int To, int NumberOfAverages)
+        {
+            List<List<double>> IntegralData = new List<List<double>>();
+            DataAnalysis DA = new DataAnalysis();
+            int HowMany = To - From;
+            double Average = 0;
+            List<double> ToSTD = new List<double> { };
+            for (int i = 0; i < RawData.Count; i++)
+            {
+                Average += RawData[i].Skip(From - 1).Take(HowMany).Sum() / HowMany;
+                ToSTD.Add(Average);
+                if(i % NumberOfAverages == 0 && i > 0)
+                {
+                    IntegralData.Add(new List<double> { RawData[i - NumberOfAverages][0], RawData[i][0], Average, DA.getStandardDeviation(ToSTD)});
+                    Average = 0;
+                    ToSTD.Clear();
+                }
+            }
+            return IntegralData;
+        }
+
         public List<double> SingleLineReader(string FilePath, int ReadLineNumber, int IgnoredColumns = 0)
         {
             List<double> temp = new List<double>();

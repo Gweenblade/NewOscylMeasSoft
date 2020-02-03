@@ -328,7 +328,7 @@
             this.ReadFilesAveTB.Name = "ReadFilesAveTB";
             this.ReadFilesAveTB.Size = new System.Drawing.Size(21, 20);
             this.ReadFilesAveTB.TabIndex = 27;
-            this.ReadFilesAveTB.Text = "20";
+            this.ReadFilesAveTB.Text = "1";
             this.ReadFilesAveTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label9
