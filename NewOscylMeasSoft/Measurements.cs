@@ -24,7 +24,7 @@ namespace NewOscylMeasSoft
         Form1 form1 = new Form1();
         NewOscylMeasSoft.Form1 MAIN = new NewOscylMeasSoft.Form1();
         List<List<double>> WaveformArray, Integral = null;
-        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning, EWHstart, PICOready, WSUready;
+        public static EventWaitHandle EWHprzestroj, EWHustawiono, EWHbreak, EWHendoftuning, EWHfilesave, EWHstart, PICOready, WSUready;
         public double IntegralPico;
         public double CurrentWavelenght;
         public PointPairList PPLWSU = new PointPairList();
@@ -266,7 +266,8 @@ namespace NewOscylMeasSoft
             EWHprzestroj = new EventWaitHandle(false, EventResetMode.AutoReset, "PRZESTROJ");
             EWHbreak = new EventWaitHandle(false, EventResetMode.AutoReset, "ZATRZYMAJ");
             EWHendoftuning = new EventWaitHandle(false, EventResetMode.AutoReset, "KONIEC");
-           // EWHstart = new EventWaitHandle(false, EventResetMode.AutoReset, "START");
+            EWHfilesave = new EventWaitHandle(false, EventResetMode.AutoReset, "ZAPISUJE DO PLIKU");
+            // EWHstart = new EventWaitHandle(false, EventResetMode.AutoReset, "START");
             int MeasureLoopIndicator;
             int i;
             short[] interferometer = new short[2048];
@@ -330,6 +331,13 @@ namespace NewOscylMeasSoft
                     }
                     if (MeasureLoopIndicator % 5 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
                     {
+                        EWHfilesave.WaitOne();
+                        using (StreamWriter SW = new StreamWriter(FilePath1))
+                        {
+                            SW.Write(SB);
+                            SW.Write(SBWSU);
+                        }
+                        EWHfilesave.Set();
                         using (StreamWriter SW = new StreamWriter(FilePath1 + "PICO", true))
                         {
                             SW.Write(SB);
