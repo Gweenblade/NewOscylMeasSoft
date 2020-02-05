@@ -603,7 +603,7 @@ namespace NewOscylMeasSoft
         return temp;
         }
 
-        public List<List<double>> RegexReaderForSingleFile(string FilePath1, string Separator, int IgnoredColumns = 0) // DO DALSZEJ DIAGNOSTKI.
+        public List<List<double>> RegexReaderForSingleFile(string FilePath1, string Separator, int IgnoredColumnsData = 0,int IgnoredColumsInterferometer = 0) // DO DALSZEJ DIAGNOSTKI.
         {
             string WholeText;
             using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
@@ -616,10 +616,24 @@ namespace NewOscylMeasSoft
                     }
                 }
             }
-            List<string> Test = Regex.Split(WholeText, "\n").ToList();
+            List<string> WholeLines = Regex.Split(WholeText, "\n").ToList();
+            foreach (string x in WholeLines)
+            {
+                List<string> Header = Regex.Split(x, " ").ToList();
+                if (Header[0] == "PICO")
+                {
 
+                }
+                if (Header[0] == "WSU")
+                {
+
+                }
+                if (Header[0] == "DL100")
+                {
+
+                }
+            }
             List<List<double>> ReadDataInDoubles = new List<List<double>>();
-            MessageBox.Show(Test.Count().ToString());
             return ReadDataInDoubles;
         }
     }
