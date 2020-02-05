@@ -329,15 +329,13 @@ namespace NewOscylMeasSoft
                     {
                         Ender = true;
                     }
-                    if (MeasureLoopIndicator % 5 == 0 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
+                    if (j == Averages - 1 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
                     {
-                        EWHfilesave.WaitOne();
                         using (StreamWriter SW = new StreamWriter(FilePath1))
                         {
-                            SW.Write(SB);
-                            SW.Write(SBWSU);
+                            SW.Write("PICO " + SB + Environment.NewLine);
+                            SW.Write("WSU " + SBWSU + Environment.NewLine);
                         }
-                        EWHfilesave.Set();
                         using (StreamWriter SW = new StreamWriter(FilePath1 + "PICO", true))
                         {
                             SW.Write(SB);
@@ -603,6 +601,26 @@ namespace NewOscylMeasSoft
                 }
             }
         return temp;
+        }
+
+        public List<List<double>> RegexReaderForSingleFile(string FilePath1, string Separator, int IgnoredColumns = 0) // DO DALSZEJ DIAGNOSTKI.
+        {
+            string WholeText;
+            using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            {
+                using (BufferedStream BS = new BufferedStream(FS))
+                {
+                    using (StreamReader SR = new StreamReader(BS))
+                    {
+                        WholeText = SR.ReadToEnd();
+                    }
+                }
+            }
+            List<string> Test = Regex.Split(WholeText, "\n").ToList();
+
+            List<List<double>> ReadDataInDoubles = new List<List<double>>();
+            MessageBox.Show(Test.Count().ToString());
+            return ReadDataInDoubles;
         }
     }
 }

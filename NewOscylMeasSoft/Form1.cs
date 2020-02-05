@@ -740,20 +740,9 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void button1_Click_6(object sender, EventArgs e)
         {
-            LineItem LBriefIntegral;
-            LBriefIntegral = ZedBriefIntegral.GraphPane.AddCurve("bla", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
-            BriefSpectrum.Add(measurements.CurrentWavelenght, measurements.IntegralPico);
-            for (int i = 0; i < 100; i++)
-            {
-                BriefSpectrum.Add(i, i);
-                measurements.CurrentWavelenght = 0;
-                measurements.IntegralPico = 0;
-                LBriefIntegral.Line.IsVisible = false;
-                ZedBriefIntegral.Update();
-                ZedBriefIntegral.AxisChange();
-                ZedBriefIntegral.Invalidate();
-            }
-
+            int.TryParse(IgnoredColumsForData.Text, out int result);
+            measurements.RegexReaderForSingleFile(OpenFileDialog.FileName, ";", result);
+            MessageBox.Show("Wczytano");
         }
 
         private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)
