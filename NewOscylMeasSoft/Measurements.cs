@@ -603,9 +603,16 @@ namespace NewOscylMeasSoft
         return temp;
         }
 
-        public List<List<double>> RegexReaderForSingleFile(string FilePath1, string Separator, int IgnoredColumnsData = 0,int IgnoredColumsInterferometer = 0) // DO DALSZEJ DIAGNOSTKI.
+        public List<List<double>> RegexReaderForSingleFile(out List<List<double>> AllPicoData, out List<List<double>> AllWsuData, out List<List<double>> AllDL100Data, string FilePath1, string Separator, int IgnoredColumnsData = 0,int IgnoredColumsInterferometer = 0) // DO DALSZEJ DIAGNOSTKI.
         {
             string WholeText;
+            List<string> StringList = new List<string>();
+            List<double> PicoData = new List<double>();
+            List<double> WsuData = new List<double>();
+            AllPicoData = new List<List<double>>();
+            AllWsuData = new List<List<double>>();
+            List<double> DL100Data = new List<double>();
+            AllDL100Data = new List<List<double>>();
             using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 using (BufferedStream BS = new BufferedStream(FS))
@@ -622,15 +629,36 @@ namespace NewOscylMeasSoft
                 List<string> Header = Regex.Split(x, " ").ToList();
                 if (Header[0] == "PICO")
                 {
-
+                    StringList = Regex.Split(Header[1], Separator).ToList();
+                    for (int i = IgnoredColumnsData; i < StringList.Count - 1; i++)
+                    {
+                        PicoData.Add(double.Parse(StringList[i]));
+                    }
+                    AllPicoData.Add(PicoData);
+                    PicoData = new List<double>();
+                    StringList = new List<string>();
                 }
                 if (Header[0] == "WSU")
                 {
-
+                    StringList = Regex.Split(Header[1], Separator).ToList();
+                    for (int i = IgnoredColumsInterferometer; i < StringList.Count - 1; i++)
+                    {
+                        WsuData.Add(double.Parse(StringList[i]));
+                    }
+                    AllWsuData.Add(WsuData);
+                    WsuData = new List<double>();
+                    StringList = new List<string>();
                 }
                 if (Header[0] == "DL100")
                 {
-
+                    StringList = Regex.Split(Header[1], Separator).ToList();
+                    for (int i = 0; i < StringList.Count - 1; i++)
+                    {
+                        DL100Data.Add(double.Parse(StringList[i]));
+                    }
+                    AllDL100Data.Add(DL100Data);
+                    DL100Data = new List<double>();
+                    StringList = new List<string>();
                 }
             }
             List<List<double>> ReadDataInDoubles = new List<List<double>>();

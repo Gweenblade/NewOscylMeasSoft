@@ -740,8 +740,12 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void button1_Click_6(object sender, EventArgs e)
         {
-            int.TryParse(IgnoredColumsForData.Text, out int result);
-            measurements.RegexReaderForSingleFile(OpenFileDialog.FileName, ";", result);
+            int.TryParse(IgnoredColumsForData.Text, out int IgnoredColumnsForData);
+            int.TryParse(IgnoredColumnsForInteferometer.Text, out int IgnoredColumsForInterferometer);
+            List<List<double>> x;
+            List<List<double>> y;
+            List<List<double>> z;
+            measurements.RegexReaderForSingleFile(out x,out y, out z, OpenFileDialog.FileName, ":", 5, 5);
             MessageBox.Show("Wczytano");
         }
 
