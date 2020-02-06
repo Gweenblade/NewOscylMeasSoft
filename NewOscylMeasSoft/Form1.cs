@@ -740,8 +740,9 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void button1_Click_6(object sender, EventArgs e)
         {
-            int.TryParse(IgnoredColumsForData.Text, out int IgnoredColumnsForData);
-            int.TryParse(IgnoredColumnsForInteferometer.Text, out int IgnoredColumsForInterferometer);
+            int IgnoredColumnsForData, IgnoredColumsForInterferometer;
+            int.TryParse(IgnoredColumsForData.Text, out IgnoredColumnsForData);
+            int.TryParse(IgnoredColumnsForInteferometer.Text, out IgnoredColumsForInterferometer);
             List<List<double>> x;
             List<List<double>> y;
             List<List<double>> z;
@@ -826,7 +827,8 @@ private void button1_Click_3(object sender, EventArgs e)
                 PPLCorrect.Add(Integral[i][0], Integral[i][1]);
                 PPLNotCorrect.Add(Integral[i][0], Integral[i][1]);
             }
-            if (int.TryParse(ReadFilesAveTB.Text, out int m) && m > 1)
+            int m;
+            if (int.TryParse(ReadFilesAveTB.Text, out m) && m > 1)
             {
                 AveragesOnIntegral = measurements.IntegralOnListsAverages(RawData, TrackMin.Value, TrackMax.Value,m);
                 for (int i = 0; i < AveragesOnIntegral.Count(); i++)

@@ -331,10 +331,10 @@ namespace NewOscylMeasSoft
                     }
                     if (j == Averages - 1 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
                     {
-                        using (StreamWriter SW = new StreamWriter(FilePath1))
+                        using (StreamWriter SW = new StreamWriter(FilePath1,true))
                         {
-                            SW.Write("PICO " + SB + Environment.NewLine);
-                            SW.Write("WSU " + SBWSU + Environment.NewLine);
+                            SW.Write("PICO " + SB);
+                            SW.Write("WSU " + SBWSU);
                         }
                         using (StreamWriter SW = new StreamWriter(FilePath1 + "PICO", true))
                         {
