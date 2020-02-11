@@ -155,6 +155,7 @@ namespace NewOscylMeasSoft
                     ZedBriefIntegral.GraphPane.CurveList.Clear();
                     WavemeterSignal.GraphPane.AddCurve("", measurements.PPLWSU, Color.Red, SymbolType.None);
                     OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
+                    DL100reads.Text = "DL100 status :" + measurements.Dl100lastdata;
                     ZedBriefIntegral.Update();
                     ZedBriefIntegral.AxisChange();
                     ZedBriefIntegral.Invalidate();

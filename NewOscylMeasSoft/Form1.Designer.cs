@@ -97,6 +97,7 @@
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
             this.button1 = new System.Windows.Forms.Button();
+            this.DL100reads = new System.Windows.Forms.Label();
             this.TriggerGroup.SuspendLayout();
             this.Pico.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -654,6 +655,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.DL100reads);
             this.groupBox1.Controls.Add(this.NewMeasureButton);
             this.groupBox1.Controls.Add(this.OnlyPico);
             this.groupBox1.Controls.Add(this.MeasurementNumberLabel);
@@ -845,6 +847,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_6);
             // 
+            // DL100reads
+            // 
+            this.DL100reads.AutoSize = true;
+            this.DL100reads.Location = new System.Drawing.Point(10, 27);
+            this.DL100reads.Name = "DL100reads";
+            this.DL100reads.Size = new System.Drawing.Size(76, 13);
+            this.DL100reads.TabIndex = 31;
+            this.DL100reads.Text = "DL 100 status:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -949,6 +960,7 @@
         private ZedGraph.ZedGraphControl ZedSignal;
         private ZedGraph.ZedGraphControl ZedBriefIntegral;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label DL100reads;
     }
 }
 

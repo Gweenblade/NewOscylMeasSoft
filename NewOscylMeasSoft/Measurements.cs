@@ -30,6 +30,12 @@ namespace NewOscylMeasSoft
         public PointPairList PPLWSU = new PointPairList();
         public PointPairList PPLPIC = new PointPairList();
         public PointPairList PPLSPEC = new PointPairList();
+        private string dl100lastdata;
+        public string Dl100lastdata
+        {
+            get { return dl100lastdata; }
+            set { dl100lastdata = Dl100lastdata; }
+        }
         public bool DrawTheGraph = false, WSUmarker = false, PICOmarker = false;
         public double SUMPICO;
         private bool pauseflag = false;
@@ -300,8 +306,8 @@ namespace NewOscylMeasSoft
                     SW3 = Stopwatch.ElapsedMilliseconds;
                     PPLWSU.Clear();
                     PPLPIC.Clear();
-                    SB.Append(SW1 + ":" + SW2 + ":" + SW3 + ":");
-                    SBWSU.Append(SW1 + ":" + SW2 + ":" + SW3 + ":");
+                    SB.Append(SW1 + ":" + SW2 + ":" + SW3 + ":" + "PICO ");
+                    SBWSU.Append(SW1 + ":" + SW2 + ":" + SW3 + ":" + "WSU ");
                     //while (!InterferometerReading) { }
                     InterferometerReading = false;
                     for (i = 0; i < WaveformArray[0].Count; i++)
@@ -331,10 +337,22 @@ namespace NewOscylMeasSoft
                     }
                     if (j == Averages - 1 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
                     {
+                        using (StreamReader SR = new StreamReader(FilePath1))
+                        {
+                            try
+                            {
+                                Dl100lastdata = SR.ReadLine().Last().ToString();
+                            }
+                            catch(Exception ex)
+                            {
+                                Dl100lastdata = "Wystąpił błąd";
+                            }
+                        }
                         using (StreamWriter SW = new StreamWriter(FilePath1,true))
                         {
-                            SW.Write("PICO " + SB);
-                            SW.Write("WSU " + SBWSU);
+
+                            SW.Write(SB);
+                            SW.Write(SBWSU);
                         }
                         using (StreamWriter SW = new StreamWriter(FilePath1 + "PICO", true))
                         {
