@@ -14,6 +14,8 @@ using Oscyloskop;
 using NewOscylMeasSoft;
 using CsvHelper;
 using System.Dynamic;
+using ADwin;
+using ADwin.Driver;
 using System.Reflection;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
@@ -28,6 +30,7 @@ namespace NewOscylMeasSoft
         int TriggerCH;
         short TriggerVoltage;
         ushort TriggerHis;
+        obsługaAdWina AW;
         Thread Measure, Graphdrawer,OscilloMeasure;
         ThreadStart MEASURE,GRAPHDRAWER;
         Measurements measurements;
@@ -70,6 +73,7 @@ namespace NewOscylMeasSoft
             PPLInterferometer = new PointPairList();
             InitializeComponent();
             DA = new DataAnalysis();
+            AW = new obsługaAdWina(aDwinSystem1);
             oscillo = new Oscyloskop.Form1();
             ZedSignal.GraphPane.XAxis.Title.Text = "Number of points";
             ZedSignal.GraphPane.YAxis.Title.Text = "Signal";
@@ -749,6 +753,11 @@ private void button1_Click_3(object sender, EventArgs e)
             List<List<double>> z;
             measurements.RegexReaderForSingleFile(out x,out y, out z, OpenFileDialog.FileName, ":", 5, 5);
             MessageBox.Show("Wczytano");
+        }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            MessageBox.Show(AW.odczytPrad().ToString());
         }
 
         private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)

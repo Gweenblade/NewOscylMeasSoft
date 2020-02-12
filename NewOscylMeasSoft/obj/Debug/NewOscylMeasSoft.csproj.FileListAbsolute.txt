@@ -164,3 +164,4 @@ C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\D
 C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CopyComplete
 C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
 C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
+C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\ADwin.Driver.dll
