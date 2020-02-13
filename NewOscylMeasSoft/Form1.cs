@@ -159,7 +159,7 @@ namespace NewOscylMeasSoft
                     ZedBriefIntegral.GraphPane.CurveList.Clear();
                     WavemeterSignal.GraphPane.AddCurve("", measurements.PPLWSU, Color.Red, SymbolType.None);
                     OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
-                    DL100reads.Text = "DL100 status :" + measurements.Dl100lastdata;
+                    DL100reads.Text = "DL100 status. Current: " + ScalingParameters.VoltageToCurrent(AW.odczytPrad()) + ", Temperature: " + ScalingParameters.VoltageToTemp(AW.odczytTemp());
                     ZedBriefIntegral.Update();
                     ZedBriefIntegral.AxisChange();
                     ZedBriefIntegral.Invalidate();
@@ -757,7 +757,6 @@ private void button1_Click_3(object sender, EventArgs e)
 
         private void button2_Click_2(object sender, EventArgs e)
         {
-            MessageBox.Show(AW.odczytPrad().ToString());
         }
 
         private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)

@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScalingParameters.cs" />
     <Compile Include="DataAnalysis.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
