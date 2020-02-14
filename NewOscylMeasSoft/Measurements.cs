@@ -300,8 +300,8 @@ namespace NewOscylMeasSoft
                     SW3 = Stopwatch.ElapsedMilliseconds;
                     PPLWSU.Clear();
                     PPLPIC.Clear();
-                    SB.Append(SW1 + ":" + SW2 + ":" + SW3 + ":" + "PICO ");
-                    SBWSU.Append(SW1 + ":" + SW2 + ":" + SW3 + ":" + "WSU ");
+                    SB.Append("PICO " + SW1 + ":" + SW2 + ":" + SW3 + ":");
+                    SBWSU.Append("WSU " + SW1 + ":" + SW2 + ":" + SW3 + ":");
                     //while (!InterferometerReading) { }
                     InterferometerReading = false;
                     for (i = 0; i < WaveformArray[0].Count; i++)
@@ -650,7 +650,7 @@ namespace NewOscylMeasSoft
                     WsuData = new List<double>();
                     StringList = new List<string>();
                 }
-                if (Header[0] == "DL100")
+                if (Header[0] == "DFB")
                 {
                     StringList = Regex.Split(Header[1], Separator).ToList();
                     for (int i = 0; i < StringList.Count - 1; i++)
@@ -662,6 +662,7 @@ namespace NewOscylMeasSoft
                     StringList = new List<string>();
                 }
             }
+            MessageBox.Show(AllDL100Data.Count.ToString()+ " " + AllPicoData.Count.ToString()+ " " + AllWsuData.Count.ToString());
             List<List<double>> ReadDataInDoubles = new List<List<double>>();
             return ReadDataInDoubles;
         }

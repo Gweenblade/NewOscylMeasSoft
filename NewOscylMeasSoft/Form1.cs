@@ -40,6 +40,12 @@ namespace NewOscylMeasSoft
         PointPairList PPLsignal, PPLInterferometer,PPLIntegralCorrect,PPLIntegralWrong;
         string loadpath;
         string savepath;
+        private int howmanyaverages;
+        public int HowManyAverages
+        {
+            get { return howmanyaverages; }
+            set { howmanyaverages = value; }
+        }
         static double[] xmin = new double[2] { 0, 0 };
         static double[] xmax = new double[2] { 0, 0 };
         static double[] y = new double[2] { -50, 50 };
@@ -64,6 +70,9 @@ namespace NewOscylMeasSoft
         List<double> CurrentWave;
         List<double> CurrentInteferometer;
         List<double> AfterCutoff;
+        List<List<double>> AllPicoData;
+        List<List<double>> AllWsuData;
+        List<List<double>> AllDl100Data;
         public Form1()
         {
             
@@ -413,13 +422,7 @@ private void button1_Click_3(object sender, EventArgs e)
         {
             if (OpenFileDialog.FileName != null)
             {
-                using (FilePathReader = new StreamReader(OpenFileDialog.FileName))
-                {
-                    loadpath = OpenFileDialog.FileName;
-                    linecount = File.ReadLines(loadpath).Count();
-                    DataSlider.Maximum = linecount;
-                    DataSlider.Minimum = 1;
-                }
+
             }
             else
                 MessageBox.Show("Something went wrong..");
@@ -546,27 +549,27 @@ private void button1_Click_3(object sender, EventArgs e)
             int Maxtotal = 0;
             int.TryParse(ReadFilesAveTB.Text, out ave);
             StringBuilder SBave = new StringBuilder();
-            for (int i = 1; i < InteferogramData.Count(); i++)
+            for (int i = 1; i < AllWsuData.Count(); i++)
             {
-                CutoffAll.Add(DA.CutoffFunction(InteferogramData[i], double.Parse(CutoffTB.Text), int.Parse(IgnoredColumnsForInteferometer.Text)));
+                CutoffAll.Add(DA.CutoffFunction(AllWsuData[i], double.Parse(CutoffTB.Text), int.Parse(IgnoredColumnsForInteferometer.Text)));
                 Maxtotal += Max;
-                using (StreamWriter SW = new StreamWriter(InteferometerPathway.FileName + "_Inteferometer", true))
+                using (StreamWriter SW = new StreamWriter(OpenFileDialog.FileName + "_Inteferometer", true))
                 {
                     for(int j = 0; j < int.Parse(IgnoredColumnsForInteferometer.Text); j++)
                     {
-                        SW.Write(InteferogramData[i][j] + " ");
+                        SW.Write(AllWsuData[i][j] + " ");
                     }
                     SW.Write(i + " " + Max + " " + DA.MaximumsUncertainty(Max) + Environment.NewLine);
                     SW.Flush();
                 }
-                if (InteferogramData[i][3] > 12810 && InteferogramData[i][3] < 12820) // zmienic centrymetry jak cos
+                if (AllWsuData[i][3] > 12810 && AllWsuData[i][3] < 12820) // zmienic centrymetry jak cos
                 {
-                    k += k + InteferogramData[i][3];
+                    k += k + AllWsuData[i][3];
                     n += 1;
                 }
-                if (InteferogramData[i][4] > 0)
+                if (AllWsuData[i][4] > 0)
                 {
-                    dk += dk + InteferogramData[i][3];
+                    dk += dk + AllWsuData[i][3];
                     m += 1;
                 }
                 if (i % ave == 0 && i > 0 && n > 0 && m > 0)
@@ -578,7 +581,7 @@ private void button1_Click_3(object sender, EventArgs e)
                 if (i % ave == 0 && i > 0)
                     SBave.Append(Maxtotal / ave + Environment.NewLine);
             }
-            using (StreamWriter SW = new StreamWriter(InteferometerPathway.FileName + "_InteferometerAverages", true))
+            using (StreamWriter SW = new StreamWriter(OpenFileDialog.FileName + "_InteferometerAverages", true))
                 SW.Write(SBave);
         }
 
@@ -601,12 +604,7 @@ private void button1_Click_3(object sender, EventArgs e)
         private void InteferometerPathway_FileOk(object sender, CancelEventArgs e)
         {
             if (InteferometerPathway.FileName != null)
-            {
-                using (FilePathReader = new StreamReader(InteferometerPathway.FileName))
-                {
-                    InteferometerSlider.Maximum = File.ReadLines(InteferometerPathway.FileName).Count();
-                    InteferometerSlider.Minimum = 1;
-                }
+            { 
             }
             else
                 MessageBox.Show("Something went wrong..");
@@ -627,64 +625,6 @@ private void button1_Click_3(object sender, EventArgs e)
 
         }
 
-        private void CutoffTest_Click(object sender, EventArgs e)
-        {
-            CutoffSaver.ShowDialog();
-            string line;
-            double Max;
-            int CounterOfMax = 0;
-            List<List<double>> ReadDataInDoubles = new List<List<double>>();
-            string[] Test;
-            int i;
-            List<string> StringList = new List<string>();
-            List<double> DoubleList = new List<double>();
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            using (FileStream FS = File.Open(InteferometerPathway.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                using (BufferedStream BS = new BufferedStream(FS))
-                {
-                    using (StreamReader SR = new StreamReader(BS))
-                    {
-                        while ((line = SR.ReadLine()) != null)
-                        {
-                            StringList = Regex.Split(line, FileSeparator.Text).ToList();
-                            for (i = int.Parse(IgnoredColumnsForInteferometer.Text); i < StringList.Count - 1; i++)
-                            {
-                                DoubleList.Add(double.Parse(StringList[i]));
-                            }
-                            ReadDataInDoubles.Add(DoubleList);
-                            if(ReadDataInDoubles.Count > 100)
-                            {
-                                for(int k = 0; k <100;k++)
-                                {
-                                    Max = ReadDataInDoubles[k].Max();
-                                    CounterOfMax = 0;
-                                    for (int j = 0; j < ReadDataInDoubles[k].Count;  j++)
-                                    {
-                                        if (ReadDataInDoubles[k][j] < (double.Parse(CutoffTB.Text) / 100) * Max)
-                                            ReadDataInDoubles[k][j] = 0;
-                                        if (j > 1 && ReadDataInDoubles[k][j] - ReadDataInDoubles[k][j - 1] == 0)
-                                            CounterOfMax++;
-                                    }
-                                    using (StreamWriter SW = new StreamWriter(CutoffSaver.FileName + " Inteferometer", true))
-                                    {
-                                        SW.Write(k + " " + stopwatch.ElapsedMilliseconds + " " + i + Environment.NewLine);
-                                        SW.Flush();
-                                    }
-                                }
-                              
-                                ReadDataInDoubles.Clear();
-                            }
-                            //DoubleList = new List<double>();
-                            //StringList = new List<string>();
-                        }
-                    }
-                }
-            }
-            stopwatch.Stop();
-            MessageBox.Show("" + stopwatch.ElapsedMilliseconds + " " + ReadDataInDoubles[1].Count);
-        }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -748,12 +688,13 @@ private void button1_Click_3(object sender, EventArgs e)
             int IgnoredColumnsForData, IgnoredColumsForInterferometer;
             int.TryParse(IgnoredColumsForData.Text, out IgnoredColumnsForData);
             int.TryParse(IgnoredColumnsForInteferometer.Text, out IgnoredColumsForInterferometer);
-            List<List<double>> x;
-            List<List<double>> y;
-            List<List<double>> z;
-            measurements.RegexReaderForSingleFile(out x,out y, out z, OpenFileDialog.FileName, ":", 5, 5);
-            MessageBox.Show("Wczytano");
-        }
+            measurements.RegexReaderForSingleFile(out AllPicoData,out AllWsuData, out AllDl100Data, OpenFileDialog.FileName, ":", 0, 0);
+            HowManyAverages = AllPicoData.Count() / AllDl100Data.Count();
+            DataSlider.Maximum = AllDl100Data.Count();
+            InteferometerSlider.Maximum = AllWsuData.Count();
+            InteferometerSlider.Minimum = 1;
+            DataSlider.Minimum = 1;
+         }
 
         private void button2_Click_2(object sender, EventArgs e)
         {
@@ -776,7 +717,7 @@ private void button1_Click_3(object sender, EventArgs e)
                 userdoneupdaterinteferometer = false;
                 FrameInteferometer.Text = "Frame Number: " + InteferometerSlider.Value.ToString();
                 CurrentInteferometer.Clear();
-                CurrentInteferometer = measurements.SingleLineReader(InteferometerPathway.FileName, InteferometerSlider.Value);
+                CurrentInteferometer = AllWsuData[InteferometerSlider.Value];
                 PPLInterferometer.Clear();
                 for(int i = 0; i < int.Parse(IgnoredColumnsForInteferometer.Text); i++)
                 {
@@ -825,7 +766,7 @@ private void button1_Click_3(object sender, EventArgs e)
             StringBuilder SB = new StringBuilder();
             StringBuilder SBAve = new StringBuilder();
             List<List<double>> AveragesOnIntegral = new List<List<double>> { };
-            Integral = measurements.IntegralOnLists(RawData, TrackMin.Value, TrackMax.Value);
+            Integral = measurements.IntegralOnLists(AllPicoData, TrackMin.Value, TrackMax.Value);
             for (int i = 0; i < Integral.Count(); i++)
             {
                 for (int j = 0; j < Integral[i].Count; j++)
@@ -867,7 +808,7 @@ private void button1_Click_3(object sender, EventArgs e)
                 userdoneupdater = false;
                 FrameLabel.Text = "Frame Number: " + DataSlider.Value.ToString();
                 CurrentWave.Clear();
-                CurrentWave = measurements.SingleLineReader(loadpath, DataSlider.Value);
+                CurrentWave = AllPicoData[DataSlider.Value];
                 TrackMin.Maximum = CurrentWave.Count();
                 TrackMax.Maximum = CurrentWave.Count();
                 PPLsignal.Clear();

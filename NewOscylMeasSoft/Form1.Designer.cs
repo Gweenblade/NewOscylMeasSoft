@@ -47,7 +47,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ReadFilesAveTB = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.CutoffTest = new System.Windows.Forms.Button();
             this.IgnoredColumsForData = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.IgnoredColumnsForInteferometer = new System.Windows.Forms.TextBox();
@@ -97,7 +96,7 @@
             this.InteferometerPathway = new System.Windows.Forms.OpenFileDialog();
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.SingleFileReader = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.aDwinSystem1 = new ADwin.Driver.ADwinSystem();
             this.TriggerGroup.SuspendLayout();
@@ -229,7 +228,6 @@
             // InteferometerSlider
             // 
             this.InteferometerSlider.BackColor = System.Drawing.Color.Bisque;
-            this.InteferometerSlider.Enabled = false;
             this.InteferometerSlider.Location = new System.Drawing.Point(729, 358);
             this.InteferometerSlider.Maximum = 0;
             this.InteferometerSlider.Name = "InteferometerSlider";
@@ -302,18 +300,15 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.ReadFilesAveTB);
+            this.groupBox2.Controls.Add(this.SingleFileReader);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.CutoffTest);
             this.groupBox2.Controls.Add(this.IgnoredColumsForData);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.IgnoredColumnsForInteferometer);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.LoadInteferometer);
-            this.groupBox2.Controls.Add(this.FindInterferogram);
             this.groupBox2.Controls.Add(this.CutOffFunction);
             this.groupBox2.Controls.Add(this.FileSeparator);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.LoadData);
             this.groupBox2.Controls.Add(this.CutoffTB);
             this.groupBox2.Controls.Add(this.Cutoff);
             this.groupBox2.Controls.Add(this.IntegralBtn);
@@ -327,7 +322,7 @@
             // 
             // ReadFilesAveTB
             // 
-            this.ReadFilesAveTB.Location = new System.Drawing.Point(488, 102);
+            this.ReadFilesAveTB.Location = new System.Drawing.Point(666, 100);
             this.ReadFilesAveTB.Name = "ReadFilesAveTB";
             this.ReadFilesAveTB.Size = new System.Drawing.Size(21, 20);
             this.ReadFilesAveTB.TabIndex = 27;
@@ -337,25 +332,15 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(331, 105);
+            this.label9.Location = new System.Drawing.Point(509, 103);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(136, 13);
             this.label9.TabIndex = 33;
             this.label9.Text = "Number of avareges in file: ";
             // 
-            // CutoffTest
-            // 
-            this.CutoffTest.Location = new System.Drawing.Point(515, 12);
-            this.CutoffTest.Name = "CutoffTest";
-            this.CutoffTest.Size = new System.Drawing.Size(75, 23);
-            this.CutoffTest.TabIndex = 26;
-            this.CutoffTest.Text = "CutoffTest";
-            this.CutoffTest.UseVisualStyleBackColor = true;
-            this.CutoffTest.Click += new System.EventHandler(this.CutoffTest_Click);
-            // 
             // IgnoredColumsForData
             // 
-            this.IgnoredColumsForData.Location = new System.Drawing.Point(488, 61);
+            this.IgnoredColumsForData.Location = new System.Drawing.Point(666, 59);
             this.IgnoredColumsForData.Name = "IgnoredColumsForData";
             this.IgnoredColumsForData.Size = new System.Drawing.Size(21, 20);
             this.IgnoredColumsForData.TabIndex = 32;
@@ -365,7 +350,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(332, 64);
+            this.label8.Location = new System.Drawing.Point(510, 62);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(120, 13);
             this.label8.TabIndex = 31;
@@ -373,7 +358,7 @@
             // 
             // IgnoredColumnsForInteferometer
             // 
-            this.IgnoredColumnsForInteferometer.Location = new System.Drawing.Point(488, 82);
+            this.IgnoredColumnsForInteferometer.Location = new System.Drawing.Point(666, 80);
             this.IgnoredColumnsForInteferometer.Name = "IgnoredColumnsForInteferometer";
             this.IgnoredColumnsForInteferometer.Size = new System.Drawing.Size(21, 20);
             this.IgnoredColumnsForInteferometer.TabIndex = 30;
@@ -383,7 +368,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(332, 85);
+            this.label7.Location = new System.Drawing.Point(510, 83);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(159, 13);
             this.label7.TabIndex = 29;
@@ -393,7 +378,7 @@
             // 
             this.LoadInteferometer.Enabled = false;
             this.LoadInteferometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LoadInteferometer.Location = new System.Drawing.Point(118, 64);
+            this.LoadInteferometer.Location = new System.Drawing.Point(790, 819);
             this.LoadInteferometer.Name = "LoadInteferometer";
             this.LoadInteferometer.Size = new System.Drawing.Size(97, 39);
             this.LoadInteferometer.TabIndex = 28;
@@ -404,7 +389,7 @@
             // FindInterferogram
             // 
             this.FindInterferogram.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.FindInterferogram.Location = new System.Drawing.Point(6, 64);
+            this.FindInterferogram.Location = new System.Drawing.Point(913, 810);
             this.FindInterferogram.Name = "FindInterferogram";
             this.FindInterferogram.Size = new System.Drawing.Size(110, 39);
             this.FindInterferogram.TabIndex = 27;
@@ -414,9 +399,8 @@
             // 
             // CutOffFunction
             // 
-            this.CutOffFunction.Enabled = false;
             this.CutOffFunction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CutOffFunction.Location = new System.Drawing.Point(221, 64);
+            this.CutOffFunction.Location = new System.Drawing.Point(272, 64);
             this.CutOffFunction.Name = "CutOffFunction";
             this.CutOffFunction.Size = new System.Drawing.Size(105, 39);
             this.CutOffFunction.TabIndex = 26;
@@ -426,7 +410,7 @@
             // 
             // FileSeparator
             // 
-            this.FileSeparator.Location = new System.Drawing.Point(488, 40);
+            this.FileSeparator.Location = new System.Drawing.Point(666, 38);
             this.FileSeparator.Name = "FileSeparator";
             this.FileSeparator.Size = new System.Drawing.Size(21, 20);
             this.FileSeparator.TabIndex = 21;
@@ -436,7 +420,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(332, 44);
+            this.label6.Location = new System.Drawing.Point(510, 42);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(104, 13);
             this.label6.TabIndex = 20;
@@ -446,7 +430,7 @@
             // 
             this.LoadData.Enabled = false;
             this.LoadData.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LoadData.Location = new System.Drawing.Point(118, 19);
+            this.LoadData.Location = new System.Drawing.Point(790, 774);
             this.LoadData.Name = "LoadData";
             this.LoadData.Size = new System.Drawing.Size(97, 39);
             this.LoadData.TabIndex = 19;
@@ -456,7 +440,7 @@
             // 
             // CutoffTB
             // 
-            this.CutoffTB.Location = new System.Drawing.Point(488, 19);
+            this.CutoffTB.Location = new System.Drawing.Point(666, 17);
             this.CutoffTB.Name = "CutoffTB";
             this.CutoffTB.Size = new System.Drawing.Size(21, 20);
             this.CutoffTB.TabIndex = 19;
@@ -466,7 +450,7 @@
             // Cutoff
             // 
             this.Cutoff.AutoSize = true;
-            this.Cutoff.Location = new System.Drawing.Point(332, 22);
+            this.Cutoff.Location = new System.Drawing.Point(510, 20);
             this.Cutoff.Name = "Cutoff";
             this.Cutoff.Size = new System.Drawing.Size(102, 13);
             this.Cutoff.TabIndex = 18;
@@ -474,9 +458,8 @@
             // 
             // IntegralBtn
             // 
-            this.IntegralBtn.Enabled = false;
             this.IntegralBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.IntegralBtn.Location = new System.Drawing.Point(221, 19);
+            this.IntegralBtn.Location = new System.Drawing.Point(272, 19);
             this.IntegralBtn.Name = "IntegralBtn";
             this.IntegralBtn.Size = new System.Drawing.Size(105, 39);
             this.IntegralBtn.TabIndex = 19;
@@ -489,7 +472,7 @@
             this.FindFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.FindFile.Location = new System.Drawing.Point(6, 19);
             this.FindFile.Name = "FindFile";
-            this.FindFile.Size = new System.Drawing.Size(110, 39);
+            this.FindFile.Size = new System.Drawing.Size(110, 81);
             this.FindFile.TabIndex = 17;
             this.FindFile.Text = "Find File";
             this.FindFile.UseVisualStyleBackColor = true;
@@ -848,15 +831,17 @@
             // 
             this.ForRandomDataReads.FileName = "openFileDialog1";
             // 
-            // button1
+            // SingleFileReader
             // 
-            this.button1.Location = new System.Drawing.Point(922, 793);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_6);
+            this.SingleFileReader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.SingleFileReader.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SingleFileReader.Location = new System.Drawing.Point(122, 19);
+            this.SingleFileReader.Name = "SingleFileReader";
+            this.SingleFileReader.Size = new System.Drawing.Size(142, 84);
+            this.SingleFileReader.TabIndex = 30;
+            this.SingleFileReader.Text = "All data in single file";
+            this.SingleFileReader.UseVisualStyleBackColor = false;
+            this.SingleFileReader.Click += new System.EventHandler(this.button1_Click_6);
             // 
             // button2
             // 
@@ -874,11 +859,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1825, 912);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ResultsAnalizer);
             this.Controls.Add(this.TriggerGroup);
             this.Controls.Add(this.TestLabel);
+            this.Controls.Add(this.LoadInteferometer);
+            this.Controls.Add(this.LoadData);
+            this.Controls.Add(this.FindInterferogram);
             this.Name = "Form1";
             this.Text = "Pico Measurement Software";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -957,7 +944,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label InteferometerParameters;
         private System.Windows.Forms.SaveFileDialog CutoffSaver;
-        private System.Windows.Forms.Button CutoffTest;
         private System.Windows.Forms.OpenFileDialog ForRandomDataReads;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton TriggerBtnOff;
@@ -972,7 +958,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private ZedGraph.ZedGraphControl ZedSignal;
         private ZedGraph.ZedGraphControl ZedBriefIntegral;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button SingleFileReader;
         private System.Windows.Forms.Label DL100reads;
         private System.Windows.Forms.Button button2;
         private ADwin.Driver.ADwinSystem aDwinSystem1;
