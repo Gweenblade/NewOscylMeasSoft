@@ -705,9 +705,12 @@ private void button1_Click_3(object sender, EventArgs e)
             double.TryParse(THmaxTB.Text, out THmax);
             double.TryParse(THminTB.Text, out THmin);
             DA.DataSummary(out AllValuableData, AllPicoData, AllWsuData, AllDl100Data, THmin, THmax, IgnoredColumsForInterferometer, IgnoredColumnsForData);
+            foreach(double d in AllValuableData[0])
+            {
+                MessageBox.Show(d.ToString());
+            }
             DA.Average(out AveragedData, AllValuableData);
             DataAnalysisTrackBar.Minimum = 0;
-            MessageBox.Show(AllValuableData.Count.ToString());
             DataAnalysisTrackBar.Maximum = AllValuableData.Count() -1;
             PointPairList AllDataPPL = new PointPairList();
             for (int i = 0; i < AllValuableData.Count; i++)

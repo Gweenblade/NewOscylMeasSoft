@@ -345,6 +345,7 @@
             this.THmaxTB.Name = "THmaxTB";
             this.THmaxTB.Size = new System.Drawing.Size(36, 20);
             this.THmaxTB.TabIndex = 35;
+            this.THmaxTB.Text = "200";
             // 
             // THminTB
             // 
@@ -352,6 +353,7 @@
             this.THminTB.Name = "THminTB";
             this.THminTB.Size = new System.Drawing.Size(35, 20);
             this.THminTB.TabIndex = 34;
+            this.THminTB.Text = "-200";
             // 
             // ReadFilesAveTB
             // 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
 namespace NewOscylMeasSoft
 {
     class DataAnalysis
@@ -10,11 +12,11 @@ namespace NewOscylMeasSoft
         public List<double> CutoffFunction(List<double> WSUsignal, double CutoffValue, int IgnoredColumns = 0)
         {
             List<double> NEWLIST = new List<double>();
-            for(int j = IgnoredColumns; j < WSUsignal.Count(); j++)
+            for (int j = IgnoredColumns; j < WSUsignal.Count(); j++)
             {
                 NEWLIST.Add(WSUsignal[j]);
             }
-            double Max = NEWLIST.Max(); 
+            double Max = NEWLIST.Max();
             for (int i = 0; i < NEWLIST.Count; i++)
             {
                 NEWLIST[i] = NEWLIST[i] - (CutoffValue / 100 * Max);
@@ -48,29 +50,28 @@ namespace NewOscylMeasSoft
             double sumOfDerivationAverage = sumOfDerivation / doubleList.Count;
             return Math.Sqrt(sumOfDerivationAverage - (average * average));
         }
-        public void DataSummary(out List<List<double>> AllValuableData, List<List<double>> Picodata, List<List<double>> Wsudata, 
+        public void DataSummary(out List<List<double>> AllValuableData, List<List<double>> Picodata, List<List<double>> Wsudata,
             List<List<double>> Dl100Data, double THmin, double THmax, int IgnoredForWsu = 5, int IgnoredforPico = 3)
         {
-            List<double> temp = new List<double>();
             AllValuableData = new List<List<double>>();
-            
             double tempsumpico, tempsumwsu;
-            for(int i = 0; i < Picodata.Count(); i++)
+            int help;
+            for (int i = 0; i < Picodata.Count() - 1; i++)
             {
                 if (Wsudata[i][3] > THmin && Wsudata[i][3] < THmax)
                 {
-                    foreach(double d in Dl100Data[i])
+                    List<double> temp = new List<double>();
+                    foreach (double d in Dl100Data[i / Dl100Data.Count()])
                     {
                         temp.Add(d);
                     }
-                    for(int j = 0; j < IgnoredforPico; j++)
+                    for (int j = 0; j < IgnoredforPico; j++)
                     {
                         temp.Add(Picodata[i][j]);
                     }
                     temp.Add(Picodata[i].Skip(IgnoredforPico - 1).Sum());
                     temp.Add(Wsudata[i][3]);
                     AllValuableData.Add(temp);
-                    temp.Clear();
                 }
             }
         }
@@ -78,32 +79,33 @@ namespace NewOscylMeasSoft
         public void Average(out List<List<double>> AveragedData, List<List<double>> NotAveragedData)
         {
             AveragedData = new List<List<double>>();
-            List<double> temp = new List<double>();
             double tempsumdata = 0;
             int k = 0;
             double tempsumwavelenght = 0;
-            for(int i = 0; i < NotAveragedData.Count;i++)
+            for (int i = 0; i < NotAveragedData.Count; i++)
             {
-                if(i > 0 && NotAveragedData[i][2] == NotAveragedData[i-1][2])
+                if (i == 0 || NotAveragedData[i][2] == NotAveragedData[i - 1][2])
                 {
-                    tempsumdata += NotAveragedData[i][6]; // MIEJSCE W KTORYM CHYBA BEDZIE SUMA SYGNALOW Z PICOSCOPU
-                    tempsumwavelenght += NotAveragedData[i][7];
+                    tempsumdata += NotAveragedData[i][3]; // MIEJSCE W KTORYM CHYBA BEDZIE SUMA SYGNALOW Z PICOSCOPU
+                    tempsumwavelenght += NotAveragedData[i][4];
                     k++;
                 }
                 else
                 {
+                    MessageBox.Show(NotAveragedData[i][2].ToString() + " " + NotAveragedData[i - 1][2]);
+                    List<double> temp = new List<double>();
                     tempsumwavelenght = tempsumwavelenght / k;
-                    tempsumdata = tempsumdata / k; 
-                    for(int j = 0; j < 3; j++)
+                    tempsumdata = tempsumdata / k;
+                    for (int j = 0; j < 3; j++)
                     {
                         temp.Add(NotAveragedData[i - 1][j]);
                     }
                     temp.Add(tempsumwavelenght);
                     temp.Add(tempsumdata);
                     AveragedData.Add(temp);
-                    temp.Clear();
-                    tempsumdata = NotAveragedData[i][6]; // MIEJSCE W KTORYM CHYBA BEDZIE SUMA SYGNALOW Z PICOSCOPU
-                    tempsumwavelenght = NotAveragedData[i][7];
+                    tempsumdata = NotAveragedData[i][3]; // MIEJSCE W KTORYM CHYBA BEDZIE SUMA SYGNALOW Z PICOSCOPU
+                    MessageBox.Show(i.ToString());
+                    tempsumwavelenght = NotAveragedData[i][4];
                     k = 1;
                 }
             }

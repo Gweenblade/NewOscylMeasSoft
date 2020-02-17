@@ -662,7 +662,6 @@ namespace NewOscylMeasSoft
                     StringList = new List<string>();
                 }
             }
-            MessageBox.Show(AllDL100Data.Count.ToString()+ " " + AllPicoData.Count.ToString()+ " " + AllWsuData.Count.ToString());
             List<List<double>> ReadDataInDoubles = new List<List<double>>();
             return ReadDataInDoubles;
         }
