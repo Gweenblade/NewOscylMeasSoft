@@ -129,7 +129,6 @@ C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\Ne
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Form1.resources
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.Properties.Resources.resources
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.GenerateResource.cache
-C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CoreCompileInputs.cache
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.csproj.CopyComplete
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
@@ -165,3 +164,4 @@ C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\D
 C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.exe
 C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
 C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\ADwin.Driver.dll
+C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\ADwin.Driver.dll

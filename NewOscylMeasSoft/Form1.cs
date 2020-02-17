@@ -55,11 +55,14 @@ namespace NewOscylMeasSoft
         List<List<double>> CutoffAll = new List<List<double>>();
         ZedGraph.LineItem lineItem1 = new ZedGraph.LineItem("cursorY1", xmin, y, Color.White, ZedGraph.SymbolType.None, 2);
         ZedGraph.LineItem lineItem2 = new ZedGraph.LineItem("cursorY2", xmax, y, Color.White, ZedGraph.SymbolType.None, 2);
+        ZedGraph.LineItem lineItem3 = new ZedGraph.LineItem("cursorY2", xmax, y, Color.White, ZedGraph.SymbolType.None, 2);
         PointPairList  PPLmax = new PointPairList();
         PointPairList PPLmin = new PointPairList();
+        PointPairList PPLLine = new PointPairList();
         PointPairList CutoffPoints = new PointPairList();
         PointPairList BriefSpectrum = new PointPairList();
         bool userdoneupdater = false;
+        bool userdoneupdateralldata = false;
         bool userdoneupdaterinteferometer = false;
         obslugaNW WMU = new obslugaNW();
         public List<double> WaveformRead()
@@ -73,6 +76,8 @@ namespace NewOscylMeasSoft
         List<List<double>> AllPicoData;
         List<List<double>> AllWsuData;
         List<List<double>> AllDl100Data;
+        List<List<double>> AllValuableData;
+        List<List<double>> AveragedData;
         public Form1()
         {
             
@@ -99,6 +104,7 @@ namespace NewOscylMeasSoft
             Graphdrawer = new Thread(GRAPHDRAWER);
             ZedSignal.GraphPane.CurveList.Add(lineItem1);
             ZedSignal.GraphPane.CurveList.Add(lineItem2);
+            ZedBriefIntegral.GraphPane.CurveList.Add(lineItem3);
             ZedSignal.GraphPane.YAxis.Scale.Max = 5000;
             ZedSignal.GraphPane.YAxis.Scale.Min = -5000;
             ZedSignal.GraphPane.YAxis.Scale.MajorStep = 1000;
@@ -113,6 +119,7 @@ namespace NewOscylMeasSoft
             AfterCutoff = new List<double>();
             lineItem1.Label.IsVisible = false;
             lineItem2.Label.IsVisible = false;
+            lineItem3.Label.IsVisible = false;
             ZedSignal.Invalidate();
         }
 
@@ -694,10 +701,58 @@ private void button1_Click_3(object sender, EventArgs e)
             InteferometerSlider.Maximum = AllWsuData.Count();
             InteferometerSlider.Minimum = 1;
             DataSlider.Minimum = 1;
-         }
+            double THmin = 0, THmax = 0;
+            double.TryParse(THmaxTB.Text, out THmax);
+            double.TryParse(THminTB.Text, out THmin);
+            DA.DataSummary(out AllValuableData, AllPicoData, AllWsuData, AllDl100Data, THmin, THmax, IgnoredColumsForInterferometer, IgnoredColumnsForData);
+            DA.Average(out AveragedData, AllValuableData);
+            DataAnalysisTrackBar.Minimum = 0;
+            MessageBox.Show(AllValuableData.Count.ToString());
+            DataAnalysisTrackBar.Maximum = AllValuableData.Count() -1;
+            PointPairList AllDataPPL = new PointPairList();
+            for (int i = 0; i < AllValuableData.Count; i++)
+            {
+                AllDataPPL.Add(AllValuableData[i][7], AllValuableData[i][6]);
+            }
+            ZedBriefIntegral.GraphPane.CurveList.Clear();
+            ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.None);
+            ZedBriefIntegral.Update();
+            ZedBriefIntegral.AxisChange();
+            ZedBriefIntegral.Invalidate();
+        }
 
         private void button2_Click_2(object sender, EventArgs e)
         {
+        }
+
+        private void DataAnalysisTrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            userdoneupdateralldata = true;
+        }
+
+        private void DataAnalysisTrackBar_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (userdoneupdateralldata)
+            {
+                DL100Label.Text = AllValuableData[DataAnalysisTrackBar.Value][0].ToString() + " " + AllValuableData[DataAnalysisTrackBar.Value][1].ToString() + " " + AllValuableData[DataAnalysisTrackBar.Value][2].ToString();
+                ZedInteferogram.AxisChange();
+                ZedInteferogram.Update();
+                ZedInteferogram.Invalidate();
+            }
+        }
+
+        private void DataAnalysisTrackBar_Scroll(object sender, EventArgs e)
+        {
+            PPLLine.Clear();
+            PPLLine.Add(TrackMax.Value, ZedBriefIntegral.GraphPane.YAxis.Scale.Min);
+            PPLLine.Add(TrackMax.Value, ZedBriefIntegral.GraphPane.YAxis.Scale.Max);
+            //LineItem LImax = ZedSignal.GraphPane.AddCurve("LImax", PPLmax, Color.Orange);
+            lmax = ZedBriefIntegral.GraphPane.AddCurve("LImax", PPLLine, Color.Orange);
+            //LImax.Label.IsVisible = false;
+            lmax.Label.IsVisible = false;
+            ZedBriefIntegral.AxisChange();
+            ZedBriefIntegral.Update();
+            ZedBriefIntegral.Invalidate();
         }
 
         private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)
