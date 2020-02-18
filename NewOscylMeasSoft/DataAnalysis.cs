@@ -92,7 +92,6 @@ namespace NewOscylMeasSoft
                 }
                 else
                 {
-                    MessageBox.Show(NotAveragedData[i][2].ToString() + " " + NotAveragedData[i - 1][2]);
                     List<double> temp = new List<double>();
                     tempsumwavelenght = tempsumwavelenght / k;
                     tempsumdata = tempsumdata / k;
@@ -104,7 +103,6 @@ namespace NewOscylMeasSoft
                     temp.Add(tempsumdata);
                     AveragedData.Add(temp);
                     tempsumdata = NotAveragedData[i][3]; // MIEJSCE W KTORYM CHYBA BEDZIE SUMA SYGNALOW Z PICOSCOPU
-                    MessageBox.Show(i.ToString());
                     tempsumwavelenght = NotAveragedData[i][4];
                     k = 1;
                 }

@@ -715,10 +715,10 @@ private void button1_Click_3(object sender, EventArgs e)
             PointPairList AllDataPPL = new PointPairList();
             for (int i = 0; i < AllValuableData.Count; i++)
             {
-                AllDataPPL.Add(AllValuableData[i][7], AllValuableData[i][6]);
+                AllDataPPL.Add(AllValuableData[i][4], AllValuableData[i][3]);
             }
             ZedBriefIntegral.GraphPane.CurveList.Clear();
-            ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.None);
+            ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Star);
             ZedBriefIntegral.Update();
             ZedBriefIntegral.AxisChange();
             ZedBriefIntegral.Invalidate();
