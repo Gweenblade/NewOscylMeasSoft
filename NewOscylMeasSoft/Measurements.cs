@@ -28,6 +28,12 @@ namespace NewOscylMeasSoft
         public double IntegralPico;
         public double CurrentWavelenght;
         public PointPairList PPLWSU = new PointPairList();
+        private bool datareadermarker = false;
+        public bool DataReaderMarker
+        {
+            get { return datareadermarker; }
+            set { datareadermarker = value; }
+        }
         public PointPairList PPLPIC = new PointPairList();
         public PointPairList PPLSPEC = new PointPairList();
         public bool DrawTheGraph = false, WSUmarker = false, PICOmarker = false;
@@ -329,6 +335,10 @@ namespace NewOscylMeasSoft
                     {
                         Ender = true;
                     }
+                    if(datareadermarker)
+                    {
+                        Thread.Sleep(5);
+                    }
                     if (j == Averages - 1 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
                     {
                         using (StreamWriter SW = new StreamWriter(FilePath1,true))
@@ -614,6 +624,7 @@ namespace NewOscylMeasSoft
             AllWsuData = new List<List<double>>();
             List<double> DL100Data = new List<double>();
             AllDL100Data = new List<List<double>>();
+            DataReaderMarker = true;
             using (FileStream FS = File.Open(FilePath1, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 using (BufferedStream BS = new BufferedStream(FS))
@@ -624,6 +635,7 @@ namespace NewOscylMeasSoft
                     }
                 }
             }
+            DataReaderMarker = false;
             List<string> WholeLines = Regex.Split(WholeText, "\n").ToList();
             foreach (string x in WholeLines)
             {
