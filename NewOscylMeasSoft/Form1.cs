@@ -164,7 +164,6 @@ namespace NewOscylMeasSoft
             int i = 1;
             LineItem LBriefIntegral;
             BriefSpectrum.Add(measurements.PPLSPEC);
-            ZedBriefIntegral.GraphPane.AddCurve("", BriefSpectrum, Color.BlueViolet, SymbolType.Diamond);
             while (true)
             {
                 if(measurements.DrawTheGraph == true)
@@ -172,13 +171,9 @@ namespace NewOscylMeasSoft
                     measurements.DrawTheGraph = false;
                     WavemeterSignal.GraphPane.CurveList.Clear();
                     OscilloSignal.GraphPane.CurveList.Clear();
-                    ZedBriefIntegral.GraphPane.CurveList.Clear();
                     WavemeterSignal.GraphPane.AddCurve("", measurements.PPLWSU, Color.Red, SymbolType.None);
                     OscilloSignal.GraphPane.AddCurve("", measurements.PPLPIC, Color.DarkBlue, SymbolType.None);
                     DL100reads.Text = "DL100 status. Current: " + ScalingParameters.VoltageToCurrent(AW.odczytPrad()) + ", Temperature: " + ScalingParameters.VoltageToTemp(AW.odczytTemp());
-                    ZedBriefIntegral.Update();
-                    ZedBriefIntegral.AxisChange();
-                    ZedBriefIntegral.Invalidate();
                     WavemeterSignal.AxisChange();
                     OscilloSignal.AxisChange();
                     WavemeterSignal.Invalidate();

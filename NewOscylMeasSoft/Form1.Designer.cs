@@ -33,9 +33,19 @@
             this.TriggerGroup = new System.Windows.Forms.GroupBox();
             this.Pico = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.DataAnalysisTrackBarMax = new System.Windows.Forms.TrackBar();
+            this.Dl100LabelMax = new System.Windows.Forms.Label();
+            this.DataAnalysisTrackBarMin = new System.Windows.Forms.TrackBar();
             this.Dl100LabelMin = new System.Windows.Forms.Label();
             this.ZedBriefIntegral = new ZedGraph.ZedGraphControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.DeleteFrame = new System.Windows.Forms.Button();
+            this.FrameLabel = new System.Windows.Forms.Label();
+            this.DataSlider = new System.Windows.Forms.TrackBar();
+            this.Bar1Label = new System.Windows.Forms.Label();
+            this.TrackMax = new System.Windows.Forms.TrackBar();
+            this.Bar2Label = new System.Windows.Forms.Label();
+            this.TrackMin = new System.Windows.Forms.TrackBar();
             this.ZedSignal = new ZedGraph.ZedGraphControl();
             this.InteferometerParameters = new System.Windows.Forms.Label();
             this.FrameInteferometer = new System.Windows.Forms.Label();
@@ -43,6 +53,8 @@
             this.ZedInteferogram = new ZedGraph.ZedGraphControl();
             this.ZedIntegral = new ZedGraph.ZedGraphControl();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.THmaxTB = new System.Windows.Forms.TextBox();
             this.THminTB = new System.Windows.Forms.TextBox();
             this.ReadFilesAveTB = new System.Windows.Forms.TextBox();
@@ -95,31 +107,19 @@
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
             this.button2 = new System.Windows.Forms.Button();
             this.aDwinSystem1 = new ADwin.Driver.ADwinSystem();
-            this.Dl100LabelMax = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.DeleteFrame = new System.Windows.Forms.Button();
-            this.FrameLabel = new System.Windows.Forms.Label();
-            this.DataSlider = new System.Windows.Forms.TrackBar();
-            this.Bar1Label = new System.Windows.Forms.Label();
-            this.TrackMax = new System.Windows.Forms.TrackBar();
-            this.Bar2Label = new System.Windows.Forms.Label();
-            this.TrackMin = new System.Windows.Forms.TrackBar();
-            this.DataAnalysisTrackBarMin = new System.Windows.Forms.TrackBar();
-            this.DataAnalysisTrackBarMax = new System.Windows.Forms.TrackBar();
             this.TriggerGroup.SuspendLayout();
             this.Pico.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataAnalysisTrackBarMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataAnalysisTrackBarMin)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataAnalysisTrackBarMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataAnalysisTrackBarMax)).BeginInit();
             this.SuspendLayout();
             // 
             // OscilInit
@@ -173,6 +173,36 @@
             this.tabPage1.Text = "Brief Integral";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // DataAnalysisTrackBarMax
+            // 
+            this.DataAnalysisTrackBarMax.Location = new System.Drawing.Point(351, 503);
+            this.DataAnalysisTrackBarMax.Maximum = 100;
+            this.DataAnalysisTrackBarMax.Name = "DataAnalysisTrackBarMax";
+            this.DataAnalysisTrackBarMax.Size = new System.Drawing.Size(320, 45);
+            this.DataAnalysisTrackBarMax.TabIndex = 33;
+            this.DataAnalysisTrackBarMax.Scroll += new System.EventHandler(this.DataAnalysisTrackBarMax_Scroll);
+            this.DataAnalysisTrackBarMax.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DataAnalysisTrackBarMax_MouseUp);
+            // 
+            // Dl100LabelMax
+            // 
+            this.Dl100LabelMax.AutoSize = true;
+            this.Dl100LabelMax.Location = new System.Drawing.Point(375, 3);
+            this.Dl100LabelMax.Name = "Dl100LabelMax";
+            this.Dl100LabelMax.Size = new System.Drawing.Size(41, 13);
+            this.Dl100LabelMax.TabIndex = 34;
+            this.Dl100LabelMax.Text = "label10";
+            this.Dl100LabelMax.Click += new System.EventHandler(this.Dl100LabelMax_Click);
+            // 
+            // DataAnalysisTrackBarMin
+            // 
+            this.DataAnalysisTrackBarMin.Location = new System.Drawing.Point(9, 503);
+            this.DataAnalysisTrackBarMin.Maximum = 100;
+            this.DataAnalysisTrackBarMin.Name = "DataAnalysisTrackBarMin";
+            this.DataAnalysisTrackBarMin.Size = new System.Drawing.Size(320, 45);
+            this.DataAnalysisTrackBarMin.TabIndex = 32;
+            this.DataAnalysisTrackBarMin.Scroll += new System.EventHandler(this.DataAnalysisTrackBar_Scroll);
+            this.DataAnalysisTrackBarMin.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DataAnalysisTrackBarMin_MouseUp);
+            // 
             // Dl100LabelMin
             // 
             this.Dl100LabelMin.AutoSize = true;
@@ -214,6 +244,78 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Pico Signal";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // DeleteFrame
+            // 
+            this.DeleteFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.DeleteFrame.Location = new System.Drawing.Point(647, 526);
+            this.DeleteFrame.Name = "DeleteFrame";
+            this.DeleteFrame.Size = new System.Drawing.Size(28, 21);
+            this.DeleteFrame.TabIndex = 47;
+            this.DeleteFrame.Text = "Delete Frame";
+            this.DeleteFrame.UseVisualStyleBackColor = true;
+            this.DeleteFrame.Click += new System.EventHandler(this.DeleteFrame_Click);
+            // 
+            // FrameLabel
+            // 
+            this.FrameLabel.AutoSize = true;
+            this.FrameLabel.Location = new System.Drawing.Point(534, 528);
+            this.FrameLabel.Name = "FrameLabel";
+            this.FrameLabel.Size = new System.Drawing.Size(83, 13);
+            this.FrameLabel.TabIndex = 46;
+            this.FrameLabel.Text = "Frame number : ";
+            // 
+            // DataSlider
+            // 
+            this.DataSlider.BackColor = System.Drawing.Color.Bisque;
+            this.DataSlider.Enabled = false;
+            this.DataSlider.Location = new System.Drawing.Point(3, 514);
+            this.DataSlider.Maximum = 0;
+            this.DataSlider.Name = "DataSlider";
+            this.DataSlider.Size = new System.Drawing.Size(531, 45);
+            this.DataSlider.TabIndex = 41;
+            // 
+            // Bar1Label
+            // 
+            this.Bar1Label.AutoSize = true;
+            this.Bar1Label.Location = new System.Drawing.Point(663, 445);
+            this.Bar1Label.Name = "Bar1Label";
+            this.Bar1Label.Size = new System.Drawing.Size(9, 13);
+            this.Bar1Label.TabIndex = 42;
+            this.Bar1Label.Text = "l";
+            // 
+            // TrackMax
+            // 
+            this.TrackMax.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.TrackMax.Enabled = false;
+            this.TrackMax.Location = new System.Drawing.Point(3, 467);
+            this.TrackMax.Maximum = 2046;
+            this.TrackMax.Minimum = 1;
+            this.TrackMax.Name = "TrackMax";
+            this.TrackMax.Size = new System.Drawing.Size(649, 45);
+            this.TrackMax.TabIndex = 45;
+            this.TrackMax.Value = 1;
+            // 
+            // Bar2Label
+            // 
+            this.Bar2Label.AutoSize = true;
+            this.Bar2Label.Location = new System.Drawing.Point(663, 488);
+            this.Bar2Label.Name = "Bar2Label";
+            this.Bar2Label.Size = new System.Drawing.Size(9, 13);
+            this.Bar2Label.TabIndex = 43;
+            this.Bar2Label.Text = "l";
+            // 
+            // TrackMin
+            // 
+            this.TrackMin.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.TrackMin.Enabled = false;
+            this.TrackMin.Location = new System.Drawing.Point(3, 422);
+            this.TrackMin.Maximum = 2046;
+            this.TrackMin.Minimum = 1;
+            this.TrackMin.Name = "TrackMin";
+            this.TrackMin.Size = new System.Drawing.Size(649, 45);
+            this.TrackMin.TabIndex = 44;
+            this.TrackMin.Value = 1;
             // 
             // ZedSignal
             // 
@@ -315,6 +417,24 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "File analysis parameters";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(421, 20);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(41, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Min cm";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(421, 45);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "Max cm";
+            // 
             // THmaxTB
             // 
             this.THmaxTB.Location = new System.Drawing.Point(468, 40);
@@ -346,7 +466,7 @@
             this.SingleFileReader.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SingleFileReader.Location = new System.Drawing.Point(122, 19);
             this.SingleFileReader.Name = "SingleFileReader";
-            this.SingleFileReader.Size = new System.Drawing.Size(142, 84);
+            this.SingleFileReader.Size = new System.Drawing.Size(142, 81);
             this.SingleFileReader.TabIndex = 30;
             this.SingleFileReader.Text = "All data in single file";
             this.SingleFileReader.UseVisualStyleBackColor = false;
@@ -820,126 +940,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
-            // Dl100LabelMax
-            // 
-            this.Dl100LabelMax.AutoSize = true;
-            this.Dl100LabelMax.Location = new System.Drawing.Point(375, 3);
-            this.Dl100LabelMax.Name = "Dl100LabelMax";
-            this.Dl100LabelMax.Size = new System.Drawing.Size(41, 13);
-            this.Dl100LabelMax.TabIndex = 34;
-            this.Dl100LabelMax.Text = "label10";
-            this.Dl100LabelMax.Click += new System.EventHandler(this.Dl100LabelMax_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(421, 20);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 13);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "Min cm";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(421, 45);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 13);
-            this.label11.TabIndex = 26;
-            this.label11.Text = "Max cm";
-            // 
-            // DeleteFrame
-            // 
-            this.DeleteFrame.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.DeleteFrame.Location = new System.Drawing.Point(647, 526);
-            this.DeleteFrame.Name = "DeleteFrame";
-            this.DeleteFrame.Size = new System.Drawing.Size(28, 21);
-            this.DeleteFrame.TabIndex = 47;
-            this.DeleteFrame.Text = "Delete Frame";
-            this.DeleteFrame.UseVisualStyleBackColor = true;
-            this.DeleteFrame.Click += new System.EventHandler(this.DeleteFrame_Click);
-            // 
-            // FrameLabel
-            // 
-            this.FrameLabel.AutoSize = true;
-            this.FrameLabel.Location = new System.Drawing.Point(534, 528);
-            this.FrameLabel.Name = "FrameLabel";
-            this.FrameLabel.Size = new System.Drawing.Size(83, 13);
-            this.FrameLabel.TabIndex = 46;
-            this.FrameLabel.Text = "Frame number : ";
-            // 
-            // DataSlider
-            // 
-            this.DataSlider.BackColor = System.Drawing.Color.Bisque;
-            this.DataSlider.Enabled = false;
-            this.DataSlider.Location = new System.Drawing.Point(3, 514);
-            this.DataSlider.Maximum = 0;
-            this.DataSlider.Name = "DataSlider";
-            this.DataSlider.Size = new System.Drawing.Size(531, 45);
-            this.DataSlider.TabIndex = 41;
-            // 
-            // Bar1Label
-            // 
-            this.Bar1Label.AutoSize = true;
-            this.Bar1Label.Location = new System.Drawing.Point(663, 445);
-            this.Bar1Label.Name = "Bar1Label";
-            this.Bar1Label.Size = new System.Drawing.Size(9, 13);
-            this.Bar1Label.TabIndex = 42;
-            this.Bar1Label.Text = "l";
-            // 
-            // TrackMax
-            // 
-            this.TrackMax.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.TrackMax.Enabled = false;
-            this.TrackMax.Location = new System.Drawing.Point(3, 467);
-            this.TrackMax.Maximum = 2046;
-            this.TrackMax.Minimum = 1;
-            this.TrackMax.Name = "TrackMax";
-            this.TrackMax.Size = new System.Drawing.Size(649, 45);
-            this.TrackMax.TabIndex = 45;
-            this.TrackMax.Value = 1;
-            // 
-            // Bar2Label
-            // 
-            this.Bar2Label.AutoSize = true;
-            this.Bar2Label.Location = new System.Drawing.Point(663, 488);
-            this.Bar2Label.Name = "Bar2Label";
-            this.Bar2Label.Size = new System.Drawing.Size(9, 13);
-            this.Bar2Label.TabIndex = 43;
-            this.Bar2Label.Text = "l";
-            // 
-            // TrackMin
-            // 
-            this.TrackMin.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.TrackMin.Enabled = false;
-            this.TrackMin.Location = new System.Drawing.Point(3, 422);
-            this.TrackMin.Maximum = 2046;
-            this.TrackMin.Minimum = 1;
-            this.TrackMin.Name = "TrackMin";
-            this.TrackMin.Size = new System.Drawing.Size(649, 45);
-            this.TrackMin.TabIndex = 44;
-            this.TrackMin.Value = 1;
-            // 
-            // DataAnalysisTrackBarMin
-            // 
-            this.DataAnalysisTrackBarMin.Location = new System.Drawing.Point(9, 503);
-            this.DataAnalysisTrackBarMin.Maximum = 100;
-            this.DataAnalysisTrackBarMin.Name = "DataAnalysisTrackBarMin";
-            this.DataAnalysisTrackBarMin.Size = new System.Drawing.Size(320, 45);
-            this.DataAnalysisTrackBarMin.TabIndex = 32;
-            this.DataAnalysisTrackBarMin.Scroll += new System.EventHandler(this.DataAnalysisTrackBar_Scroll);
-            this.DataAnalysisTrackBarMin.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DataAnalysisTrackBarMin_MouseUp);
-            // 
-            // DataAnalysisTrackBarMax
-            // 
-            this.DataAnalysisTrackBarMax.Location = new System.Drawing.Point(351, 503);
-            this.DataAnalysisTrackBarMax.Maximum = 100;
-            this.DataAnalysisTrackBarMax.Name = "DataAnalysisTrackBarMax";
-            this.DataAnalysisTrackBarMax.Size = new System.Drawing.Size(320, 45);
-            this.DataAnalysisTrackBarMax.TabIndex = 33;
-            this.DataAnalysisTrackBarMax.Scroll += new System.EventHandler(this.DataAnalysisTrackBarMax_Scroll);
-            this.DataAnalysisTrackBarMax.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DataAnalysisTrackBarMax_MouseUp);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -962,8 +962,13 @@
             this.Pico.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataAnalysisTrackBarMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DataAnalysisTrackBarMin)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TrackMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.InteferometerSlider)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -971,11 +976,6 @@
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataSlider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackMax)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrackMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataAnalysisTrackBarMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DataAnalysisTrackBarMax)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
