@@ -72,6 +72,7 @@ namespace NewOscylMeasSoft
                     }
                     temp.Add(Picodata[i].Skip(IgnoredforPico).Sum());
                     temp.Add(Wsudata[i][3]);
+
                     AllValuableData.Add(temp);
                 }
             }
