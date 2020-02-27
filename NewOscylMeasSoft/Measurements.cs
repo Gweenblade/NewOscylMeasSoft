@@ -648,6 +648,7 @@ namespace NewOscylMeasSoft
                         PicoData.Add(double.Parse(StringList[i]));
                     }
                     AllPicoData.Add(PicoData);
+                    AllDL100Data.Add(DL100Data);
                     PicoData = new List<double>();
                     StringList = new List<string>();
                 }
@@ -664,13 +665,12 @@ namespace NewOscylMeasSoft
                 }
                 if (Header[0] == "DFB")
                 {
+                    DL100Data = new List<double>();
                     StringList = Regex.Split(Header[1], Separator).ToList();
                     for (int i = 0; i < StringList.Count - 1; i++)
                     {
                         DL100Data.Add(double.Parse(StringList[i]));
                     }
-                    AllDL100Data.Add(DL100Data);
-                    DL100Data = new List<double>();
                     StringList = new List<string>();
                 }
             }

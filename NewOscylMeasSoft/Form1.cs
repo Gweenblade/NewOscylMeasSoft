@@ -796,8 +796,13 @@ private void button1_Click_3(object sender, EventArgs e)
             ZedBriefIntegral.GraphPane.CurveList.Clear();
             ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Plus);
             ZedBriefIntegral.GraphPane.AddCurve("", ImportantDataPPL, Color.Blue, SymbolType.Diamond);
-            Dl100LabelMin.Text = "Temperature: " + AllValuableData[DataAnalysisTrackBarMin.Value][1].ToString() + " Current: " + AllValuableData[DataAnalysisTrackBarMin.Value][2].ToString();
-            Dl100LabelMax.Text = "Temperature: " + AllValuableData[DataAnalysisTrackBarMax.Value][1].ToString() + " Current: " + AllValuableData[DataAnalysisTrackBarMax.Value][2].ToString();
+            MessageBox.Show(AllValuableData.Count().ToString() + " " + DataAnalysisTrackBarMin.Value);
+            //foreach( double d in AllValuableData[DataAnalysisTrackBarMin.Value])
+            //{
+            //    MessageBox.Show(d.ToString());
+            //}
+            Dl100LabelMin.Text = "Temperature: " + AllValuableData[DataAnalysisTrackBarMin.Value][1] + " Current: " + AllValuableData[DataAnalysisTrackBarMin.Value][2].ToString();
+            Dl100LabelMax.Text = "Temperature: " + AllValuableData[DataAnalysisTrackBarMax.Value][1] + " Current: " + AllValuableData[DataAnalysisTrackBarMax.Value][2].ToString();
             ZedBriefIntegral.Update();
             ZedBriefIntegral.AxisChange();
             ZedBriefIntegral.Invalidate();

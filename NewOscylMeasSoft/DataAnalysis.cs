@@ -51,17 +51,18 @@ namespace NewOscylMeasSoft
             return Math.Sqrt(sumOfDerivationAverage - (average * average));
         }
         public void DataSummary(out List<List<double>> AllValuableData, List<List<double>> Picodata, List<List<double>> Wsudata,
-            List<List<double>> Dl100Data, double THmin, double THmax, int IgnoredForWsu = 5, int IgnoredforPico = 3)
+            List<List<double>> Dl100Data, double THmin, double THmax, int IgnoredForWsu = 5, int IgnoredforPico = 4)
         {
             AllValuableData = new List<List<double>>();
             double tempsumpico, tempsumwsu;
             int help;
+            int DLindex = 0;
             for (int i = 0; i < Picodata.Count() - 1; i++)
             {
                 if (Wsudata[i][3] > THmin && Wsudata[i][3] < THmax)
                 {
                     List<double> temp = new List<double>();
-                    foreach (double d in Dl100Data[i / Dl100Data.Count()])
+                    foreach (double d in Dl100Data[i])
                     {
                         temp.Add(d);
                     }
@@ -69,7 +70,7 @@ namespace NewOscylMeasSoft
                     {
                         temp.Add(Picodata[i][j]);
                     }
-                    temp.Add(Picodata[i].Skip(IgnoredforPico - 1).Sum());
+                    temp.Add(Picodata[i].Skip(IgnoredforPico).Sum());
                     temp.Add(Wsudata[i][3]);
                     AllValuableData.Add(temp);
                 }
