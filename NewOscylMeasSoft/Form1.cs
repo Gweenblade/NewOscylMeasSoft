@@ -712,7 +712,9 @@ private void button1_Click_3(object sender, EventArgs e)
                 AllDataPPL.Add(AllValuableData[i][4], AllValuableData[i][3]);
             }
             ZedBriefIntegral.GraphPane.CurveList.Clear();
-            ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Star);
+            //ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Star);
+            LineItem curve = ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Circle);
+            curve.Line.IsVisible = false;
             ZedBriefIntegral.Update();
             ZedBriefIntegral.AxisChange();
             ZedBriefIntegral.Invalidate();
@@ -769,8 +771,10 @@ private void button1_Click_3(object sender, EventArgs e)
                 }
             }
             ZedBriefIntegral.GraphPane.CurveList.Clear();
-            ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Plus);
-            ZedBriefIntegral.GraphPane.AddCurve("", ImportantDataPPL, Color.Blue, SymbolType.Diamond);
+            LineItem LI1 = ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Plus);
+            LineItem LI2 = ZedBriefIntegral.GraphPane.AddCurve("", ImportantDataPPL, Color.Blue, SymbolType.Diamond);
+            LI2.Line.IsVisible = false;
+            LI1.Line.IsVisible = false;
             Dl100LabelMin.Text = "Temperature: " + AllValuableData[DataAnalysisTrackBarMin.Value][1].ToString() + " Current: " + AllValuableData[DataAnalysisTrackBarMin.Value][2].ToString();
             Dl100LabelMax.Text = "Temperature: " + AllValuableData[DataAnalysisTrackBarMax.Value][1].ToString() + " Current: " + AllValuableData[DataAnalysisTrackBarMax.Value][2].ToString();
             ZedBriefIntegral.Update();
@@ -794,9 +798,10 @@ private void button1_Click_3(object sender, EventArgs e)
                 }
             }
             ZedBriefIntegral.GraphPane.CurveList.Clear();
-            ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Plus);
-            ZedBriefIntegral.GraphPane.AddCurve("", ImportantDataPPL, Color.Blue, SymbolType.Diamond);
-            MessageBox.Show(AllValuableData.Count().ToString() + " " + DataAnalysisTrackBarMin.Value);
+            LineItem LI1 = ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Plus);
+            LineItem LI2 = ZedBriefIntegral.GraphPane.AddCurve("", ImportantDataPPL, Color.Blue, SymbolType.Diamond);
+            LI2.Line.IsVisible = false;
+            LI1.Line.IsVisible = false;
             //foreach( double d in AllValuableData[DataAnalysisTrackBarMin.Value])
             //{
             //    MessageBox.Show(d.ToString());
