@@ -340,7 +340,10 @@ namespace NewOscylMeasSoft
         {
             DialogResult DR = MessageBox.Show("Are you sure you want to stop measurements?", "OMG YOU ARE GOING TO STOP THE MEASUREMENTS!", MessageBoxButtons.YesNo);
             if (DR == DialogResult.Yes)
-                Measure.Abort();
+            {
+                measurements.StopTheMeasurements = true;
+                MessageBox.Show("Przerywam");
+            }
             else
                 MessageBox.Show("Measurements were not stopped");
         }

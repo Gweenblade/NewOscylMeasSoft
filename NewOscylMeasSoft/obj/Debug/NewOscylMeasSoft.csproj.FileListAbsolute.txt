@@ -165,3 +165,4 @@ C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\D
 C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\obj\Debug\NewOscylMeasSoft.pdb
 C:\Users\KPdoc\Desktop\Doktorat\Repozytoria Git\PicoScope\NewOscylMeasSoft\bin\Debug\ADwin.Driver.dll
 C:\Users\kryst\OneDrive\Desktop\Studia\Git repozytoria\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\ADwin.Driver.dll
+C:\Users\Tomek\Desktop\Krystian Puczka Programy\OscilloMeasureSoftware\NewOscylMeasSoft\bin\Debug\ADwin.Driver.dll
