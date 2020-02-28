@@ -40,7 +40,12 @@ namespace NewOscylMeasSoft
         public double SUMPICO;
         private bool pauseflag = false;
         private bool InterferometerReading = false;
-
+        private bool stopthemeasurements = false;
+        public bool StopTheMeasurements
+        {
+            get { return stopthemeasurements; }
+            set { stopthemeasurements = value; }
+        }
         public bool PauseFlag
         {
             get { return pauseflag; }
@@ -286,7 +291,7 @@ namespace NewOscylMeasSoft
             double Wavenumber = 0;
             long SW1, SW2, SW3;
             Stopwatch.Start();
-            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true; MeasureLoopIndicator++)
+            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures || TriggerBtn == true || !StopTheMeasurements; MeasureLoopIndicator++)
             {
                 if (TriggerBtn == true)
                 {
@@ -339,7 +344,7 @@ namespace NewOscylMeasSoft
                     {
                         Thread.Sleep(5);
                     }
-                    if (j == Averages - 1 || NumberOfMeasures - MeasureLoopIndicator < 50 || Ender == true)
+                    if (j == Averages - 1 || NumberOfMeasures - MeasureLoopIndicator < 50)
                     {
                         using (StreamWriter SW = new StreamWriter(FilePath1,true))
                         {
@@ -362,12 +367,8 @@ namespace NewOscylMeasSoft
                     }
 
                 }
-                if(Ender)
-                {
-                    MessageBox.Show("Koniec pomiaru");
-                    break;
-                }
             }
+            StopTheMeasurements = false;
             Stopwatch.Stop();
             MessageBox.Show("Koniec");
         }
