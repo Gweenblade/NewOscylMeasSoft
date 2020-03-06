@@ -291,7 +291,7 @@ namespace NewOscylMeasSoft
             double Wavenumber = 0;
             long SW1, SW2, SW3;
             Stopwatch.Start();
-            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures && !StopTheMeasurements; MeasureLoopIndicator++)
+            for (MeasureLoopIndicator = 0; MeasureLoopIndicator < NumberOfMeasures && !this.StopTheMeasurements; MeasureLoopIndicator++)
             {
                 if (TriggerBtn == true)
                 {
