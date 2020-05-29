@@ -821,6 +821,59 @@ private void button1_Click_3(object sender, EventArgs e)
 
         }
 
+        private void ForFastSwapAnalysis_Click(object sender, EventArgs e)
+        {
+            int IgnoredColumnsForData, IgnoredColumsForInterferometer;
+            int.TryParse(IgnoredColumsForData.Text, out IgnoredColumnsForData);
+            int.TryParse(IgnoredColumnsForInteferometer.Text, out IgnoredColumsForInterferometer);
+            measurements.RegexReaderForSingleFile(out AllPicoData, out AllWsuData, out AllDl100Data, OpenFileDialog.FileName, ":", 0, 0);
+            HowManyAverages = AllPicoData.Count() / AllDl100Data.Count();
+            DataSlider.Maximum = AllDl100Data.Count();
+            InteferometerSlider.Maximum = AllWsuData.Count();
+            InteferometerSlider.Minimum = 1;
+            DataSlider.Minimum = 1;
+            double THmin = 0, THmax = 0;
+            double.TryParse(THmaxTB.Text, out THmax);
+            double.TryParse(THminTB.Text, out THmin);
+            DA.DataSummary(out AllValuableData, AllPicoData, AllWsuData, AllDl100Data, THmin, THmax, IgnoredColumsForInterferometer, IgnoredColumnsForData);
+            DA.Average(out AveragedData, AllValuableData);
+            List<List<double>> TrueData = new List<List<double>>();
+            for(int i = 0; i < AllValuableData.Count - 1; i = i + 2)
+            {
+                if(AllValuableData[i][4] > 0 && AllValuableData[i + 1][4] > 0 && AllValuableData[i][3] > 0 && AllValuableData[i + 1][3] > 0 && AllValuableData[i+1][0]-AllValuableData[i][0] < 200)
+                {
+                    TrueData.Add(AllValuableData[i]);
+                    TrueData.Add(AllValuableData[i + 1]);
+                }
+            }
+            DataAnalysisTrackBarMin.Minimum = 0;
+            DataAnalysisTrackBarMin.Maximum = AllValuableData.Count() - 1;
+            DataAnalysisTrackBarMax.Minimum = 0;
+            DataAnalysisTrackBarMax.Maximum = AllValuableData.Count() - 1;
+            DataAnalysisTrackBarMax.Value = AllValuableData.Count() - 1;
+            PointPairList AllDataPPL = new PointPairList();
+            for (int i = 0; i < TrueData.Count; i++)
+            {
+                AllDataPPL.Add(TrueData[i][4], TrueData[i][3]);
+            }
+            ZedBriefIntegral.GraphPane.CurveList.Clear();
+            //ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Star);
+            LineItem curve = ZedBriefIntegral.GraphPane.AddCurve("", AllDataPPL, Color.Black, SymbolType.Circle);
+            curve.Line.IsVisible = false;
+            ZedBriefIntegral.Update();
+            ZedBriefIntegral.AxisChange();
+            ZedBriefIntegral.Invalidate();
+            StringBuilder SB = new StringBuilder();
+            foreach (List<double> list in TrueData)
+            {
+                foreach (double d in list)
+                    SB.Append(d + " ");
+                SB.Append(Environment.NewLine);
+            }
+            using (StreamWriter SW = new StreamWriter(OpenFileDialog.FileName + "_FastSwapData", true))
+                SW.Write(SB);
+        }
+
         private void TriggerBtnOn_CheckedChanged(object sender, EventArgs e)
         {
             

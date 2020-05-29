@@ -106,7 +106,7 @@
             this.CutoffSaver = new System.Windows.Forms.SaveFileDialog();
             this.ForRandomDataReads = new System.Windows.Forms.OpenFileDialog();
             this.button2 = new System.Windows.Forms.Button();
-            this.aDwinSystem1 = new ADwin.Driver.ADwinSystem();
+            this.ForFastSwapAnalysis = new System.Windows.Forms.Button();
             this.TriggerGroup.SuspendLayout();
             this.Pico.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -392,6 +392,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.ForFastSwapAnalysis);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.THmaxTB);
@@ -487,7 +488,7 @@
             this.IgnoredColumsForData.Name = "IgnoredColumsForData";
             this.IgnoredColumsForData.Size = new System.Drawing.Size(21, 20);
             this.IgnoredColumsForData.TabIndex = 32;
-            this.IgnoredColumsForData.Text = "0";
+            this.IgnoredColumsForData.Text = "5";
             this.IgnoredColumsForData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
@@ -505,7 +506,7 @@
             this.IgnoredColumnsForInteferometer.Name = "IgnoredColumnsForInteferometer";
             this.IgnoredColumnsForInteferometer.Size = new System.Drawing.Size(21, 20);
             this.IgnoredColumnsForInteferometer.TabIndex = 30;
-            this.IgnoredColumnsForInteferometer.Text = "0";
+            this.IgnoredColumnsForInteferometer.Text = "5";
             this.IgnoredColumnsForInteferometer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label7
@@ -940,6 +941,16 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_2);
             // 
+            // ForFastSwapAnalysis
+            // 
+            this.ForFastSwapAnalysis.Location = new System.Drawing.Point(401, 80);
+            this.ForFastSwapAnalysis.Name = "ForFastSwapAnalysis";
+            this.ForFastSwapAnalysis.Size = new System.Drawing.Size(102, 39);
+            this.ForFastSwapAnalysis.TabIndex = 36;
+            this.ForFastSwapAnalysis.Text = "Fast swap analysis";
+            this.ForFastSwapAnalysis.UseVisualStyleBackColor = true;
+            this.ForFastSwapAnalysis.Click += new System.EventHandler(this.ForFastSwapAnalysis_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1061,6 +1072,7 @@
         private System.Windows.Forms.TrackBar TrackMin;
         private System.Windows.Forms.TrackBar DataAnalysisTrackBarMax;
         private System.Windows.Forms.TrackBar DataAnalysisTrackBarMin;
+        private System.Windows.Forms.Button ForFastSwapAnalysis;
     }
 }
 
